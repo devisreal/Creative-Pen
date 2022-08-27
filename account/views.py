@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 def login(request):
-    return HttpResponse("Hello there")
+    context = {}
+    return render(request, 'account/login.html', context)
+
+def register(request):
+    context = {}
+    return render(request, 'account/register.html', context)
