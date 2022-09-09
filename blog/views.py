@@ -8,4 +8,8 @@ def home(request):
 
 def about(request):
    context = {}
-   return render(request, 'blog/about.html', context)
+   return render(request, 'extras/about.html', context)
+
+def contact(request):
+   context = {}
+   return render(request, 'extras/contact.html')

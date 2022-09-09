@@ -1,44 +1,101 @@
 {% load static %}
 {% url 'home' as home %}
 {% url 'about' as about %}
+{% url 'contact' as contact %}
 
 
-
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light py-2 border-bottom sticky-top top-0">
-   <div class="container-fluid px-5">
+<nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
+   <div class="container-fluid px-md-5 px-4">
       <a class="navbar-brand text-xl mb-2 font-bree" href="{% url 'home' %}">
-         Creative 
+         Creative
+         <span class="text-red">
+            Pen
+         </span>
+      </a>      
+      <button 
+         class="btn navbar-toggler border-0" 
+         type="button" 
+         data-bs-toggle="offcanvas" 
+         data-bs-target="#offcanvasRight"
+         aria-controls="offcanvasRight"
+      >
+         <i class="ri-menu-3-line text-2xl"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-semibold">
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                  href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="#">Categories</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                  href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                  href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+            </li>
+         </ul>
+         <a class="nav-link text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}">
+            Get started
+         </a>
+
+      </div>
+   </div>
+</nav>
+
+
+
+
+<div class="offcanvas show offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+   <div class="offcanvas-header">
+      <a class="text-black text-decoration-none text-xl mb-2 font-bree" href="{% url 'home' %}">
+         Creative
          <span class="text-red">
             Pen
          </span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 font-semibold">
+      <button type="button" class="btn-close text-reset btn btn-sm" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+   </div>
+   <div class="offcanvas-body">
+      <div class="" id="offNav">
+         <ul class="mx-auto ms-lg-auto me-lg-0 font-semibold list-unstyled">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#">Link</a>
-            </li>                      
+               <a class="nav-link" href="#">Categories</a>
+            </li>
             <li class="nav-item">
                <a class="nav-link {% if request.path == about %} active-nav  {% endif %}" href="{% url 'about' %}">About</a>
-            </li>                      
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                  href="{% url 'contact' %}">Contact</a>
+            </li>
             <li class="nav-item">
                <a class="nav-link" href="{% url 'login' %}">Sign in</a>
             </li>
-            
-         </ul>                  
-         <a class="nav-link text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}">
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+            </li>
+         </ul>
+         <a class="nav-link w-fit text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}" style="color: #fff !important;">
             Get started
          </a>
-         
+      
       </div>
    </div>
-</nav>
+</div>
 
 <script>
    const navbar = document.querySelector('#navbar');

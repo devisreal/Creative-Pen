@@ -50,13 +50,13 @@
 
       <span style="height: 40px; " class="m-2 ms-2 d-grid rounded-0 align-content-center">
          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-         <h6 class="text-danger p-0 m-0 text-md">ERROR</h6>
+         <h6 class="text-danger p-0 font-bree m-0 text-md">ERROR</h6>
          {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-         <h6 class="text-primary p-0 m-0 text-md">INFO</h6>
+         <h6 class="text-primary p-0 font-bree m-0 text-md">INFO</h6>
          {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-         <h6 class="text-success p-0 m-0 text-md">SUCCESS</h6>
+         <h6 class="text-success p-0 font-bree m-0 text-md">SUCCESS</h6>
          {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-         <h6 class="text-amber p-0 m-0 text-md">WARNING</h6>
+         <h6 class="text-amber p-0 font-bree m-0 text-md">WARNING</h6>
          {% endif %}
          <small class="font-muli mt-2 text-sm font-semibold">{{ message }}</small>
 

@@ -21,7 +21,7 @@ h5,
 h6,
 button,
 .btn {
-  font-family: 'Bree Serif', serif !important;
+  font-family: 'Cabin', sans-serif !important;
 }
 
 p,
@@ -39,6 +39,9 @@ td {
 }
 .font-muli {
   font-family: 'muli', sans-serif !important;
+}
+.font-cabin{
+  font-family: 'Cabin', sans-serif !important;
 }
 
 :root {
@@ -361,5 +364,14 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .active-nav{
   color: black !important;
-  font-weight: 700;  
+  font-weight: 600;  
+}
+#navbar .nav-link, #offNav .nav-link{
+  font-family: 'Cabin', sans-serif ;
+  color: var(--gray-500) !important;
+}
+@media screen and (max-width: 500px) {
+  #offcanvasRight{
+    width: 80vw !important;
+  }
 }
