@@ -4,59 +4,88 @@
 {% url 'contact' as contact %}
 
 
-<nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
-   <div class="container-fluid px-md-5 px-4">
-      <a class="navbar-brand text-xl mb-2 font-bree" href="{% url 'home' %}">
-         Creative
-         <span class="text-red">
-            Pen
-         </span>
-      </a>      
-      <button 
-         class="btn navbar-toggler border-0" 
-         type="button" 
-         data-bs-toggle="offcanvas" 
-         data-bs-target="#offcanvasRight"
-         aria-controls="offcanvasRight"
-      >
-         <i class="ri-menu-3-line text-2xl"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-semibold">
-            <li class="nav-item">
-               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
-                  href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="#">Categories</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
-                  href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
-                  href="{% url 'contact' %}">Contact</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'login' %}">Sign in</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-            </li>
-         </ul>
-         <a class="nav-link text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}">
-            Get started
+{% if request.user.is_authenticated %}
+   <nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
+      <div class="container-fluid px-md-5 px-4">
+         <a class="navbar-brand text-xl mb-2 font-bree" href="{% url 'home' %}">
+            Creative
+            <span class="text-red">
+               Pen
+            </span>
          </a>
-
+         <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <i class="ri-menu-3-line text-2xl"></i>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-semibold">
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                     href="{% url 'home' %}">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Categories</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                     href="{% url 'about' %}">About</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                     href="{% url 'contact' %}">Contact</a>
+               </li>               
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+               </li>
+            </ul>            
+         </div>
       </div>
-   </div>
-</nav>
+   </nav>
+{% else %}
+   <nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
+      <div class="container-fluid px-md-5 px-4">
+         <a class="navbar-brand text-xl mb-2 font-bree" href="{% url 'home' %}">
+            Creative
+            <span class="text-red">
+               Pen
+            </span>
+         </a>
+         <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <i class="ri-menu-3-line text-2xl"></i>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-semibold">
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                     href="{% url 'home' %}">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Categories</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                     href="{% url 'about' %}">About</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                     href="{% url 'contact' %}">Contact</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+               </li>               
+            </ul>
+            <a class="nav-link text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}">
+               Get started
+            </a>
+   
+         </div>
+      </div>
+   </nav>
+{% endif %}
 
 
-
-
-<div class="offcanvas show offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header">
       <a class="text-black text-decoration-none text-xl mb-2 font-bree" href="{% url 'home' %}">
          Creative
@@ -82,16 +111,25 @@
                <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
                   href="{% url 'contact' %}">Contact</a>
             </li>
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'login' %}">Sign in</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-            </li>
+            {% if not request.user.is_authenticated %}
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+               </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+               <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+               </li>
+            {% endif %}
+            
          </ul>
-         <a class="nav-link w-fit text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}" style="color: #fff !important;">
-            Get started
-         </a>
+         
+         {% if not request.user.is_authenticated %}
+            <a class="nav-link w-fit text-white bg-dark ms-3 font-bree rounded-xl" href="{% url 'register' %}"
+               style="color: #fff !important;">
+               Get started
+            </a>
+         {% endif %}
       
       </div>
    </div>

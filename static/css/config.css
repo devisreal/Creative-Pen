@@ -366,9 +366,11 @@ input[type="search"]::-webkit-search-results-decoration {
   color: black !important;
   font-weight: 600;  
 }
-#navbar .nav-link, #offNav .nav-link{
+#navbar .nav-link{
   font-family: 'Cabin', sans-serif ;
-  color: var(--gray-500) !important;
+}
+#offNav .nav-link{
+  color: var(--gray-500);
 }
 @media screen and (max-width: 500px) {
   #offcanvasRight{
