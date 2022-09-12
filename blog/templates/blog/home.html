@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
    Home
 {% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock styles %}
 {% block content %}
-{% include 'partials/messages.html' %}
-   <h4>Home Page</h4>   
+{% include 'partials/messages.html' %}      
+
+
+
 {% endblock content %}

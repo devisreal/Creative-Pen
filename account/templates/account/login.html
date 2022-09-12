@@ -12,7 +12,7 @@
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link rel="stylesheet" href="https://use.typekit.net/pjw0trz.css">
-   <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
 
    <!-- ? Icons -->
@@ -40,15 +40,17 @@
                   <i class="ri-arrow-left-fill me-2"></i>
                    Home
                </a>
-               <h2 class="font-bree mx-auto w-fit mt-3">                  
-                  <i class="ri-lightbulb-fill text-2xl text-blue"></i>
-                  Creative
-                  <span class="text-red">
-                     Pen
-                  </span>
-               </h2>
+               <div class="d-flex align-items-center mt-5 w-fit mx-auto">
+                  <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
+                  <h1 class="font-righteous text-2xl mt-2 ms-1 text-uppercase">
+                     Creative
+                     <span class="text-red">
+                        Pen
+                     </span>
+                  </h1>
+               </div>
                {% include 'partials/messages.html' %}
-               <form action="" method="POST" class="login-form mx-auto mt-5 rounded-md p-3 p-md-4 ">
+               <form action="" method="POST" class="login-form mx-auto mt-3 rounded-md p-3 p-md-4 ">
                   {% csrf_token %}
                   <div class="form-floating mb-3">
                      <input 

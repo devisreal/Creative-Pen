@@ -46,5 +46,5 @@ def user_logout(request):
     logout(request)
     # Return success message
     messages.success(request, 'See you soon!')    
-    # return redirect(request.META.get('HTTP_REFERER'))
-    return redirect('login')
+    return redirect(request.META.get('HTTP_REFERER'))
+    # return redirect('login')
