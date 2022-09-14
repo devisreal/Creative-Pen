@@ -21,7 +21,7 @@ h5,
 h6,
 button,
 .btn {
-  font-family: 'Cabin', sans-serif !important;
+  font-family: "Cabin", sans-serif !important;
 }
 
 p,
@@ -30,25 +30,25 @@ li,
 input,
 textarea,
 td {
-  font-family: 'muli', sans-serif !important;
+  font-family: "muli", sans-serif !important;
 }
 
 /* ! Font Family */
 .font-righteous {
-  font-family: 'Righteous', cursive !important;
+  font-family: "Righteous", cursive !important;
 }
 
 .font-muli {
-  font-family: 'muli', sans-serif !important;
+  font-family: "muli", sans-serif !important;
 }
 
 .font-cabin {
-  font-family: 'Cabin', sans-serif !important;
+  font-family: "Cabin", sans-serif !important;
 }
 
 :root {
-  --color-blue: #234E70;
-  --color-red: #D2302C;
+  --color-blue: #234e70;
+  --color-red: #d2302c;
   --color-amber: #f59e0b;
   --white: #fff;
   --gray-500: #6b7280;
@@ -373,14 +373,13 @@ input[type="number"] {
   backdrop-filter: grayscale(100%) !important;
 }
 
-
 /* ! Form Styles */
 .form-control {
   border: 2px solid var(--gray-500);
   outline: none !important;
   background-color: var(--white);
   box-shadow: none !important;
-  font-family: 'muli', sans-serif !important;
+  font-family: "muli", sans-serif !important;
 }
 
 .form-control:focus {
@@ -393,7 +392,7 @@ input[type="number"] {
 .form-label text-black,
 label {
   font-weight: 500;
-  font-family: 'Bree Serif', serif;
+  font-family: "Bree Serif", serif;
 }
 
 .form-check-input:focus,
@@ -440,7 +439,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 #navbar .nav-link {
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
 }
 
 #offNav .nav-link {
@@ -454,8 +453,39 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .gradient-text {
-
-  background: linear-gradient(62deg, #D2302C, #234E70);
+  background: linear-gradient(62deg, #d2302c, #234e70);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* ? Page scrollbar */
+body#body::-webkit-scrollbar {
+  width: 7px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+body#body::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+body#body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+body#body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ? General Styles */
+.page-hero {
+  height: 45vh;
+}
+.hero-link {
+  color: #333;
+}
+.hero-link:hover{
+  color: var(--color-red) !important;
 }

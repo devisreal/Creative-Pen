@@ -1,8 +1,80 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 About
 {% endblock title %}
+{% block styles %}
+{% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
-<h4>About Page</h4>
+
+
+<header class="page-hero d-grid align-content-center my-shadow border-bottom"
+   style="background-image: url(../../../static/img/doodles.webp);">
+   <div class="container-fluid backdrop-blur-md">
+      <div class="row">
+         <div class="col-12 mx-auto d-grid align-content-center page-hero">
+            <div class="p-2 text-center">
+               <h5 class="text-3xl">
+                  About Us
+               </h5>
+               <div class="mt-2 text-md font-muli font-semibold d-flex align-items-center w-fit mx-auto ">
+                  <a href="{% url 'home' %}" class="text-decoration-none hero-link">
+                     Home 
+                  </a>
+                  <i class="ri-arrow-right-s-line mb-1 mx-1"></i>
+                  <span>
+                     About Us
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+
+
+<div class="container px-2" style="margin-top: 100px;">
+   <div class="row gx-5">
+      <div class="col-11 col-sm-11 col-md-6 mx-auto ">
+         <div class="p-0 ">
+            <img src="{% static 'img/business.jpg' %}" class="img-fluid rounded-xl" alt="">
+         </div>
+      </div>
+      <div class="col-11 col-sm-11 col-md-6 mx-auto d-grid align-content-center mt-5 mt-md-0">
+         <div class="p-md-3 ">
+            <h3 class="text-center text-md-start">Our Story</h3>
+            <p class="mt-3 text-justify">
+               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi voluptatem unde ex. 
+               Iure nulla mollitia, laborum blanditiis iste sapiente aliquid atque molestiae natus 
+               laudantium quibusdam est commodi animi! Earum, ea?
+            </p>
+            <p class="text-justify">
+               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi voluptatem unde ex. 
+               Iure nulla mollitia, laborum blanditiis iste sapiente aliquid atque molestiae natus 
+               laudantium quibusdam est commodi animi! Earum, ea?
+            </p>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div class="container px-2" style="margin-top: 120px;">
+   <div class="row gx-5">
+      <div class="col">
+         <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+      <div class="col">
+         <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+      <div class="col">
+         <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+   </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+
 {% endblock content %}
