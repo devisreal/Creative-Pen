@@ -1,6 +1,8 @@
 {% load static %}
 {% url 'home' as home %}
+{% url 'latest_posts' as latest_posts %}
 {% url 'about' as about %}
+{% url 'categories' as categories %}
 {% url 'contact' as contact %}
 
 
@@ -27,7 +29,12 @@
                      href="{% url 'home' %}">Home</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="#">Categories</a>
+                  <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
+                     href="{% url 'latest_posts' %}">Latest</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
+                     href="{% url 'categories' %}">Categories</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
@@ -67,7 +74,12 @@
                      href="{% url 'home' %}">Home</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="#">Categories</a>
+                  <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
+                     href="{% url 'latest_posts' %}">Latest</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
+                     href="{% url 'categories' %}">Categories</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
@@ -111,7 +123,10 @@
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#">Categories</a>
+               <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}" href="{% url 'latest_posts' %}">Latest</a>
+            </li>            
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}" href="{% url 'categories' %}">Categories</a>
             </li>
             <li class="nav-item">
                <a class="nav-link {% if request.path == about %} active-nav  {% endif %}" href="{% url 'about' %}">About</a>

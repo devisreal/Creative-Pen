@@ -7,6 +7,8 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Login | Creative Pen</title>
+   <link rel="shortcut icon" href="{% static 'img/imagex.jpg' %}" type="image/x-icon">
+   <link rel="preload" as="image" href="{% static 'img/login-bg.jpg' %}">
 
    <!-- ? Fonts -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +20,7 @@
    <!-- ? Icons -->
    <script src="https://unpkg.com/phosphor-icons"></script>
    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
 
 
    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -31,13 +34,14 @@
       <div class="row gx-0">
          <div class="col-7 d-none d-md-inline">
             <div class="p-3 login-left h-full d-grid align-content-center" >
-               <img src="{% static 'img/hand.png' %}" alt="" class="img-fluid col-4 mx-auto pointer-events-none">
+               
             </div>
          </div>
          <div class="col">
             <div class="p-lg-3 login-right h-full">
                <a href="{% url 'home' %}" class="btn-light border btn w-fit d-flex align-items-center mb-5 text-sm ms-5 ms-md-0">
-                  <i class="ri-arrow-left-fill me-2"></i>
+                  <!-- <i class="ri-arrow-left-fill me-2"></i> -->
+                  <i class="ti ti-smart-home me-1 fs-5"></i>
                    Home
                </a>
                <div class="d-flex align-items-center mt-5 w-fit mx-auto">
@@ -55,7 +59,7 @@
                   <div class="form-floating mb-3">
                      <input 
                         type="text" 
-                        class="form-control font-semibold font-medium rounded-lg" 
+                        class="form-control font-semibold font-medium" 
                         id="email" 
                         name="username_or_email"
                         placeholder=""
@@ -68,7 +72,7 @@
                   <div class="form-floating mb-3">
                      <input 
                         type="password" 
-                        class="form-control font-semibold font-medium rounded-lg" 
+                        class="form-control font-semibold font-medium" 
                         id="password" 
                         name="password"
                         placeholder=""

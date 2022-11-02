@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Contact
+{% endblock title %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+
+<header class="page-hero d-grid align-content-center my-shadow border-bottom"
+   style="background-image: url(../../../static/img/doodles.webp);">
+   <div class="container-fluid backdrop-blur-sm">
+      <div class="row">
+         <div class="col-12 mx-auto d-grid align-content-center page-hero">
+            <div class="p-2 text-center">
+               <h5 class="text-3xl">
+                  Contact Us
+               </h5>
+               <div class="mt-2 text-md font-muli font-semibold d-flex align-items-center w-fit mx-auto ">
+                  <a href="{% url 'home' %}" class="text-decoration-none hero-link">
+                     Home
+                  </a>
+                  <i class="ri-arrow-right-s-line mb-1 mx-1"></i>
+                  <span>
+                     Contact Us
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+
+<div class="container px-2" style="margin-top: 160px;">
+   <div class="row gx-5 contact-form-section" >
+      <div class="col-5">
+         <div class="border bg-light contact-form-image">
+            <!-- <img src="{% static 'img/contact-img.jpg' %} " alt="" class="img-fluid"> -->
+         </div>
+      </div>
+
+      <!-- ? Contact Form -->
+      <div class="col d-grid align-content-center bg-light contact-form my-shadow">
+         <div class="">
+
+            <form class="container" method="POST">
+               {% csrf_token %}
+               <!-- ! First and Last Names -->
+               <div class="row g-3">
+                  <div class="col">
+                     <div class="form-floating mb-3">
+                        <input 
+                           type="text" 
+                           class="form-control font-semibold font-medium" 
+                           id="firstname"
+                           name="firstname" 
+                           placeholder=""
+                           autocomplete="off" 
+                           required
+                        >
+                        <label class="font-cabin font-semibold" for="email">Firstname</label>
+                     </div>
+                  </div>
+                  <div class="col">
+                     <div class="form-floating mb-3">
+                        <input 
+                           type="text" 
+                           class="form-control font-semibold font-medium" 
+                           id="lastname"
+                           name="lastname" 
+                           placeholder="" 
+                           autocomplete="off" 
+                           required
+                        >
+                        <label class="font-cabin font-semibold" for="email">Lastname</label>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- ! Email address -->
+               <div class="row gx-3">
+                  <div class="col">
+                     <div class="form-floating mb-3">
+                        <input 
+                           type="email" 
+                           class="form-control font-semibold font-medium" 
+                           id="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                           name="email" 
+                           placeholder="" 
+                           autocomplete="off" 
+                           required
+                        >
+                        <label class="font-cabin font-semibold" for="email">Email address</label>
+                     </div>
+                  </div>                  
+               </div>
+
+               <!-- ! Message -->
+               <div class="row gx-3">
+                  <div class="col">                     
+                     <div class="form-floating mb-3">
+                        <textarea                         
+                           class="form-control font-semibold font-medium" 
+                           placeholder=""
+                           id="message"
+                           name="message"
+                           style="height: 150px;resize: none;"
+                           autocomplete="off" 
+                           required
+                        ></textarea>
+                        <label class="font-cabin font-semibold" for="message">Message</label>
+                     </div>
+                  </div>                  
+               </div>
+
+               <div class="w-fit ms-auto mt-3">
+                  <button type="submit" class="btn btn-red font-semibold">
+                     Submit
+                  </button>
+               </div>
+
+            </form>
+
+         </div>
+      </div>
+
+   </div>
+</div>
+
+<br><br><br><br>
+
+{% endblock content %}

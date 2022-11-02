@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Categories
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<header class="page-hero d-grid align-content-center my-shadow border-bottom"
+   style="background-image: url(../../../static/img/doodles.webp);">
+   <div class="container-fluid backdrop-blur-sm">
+      <div class="row">
+         <div class="col-12 mx-auto d-grid align-content-center page-hero">
+            <div class="p-2 text-center">
+               <h5 class="text-3xl">
+                  Categories
+               </h5>
+               <div class="mt-2 text-md font-muli font-semibold d-flex align-items-center w-fit mx-auto ">
+                  <a href="{% url 'home' %}" class="text-decoration-none hero-link">
+                     Home
+                  </a>
+                  <i class="ri-arrow-right-s-line mb-1 mx-1"></i>
+                  <span>
+                     Categories
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+{% endblock %}

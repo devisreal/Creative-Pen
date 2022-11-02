@@ -1,8 +1,13 @@
-.login-left {
-  background-image: url(../img/flower-dark.webp);
+.login-left {  
+  background-image: linear-gradient(
+      62deg,
+      rgba(0, 0, 0, 0.3) 20%,
+      rgba(0, 0, 0, 0.3) 80%
+    ),
+  url("../img/login-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: bottom;
+  background-position: right;  
 }
 .login-right {
   display: grid;
