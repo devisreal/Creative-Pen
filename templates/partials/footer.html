@@ -1,1 +1,27 @@
-<h1>Footer</h1>
+{% load static %}
+<div class="container px-0">
+   <footer class="d-flex flex-wrap justify-content-between align-items-center pt-2 mt-4 mb-2 border-top">
+      <p class="col-md-4 mb-0 font-medium font-cabin">
+         &copy; <span id="year"></span> Creative Pen
+      </p>
+
+      <a href="/"
+         class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+         <img src="{% static 'img/tmp1.png' %}" class="img-fluid" width="30px" alt="Logo">
+      </a>
+
+      <ul class="nav col-md-4 justify-content-end ">
+         <li class="nav-item font-cabin"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+         <li class="nav-item font-cabin"><a href="{% url 'latest_posts' %}" class="nav-link px-2 text-muted">Latest</a></li>
+         <li class="nav-item font-cabin"><a href="{% url 'categories' %}" class="nav-link px-2 text-muted">Categories</a></li>
+         <li class="nav-item font-cabin"><a href="{% url 'about' %}" class="nav-link px-2 text-muted">About</a></li>
+         <li class="nav-item font-cabin"><a href="{% url 'contact' %}" class="nav-link px-2 text-muted">Contact</a></li>
+      </ul>
+   </footer>
+</div>
+
+<script>
+   let currentYear = new Date().getFullYear()
+   let year = document.getElementById('year')
+   year.innerHTML = currentYear
+</script>

@@ -1,6 +1,6 @@
 {% if messages %}
 {% for message in messages %}
-<div class="border p-0 rounded-0 d-flex my-shadow w-fit mx-auto justify-content-center alert fade show message-alert">
+<div class="border p-0 rounded-0 d-flex my-shadow w-fit mx-auto justify-content-center alert fade show message-alert" style="z-index: 1000 !important;">
    <div class="input-group bg-white rounded-0">
       {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
       <div class="input-group-text bg-danger border-0 rounded-0" id="btnGroupAddon">         

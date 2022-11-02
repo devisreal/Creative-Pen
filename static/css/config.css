@@ -430,7 +430,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .message-alert {
   position: absolute !important;
   bottom: 20px !important;
-  left: 20px !important;
+  right: 20px !important;
 }
 
 #navbar {
