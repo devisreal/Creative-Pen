@@ -1,76 +1,83 @@
 {% if messages %}
 {% for message in messages %}
-<div class="border p-0 rounded-0 d-flex my-shadow w-fit mx-auto justify-content-center alert fade show message-alert" style="z-index: 1000 !important;">
-   <div class="input-group bg-white rounded-0">
-      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-      <div class="input-group-text bg-danger border-0 rounded-0" id="btnGroupAddon">         
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none"></rect>
-            <circle cx="128" cy="128" r="96" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
-               stroke-width="24"></circle>
-            <line x1="128" y1="80" x2="128" y2="132" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
-               stroke-width="24"></line>
-            <circle cx="128" cy="172" r="16"></circle>
+<div class="position-fixed bottom-0  end-0 p-3 toast-container" style="z-index: 11">
+   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+   <div id="liveToast" class="toast show bg-white border border-danger border-2" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header d-flex align-items-center">
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-circle me-1" width="25"
+            height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#DC3545" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
          </svg>
+         <span class="me-auto text-danger font-bold font-cabin fs-6">Error</span>
+         <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-      <div class="input-group-text bg-primary border-0 rounded-0" id="btnGroupAddon">
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none"></rect>
-            <circle cx="128" cy="128" r="96" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
-               stroke-width="24"></circle>
-            <polyline points="120 124 128 124 128 176 136 176" fill="none" stroke="#ffffff" stroke-linecap="round"
-               stroke-linejoin="round" stroke-width="24"></polyline>
-            <circle cx="126" cy="84" r="16"></circle>
-         </svg>
-      </div>
-      {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-      <div class="input-group-text bg-success border-0 rounded-0" id="btnGroupAddon">
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none"></rect>
-            <polyline points="172 104 113.3 160 84 132" fill="none" stroke="#ffffff" stroke-linecap="round"
-               stroke-linejoin="round" stroke-width="24"></polyline>
-            <circle cx="128" cy="128" r="96" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
-               stroke-width="24"></circle>
-         </svg>
-      </div>
-      {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-      <div class="input-group-text bg-amber border-0 rounded-0" id="btnGroupAddon">
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#ffffff" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="none"></rect>
-            <line x1="128" y1="104" x2="128" y2="136" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
-               stroke-width="24"></line>
-            <path d="M114.2,40l-88,152A16,16,0,0,0,40,216H216a16,16,0,0,0,13.8-24l-88-152A15.9,15.9,0,0,0,114.2,40Z" fill="none"
-               stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
-            <circle cx="128" cy="176" r="16"></circle>
-         </svg>
-      </div>
-      {% endif %}
-
-
-      <span style="height: 40px; " class="m-2 ms-2 d-grid rounded-0 align-content-center">
-         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-         <h6 class="text-danger p-0 font-bree m-0 text-md">ERROR</h6>
-         {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-         <h6 class="text-primary p-0 font-bree m-0 text-md">INFO</h6>
-         {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-         <h6 class="text-success p-0 font-bree m-0 text-md">SUCCESS</h6>
-         {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-         <h6 class="text-amber p-0 font-bree m-0 text-md">WARNING</h6>
-         {% endif %}
-         <small class="font-muli mt-2 text-sm font-semibold">{{ message }}</small>
-
-      </span>
-      <div class="input-group-text bg-white border-0 ms-auto" id="btnGroupAddon">
-         <i class="ri-close-circle-fill text-black ps-5 text-xl cursor-pointer" data-bs-dismiss="alert"></i>         
+      <div class="toast-body font-muli font-semibold">
+         {{ message }}
       </div>
    </div>
+   {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+   <div id="liveToast" class="toast show bg-white border border-primary border-2" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header d-flex align-items-center">
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle me-1" width="25"
+            height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#0D6EFD" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            <polyline points="11 12 12 12 12 16 13 16"></polyline>
+         </svg>
+         <span class="me-auto text-primary font-bold font-cabin fs-6">Info</span>
+         <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body font-muli font-semibold">
+         {{ message }}
+      </div>
+   </div>
+   {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+   <div id="liveToast" class="toast show bg-white border border-success border-2" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header d-flex align-items-center">
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1" width="25"
+            height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#198754" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M9 12l2 2l4 -4"></path>
+         </svg>
+         <span class="me-auto text-success font-bold font-cabin fs-6">Success</span>
+         <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body font-muli font-semibold">
+         {{ message }}
+      </div>
+   </div>
+   {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+   <div id="liveToast" class="toast show bg-white border border-amber border-2" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="toast-header d-flex align-items-center">
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle me-1" width="25"
+            height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#f59e0b" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 9v2m0 4v.01"></path>
+            <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+         </svg>
+         <span class="me-auto text-amber font-bold font-cabin fs-6">Warning</span>
+         <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body font-muli font-semibold">
+         {{ message }}
+      </div>
+   </div>
+   {% endif %}
+
 </div>
 {% endfor %}
 {% endif %}
 
-<script>
-   setTimeout(() => {
-      $(".message-alert").remove()
-   }, 4000)
-</script>

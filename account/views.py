@@ -27,7 +27,7 @@ def login(request):
                 try:
                     user = authenticate(username=username, password=password)
                     auth.login(request, user)
-                    messages.success(request, "You're successfully logged in.")
+                    messages.success(request, "You are successfully logged in.")
                     return redirect('home')
                 except:
                     messages.error(request, "Incorrect password.")

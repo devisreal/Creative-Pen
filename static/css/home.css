@@ -130,16 +130,16 @@ svg#freepik_stories-blog-post.animated
     transform: translateX(0);
   }
 }
-/* .home-header{
-  height: 70vh;
-} */
 
-/* Thin out the marketing headings */
 .featurette-heading {
   font-weight: 300;
   line-height: 1;
   /* rtl:remove */
   letter-spacing: -0.05rem;
+}
+.wavy-text-decoration{
+  text-decoration: 2px underline wavy var(--color-red);
+  text-underline-offset: 5px;
 }
 
 /* !! SECOND SVG STYLES */
