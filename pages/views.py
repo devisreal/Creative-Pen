@@ -1,11 +1,19 @@
-from django.shortcuts import render
-from .models import ContactDetail
+from django.shortcuts import render, redirect
+from .models import ContactDetail, Subscriber
 from django.contrib import messages
 
 
 def home(request):
    context = {}
    return render(request, 'pages/home.html', context)
+
+def footer(request):
+   if request.method == 'POST':      
+      email = request.POST['email']      
+      Subscriber.objects.create(email=email)
+      
+      messages.success(request, 'Thank you for subscribing! 👍')
+      return redirect(request.META.get('HTTP_REFERER'))
 
 def latest(request):
    context = {}

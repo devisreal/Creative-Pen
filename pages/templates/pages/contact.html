@@ -33,19 +33,19 @@ Contact
 </header>
 
 
-<div class="container px-2" style="margin-top: 160px;">
+<div class="container px-5" style="margin-top: 160px;">
    <div class="row gx-5 contact-form-section" >
-      <div class="col-5">
+      <div class="col-md-5">
          <div class="border bg-light contact-form-image">
             <!-- <img src="{% static 'img/contact-img.jpg' %} " alt="" class="img-fluid"> -->
          </div>
       </div>
 
       <!-- ? Contact Form -->
-      <div class="col d-grid align-content-center bg-light contact-form my-shadow">
+      <div class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form my-shadow">
          <div class="">
 
-            <form class="container" method="POST">
+            <form class="container px-lg-4 px-md-3 px-3" method="POST">
                {% csrf_token %}
                <!-- ! First and Last Names -->
                <div class="row g-3">
@@ -130,6 +130,8 @@ Contact
    </div>
 </div>
 
+<br><br><br><br>
+<br><br><br><br>
 <br><br><br><br>
 
 {% endblock content %}

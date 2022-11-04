@@ -45,6 +45,6 @@ def register(request):
 def user_logout(request):    
     logout(request)
     # Return success message
-    messages.success(request, 'See you soon!')    
+    messages.success(request, 'See you soon! 👋')
     return redirect(request.META.get('HTTP_REFERER'))
     # return redirect('login')

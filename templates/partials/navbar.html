@@ -7,102 +7,102 @@
 
 
 {% if request.user.is_authenticated %}
-   <nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
-      <div class="container-fluid px-md-5 px-4">
-         <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
-            <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
-            <h1 class="font-righteous text-xl mt-2 ms-1 text-uppercase">
-               Creative
-               <span class="text-red">
-                  Pen
-               </span>
-            </h1>
-         </a>
-         <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-            <i class="ri-menu-3-line text-2xl"></i>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
-                     href="{% url 'home' %}">Home</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
-                     href="{% url 'latest_posts' %}">Latest</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
-                     href="{% url 'categories' %}">Categories</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
-                     href="{% url 'about' %}">About</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
-                     href="{% url 'contact' %}">Contact</a>
-               </li>               
-               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-               </li>
-            </ul>            
-         </div>
+<nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
+   <div class="container-fluid px-md-5 px-4">
+      <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
+         <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
+         <h1 class="font-righteous text-xl mt-2 ms-1 text-uppercase">
+            Creative
+            <span class="text-red">
+               Pen
+            </span>
+         </h1>
+      </a>
+      <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+         <i class="ri-menu-3-line text-2xl"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                  href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
+                  href="{% url 'latest_posts' %}">Latest</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
+                  href="{% url 'categories' %}">Categories</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                  href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                  href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+            </li>
+         </ul>
       </div>
-   </nav>
+   </div>
+</nav>
 {% else %}
-   <nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
-      <div class="container-fluid px-md-5 px-4">         
-         <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
-            <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
-            <h1 class="font-righteous  text-xl mt-2 ms-1 text-uppercase">
-               Creative
-               <span class="text-red">
-                  Pen
-               </span>
-            </h1>
+<nav id="navbar" class="navbar navbar-expand-md navbar-light py-2 border-bottom sticky-top top-0">
+   <div class="container-fluid px-md-5 px-4">
+      <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
+         <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
+         <h1 class="font-righteous  text-xl mt-2 ms-1 text-uppercase">
+            Creative
+            <span class="text-red">
+               Pen
+            </span>
+         </h1>
+      </a>
+      <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+         <i class="ri-menu-3-line text-2xl"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                  href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
+                  href="{% url 'latest_posts' %}">Latest</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
+                  href="{% url 'categories' %}">Categories</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                  href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
+                  href="{% url 'contact' %}">Contact</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+            </li>
+         </ul>
+         <a class="nav-link text-white bg-dark ms-3 font-cabin rounded-xl font-medium " href="{% url 'register' %}">
+            Get started
          </a>
-         <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-            <i class="ri-menu-3-line text-2xl"></i>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
-                     href="{% url 'home' %}">Home</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
-                     href="{% url 'latest_posts' %}">Latest</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
-                     href="{% url 'categories' %}">Categories</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
-                     href="{% url 'about' %}">About</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
-                     href="{% url 'contact' %}">Contact</a>
-               </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Sign in</a>
-               </li>               
-            </ul>
-            <a class="nav-link text-white bg-dark ms-3 font-cabin rounded-xl font-medium " href="{% url 'register' %}">
-               Get started
-            </a>
-   
-         </div>
       </div>
-   </nav>
+   </div>
+</nav>
 {% endif %}
 
 
+<!-- ! OFFCANVAS -->
 <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header d-flex align-items-center">
       <a href="{% url 'home' %}" class="text-dark text-decoration-none d-flex align-items-center">
@@ -114,58 +114,60 @@
             </span>
          </h1>
       </a>
-      <button type="button" class="btn-close text-reset btn btn-sm" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close text-reset btn btn-sm" data-bs-dismiss="offcanvas"
+         aria-label="Close"></button>
    </div>
    <div class="offcanvas-body">
       <div class="" id="offNav">
          <ul class="mx-auto ms-lg-auto me-lg-0 font-semibold list-unstyled">
             <li class="nav-item">
-               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}" href="{% url 'home' %}">Home</a>
+               <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
+                  href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}" href="{% url 'latest_posts' %}">Latest</a>
-            </li>            
-            <li class="nav-item">
-               <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}" href="{% url 'categories' %}">Categories</a>
+               <a class="nav-link {% if request.path == latest_posts %} active-nav  {% endif %}"
+                  href="{% url 'latest_posts' %}">Latest</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}" href="{% url 'about' %}">About</a>
+               <a class="nav-link {% if request.path == categories %} active-nav  {% endif %}"
+                  href="{% url 'categories' %}">Categories</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link {% if request.path == about %} active-nav  {% endif %}"
+                  href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
                <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
                   href="{% url 'contact' %}">Contact</a>
             </li>
             {% if not request.user.is_authenticated %}
-               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Sign in</a>
-               </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'login' %}">Sign in</a>
+            </li>
             {% endif %}
             {% if request.user.is_authenticated %}
-               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-               </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
+            </li>
             {% endif %}
-            
          </ul>
-         
          {% if not request.user.is_authenticated %}
-            <a class="nav-link w-fit text-white bg-dark ms-3 font-righteous rounded-xl" href="{% url 'register' %}"
-               style="color: #fff !important;">
-               Get started
-            </a>
+         <a class="nav-link w-fit text-white bg-dark ms-3 font-cabin rounded-lg font-medium" href="{% url 'register' %}"
+            >
+            Get started
+         </a>
          {% endif %}
-      
       </div>
    </div>
 </div>
 
 <script>
    const navbar = document.querySelector('#navbar');
-      window.onscroll = () => {
-         if (window.scrollY > 30) {
-            navbar.classList.add('backdrop-blur');
-         } else {
-            navbar.classList.toggle('backdrop-blur');
-         }         
-      }   
+   window.onscroll = () => {
+      if (window.scrollY > 30) {
+         navbar.classList.add('backdrop-blur');
+      } else {
+         navbar.classList.toggle('backdrop-blur');
+      }
+   }   
 </script>

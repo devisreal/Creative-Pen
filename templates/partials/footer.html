@@ -1,6 +1,27 @@
 {% load static %}
-<div class="container px-0">
-   <footer class="d-flex flex-wrap justify-content-between align-items-center pt-2 mt-4 mb-2 border-top">
+<div class="container px-0 mt-5">
+   <div class="bg-light rounded-lg my-shadow py-5 p-4 px-sm-5">
+      <h3 class="form-label font-cabin text-cente mb-4">Subscribe to our newsletter</h3>
+      <form action="{% url 'footer' %}" method="POST" class="d-md-flex align-items-center">
+         {% csrf_token %}
+         <div class="col-md-6">
+            <input 
+               type="email" 
+               class="form-control font-medium py-2" 
+               name="email" 
+               id="email" 
+               placeholder="Enter your email"
+               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+               required
+            >
+         </div>
+         <div class="col-md-5 ms-auto mx-md-auto w-fit">
+            <button type="submit" class="btn btn-blue px-4 px-md-5 mx-auto py-2 mt-4 mt-md-0 font-medium rounded-pill">SUBSCRIBE</button>
+         </div>
+      </form>
+   </div>
+
+   <footer class="d-flex flex-wrap justify-content-between align-items-center pt-2 mt-2 px-1 px-sm-0 mb-2">
       <p class="col-md-4 mb-0 font-medium font-cabin">
          &copy; <span id="year"></span> Creative Pen
       </p>
@@ -12,8 +33,10 @@
 
       <ul class="nav col-md-4 justify-content-end ">
          <li class="nav-item font-cabin"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
-         <li class="nav-item font-cabin"><a href="{% url 'latest_posts' %}" class="nav-link px-2 text-muted">Latest</a></li>
-         <li class="nav-item font-cabin"><a href="{% url 'categories' %}" class="nav-link px-2 text-muted">Categories</a></li>
+         <li class="nav-item font-cabin"><a href="{% url 'latest_posts' %}" class="nav-link px-2 text-muted">Latest</a>
+         </li>
+         <li class="nav-item font-cabin"><a href="{% url 'categories' %}"
+               class="nav-link px-2 text-muted">Categories</a></li>
          <li class="nav-item font-cabin"><a href="{% url 'about' %}" class="nav-link px-2 text-muted">About</a></li>
          <li class="nav-item font-cabin"><a href="{% url 'contact' %}" class="nav-link px-2 text-muted">Contact</a></li>
       </ul>

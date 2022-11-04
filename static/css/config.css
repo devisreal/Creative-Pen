@@ -490,22 +490,29 @@ body#body::-webkit-scrollbar-thumb:hover {
 .hero-link {
   color: #333;
 }
-.hero-link:hover{
+.hero-link:hover {
   color: var(--color-red) !important;
 }
 
-
 /* ? Contact Page */
-.contact-form-section{
-  height: 75vh !important;
+@media screen and (min-width: 767px) {
+  .contact-form-section {
+    height: 75vh !important;
+  }
+  
 }
-.contact-form{
+@media screen and (max-width: 767px) {
+  .contact-form-image{
+    height: 55vh !important;
+  }
+}
+.contact-form {
   border-radius: 20px;
 }
-.contact-form-image{
+.contact-form-image {
   height: 75vh;
   border-radius: 20px;
-  background-image: url('../img/contact-img.jpg');
+  background-image: url("../img/contact-img.jpg");
   background-size: cover;
   background-position: center;
 }
