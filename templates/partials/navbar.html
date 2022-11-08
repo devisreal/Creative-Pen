@@ -47,6 +47,20 @@
             <li class="nav-item">
                <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
             </li>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+               </a>
+               <ul class="dropdown-menu mt-2 dropdown-menu-end px-2">
+                  <li><a class="dropdown-item nav-link rounded-md" href="#">Dashboard</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md" href="#">Another action</a></li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item nav-link rounded-md" href="#">Sign out</a></li>
+               </ul>
+            </li>
+            
          </ul>
       </div>
    </div>

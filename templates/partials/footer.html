@@ -1,5 +1,5 @@
 {% load static %}
-<div class="container px-0 mt-5">
+<div class="container-fluid px-flutt mt-5">
    <div class="bg-light rounded-lg my-shadow py-5 p-4 px-sm-5">
       <h3 class="form-label font-cabin text-cente mb-4">Subscribe to our newsletter</h3>
       <form action="{% url 'footer' %}" method="POST" class="d-md-flex align-items-center">
@@ -21,9 +21,9 @@
       </form>
    </div>
 
-   <footer class="d-flex flex-wrap justify-content-between align-items-center pt-2 mt-2 px-1 px-sm-0 mb-2">
-      <p class="col-md-4 mb-0 font-medium font-cabin">
-         &copy; <span id="year"></span> Creative Pen
+   <footer class="d-flex bg-light flex-wrap justify-content-between align-items-center py-1 mt-2 px-1 px-sm-2 rounded-lg mb-2">
+      <p class="col-md-4 mb-0 font-medium font-cabin text-muted">
+         &copy; <span id="year"></span> Creative Pen. All rights reserved
       </p>
 
       <a href="/"
