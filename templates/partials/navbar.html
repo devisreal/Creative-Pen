@@ -23,7 +23,7 @@
          <i class="ri-menu-3-line text-2xl"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium d-flex align-items-center">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>
@@ -47,20 +47,24 @@
             <li class="nav-item">
                <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown ms-2">
                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Account
+                  <img
+                     src="{% static 'img/man.png' %}"
+                     alt="User Avatar" 
+                     class="img-fluid rounded-full nav-avatar" 
+                     style="width: 40px;height: 40px;object-fit: cover;"
+                  />
                </a>
-               <ul class="dropdown-menu mt-2 dropdown-menu-end px-2">
-                  <li><a class="dropdown-item nav-link rounded-md" href="#">Dashboard</a></li>
-                  <li><a class="dropdown-item nav-link rounded-md" href="#">Another action</a></li>
+               <ul class="dropdown-menu mt-1 dropdown-menu-end px-2">
+                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'readers:dashboard' request.user.slug %}">Dashboard</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="#">Another action</a></li>
                   <li>
-                     <hr class="dropdown-divider">
+                     <hr class="dropdown-divider p-0 m-0 my-1">
                   </li>
-                  <li><a class="dropdown-item nav-link rounded-md" href="#">Sign out</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'logout' %}">Sign out</a></li>
                </ul>
-            </li>
-            
+            </li>            
          </ul>
       </div>
    </div>

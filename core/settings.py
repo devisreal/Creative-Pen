@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'blog',
     'pages',
+    'readers',
 ]
 
 MIDDLEWARE = [
@@ -165,5 +166,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'account.User'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'latest_posts'
 LOGIN_URL = 'login'

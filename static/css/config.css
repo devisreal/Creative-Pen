@@ -176,12 +176,14 @@ td {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
+  appearance: none !important;
   margin: 0 !important;
 }
 
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield !important;
+  appearance: textfield !important;
 }
 
 /* ! Box Shadows */
@@ -434,7 +436,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 #navbar {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .active-nav {
@@ -459,6 +461,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .gradient-text {
   background: linear-gradient(62deg, #d2302c, #234e70);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

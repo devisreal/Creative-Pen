@@ -5,6 +5,13 @@ from autoslug import AutoSlugField
 
 
 class User(AbstractUser):
+   gender_choices =  (      
+      ('Male', 'Male'),
+      ('Female', 'Female'),
+      ('Other', 'Other'),
+      ('not_saying', 'Prefer not to say'),      
+   )
+
    profile_picture = models.ImageField(
       null=True,
       blank=True,
@@ -33,13 +40,13 @@ class User(AbstractUser):
    address = models.CharField(max_length=250, blank=True)
    mobile_no = models.CharField(max_length=14, blank=True)
    date_of_birth = models.DateField(null=True, blank=True)
+   gender = models.CharField(max_length=50, choices=gender_choices, null=True)
    is_author = models.BooleanField(null=True, blank=True, default=False)
    slug = AutoSlugField(unique=True, populate_from='username', sep='_', null=True)
 
 
    def __str__(self):
       return f'{self.username}'
-
 
 
 class UserSettings(models.Model):
