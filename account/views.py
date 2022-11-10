@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import authenticate, logout
@@ -7,11 +8,13 @@ from django.contrib import messages
 
 
 # Create your views here.
+
 def login(request):
+    
     if request.user.is_authenticated:
         messages.warning(request, 'You are already logged in!')
         return redirect('home')
-    else:
+    else:        
         if request.method == 'POST':
             username_or_email = request.POST['username_or_email']
             password = request.POST['password']
@@ -24,10 +27,11 @@ def login(request):
                 username = None
 
             if username is not None:
+                # next_page = request.GET['next']
                 try:
                     user = authenticate(username=username, password=password)
                     auth.login(request, user)
-                    messages.success(request, "You are successfully logged in.")
+                    messages.success(request, "You are successfully logged in.")                    
                     return redirect('home')
                 except:
                     messages.error(request, "Incorrect password.")

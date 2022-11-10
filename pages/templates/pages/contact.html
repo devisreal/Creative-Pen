@@ -17,7 +17,7 @@ Contact
                <h5 class="text-3xl">
                   Contact Us
                </h5>
-               <div class="mt-2 text-md font-muli font-semibold d-flex align-items-center w-fit mx-auto ">
+               <div class="mt-2 text-md font-outfit font-medium d-flex align-items-center w-fit mx-auto ">
                   <a href="{% url 'home' %}" class="text-decoration-none hero-link">
                      Home
                   </a>
@@ -34,7 +34,7 @@ Contact
 
 
 <div class="container px-5" style="margin-top: 160px;">
-   <div class="row gx-5 contact-form-section" >
+   <div class="row gx-5 contact-form-section">
       <div class="col-md-5">
          <div class="border bg-light contact-form-image">
             <!-- <img src="{% static 'img/contact-img.jpg' %} " alt="" class="img-fluid"> -->
@@ -42,39 +42,30 @@ Contact
       </div>
 
       <!-- ? Contact Form -->
-      <div class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form my-shadow">
+      <div
+         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form my-shadow">
          <div class="">
 
             <form class="container px-lg-4 px-md-3 px-3" method="POST">
+               <h3 class="mb-4 d-flex align-items-center">
+                  <i class="ti ti-mail fs-1 text-blue me-2"></i>
+                  Send us a message
+               </h3>
                {% csrf_token %}
                <!-- ! First and Last Names -->
                <div class="row g-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input 
-                           type="text" 
-                           class="form-control font-semibold font-medium" 
-                           id="firstname"
-                           name="firstname" 
-                           placeholder=""
-                           autocomplete="off" 
-                           required
-                        >
-                        <label class="font-cabin font-semibold" for="email">Firstname</label>
+                        <input type="text" class="form-control" id="firstname"
+                           name="firstname" placeholder="" autocomplete="off" required>
+                        <label class="" for="email">Firstname</label>
                      </div>
                   </div>
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input 
-                           type="text" 
-                           class="form-control font-semibold font-medium" 
-                           id="lastname"
-                           name="lastname" 
-                           placeholder="" 
-                           autocomplete="off" 
-                           required
-                        >
-                        <label class="font-cabin font-semibold" for="email">Lastname</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname"
+                           placeholder="" autocomplete="off" required>
+                        <label class="" for="email">Lastname</label>
                      </div>
                   </div>
                </div>
@@ -83,37 +74,23 @@ Contact
                <div class="row gx-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input 
-                           type="email" 
-                           class="form-control font-semibold font-medium" 
-                           id="email"
-                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                           name="email" 
-                           placeholder="" 
-                           autocomplete="off" 
-                           required
-                        >
-                        <label class="font-cabin font-semibold" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" placeholder=""
+                           autocomplete="off" required>
+                        <label class="" for="email">Email address</label>
                      </div>
-                  </div>                  
+                  </div>
                </div>
 
                <!-- ! Message -->
                <div class="row gx-3">
-                  <div class="col">                     
+                  <div class="col">
                      <div class="form-floating mb-3">
-                        <textarea                         
-                           class="form-control font-semibold font-medium" 
-                           placeholder=""
-                           id="message"
-                           name="message"
-                           style="height: 150px;resize: none;"
-                           autocomplete="off" 
-                           required
-                        ></textarea>
-                        <label class="font-cabin font-semibold" for="message">Message</label>
+                        <textarea class="form-control" placeholder="" id="message"
+                           name="message" style="height: 150px;resize: none;" autocomplete="off" required></textarea>
+                        <label class="" for="message">Message</label>
                      </div>
-                  </div>                  
+                  </div>
                </div>
 
                <div class="w-fit ms-auto mt-3">

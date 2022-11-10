@@ -44,15 +44,12 @@
                <a class="nav-link {% if request.path == contact %} active-nav  {% endif %}"
                   href="{% url 'contact' %}">Contact</a>
             </li>
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-            </li>
             <li class="nav-item dropdown ms-2">
-               <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <a class="nav-link dropdown-toggle" role="button" style="user-select: none;" data-bs-toggle="dropdown" aria-expanded="false">
                   <img
                      src="{% static 'img/man.png' %}"
                      alt="User Avatar" 
-                     class="img-fluid rounded-full nav-avatar" 
+                     class="img-fluid rounded-full nav-avatar pointer-events-none"
                      style="width: 40px;height: 40px;object-fit: cover;"
                   />
                </a>
@@ -111,7 +108,7 @@
                <a class="nav-link" href="{% url 'login' %}">Sign in</a>
             </li>
          </ul>
-         <a class="nav-link text-white bg-dark ms-3 font-cabin rounded-xl font-medium " href="{% url 'register' %}">
+         <a class="nav-link text-white bg-dark ms-3 font-outfit rounded-xl font-medium " href="{% url 'register' %}">
             Get started
          </a>
       </div>
@@ -121,7 +118,7 @@
 
 
 <!-- ! OFFCANVAS -->
-<div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas show offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header d-flex align-items-center">
       <a href="{% url 'home' %}" class="text-dark text-decoration-none d-flex align-items-center">
          <img src="{% static 'img/tmp1.png' %}" alt="" width="25px">
@@ -137,7 +134,7 @@
    </div>
    <div class="offcanvas-body">
       <div class="" id="offNav">
-         <ul class="mx-auto ms-lg-auto me-lg-0 font-semibold list-unstyled">
+         <ul class="mx-auto ms-lg-auto me-lg-0 font- list-unstyled">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>
@@ -163,14 +160,30 @@
                <a class="nav-link" href="{% url 'login' %}">Sign in</a>
             </li>
             {% endif %}
-            {% if request.user.is_authenticated %}
-            <li class="nav-item">
-               <a class="nav-link" href="{% url 'logout' %}">Sign out</a>
-            </li>
+            {% if request.user.is_authenticated %}            
+            <li class="nav-item d-flex justify-content-between dropdown align-items-center border-top mt-2 pt-2">
+               <a class="nav-link text-capitalize" href="{% url 'logout' %}">
+                  {{request.user.username}}
+               </a>
+               <a class="nav-link dropdown-toggle" role="button" style="user-select: none;" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="{% static 'img/man.png' %}" alt="User Avatar" class="img-fluid rounded-full nav-avatar pointer-events-none"
+                     style="width: 40px;height: 40px;object-fit: cover;" />
+               </a>
+               <ul class="dropdown-menu mt-1 dropdown-menu-start px-2 my-shadow-sm">
+                  <li><a class="dropdown-item nav-link rounded-md font-medium"
+                        href="{% url 'readers:dashboard' request.user.slug %}">Dashboard</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="#">Another action</a></li>
+                  <li>
+                     <hr class="dropdown-divider p-0 m-0 my-1">
+                  </li>
+                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'logout' %}">Sign out</a></li>
+               </ul>
+            </li>            
             {% endif %}
          </ul>
          {% if not request.user.is_authenticated %}
-         <a class="nav-link w-fit text-white bg-dark ms-3 font-cabin rounded-lg font-medium" href="{% url 'register' %}"
+         <a class="nav-link w-fit text-white bg-dark ms-3 font-outfit rounded-lg font-medium" href="{% url 'register' %}"
             >
             Get started
          </a>

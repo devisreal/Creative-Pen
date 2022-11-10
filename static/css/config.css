@@ -30,7 +30,7 @@ li,
 input,
 textarea,
 td {
-  font-family: "muli", sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
 }
 
 /* ! Font Family */
@@ -38,8 +38,8 @@ td {
   font-family: "Righteous", cursive !important;
 }
 
-.font-muli {
-  font-family: "muli", sans-serif !important;
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
 }
 
 .font-cabin {
@@ -385,7 +385,7 @@ input[type="number"] {
   outline: none !important;
   background-color: var(--white);
   box-shadow: none !important;
-  font-family: "muli", sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
 }
 
 .form-control:focus {
@@ -398,7 +398,7 @@ input[type="number"] {
 .form-label text-black,
 label {
   font-weight: 500;
-  font-family: "Bree Serif", serif;
+  font-family: "Cabin", sans-serif !important;
 }
 
 .form-check-input:focus,
@@ -441,15 +441,23 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .active-nav {
   color: black !important;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #navbar .nav-link {
   font-family: "Cabin", sans-serif;
 }
 
-#offNav .nav-link {
+/* #offNav .nav-link {
   color: var(--gray-500);
+} */
+
+#offNav .nav-item .nav-link{
+  color: var(--gray-500);
+}
+
+#offNav .nav-item .nav-link:hover{
+  color: black !important;
 }
 
 @media screen and (max-width: 500px) {

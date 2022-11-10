@@ -4,5 +4,5 @@ from . import views
 app_name = 'readers'
 
 urlpatterns = [
-   path('dashboard/', views.dashboard, name="dashboard"),
+   path('', views.dashboard, name="dashboard"),
 ]

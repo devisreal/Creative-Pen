@@ -8,11 +8,11 @@
    <title> {% block title %}{% endblock title %} | Creative Pen</title>
    <link rel="shortcut icon" href="{% static 'img/imagex.jpg' %}" type="image/x-icon">
 
-   <!-- * Fonts -->
-   <link rel="stylesheet" href="https://use.typekit.net/pjw0trz.css">
+   <!-- * Fonts -->   
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link rel="stylesheet" href="https://use.typekit.net/pjw0trz.css">
+   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -35,7 +35,7 @@
    {% block content %}
       
    {% endblock content %}
-   {% include 'partials/footer.html' %}
+   <!-- {% include 'partials/footer.html' %} -->
 
    <!-- * Vendors -->
    <script src="{% static 'js/jquery.min.js' %}"></script>
