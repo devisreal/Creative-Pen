@@ -1,103 +1,58 @@
-<!DOCTYPE html>
+{% extends 'account/auth_base.html' %}
 {% load static %}
-<html lang="en">
+{% block title %}
+Login | Creative Pen
+{% endblock title %}
+{% block auth_main %}
+{% include 'partials/messages.html' %}
 
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login | Creative Pen</title>
-   <link rel="shortcut icon" href="{% static 'img/imagex.jpg' %}" type="image/x-icon">
-   <link rel="preload" as="image" href="{% static 'img/login-bg.jpg' %}">
-
-   <!-- ? Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-   <!-- ? Icons -->
-   <script src="https://unpkg.com/phosphor-icons"></script>
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
-
-
-   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-   <link rel="stylesheet" href="{% static 'css/config.css' %}">
-   <link rel="stylesheet" href="{% static 'css/auth.css' %}">   
-</head>
-
-<body class="">
-
-   <div class="container-fluid px-0">
-      <div class="row gx-0">
-         <div class="col-7 d-none d-md-inline">
-            <div class="p-3 login-left h-full d-grid align-content-center"></div>
-         </div>
-         <div class="col">
-            <div class="p-lg-3 login-right h-full">
-               <a href="{% url 'home' %}" class="btn-light border btn w-fit d-flex align-items-center mb-5 text-sm ms-3 ms-lg-0">                                    
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-dot me-1" width="20" height="20"
-                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                     <path d="M19 12h2l-9 -9l-9 9h2v7a2 2 0 0 0 2 2h5"></path>
-                     <circle cx="19" cy="19" r="3"></circle>
-                     <path d="M9 21v-6a2 2 0 0 1 2 -2h2c.641 0 1.212 .302 1.578 .771"></path>
-                  </svg>                  
-                     Home
-               </a>
-               <div class="d-flex align-items-center mt-5 w-fit mx-auto">
-                  <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
-                  <h1 class="font-righteous  text-2xl mt-2 ms-1 text-uppercase">
-                     Creative
-                     <span class="text-red">
-                        Pen
-                     </span>
-                  </h1>
-               </div>
-               {% include 'partials/messages.html' %}
-               <form action="" method="POST" class="login-form mx-auto mt-3 rounded-md p-3 p-md-4 ">
-                  {% csrf_token %}
-                  <div class="form-floating mb-3">
-                     <input 
-                        type="text" 
-                        class="form-control " 
-                        id="email" 
-                        name="username_or_email"
-                        placeholder=""
-                        autocomplete="off"
-                        required
-                     >
-                     <label class="" for="email">Email address / Username</label>
-                  </div>
-
-                  <div class="form-floating mb-3">
-                     <input 
-                        type="password" 
-                        class="form-control " 
-                        id="password" 
-                        name="password"
-                        placeholder=""
-                        autocomplete="off"
-                        required
-                     >
-                     <label class="" for="password">Password</label>
-                  </div>
-
-                  <div class="w-fit ms-auto mt-4">
-                     <button type="submit" class="btn btn-red font-semibold">Login</button>
-                  </div>
-               </form>
-            </div>
-         </div>
+<div class="col">
+   <div class="p-0 p-md-0 p-lg-3 login-right h-full gap-4">
+      <!-- <i class="iconsax text-black" icon-name="receive-square"></i> -->
+      <div class="d-grid" style="place-content: center;">
+         <img src="{% static 'img/tmp1.png' %}" class="img-fluid mx-auto" width="40px" alt="Logo">
+         <h3 class="text-center m-0 p-0">Login to your account</h3>
       </div>
+
+      <form action="" method="POST" class="login-form mx-auto mt-3 rounded-md p-3 p-md-1 p-lg-4 ">
+         {% csrf_token %}
+
+         <fieldset class="my-2">
+            <label for="email_username">Username or Email</label>
+            <div class="form-group input-icon-group mt-2">
+               <i class="fa-solid fa-envelope input-icon text-black-50"></i>
+               <input type="text" id="email_username" class="form-control" placeholder="john@email.com | john doe"
+                  name="username_or_email" title="Username or Email" autocomplete="off" required>
+            </div>
+         </fieldset>
+
+         <fieldset class="my-2 mb-3">
+            <label for="password">Password</label>
+            <div class="form-group input-icon-group mt-2">
+               <i class="fa-solid fa-unlock input-icon text-black-50"></i>
+               <input type="password" id="password" class="form-control" placeholder="******" name="password"
+                  autocomplete="off" title="Password" required>
+            </div>
+         </fieldset>
+
+         <div class="d-grid">
+            <a href="" class="auth-link w-fit ms-auto font-outfit text-sm text-black opacity-75">
+               Forgot password ?
+            </a>
+         </div>
+
+         <div class="d-grid ms-auto mt-4">
+            <button type="submit" class="btn btn-blue font-semibold">Sign In</button>
+
+            <p class="text-center mt-3 text-md">
+               Not registered? <a href="{% url 'register' %}" class="auth-link text-black font-medium">Create
+                  Account</a>
+            </p>
+         </div>
+
+
+      </form>
    </div>
+</div>
 
-   <script src="{% static 'js/jquery.min.js' %}"></script>
-   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}

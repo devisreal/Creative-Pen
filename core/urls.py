@@ -19,11 +19,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('taggit/', include('taggit_selectize.urls')),
     path('pen_admin/', admin.site.urls),
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
     path('user/<slug:slug>/', include('readers.urls'))
 ]
+
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

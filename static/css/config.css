@@ -380,8 +380,34 @@ input[type="number"] {
 }
 
 /* ! Form Styles */
+/* ? Form Icon */
+.input-icon-group {
+  display: flex;
+  align-items: center;  
+}
+.input-icon-group .form-control {
+  padding-left: 2.2rem;  
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 7px;
+}
+
+.input-icon-group .input-icon {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  
+  /* color: #234e70;
+  fill: #234e70; */
+}
+
 .form-control {
-  border: 2px solid var(--gray-500);
+  border: 0.125em solid gray;
   outline: none !important;
   background-color: var(--white);
   box-shadow: none !important;
@@ -392,7 +418,8 @@ input[type="number"] {
   border-color: var(--color-blue);
   color: #212529;
   background-color: #fff;
-  box-shadow: 0 0 0 2.5px rgba(84, 89, 66, 0.3) !important;
+  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
+  /* box-shadow: none !important; */
 }
 
 .form-label text-black,

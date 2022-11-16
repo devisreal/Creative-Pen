@@ -6,10 +6,12 @@ django-autoslug==1.9.8
 django-crispy-forms==1.14.0
 django-multiselectfield==0.1.12
 django-quill-editor==0.1.40
+django-taggit==3.0.0
 Pillow==9.2.0
 psycopg2==2.9.3
 python-decouple==3.6
 pytz==2022.2.1
 sqlparse==0.4.2
+taggit-selectize==2.11.0
 tzdata==2022.2
 whitenoise==6.2.0

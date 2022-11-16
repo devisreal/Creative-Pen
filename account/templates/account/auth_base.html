@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title> {% block title %}{% endblock title %} | Creative Pen</title>
+   <title>{% block title %} {% endblock title %}</title>
    <link rel="shortcut icon" href="{% static 'img/imagex.jpg' %}" type="image/x-icon">
+   <link rel="preload" as="image" href="{% static 'img/auth-bg.jpg' %}">
 
-   <!-- ? Fonts -->   
+   <!-- ? Fonts -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -18,36 +20,37 @@
 
    <!-- ? Icons -->
    <script src="https://kit.fontawesome.com/c9b2dff50a.js" crossorigin="anonymous"></script>
-   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
 
-   <!-- ? Vendors -->
-   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">   
+   <!-- ? CSS -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
    <link rel="stylesheet" href="{% static 'css/config.css' %}">
-   <link rel="stylesheet" href="{% static 'css/selectize.css' %}">
-   <link rel="stylesheet" href="{% static 'css/selectize.bootstrap5.min.css' %}">
-
-   <!-- ? Custom Styles -->
-   {% block styles %}
-      
-   {% endblock styles %}
+   <link rel="stylesheet" href="{% static 'css/auth.css' %}">   
+   <script src="//glenthemes.github.io/iconsax/geticons.js"></script>
+   <link href="//glenthemes.github.io/iconsax/style.css" rel="stylesheet">   
+   <style>
+      :root {
+         --Iconsax-Size: 20px;
+         --Iconsax-Color: #000;
+         --Iconsax-Fill: #000;
+      }
+   </style>
 </head>
-<body id="body">
 
-   {% include 'partials/navbar.html' %}
-   {% block content %}
-      
-   {% endblock content %}
-   <!-- {% include 'partials/footer.html' %} -->
+<body class="">
 
-   <!-- * Vendors -->
+   <div class="container-fluid px-0">
+      <div class="row gx-0">
+         <div class="col-7 d-none d-md-inline">
+            <div class="p-3 login-left h-full d-grid align-content-center"></div>
+         </div>
+         {% block auth_main %}{% endblock %}
+      </div>
+   </div>
+
    <script src="{% static 'js/jquery.min.js' %}"></script>
    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-   <script src="{% static 'js/selectize.min.js' %}"></script>
-   <script src="{% static 'js\masonry.pkgd.min.js' %}"></script>
-   
-   <!-- * Custom Scripts -->
-   
 </body>
+
 </html>

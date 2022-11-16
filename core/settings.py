@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',    
     'crispy_forms',
     'crispy_bootstrap5',
-    'django_quill',
+    'django_quill',    
+    'taggit',
+    'taggit_selectize',
     'account',
     'blog',
     'pages',
@@ -169,3 +171,74 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = 'latest_posts'
 LOGIN_URL = '/auth/login/'
+
+
+# DJANGO TAGGIT CONFIG
+TAGGIT_CASE_INSENSITIVE = True
+TAGGIT_TAGS_FROM_STRING = 'taggit_selectize.utils.parse_tags'
+TAGGIT_STRING_FROM_TAGS = 'taggit_selectize.utils.join_tags'
+TAGGIT_SELECTIZE = {
+    'MINIMUM_QUERY_LENGTH': 2,
+    'RECOMMENDATION_LIMIT': 10,
+    'CSS_FILENAMES': ("taggit_selectize/css/selectize.django.css",),
+    'JS_FILENAMES': ("taggit_selectize/js/selectize.js",),
+    'DIACRITICS': True,
+    'CREATE': True,
+    'PERSIST': True,
+    'OPEN_ON_FOCUS': True,
+    'HIDE_SELECTED': True,
+    'CLOSE_AFTER_SELECT': False,
+    'LOAD_THROTTLE': 300,
+    'PRELOAD': False,
+    'ADD_PRECEDENCE': False,
+    'SELECT_ON_TAB': True,
+    'REMOVE_BUTTON': True,
+    'RESTORE_ON_BACKSPACE': False,
+    'DRAG_DROP': False,
+    'DELIMITER': ','
+}
+
+# DJANGO QUILL-FIELD CONFIG
+QUILL_CONFIGS = {
+    "default": {
+        "theme": "snow",
+        "modules": {
+            "syntax": True,
+            "toolbar": [
+                [
+                    {"font": []},
+                    {"header": [1, 2, 3, 4, 5, 6, False]},
+                    {"align": []},
+                    {"size": ['small', 'large', 'huge']},                      
+                    {'list': 'ordered'},
+                    {'list': 'bullet'},
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strike",
+                    "blockquote",
+                    {"color": []},
+                    {"background": []},
+                ],
+                ["code-block", "link", "image"],
+                ["clean"],
+            ],
+            # quill-image-compress
+            "imageCompressor": {
+                "quality": 0.8,
+                "maxWidth": 2000,
+                "maxHeight": 2000,
+                "imageType": "image/jpeg",
+                "keepImageTypes": [],
+                "ignoreImageTypes": False,
+                "debug": False,
+                "suppressErrorLogging": True,
+            },
+            # quill-resize
+            "resize": {
+                "showSize": True,
+                "locale": {},
+            },
+        },
+    },
+}
