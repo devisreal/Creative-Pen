@@ -5,19 +5,21 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, logout
 from account.models import User
 from django.contrib import messages
+from random_username.generate import generate_username
 
 
 # Create your views here.
 
+
 def login(request):
-    
+
     if request.user.is_authenticated:
-        messages.warning(request, 'You are already logged in!')
-        return redirect('home')
-    else:        
-        if request.method == 'POST':
-            username_or_email = request.POST['username_or_email']
-            password = request.POST['password']
+        messages.warning(request, "You are already logged in!")
+        return redirect("home")
+    else:
+        if request.method == "POST":
+            username_or_email = request.POST["username_or_email"]
+            password = request.POST["password"]
 
             if User.objects.filter(username=username_or_email).exists():
                 username = username_or_email
@@ -31,24 +33,47 @@ def login(request):
                 try:
                     user = authenticate(username=username, password=password)
                     auth.login(request, user)
-                    messages.success(request, "You are successfully logged in.")                    
-                    return redirect('home')
+                    messages.success(request, "You are successfully logged in.")
+                    return redirect("home")
                 except:
                     messages.error(request, "Incorrect password.")
-                    return redirect('login')
+                    return redirect("login")
             else:
                 messages.error(request, "Enter correct details.")
-                return redirect('login')    
-    return render(request, 'account/login.html')
+                return redirect("login")
+    return render(request, "account/login.html")
+
 
 def register(request):
-    context = {}
-    return render(request, 'account/register.html', context)
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
+
+        if password == confirm_password:
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "Email address has already been used!")
+                return redirect("register")
+            else:
+                user = User.objects.create_user(
+                    username="".join(generate_username()),
+                    email=email,
+                    password=password,
+                )
+                auth.login(request, user)
+                if not user.is_staff:
+                    messages.success(
+                        request, 'Account created successfully, please complete your profile'
+                    )
+                    return redirect("home")
+        else:
+            messages.error(request, "Passwords do not match")
+            return redirect("register")
+    return render(request, "account/register.html")
+
 
 @login_required
-def user_logout(request):    
-    logout(request)
-    # Return success message
-    messages.success(request, 'See you soon! 👋')
-    return redirect(request.META.get('HTTP_REFERER'))
-    # return redirect('login')
+def user_logout(request):
+    logout(request)    
+    messages.success(request, "See you soon! 👋")
+    return redirect(request.META.get("HTTP_REFERER"))    

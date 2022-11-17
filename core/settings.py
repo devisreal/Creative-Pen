@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'blog',
     'pages',
     'readers',
+    'pen_admin',
 ]
 
 MIDDLEWARE = [

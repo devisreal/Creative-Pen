@@ -14,7 +14,7 @@ Login | Creative Pen
          <h3 class="text-center m-0 p-0">Login to your account</h3>
       </div>
 
-      <form action="" method="POST" class="login-form mx-auto mt-3 rounded-md p-3 p-md-1 p-lg-4 ">
+      <form action="{% url 'login' %}" method="POST" class="login-form mx-auto mt-3 rounded-md p-3 p-md-1 p-lg-4 ">
          {% csrf_token %}
 
          <fieldset class="my-2">

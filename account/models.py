@@ -28,7 +28,7 @@ class User(AbstractUser):
       blank=True,
       upload_to='profile_bg_images',
       validators=[
-         FileExtensionValidator(
+         FileExtensionValidator(  
             allowed_extensions=[
                'png', 'jpg', 'jpeg', 'webp'
             ]

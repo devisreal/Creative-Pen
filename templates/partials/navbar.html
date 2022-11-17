@@ -55,7 +55,9 @@
                </a>
                <ul class="dropdown-menu mt-1 dropdown-menu-end px-2">
                   <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'readers:dashboard' request.user.slug %}">Dashboard</a></li>
-                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="#">Another action</a></li>
+                  {% if request.user.is_author %}
+                     <li><a class="dropdown-item nav-link rounded-md font-medium" href="#">Create Post</a></li>
+                  {% endif %}
                   <li>
                      <hr class="dropdown-divider p-0 m-0 my-1">
                   </li>

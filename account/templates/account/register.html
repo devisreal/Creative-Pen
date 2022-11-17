@@ -13,9 +13,10 @@ Register | Creative Pen
          <h3 class="m-0 p-0">Create an account</h3>
       </div>
 
-      <form action="" method="POST" class="login-form mx-auto  rounded-md p-3 p-md-1 p-lg-4 ">
+      <form action="{% url 'register' %}" method="POST" class="login-form mx-auto  rounded-md p-3 p-md-1 p-lg-4 ">
          {% csrf_token %}
 
+         <!-- ? Email Adress Field -->
          <fieldset class="my-2 mb-3">
             <label for="email">Your Email</label>
             <div class="form-group input-icon-group mt-2">
@@ -25,6 +26,7 @@ Register | Creative Pen
             </div>
          </fieldset>
 
+         <!-- ? Password Field -->
          <fieldset class="my-2 mb-3">
             <label for="password">Your Password</label>
             <div class="form-group input-icon-group mt-2">
@@ -34,6 +36,7 @@ Register | Creative Pen
             </div>
          </fieldset>
 
+         <!-- ? Confirm Password Field -->
          <fieldset class="my-2 mb-3">
             <label for="confirm_password">Confirm Password</label>
             <div class="form-group input-icon-group mt-2">
