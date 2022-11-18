@@ -10,7 +10,7 @@ Contact
 
 <header class="page-hero d-grid align-content-center my-shadow border-bottom"
    style="background-image: url(../../../static/img/doodles.webp);">
-   <div class="container-fluid backdrop-blur-sm">
+   <div class="container-fluid backdrop-blur-md">
       <div class="row">
          <div class="col-12 mx-auto d-grid align-content-center page-hero">
             <div class="p-2 text-center">
@@ -19,9 +19,10 @@ Contact
                </h5>
                <div class="mt-2 text-md font-outfit font-medium d-flex align-items-center w-fit mx-auto ">
                   <a href="{% url 'home' %}" class="text-decoration-none hero-link">
+                     <i class="fa-solid fa-house opacity-75"></i>
                      Home
                   </a>
-                  <i class="ri-arrow-right-s-line mb-1 mx-1"></i>
+                  <i class="fa-solid fa-circle text-black-50 mx-3" style="font-size: 4px;"></i>
                   <span>
                      Contact Us
                   </span>
@@ -36,19 +37,16 @@ Contact
 <div class="container px-5" style="margin-top: 160px;">
    <div class="row gx-5 contact-form-section">
       <div class="col-md-5">
-         <div class="border bg-light contact-form-image">
-            <!-- <img src="{% static 'img/contact-img.jpg' %} " alt="" class="img-fluid"> -->
-         </div>
+         <div class="border bg-light contact-form-image"></div>
       </div>
 
       <!-- ? Contact Form -->
       <div
-         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form my-shadow">
+         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form rounded-lg my-shadow">
          <div class="">
 
             <form class="container px-lg-4 px-md-3 px-3" method="POST">
-               <h3 class="mb-4 d-flex align-items-center">
-                  <i class="ti ti-mail fs-1 text-blue me-2"></i>
+               <h3 class="mb-4 d-flex align-items-center">                  
                   Send us a message
                </h3>
                {% csrf_token %}

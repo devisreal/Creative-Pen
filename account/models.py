@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import AbstractUser
 from autoslug import AutoSlugField
+from django.template.defaultfilters import slugify
 
 
 class User(AbstractUser):
@@ -47,6 +48,9 @@ class User(AbstractUser):
    def __str__(self):
       return f'{self.username}'
 
+   def save(self, *args, **kwargs):
+      self.slug = slugify(self.username)
+      super().save(*args, **kwargs)
 
 class UserSettings(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)

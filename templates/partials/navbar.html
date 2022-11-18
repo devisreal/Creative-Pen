@@ -20,10 +20,13 @@
       </a>
       <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-         <i class="ri-menu-3-line text-2xl"></i>
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M3 4h18v2H3V4zm6 7h12v2H9v-2zm-6 7h18v2H3v-2z" />
+         </svg>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium d-flex align-items-center">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 d-flex align-items-center">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>
@@ -46,22 +49,22 @@
             </li>
             <li class="nav-item dropdown ms-2">
                <a class="nav-link dropdown-toggle" role="button" style="user-select: none;" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img
-                     src="{% static 'img/man.png' %}"
+                  <img                     
+                     src="{% if request.user.profile_picture %} {{request.user.profile_picture.url}} {% else %} {% static 'img/man.png' %} {% endif %} "
                      alt="User Avatar" 
                      class="img-fluid rounded-full nav-avatar pointer-events-none"
                      style="width: 40px;height: 40px;object-fit: cover;"
                   />
-               </a>
+               </a>               
                <ul class="dropdown-menu mt-1 dropdown-menu-end px-2">
-                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'readers:dashboard' request.user.slug %}">Dashboard</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md" href="{% url 'readers:dashboard' request.user.slug %}">Dashboard</a></li>
                   {% if request.user.is_author %}
-                     <li><a class="dropdown-item nav-link rounded-md font-medium" href="#">Create Post</a></li>
+                     <li><a class="dropdown-item nav-link rounded-md" href="#">Create Post</a></li>
                   {% endif %}
                   <li>
                      <hr class="dropdown-divider p-0 m-0 my-1">
                   </li>
-                  <li><a class="dropdown-item nav-link rounded-md font-medium" href="{% url 'logout' %}">Sign out</a></li>
+                  <li><a class="dropdown-item nav-link rounded-md" href="{% url 'logout' %}">Sign out</a></li>
                </ul>
             </li>            
          </ul>
@@ -81,11 +84,14 @@
          </h1>
       </a>
       <button class="btn navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
-         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-         <i class="ri-menu-3-line text-2xl"></i>
+         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">         
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M3 4h18v2H3V4zm6 7h12v2H9v-2zm-6 7h18v2H3v-2z" />
+         </svg>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0 font-medium">
+         <ul class="navbar-nav mx-auto ms-lg-auto me-lg-0">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>
@@ -136,7 +142,7 @@
    </div>
    <div class="offcanvas-body">
       <div class="" id="offNav">
-         <ul class="mx-auto ms-lg-auto me-lg-0 font- list-unstyled">
+         <ul class="mx-auto ms-lg-auto me-lg-0 list-unstyled">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>

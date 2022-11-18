@@ -7,6 +7,7 @@ from taggit_selectize.managers import TaggableManager
 
 class PostCategory(models.Model):
    name = models.CharField(max_length=150)
+   color = models.CharField(max_length=20, default='#333', null=True, blank=True)
    category_image = models.ImageField(
       null=True,
       blank=True,

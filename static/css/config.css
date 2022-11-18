@@ -400,10 +400,9 @@ input[type="number"] {
   height: 2.375rem;
   line-height: 2.375rem;
   text-align: center;
-  pointer-events: none;
-  
-  /* color: #234e70;
-  fill: #234e70; */
+  pointer-events: none;  
+  color: rgba(0, 0, 0, 0.5) !important;
+  fill: rgba(0, 0, 0, 0.5) !important;
 }
 
 .form-control {
@@ -471,8 +470,8 @@ input[type="search"]::-webkit-search-results-decoration {
   font-weight: 500;
 }
 
-#navbar .nav-link {
-  font-family: "Cabin", sans-serif;
+#navbar .nav-link {  
+  font-family: 'Outfit', sans-serif !important;
 }
 
 /* #offNav .nav-link {
@@ -523,13 +522,13 @@ body#body::-webkit-scrollbar-thumb:hover {
 
 /* ? General Styles */
 .page-hero {
-  height: 65vh;
+  height: 55vh;
 }
 .hero-link {
   color: #333;
 }
 .hero-link:hover {
-  color: var(--color-red) !important;
+  color: var(--color-blue) !important;
 }
 
 /* ? Contact Page */
@@ -543,9 +542,6 @@ body#body::-webkit-scrollbar-thumb:hover {
   .contact-form-image{
     height: 55vh !important;
   }
-}
-.contact-form {
-  border-radius: 20px;
 }
 .contact-form-image {
   height: 75vh;
