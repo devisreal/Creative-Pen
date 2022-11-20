@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My Profile ({{request.user.username}})
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Profile </h1>
+<h3>Profile of {{request.user.username}}</h3>
+
+<a name="" id="" class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}" role="button">Edit My Profile</a>
+
+{% endblock %}

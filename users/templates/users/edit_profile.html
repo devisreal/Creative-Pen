@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Dashboard || {{request.user.username}}
+Edit Profile ({{request.user.username}})
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -9,7 +9,8 @@ Dashboard || {{request.user.username}}
 {% include 'partials/messages.html' %}
 
 
-<h1 class="p-4">Dashboard </h1>
-<h3>Welcome {{request.user.username}}</h3>
+<h1 class="p-4">Edit Profile </h1>
+<h3>Edit Profile of {{request.user.username}}</h3>
+
 
 {% endblock %}

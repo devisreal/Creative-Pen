@@ -470,6 +470,10 @@ input[type="search"]::-webkit-search-results-decoration {
   font-weight: 500;
 }
 
+.active-dropdown{
+  background-color: var(--gray-500) !important;
+}
+
 #navbar .nav-link {  
   font-family: 'Outfit', sans-serif !important;
 }

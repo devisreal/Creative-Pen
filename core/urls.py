@@ -23,7 +23,7 @@ urlpatterns = [
     path('pen_admin/', admin.site.urls),
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
-    path('user/<slug:slug>/', include('readers.urls'))
+    path('<slug:slug>/', include('users.urls'))
 ]
 
 

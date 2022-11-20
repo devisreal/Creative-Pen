@@ -44,10 +44,11 @@ INSTALLED_APPS = [
     'django_quill',    
     'taggit',
     'taggit_selectize',
+    'active_link',
     'account',
     'blog',
     'pages',
-    'readers',
+    'users',
     'pen_admin',
 ]
 
@@ -71,10 +72,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
+                'django.template.context_processors.debug',                
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'django.core.context_processors',
+                
             ],
         },
     },

@@ -29,15 +29,15 @@ def about(request):
 
 def contact(request):
    if request.method == 'POST':
-      firstname = request.POST['firstname']
-      lastname = request.POST['lastname']
+      name = request.POST['name']
+      subject = request.POST['subject']
       email_address = request.POST['email']      
       message = request.POST['message']
 
       ContactDetail.objects.create(
-         firstname=firstname,
-         lastname=lastname, 
-         email_address=email_address, 
+         name=name,
+         subject=subject,
+         email_address=email_address,
          message=message
       )
       messages.success(request, 'Your message has been sent!')

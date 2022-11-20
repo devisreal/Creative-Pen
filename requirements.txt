@@ -5,6 +5,7 @@ colorama==0.4.6
 crispy-bootstrap5==0.6
 dj-database-url==1.0.0
 Django==4.0
+django-appconf==1.0.5
 django-autoslug==1.9.8
 django-crispy-forms==1.14.0
 django-multiselectfield==0.1.12
