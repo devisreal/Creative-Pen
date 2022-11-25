@@ -638,7 +638,7 @@ body#body::-webkit-scrollbar-thumb:hover {
 
 /* ? General Styles */
 .page-hero {
-  height: 55vh;  
+  height: 55vh;
 }
 .hero-link {
   color: #333;
@@ -664,4 +664,23 @@ body#body::-webkit-scrollbar-thumb:hover {
   background-image: url("../img/contact-img.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.footer-link {
+  --Iconsax-Color: #6c757d;
+  color: #6c757d;
+  transition: .2s;
+}
+
+.footer-link:hover {
+  color: #000 !important;
+  --Iconsax-Color: #000;
+  transition: .2s;
+}
+.footer-link .iconsax{  
+  transition: .2s;
+}
+.footer-link:hover .iconsax{
+  transform: translateX(2px);
+  transition: .2s;
 }
