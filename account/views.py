@@ -12,7 +12,6 @@ from random_username.generate import generate_username
 
 
 def login(request):
-
     if request.user.is_authenticated:
         messages.warning(request, "You are already logged in!")
         return redirect("home")
@@ -31,10 +30,10 @@ def login(request):
             if username is not None:
                 # next_page = request.GET['next']
                 try:
-                    user = authenticate(username=username, password=password)
+                    user = authenticate(username=username, password=password)                    
                     auth.login(request, user)
                     messages.success(request, "You are successfully logged in.")
-                    return redirect("home")
+                    return redirect('users:dashboard', user.slug)                    
                 except:
                     messages.error(request, "Incorrect password.")
                     return redirect("login")
@@ -65,7 +64,7 @@ def register(request):
                     messages.success(
                         request, 'Account created successfully, please complete your profile'
                     )
-                    return redirect("home")
+                    return redirect('users:edit_profile', user.slug)
         else:
             messages.error(request, "Passwords do not match")
             return redirect("register")

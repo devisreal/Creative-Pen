@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, UserSettings
+from .models import User, UserSettings, SocialHandle
 
 # Register your models here.
 @admin.register(User)
@@ -10,3 +10,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(UserSettings)
 class UserSettingsAdmin(admin.ModelAdmin):
    pass   
+
+@admin.register(SocialHandle)
+class SocialHandleAdmin(admin.ModelAdmin):
+   pass

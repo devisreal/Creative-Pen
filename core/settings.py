@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django_quill',    
     'taggit',
     'taggit_selectize',
-    'active_link',
+    'active_link',    
+
+    # Custom Apps
     'account',
     'blog',
     'pages',

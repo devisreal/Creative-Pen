@@ -1,0 +1,15 @@
+.background-img {
+  height: 220px;  
+  background-size: cover;
+  background-position: center;
+}
+
+.edit-icon .iconsax {
+  --Iconsax-Size: 18px;
+  --Iconsax-Color: rgba(0, 0, 0, 0.7);
+}
+
+.cancel-icon .iconsax {
+  --Iconsax-Size: 18px;
+  --Iconsax-Color: #dc3545;
+}

@@ -1,16 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Edit Profile ({{request.user.username}})
+   Edit Profile ({{request.user.username}})
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
 {% block content %}
+{{ user_form.media }}
 {% include 'partials/messages.html' %}
 
-
-<h1 class="p-4">Edit Profile </h1>
-<h3>Edit Profile of {{request.user.username}}</h3>
+<form action="{% url 'users:edit_profile' request.user.slug %}" enctype="multipart/form-data" class="p-5" method="POST">
+   {% csrf_token %}
+   <label for="basic-url" class="form-label">Username</label>
+   <div class="input-group mb-3">
+      <span class="input-group-text font-outfit bg-light user-select-none" id="basic-addon3">creativepen.com/user/</span>      
+      {{user_form.username}}
+   </div>
+   <div class="input-group mb-3">
+      <span class="input-group-text font-outfit bg-white">Full name</span>
+      {{user_form.first_name}}
+      {{user_form.last_name}}
+   </div>
+   {{user_form.as_p}}
+   {{social_form}}
+   <button class="btn btn-sm btn-success my-5">Submit</button>
+</form>
 
 
 {% endblock %}

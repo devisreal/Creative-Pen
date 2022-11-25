@@ -1,15 +1,17 @@
 from typing import Any
 from django import forms
-from account.models import User
+from account.models import User, SocialHandle
 
 
 class UserUpdateForm(forms.ModelForm):
    username = forms.CharField(
       label="",
+      required=True,
       widget=forms.TextInput(
          attrs={
             "placeholder": "",
-            "class": "form-control bg-light",
+            "aria-describedby":"basic-addon3",
+            "class": "form-control",
             "id": "username",
             "type": "text",
          }
@@ -18,82 +20,301 @@ class UserUpdateForm(forms.ModelForm):
 
    email = forms.EmailField(
       label="",
+      required=True,
       widget=forms.EmailInput(
          attrs={
             "type": "email",
             "placeholder": "",
-            "class": "form-control bg-light",
+            "class": "form-control  my-2",
             "id": "email",
          }
       ),
    )
 
-   image = forms.ImageField(
-      label='',
+   profile_picture = forms.ImageField(
+      label="Profile Picture",
+      required=False,
       widget=forms.FileInput(
          attrs={
             "type": "file",
             "placeholder": "",
-            "class": "form-control bg-light",
-            "id": "image"
+            "class": "form-control  my-2",
+            "id": "profile_picture",
          }
-      )
+      ),
+   )
+
+   background_image = forms.ImageField(
+      label="",
+      required=False,
+      widget=forms.FileInput(
+         attrs={
+            "type": "file",
+            "placeholder": "",
+            "class": "form-control  my-2",
+            "id": "background_image",
+         }
+      ),
    )
 
    first_name = forms.CharField(
+      label='',
+      required=True,
       widget=forms.TextInput(
-      attrs={
-            "placeholder": "",
-            "class": "form-control bg-light",
-            "id": "firstname",
-            "type": "text"
+         attrs={
+            "placeholder": "Firstname",
+            "class": "form-control",
+            "id": "first_name",
+            "type": "text",
          }
       )
    )
 
    last_name = forms.CharField(
+      label='',
+      required=True,
       widget=forms.TextInput(
-         attrs={
-            "placeholder": "",
-            "class": "form-control bg-light",
-            "id": "lastname",
-            "type": "text"
-         }
+      attrs={
+         "placeholder": "Lastname",
+         "class": "form-control",
+         "id": "last_name",
+         "type": "text",
+      }
       )
    )
 
-   phone = forms.CharField(
-      widget=forms.NumberInput(
+   mobile_no = forms.CharField(
+      label='',
+      max_length=14,
+      required=False,
+      widget=forms.TextInput(
          attrs={
-            "placeholder": "Phone Number",
-            "class": "form-control bg-light",
-            "type": "tel"
+            "placeholder": "+234...",             
+            "class": "form-control  my-2",
+            "id": "mobile_no",
+            "maxlength": 14
          }
+      )
+   )   
+
+   job_title = forms.CharField(
+      label='',
+      required=False,
+      widget=forms.TextInput(
+      attrs={
+         "placeholder": "",
+         "class": "form-control  my-2",
+         "id": "job_title",
+         "type": "text",
+      }
       )
    )
 
    bio = forms.CharField(
+      label='',
+      required=False,
       widget=forms.Textarea(
          attrs={
-            "placeholder": "Write About yourself",
-            "class": "form-control bg-light",
-            "id": "ProfileBio",
-            'style': 'height: 120px'
+            "placeholder": "Brief description for your profile.",
+            "class": "form-control  my-2",
+            "id": "bio",
+            "style": "height: 120px",
+         }
+      )
+   )
+
+   city = forms.CharField(
+      label='',
+      required=False,
+      widget=forms.TextInput(
+      attrs={
+         "placeholder": "",
+         "class": "form-control  my-2",
+         "id": "city",
+         "type": "text",
+      }
+      )
+   )
+
+   address = forms.CharField(
+      label='',
+      required=False,
+      widget=forms.TextInput(
+      attrs={
+         "placeholder": "",
+         "class": "form-control  my-2",
+         "id": "address",
+         "type": "text",
+      }
+      )
+   )
+
+   date_of_birth = forms.DateField(
+      label="",
+      required=False,
+      widget=forms.DateInput(
+         attrs={
+            "type":"date",
+            "class": "form-control  my-2",
+            "placeholder":"",
+            "id": 'date_of_birth'
+         }
+      )
+   )
+
+   gender_choices =  [
+      ('Male', 'Male'),
+      ('Female', 'Female'),
+      ('Other', 'Other'),
+      ('not_saying', 'Prefer not to say'),
+   ]
+
+   gender = forms.ChoiceField(
+      label='',
+      required=False,
+      choices=gender_choices,
+      widget=forms.Select(
+         attrs={
+            'class': 'form-select ',
+            'id': 'gender'
+         }
+      )
+   )
+
+   class Meta:
+      model = User
+      fields = (
+         "username",
+         "first_name",
+         "last_name",
+         "email",
+         "profile_picture",
+         "background_image",
+         "job_title",
+         "bio",
+         "city",
+         "address",
+         "mobile_no",
+         "date_of_birth",
+         "gender",                  
+      )
+
+      def __init__(self, *args: Any, **kwargs: Any) -> None:
+         super(UserUpdateForm, self).__init__(*args, **kwargs)
+
+         for fieldname in (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "profile_picture",
+            "background_image",
+            "job_title",
+            "bio",
+            "city",
+            "address",
+            "mobile_no",
+            "date_of_birth",
+            "gender",  
+         ):
+            self.fields[fieldname].help_text = None
+
+class UserSocialHandleForm(forms.ModelForm):
+
+   facebook = forms.URLField(
+      label='',
+      required=False,
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.facebook.com/',
+            "class": 'form-control  my-2',
+            "id": 'facebook_handle'
+         }
+      )
+   )
+
+   linkedin = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.linkedin.com/',
+            "class": 'form-control  my-2',
+            "id": 'linkedin_handle'
+         }
+      )
+   )
+
+   twitter = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.twitter.com/ ',
+            "class": 'form-control  my-2',
+            "id": 'twitter_handle'
+         }
+      )
+   )
+
+   instagram = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.instagram.com/',
+            "class": 'form-control  my-2',
+            "id": 'instagram_handle'
+         }
+      )
+   )
+
+   youtube = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.youtube.com/',
+            "class": 'form-control  my-2',
+            "id": 'youtube_handle'
+         }
+      )
+   )
+
+   behance = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://www.behance.net/',
+            "class": 'form-control  my-2',
+            "id": 'behance_handle'
+         }
+      )
+   )
+
+   dribbble = forms.URLField(
+      label='',
+      required=False,      
+      widget=forms.URLInput(
+         attrs={
+            "placeholder": 'https://dribbble.com/',
+            "class": 'form-control  my-2',
+            "id": 'dribbble_handle'
          }
       )
    )
 
 
    class Meta:
-      model = User
-      fields = ("username", "email")
-      # fields = ('image', 'first_name', 'last_name', 'phone', 'bio')
-
-   def __init__(self, *args: Any, **kwargs: Any) -> None:
-      super(UserUpdateForm, self).__init__(*args, **kwargs)
-
-      for fieldname in (
-         "username",
-         "email",
-      ):
-         self.fields[fieldname].help_text = None
+      model = SocialHandle
+      fields = (
+         'facebook',
+         'linkedin',
+         'twitter',
+         'instagram',
+         'youtube',
+         'behance',
+         'dribbble'
+      )
+      

@@ -11,5 +11,6 @@ Dashboard ({{request.user.username}})
 
 <h1 class="p-4">Dashboard </h1>
 <h3>Welcome {{request.user.username}}</h3>
-
+<a name="" id="" class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}"
+   role="button">Edit My Profile</a>
 {% endblock %}

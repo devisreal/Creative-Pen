@@ -1,17 +1,149 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
-My Profile ({{request.user.username}})
+My Profile ({{user.username}})
 {% endblock title %}
 {% block styles %}
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<style>
+   :root {
+      --Iconsax-Size: 20px;
+      --Iconsax-Color: rgb(0, 0, 0, 0.7);
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
 
-<h1 class="p-4">Profile </h1>
-<h3>Profile of {{request.user.username}}</h3>
+<div class="container-md mt-4">
+   <div class="col-12">
+      <div class="mb-4 position-relative z-index-9">
+         <!-- Cover image -->
+         <div 
+            class="py-5 rounded background-img" 
+            {% if request.user.background_image %}
+               style="background-image: url('{{request.user.background_image.url}}');"
+            {% else %}
+               style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');"
+            {% endif %}            
+         >
+         </div>
+         <div class="card-body pt-3 pb-0">
+            <div class="row d-flex justify-content-between">
+               <!-- Avatar -->
+               <div class="col-sm-12 col-md-auto text-center text-md-start">
+                  <div class="avatar avatar-xxl mt-n5">
+                     {% if request.user.profile_picture %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{{request.user.profile_picture.url}}" alt="">
+                     {% else %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{% static 'img/user/custom.jpg' %}" alt="">
+                     {% endif %}
+                  </div>
+               </div>
+               <!-- Profile info -->
+               <div
+                  class="col-sm-12 mt-3 mt-md-0 col-md text-center text-md-start d-md-flex justify-content-between align-items-center">
+                  <div>
+                     <!-- ? User fullname -->
+                     <h4 class="m-0 p-0">                        
+                        {{request.user.get_full_name|default:"Firstname Lastname"}}
 
-<a name="" id="" class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}" role="button">Edit My Profile</a>
+                        {% if request.user.usersettings.is_verified %}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon" viewBox="0 0 24 24">
+                           <path
+                              d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
+                           </path>
+                        </svg>
+                        {% endif %}
+                     </h4>
+                     <small class="font-medium text-gray-500">
+                        {{request.user.username}}
+                     </small>
+                     <ul class="list-inline text-md pt-1">
+
+                        <!-- ? User Job Title -->                        
+                        <li class="list-inline-item">
+                           <i class="iconsax me-1 pb-1" icon-name="user-1-octagon"></i>
+                           {{request.user.job_title|default:"..."}}
+                        </li>
+
+                        <!-- ? User City -->
+
+                        <li class="list-inline-item">
+                           <i class="iconsax me-1 pb-1" icon-name="location"></i>
+                           {{request.user.city|default:"..."}}
+                        </li>
+
+                        <!-- ? User Joined date -->
+                        <li class="list-inline-item">
+                           <i class="iconsax me-1 pb-1" icon-name="calendar-2"></i>
+                           Joined on {{request.user.date_joined|date:"dS F Y"}}
+                        </li>
+                     </ul>
+                     <p class="m-0"></p>
+                  </div>
+
+                  <!-- Links -->
+                  <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                     <a href="#" class="btn btn-blue btn-sm me-3">Follow</a>
+                     <!-- Card action START -->
+                     <div class="dropdown ms-3">
+                        <a class="text-secondary" href="" id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside" aria-expanded="false">
+                           <!-- Dropdown Icon -->
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <circle fill="currentColor" cx="3" cy="12" r="2.5"></circle>
+                              <circle fill="currentColor" opacity="0.5" cx="12" cy="12" r="2.5"></circle>
+                              <circle fill="currentColor" opacity="0.3" cx="21" cy="12" r="2.5"></circle>
+                           </svg>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
+
+                           {% if request.user.is_staff %}
+                              <li>
+                                 <a class="dropdown-item edit-icon" target="_blank" href="/pen_admin/">
+                                    <i class="iconsax me-2" icon-name="grid-apps"></i>
+                                    Admin Panel
+                                 </a>
+                              </li>
+                           {% endif %}
+
+                           <li>
+                              <a class="dropdown-item edit-icon"
+                                 href="{% url 'users:edit_profile' request.user.slug %}">
+                                 <i class="iconsax me-2" icon-name="edit-1"></i>
+                                 Edit profile
+                              </a>
+                           </li>                        
+                           <li>
+                              <hr class="dropdown-divider">
+                           </li>
+                           <li>
+                              <a class="dropdown-item text-danger cancel-icon" href="{% url 'users:delete_account' request.user.slug %}">
+                                 <i class="iconsax me-2" icon-name="close-circle"></i>
+                                 Delete profile
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- Card action END -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+{% comment %}
+<!-- style="background-image: url('{{}}');" -->
+{% endcomment %}
 
 {% endblock %}

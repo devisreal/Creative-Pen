@@ -29,8 +29,10 @@ small,
 li,
 input,
 textarea,
+select,
+option,
 td {
-  font-family: 'Outfit', sans-serif !important;
+  font-family: "Outfit", sans-serif !important;
 }
 
 /* ! Font Family */
@@ -39,7 +41,7 @@ td {
 }
 
 .font-outfit {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .font-cabin {
@@ -62,6 +64,12 @@ td {
 
 .bg-red {
   background-color: var(--color-red) !important;
+}
+
+.verified-icon {
+  fill: var(--color-blue);
+  width: 20px;
+  height: 20px;
 }
 
 .bg-amber {
@@ -379,14 +387,107 @@ input[type="number"] {
   backdrop-filter: grayscale(100%) !important;
 }
 
+/* ! Z-index styles , Negative Margin, Avatar  */
+.z-index-0 {
+  z-index: 0 !important;
+}
+
+.z-index-9 {
+  z-index: 9 !important;
+}
+
+.z-index-99 {
+  z-index: 99 !important;
+}
+
+.z-index-n9 {
+  z-index: -9 !important;
+}
+
+.mt-n1 {
+  margin-top: -0.25rem !important;
+}
+
+.mt-n2 {
+  margin-top: -0.5rem !important;
+}
+
+.mt-n3 {
+  margin-top: -1rem !important;
+}
+
+.mt-n4 {
+  margin-top: -2rem !important;
+}
+
+.mt-n5 {
+  margin-top: -3rem !important;
+}
+
+.avatar {
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  display: inline-block !important;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.avatar-xs {
+  height: 2.1875rem;
+  width: 2.1875rem;
+}
+
+.avatar-sm {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.avatar-lg {
+  height: 4rem;
+  width: 4rem;
+}
+
+.avatar-xl {
+  height: 5.125rem;
+  width: 5.125rem;
+}
+
+.avatar-xxl {
+  height: 5.125rem;
+  width: 5.125rem;
+}
+@media (min-width: 768px) {
+  .avatar-xxl {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+.avatar-xxxl {
+  height: 8rem;
+  width: 8rem;
+}
+@media (min-width: 768px) {
+  .avatar-xxxl {
+    width: 11rem;
+    height: 11rem;
+  }
+}
+
 /* ! Form Styles */
 /* ? Form Icon */
 .input-icon-group {
   display: flex;
-  align-items: center;  
+  align-items: center;
 }
 .input-icon-group .form-control {
-  padding-left: 2.2rem;  
+  padding-left: 2.2rem;
   padding-top: 8px;
   padding-bottom: 8px;
   border-radius: 7px;
@@ -400,9 +501,24 @@ input[type="number"] {
   height: 2.375rem;
   line-height: 2.375rem;
   text-align: center;
-  pointer-events: none;  
+  pointer-events: none;
   color: rgba(0, 0, 0, 0.5) !important;
   fill: rgba(0, 0, 0, 0.5) !important;
+}
+
+.form-select {
+  border: 0.125em solid gray;
+  outline: none !important;
+  background-color: var(--white);
+  box-shadow: none !important;
+  font-family: "Outfit", sans-serif !important;
+}
+
+.form-select:focus {
+  border-color: var(--color-blue);
+  color: #212529;
+  background-color: #fff;
+  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
 }
 
 .form-control {
@@ -410,7 +526,7 @@ input[type="number"] {
   outline: none !important;
   background-color: var(--white);
   box-shadow: none !important;
-  font-family: 'Outfit', sans-serif !important;
+  font-family: "Outfit", sans-serif !important;
 }
 
 .form-control:focus {
@@ -467,26 +583,22 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .active-nav {
   color: black !important;
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
-.active-dropdown{
+.active-dropdown {
   background-color: var(--gray-500) !important;
 }
 
-#navbar .nav-link {  
-  font-family: 'Outfit', sans-serif !important;
+#navbar .nav-link {
+  font-family: "Outfit", sans-serif !important;
 }
 
-/* #offNav .nav-link {
-  color: var(--gray-500);
-} */
-
-#offNav .nav-item .nav-link{
+#offNav .nav-item .nav-link {
   color: var(--gray-500);
 }
 
-#offNav .nav-item .nav-link:hover{
+#offNav .nav-item .nav-link:hover {
   color: black !important;
 }
 
@@ -526,7 +638,7 @@ body#body::-webkit-scrollbar-thumb:hover {
 
 /* ? General Styles */
 .page-hero {
-  height: 55vh;
+  height: 55vh;  
 }
 .hero-link {
   color: #333;
@@ -540,10 +652,9 @@ body#body::-webkit-scrollbar-thumb:hover {
   .contact-form-section {
     height: 75vh !important;
   }
-  
 }
 @media screen and (max-width: 767px) {
-  .contact-form-image{
+  .contact-form-image {
     height: 55vh !important;
   }
 }

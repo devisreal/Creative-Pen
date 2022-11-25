@@ -36,7 +36,9 @@ class User(AbstractUser):
          )
       ]
    )
+   job_title = models.CharField(max_length=250, blank=True, null=True)
    bio = models.TextField(blank=True)
+   city = models.CharField(max_length=100, blank=True, null=True)
    address = models.CharField(max_length=250, blank=True)
    mobile_no = models.CharField(max_length=14, blank=True)
    date_of_birth = models.DateField(null=True, blank=True)
@@ -55,6 +57,20 @@ class User(AbstractUser):
 class UserSettings(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    request_author_access = models.BooleanField(null=True, blank=True, default=False)
+   is_verified = models.BooleanField(null=True, blank=True, default=False)
    
    def __str__(self):
       return f'User settings for {self.user.username}'
+
+class SocialHandle(models.Model):
+   user = models.OneToOneField(User, on_delete=models.CASCADE)
+   facebook = models.URLField(blank=True, null=True)
+   linkedin = models.URLField(blank=True, null=True)
+   twitter = models.URLField(blank=True, null=True)
+   instagram = models.URLField(blank=True, null=True)
+   youtube = models.URLField(blank=True, null=True)
+   behance = models.URLField(blank=True, null=True)
+   dribbble = models.URLField(blank=True, null=True)
+
+   def __str__(self):
+      return f"{self.user.username}'s Social Handles"
