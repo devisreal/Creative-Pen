@@ -639,6 +639,7 @@ body#body::-webkit-scrollbar-thumb:hover {
 /* ? General Styles */
 .page-hero {
   height: 55vh;
+  background-attachment: fixed;
 }
 .hero-link {
   color: #333;

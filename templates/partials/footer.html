@@ -1,9 +1,9 @@
 {% load static %}
 <footer class="bg-light border-top mt-5">
-   <div class="container">
+   <div class="container px-0">
       <div class="row pt-5">
-         <div class="col-6 col-md-4 mb-3 mb-md-0">
-            <a href="{% url 'home' %}" class="navbar-brand text-black d-flex align-items-center">
+         <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-4 mb-5 mb-md-0 text-center text-sm-start">
+            <a href="{% url 'home' %}" class="navbar-brand text-black d-flex align-items-center justify-content-center justify-content-sm-start">
                <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
                <h1 class="font-righteous text-xl mt-2 ms-2 text-uppercase">
                   Creative
@@ -11,21 +11,21 @@
                      Pen
                   </span>
                </h1>
-            </a>
-            <small class="font-medium text-md">
+            </a>            
+            <small class="font-medium text-md text-gray-500 ">
                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                sed do eiusmod tempor incididunt ut labore et dolore magna
                aliqua.
             </small>
          </div>
 
-         <div class="col-6 col-md-2 mb-3 mb-md-0">
+         <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-2 offset-md-1 mb-3 mb-md-0">
             <h5>
-               <i class="iconsax me-" style="--Iconsax-Size: 23px;" icon-name="hashtag-down"></i>
+               <i class="iconsax" style="--Iconsax-Size: 22px;--Iconsax-Color: #333;" icon-name="hashtag-down"></i>
                Categories
             </h5>
             <hr>
-            <ul class="nav flex-column">
+            <ul class="nav flex-column text-md">
                <li class="nav-item mb-2">
                   <a href="{% url 'home' %}" class="nav-link p-0 footer-link">
                      <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
@@ -59,13 +59,13 @@
             </ul>
          </div>
 
-         <div class="col-6 col-md-2 mb-3 mb-md-0 ">
+         <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-2 mb-3 mb-md-0 mt-4 mt-md-0">
             <h5>
-               <i class="iconsax me-" style="--Iconsax-Size: 23px;" icon-name="attach-square"></i>
+               <i class="iconsax" style="--Iconsax-Size: 22px;--Iconsax-Color: #333;" icon-name="attach-square"></i>
                Links
             </h5>
             <hr>
-            <ul class="nav flex-column">
+            <ul class="nav flex-column text-md">
                <li class="nav-item mb-2">
                   <a href="{% url 'home' %}" class="nav-link p-0 footer-link">
                      <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
@@ -99,15 +99,18 @@
             </ul>
          </div>
 
-         <div class="col-md-3 offset-md-1 mb-3 mb-md-0 ">
+         <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-3 mb-3 mb-md-0 mt-4 mt-md-0">
             <form action="{% url 'footer' %}" method="POST">
                {% csrf_token %}
-               <h5>Subscribe</h5>
+               <h5>
+                  <i class="iconsax" style="--Iconsax-Size: 22px;--Iconsax-Color: #333;" icon-name="bell-2"></i>
+                  Subscribe
+               </h5>
                <hr>
                <p class="text-md text-gray-500">Monthly digest of what's new and exciting from us.</p>
                <div class="d-flex flex-column flex-s w-100 gap-2">
                   <label for="newsletter1" class="visually-hidden">Email address</label>
-                  <input name="email" id="email" placeholder="Enter your email" type="email"
+                  <input name="email" id="email" title="user@email.com" placeholder="Enter your email" type="email"
                      class="form-control text-md" placeholder="Email address"
                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                   <button class="btn btn-blue" type="submit">Subscribe</button>
@@ -122,24 +125,24 @@
             &copy; <span id="year"></span> Creative Pen. All rights reserved.
          </p>
          <ul class="list-unstyled d-flex">
-            <li class="ms-3">
+            <li class="ms-md-3">
                <a class="link-dark" href="#">
-                  <i class='bx bxl-twitter fs-5'></i>
+                  <i class='bx bxl-twitter fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
                <a class="link-dark" href="#">
-                  <i class='bx bxl-facebook fs-5'></i>
+                  <i class='bx bxl-facebook fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
                <a class="link-dark" href="#">
-                  <i class='bx bxl-instagram-alt fs-5'></i>
+                  <i class='bx bxl-instagram-alt fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
                <a class="link-dark" href="#">
-                  <i class='bx bxl-vk fs-5'></i>
+                  <i class='bx bxl-vk fs-5 text-blue'></i>
                </a>
             </li>
          </ul>

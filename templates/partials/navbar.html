@@ -56,7 +56,7 @@
                      class="img-fluid rounded-full  pointer-events-none"
                      style="width: 40px;height: 40px;object-fit: cover;" />
                   {% else %}
-                  <img src="{% static 'img/user/user-placeholder.jpg' %}" alt="User Avatar"
+                  <img src="{% static 'img/user/custom.jpg' %}" alt="User Avatar"
                      class="img-fluid rounded-full  pointer-events-none"
                      style="width: 35px;height: 35px;object-fit: cover;" />
                   {% endif %}
@@ -196,8 +196,8 @@
                         class="img-fluid rounded-full  pointer-events-none"
                         style="width: 40px;height: 40px;object-fit: cover;" />
                      {% else %}
-                     <img src="{% static 'img/user/user-placeholder.jpg' %}" alt="User Avatar"
-                        class="img-fluid rounded-full  pointer-events-none"
+                     <img src="{% static 'img/user/custom.jpg' %}" alt="User Avatar"
+                        class="img-fluid rounded-full pointer-events-none"
                         style="width: 35px;height: 35px;object-fit: cover;" />
                      {% endif %}
                   </a>
@@ -251,9 +251,9 @@
    const navbar = document.querySelector('#navbar');
    window.onscroll = () => {
       if (window.scrollY > 30) {
-         navbar.classList.add('backdrop-blur');
+         navbar.classList.add('backdrop-blur-md');
       } else {
-         navbar.classList.toggle('backdrop-blur');
+         navbar.classList.toggle('backdrop-blur-md');
       }
    }   
 </script>
