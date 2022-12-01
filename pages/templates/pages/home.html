@@ -575,7 +575,13 @@ Home
 
 <br><br><br><br>
 
+{% for author in authors %}
 
+{% if not author.is_staff %}
+<a href="{% url 'author_external' author.slug %}">{{author.username}}</a>
+{% endif %}
+
+{% endfor %}
 
 <br><br><br><br>
 

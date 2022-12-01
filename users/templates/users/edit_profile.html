@@ -11,7 +11,7 @@
 
 <form action="{% url 'users:edit_profile' request.user.slug %}" enctype="multipart/form-data" class="p-5" method="POST">
    {% csrf_token %}
-   <label for="basic-url" class="form-label">Username</label>
+   <!-- <label for="basic-url" class="form-label">Username</label>
    <div class="input-group mb-3">
       <span class="input-group-text font-outfit bg-light user-select-none" id="basic-addon3">creativepen.com/user/</span>      
       {{user_form.username}}
@@ -20,7 +20,7 @@
       <span class="input-group-text font-outfit bg-white">Full name</span>
       {{user_form.first_name}}
       {{user_form.last_name}}
-   </div>
+   </div> -->
    {{user_form.as_p}}
    {{social_form}}
    <button class="btn btn-sm btn-success my-5">Submit</button>

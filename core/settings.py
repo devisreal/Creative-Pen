@@ -48,10 +48,10 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'account',
+    'pen_admin',
+    'users',
     'blog',
     'pages',
-    'users',
-    'pen_admin',
 ]
 
 MIDDLEWARE = [

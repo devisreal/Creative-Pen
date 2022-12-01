@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Subscribers
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Subscribers</h1>
+
+{% for subscriber in subscribers %}
+   <h2>{{subscriber.email}}</h2>
+{% endfor %}
+
+{% endblock %}

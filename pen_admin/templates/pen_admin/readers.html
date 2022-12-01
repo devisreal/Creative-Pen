@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Readers
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Readers</h1>
+
+
+{% for reader in readers %}
+<h1>{{reader.username}}</h1>
+{% endfor %}
+
+{% endblock %}

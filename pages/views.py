@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import ContactDetail, Subscriber
 from django.contrib import messages
+from account.models import User
 
 
 def home(request):
-   context = {}
+   authors = User.objects.filter(is_author=True)
+   context = {
+      'authors': authors
+   }
+
    return render(request, 'pages/home.html', context)
 
 def footer(request):

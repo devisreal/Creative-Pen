@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Authors Single
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<div class="author-info py-4 pt-5 px-2 bg-light text-center border-bottom">
+   <div class="avatar avatar-xl mb-3">
+      {% if author.profile_picture %}
+      <img class="avatar-img rounded-circle border-0 pointer-events-none" src="{{author.profile_picture.url}}" alt="">
+      {% else %}
+      <img class="avatar-img rounded-circle border-0 pointer-events-none" src="{% static 'img/user/custom.jpg' %}"
+         alt="">
+      {% endif %}
+   </div>
+   <h4 class="font-semibold mb-0">Hi, I'm {{author.get_full_name|default:"Author"}}</h4>
+   <small class="d-block text-gray-500 mb-2">
+      {{author.job_title|default:"Writer"}}
+   </small>
+   <small class="bg-red py-1 px-2 rounded-pill text-white">
+      8 Articles
+   </small>
+   <p class="col-md-5 mx-auto text-gray-500 mt-4 font-light">
+      {{author.bio|default:"..."}}
+   </p>
+   <ul class="list-inline author-profile-icon">
+
+      <!-- Facebook -->
+      {% if author.socialhandle.facebook %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.facebook}}">
+            <i class='bx bxl-facebook border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+      <!-- LinkedIn -->
+      {% if author.socialhandle.linkedin %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.linkedin}}">
+            <i class='bx bxl-linkedin-square border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+      <!-- Twitter -->
+      {% if author.socialhandle.twitter %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.twitter}}">
+            <i class='bx bxl-twitter border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+      <!-- Instagram -->
+      {% if author.socialhandle.instagram %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.instagram}}">
+            <i class='bx bxl-instagram border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+
+      <!-- Youtube -->
+      {% if author.socialhandle.youtube %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.youtube}}">
+            <i class='bx bxl-youtube border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+      <!-- Behance -->
+      {% if author.socialhandle.behance %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.behance}}">
+            <i class='bx bxl-behance border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+
+
+      <!-- Dribble -->
+      {% if author.socialhandle.dribbble %}
+      <li class="list-inline-item">
+         <a href="{{author.socialhandle.dribbble}}">
+            <i class='bx bxl-dribbble border p-1 rounded-circle'></i>
+         </a>
+      </li>
+      {% endif %}
+   </ul>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Authors
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Authors</h1>
+
+
+{% for author in authors %}
+
+   {% if not author.is_staff %}   
+      <a href="" class="btn btn-red m-3">{{author.username}}</a>
+   {% endif %}
+
+{% endfor %}
+
+{% endblock %}

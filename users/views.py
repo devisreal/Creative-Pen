@@ -42,10 +42,22 @@ def edit_profile(request, slug):
    }   
    return render(request, 'users/edit_profile.html', context)
 
-
+@login_required
 def delete_account(request, slug):
    user = User.objects.get(slug=slug)
    user.is_active = False
    user.save()
    messages.success(request, "Account deleted successfully! 👋")
    return redirect('logout')
+
+
+def author_external(request, slug):   
+   author = User.objects.get(slug=slug)
+   if request.user == author:
+      return redirect('users:profile', slug=slug)
+   else:
+      context = {
+         'author': author
+      }
+      return render(request, 'users/author-external.html', context)
+   

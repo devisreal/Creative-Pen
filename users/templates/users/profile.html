@@ -61,7 +61,7 @@ My Profile ({{user.username}})
                         {% endif %}
                      </h4>
                      <small class="font-medium text-gray-500">
-                        {{request.user.username}}
+                        {{request.user.get_username}}
                      </small>
                      <ul class="list-inline text-md pt-1">
 

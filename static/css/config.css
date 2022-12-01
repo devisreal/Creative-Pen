@@ -616,23 +616,23 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 /* ? Page scrollbar */
-body#body::-webkit-scrollbar {
+.offcanvas-body::-webkit-scrollbar, body#body::-webkit-scrollbar {
   width: 7px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
-body#body::-webkit-scrollbar-track {
+.offcanvas-body::-webkit-scrollbar-track, body#body::-webkit-scrollbar-track {
   background: #f5f5f5;
 }
 
-body#body::-webkit-scrollbar-thumb {
+.offcanvas-body::-webkit-scrollbar-thumb, body#body::-webkit-scrollbar-thumb {
   background: #888;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
-body#body::-webkit-scrollbar-thumb:hover {
+.offcanvas-body::-webkit-scrollbar-thumb:hover, body#body::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
@@ -685,3 +685,23 @@ body#body::-webkit-scrollbar-thumb:hover {
   transform: translateX(2px);
   transition: .2s;
 }
+
+.author-profile-icon li a i{  
+  color: var(--gray-500);
+  transition: .2s;
+}
+
+.author-profile-icon li a i:hover{
+  color: #333;
+  border-color: var(--gray-500) !important;  
+  transition: .2s;
+}
+
+/* .author-profile-icon li a i{  
+  transition: .2s;
+}
+
+.author-profile-icon li a:hover i{
+  
+  transition: .2s;
+} */
