@@ -697,11 +697,11 @@ input[type="search"]::-webkit-search-results-decoration {
   transition: .2s;
 }
 
-/* .author-profile-icon li a i{  
-  transition: .2s;
-}
 
-.author-profile-icon li a:hover i{
-  
-  transition: .2s;
-} */
+.contact-icon{  
+  background-image: linear-gradient(
+    120deg,
+    rgba(210, 48, 44, 0.7) 50%,
+    rgba(35, 78, 112, 0.7) 80%
+  );
+}

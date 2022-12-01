@@ -3,6 +3,15 @@
 {% block title %}
 Contact
 {% endblock title %}
+{% block styles %}
+<style>
+   :root {
+      --Iconsax-Size: 30px;
+      --Iconsax-Color: #fff;
+      --Iconsax-Fill: #fff;
+   }
+</style>
+{% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
@@ -40,6 +49,39 @@ Contact
 </header>
 
 
+<div class="container-md px-4 px-md-5" style="margin-top: 70px;">
+   <div class="row g-3">
+      <div class="col col-sm-6 col-md-6 col-lg-4">
+         <div class="p-3 px-4 border rounded-xl d-flex align-items-center ">
+            <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="phone"></i>
+            <div>
+               <h5 class="m-0 p-0">Phone</h4>
+               <p class="m-0 p-0 text-md text-gray-500 font-lig">+234 903-456-7890</p>
+            </div>
+         </div>
+      </div>
+      <div class="col col-sm-6 col-md-6 col-lg-4">
+         <div class="p-3 px-4 border rounded-xl d-flex align-items-center ">
+            <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="mail"></i>
+            <div>
+               <h5 class="m-0 p-0">E-mail</h4>
+               <p class="m-0 p-0 text-md text-gray-500 font-lig">help@creativepen.com</p>
+            </div>
+         </div>
+      </div>
+      <div class="col col-sm-6 col-md-6 col-lg-4">
+         <div class="p-3 px-4 border rounded-xl d-flex align-items-center ">
+            <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="map-1"></i>
+            <div>
+               <h5 class="m-0 p-0">Location</h4>
+               <p class="m-0 p-0 text-md text-gray-500 font-lig">Lagos, Nigeria</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
 <div class="container px-5" style="margin-top: 160px;">
    <div class="row gx-5 contact-form-section">
       <div class="col-md-5">
@@ -48,11 +90,11 @@ Contact
 
       <!-- ? Contact Form -->
       <div
-         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center bg-light contact-form rounded-lg my-shadow">
+         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center contact-form">
          <div class="">
 
             <form class="container px-lg-4 px-md-3 px-3" method="POST">
-               <h3 class="mb-4 d-flex align-items-center">                  
+               <h3 class="mb-4 d-flex align-items-center text-capitalize">                  
                   Send us a message
                </h3>
                {% csrf_token %}

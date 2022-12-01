@@ -61,6 +61,10 @@ class UserSettings(models.Model):
    
    def __str__(self):
       return f'User settings for {self.user.username}'
+   
+   class Meta:
+      verbose_name = "User Setting"
+      verbose_name_plural = "User Settings"
 
 class SocialHandle(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)

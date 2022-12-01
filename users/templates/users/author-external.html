@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Authors Single
+Author - {{author.username}}
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -20,7 +20,7 @@ Authors Single
    </div>
    <h4 class="font-semibold mb-0">Hi, I'm {{author.get_full_name|default:"Author"}}</h4>
    <small class="d-block text-gray-500 mb-2">
-      {{author.job_title|default:"Writer"}}
+      {{author.job_title|default:""}}
    </small>
    <small class="bg-red py-1 px-2 rounded-pill text-white">
       8 Articles
@@ -34,7 +34,7 @@ Authors Single
       {% if author.socialhandle.facebook %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.facebook}}">
-            <i class='bx bxl-facebook border p-1 rounded-circle'></i>
+            <i class='bx bxl-facebook text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -43,7 +43,7 @@ Authors Single
       {% if author.socialhandle.linkedin %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.linkedin}}">
-            <i class='bx bxl-linkedin-square border p-1 rounded-circle'></i>
+            <i class='bx bxl-linkedin-square text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -52,7 +52,7 @@ Authors Single
       {% if author.socialhandle.twitter %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.twitter}}">
-            <i class='bx bxl-twitter border p-1 rounded-circle'></i>
+            <i class='bx bxl-twitter text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -61,7 +61,7 @@ Authors Single
       {% if author.socialhandle.instagram %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.instagram}}">
-            <i class='bx bxl-instagram border p-1 rounded-circle'></i>
+            <i class='bx bxl-instagram text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -71,7 +71,7 @@ Authors Single
       {% if author.socialhandle.youtube %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.youtube}}">
-            <i class='bx bxl-youtube border p-1 rounded-circle'></i>
+            <i class='bx bxl-youtube text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -80,7 +80,7 @@ Authors Single
       {% if author.socialhandle.behance %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.behance}}">
-            <i class='bx bxl-behance border p-1 rounded-circle'></i>
+            <i class='bx bxl-behance text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}
@@ -90,7 +90,7 @@ Authors Single
       {% if author.socialhandle.dribbble %}
       <li class="list-inline-item">
          <a href="{{author.socialhandle.dribbble}}">
-            <i class='bx bxl-dribbble border p-1 rounded-circle'></i>
+            <i class='bx bxl-dribbble text-sm border p-1 rounded-circle'></i>
          </a>
       </li>
       {% endif %}

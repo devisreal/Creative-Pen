@@ -13,7 +13,7 @@ urlpatterns = [
 
 
    # Admin Views
-   path('authors/', admin_views.authors, name="authors"),
+   path('authors/', admin_views.authors, name="authors"),   
    path('readers/', admin_views.readers, name="readers"),
    path('subscribers/', admin_views.subscribers, name="subscribers"),
 ]

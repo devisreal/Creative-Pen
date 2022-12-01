@@ -54,7 +54,7 @@ def delete_account(request, slug):
 def author_external(request, slug):   
    author = User.objects.get(slug=slug)
    if request.user == author:
-      return redirect('users:profile', slug=slug)
+      return redirect('users:profile', slug=slug)   
    else:
       context = {
          'author': author
