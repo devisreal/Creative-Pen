@@ -14,7 +14,7 @@ Readers
 
 {% for reader in readers %}
 
-<a href="" class="btn btn-blue btn-group m-3">{{reader.username}}</a>
+<a href="{% url 'users:single_reader' request.user.slug reader.username %}" class="btn btn-blue btn-group m-3">{{reader.username}}</a>
 {% endfor %}
 
 {% endblock %}

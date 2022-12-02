@@ -9,7 +9,7 @@ from random_username.generate import generate_username
 
 
 # Create your views here.
-
+ 
 
 def login(request):
     if request.user.is_authenticated:
@@ -33,7 +33,7 @@ def login(request):
                     user = authenticate(username=username, password=password)                    
                     auth.login(request, user)
                     messages.success(request, "You are successfully logged in.")
-                    return redirect('users:dashboard', user.slug)                    
+                    return redirect('users:dashboard', user.slug)
                 except:
                     messages.error(request, "Incorrect password.")
                     return redirect("login")

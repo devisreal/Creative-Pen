@@ -93,7 +93,11 @@
                   </li>
                   {% endif %}
                   {% if request.user.is_author %}
-                  <li><a class="dropdown-item nav-link rounded-md" href="#">Create Post</a></li>
+                  <li>
+                     <a class="dropdown-item nav-link rounded-md" href="{% url 'blog:create_post' %}">
+                        Create Post
+                     </a>
+                  </li>
                   {% endif %}
                   <li>
                      <a class="dropdown-item nav-link rounded-md {% if '/profile' in request.path or '/edit-profile' in request.path%} bg-light text-black font-medium {% endif %}"
@@ -238,19 +242,24 @@
                         </li>
                         {% if request.user.is_staff %}
                         <li class="">
-                           <a class=" nav-link rounded-md" href="#">
+                           <a class=" nav-link rounded-md" href="{% url 'users:authors' request.user.slug %}">
                               Authors
                            </a>
                         </li>
                         <li class="">
-                           <a class=" nav-link rounded-md" href="#">
+                           <a class=" nav-link rounded-md" href="{% url 'users:readers' request.user.slug %}">
                               Readers
                            </a>
                         </li>
+                        <li class="">
+                           <a class=" nav-link rounded-md" href="{% url 'users:subscribers' request.user.slug %}">
+                              Subscribers
+                           </a>
+                        </li>                        
                         {% endif %}
                         {% if request.user.is_author %}
                         <li class="">
-                           <a class=" nav-link rounded-md" href="#">
+                           <a class=" nav-link rounded-md" href="{% url 'blog:create_post' %}">
                               Create Post
                            </a>
                         </li>

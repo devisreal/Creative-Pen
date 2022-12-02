@@ -82,34 +82,38 @@ Contact
 </div>
 
 
-<div class="container px-5" style="margin-top: 160px;">
-   <div class="row gx-5 contact-form-section">
-      <div class="col-md-5">
-         <div class="border bg-light contact-form-image"></div>
+<div class="container px-lg-5" style="margin-top: 160px;">
+   <div class="row gx-lg-5 contact-form-section">
+      <div class="col-md-6 col-lg-4">
+         <div class="bg-light contact-form-image h-100 rounded-lg p-4 position-relative">
+            <a href="" class="btn btn-red btn-sm p-4 py-2 text-uppercase position-absolute" style="bottom: 30px;">
+               Click Me
+            </a>
+         </div>
       </div>
 
       <!-- ? Contact Form -->
       <div
-         class="col-md-7 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center contact-form">
+         class="col-md-6 col-lg-8 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center contact-form">
          <div class="">
 
-            <form class="container px-lg-4 px-md-3 px-3" method="POST">
+            <form class="container px-lg-0 py-lg-3 px-md-1 px-3" method="POST">
                <h3 class="mb-4 d-flex align-items-center text-capitalize">                  
-                  Send us a message
+                  Let's Talk about Everything
                </h3>
                {% csrf_token %}
                <!-- ! First and Last Names -->
                <div class="row g-2">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="name"
+                        <input type="text" class="form-control rounded-lg rounded-lg" id="name"
                            name="name" placeholder="" autocomplete="off" required>
                         <label class="" for="name">Name</label>
                      </div>
                   </div>
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"
+                        <input type="email" class="form-control rounded-lg" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"
                            placeholder="" autocomplete="off" required>
                         <label class="" for="email">Email address</label>
                      </div>
@@ -120,7 +124,7 @@ Contact
                <div class="row gx-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="" autocomplete="off" required>
+                        <input type="text" class="form-control rounded-lg" id="subject" name="subject" placeholder="" autocomplete="off" required>
                         <label class="" for="subject">Subject</label>
                      </div>
                   </div>
@@ -130,7 +134,7 @@ Contact
                <div class="row gx-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="" id="message"
+                        <textarea class="form-control rounded-lg" placeholder="" id="message"
                            name="message" style="height: 150px;resize: none;" autocomplete="off" required></textarea>
                         <label class="" for="message">Message</label>
                      </div>
@@ -151,8 +155,6 @@ Contact
    </div>
 </div>
 
-<br><br><br><br>
-<br><br><br><br>
 <br><br><br><br>
 
 {% endblock content %}

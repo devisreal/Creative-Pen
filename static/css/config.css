@@ -645,24 +645,22 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #333;
 }
 .hero-link:hover {
-  color: var(--color-blue) !important;
+  color: var(--color-red) !important;
 }
 
 /* ? Contact Page */
-@media screen and (min-width: 767px) {
-  .contact-form-section {
-    height: 75vh !important;
-  }
-}
 @media screen and (max-width: 767px) {
   .contact-form-image {
     height: 55vh !important;
   }
 }
-.contact-form-image {
-  height: 75vh;
-  border-radius: 20px;
-  background-image: url("../img/contact-img.jpg");
+.contact-form-image {  
+  background-image: linear-gradient(
+      62deg,
+      rgba(0, 0, 0, 0.4) 20%,
+      rgba(0, 0, 0, 0.4) 80%
+    ),
+    url("../img/contact-img.jpg");  
   background-size: cover;
   background-position: center;
 }

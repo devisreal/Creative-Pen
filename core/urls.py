@@ -7,11 +7,11 @@ from users.views import author_external
 urlpatterns = [
     path('taggit/', include('taggit_selectize.urls')),
     path('pen_admin/', admin.site.urls),
+    path('blog/', include('blog.urls')),
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
     path('@/<slug:slug>/', include('users.urls')),
     path('author/<slug:slug>/', author_external, name='author_external'),
-    
     
 ]
 
