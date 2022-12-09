@@ -10,8 +10,25 @@ $("#inputTags").selectize({
       };
    },
 });
+$(function () {
+   $(".custom-dropdown").on("show.bs.dropdown", function () {
+      var that = $(this);
+      setTimeout(function () {
+         that.find(".dropdown-menu").addClass("active");
+      }, 100);
+   });
+   $(".custom-dropdown").on("hide.bs.dropdown", function () {
+      $(this).find(".dropdown-menu").removeClass("active");
+   });
+});
 let TODAY = new Date(Date.now());
-let EIGHTEEN_YEARS_BACK = new Date(new Date(TODAY).getDate() + "/" + new Date(TODAY).getMonth() + "/" + (new Date(TODAY).getFullYear() - 16));
+let EIGHTEEN_YEARS_BACK = new Date(
+   new Date(TODAY).getDate() +
+   "/" +
+   new Date(TODAY).getMonth() +
+   "/" +
+   (new Date(TODAY).getFullYear() - 16)
+);
 const myInput = document.querySelector(".profileDate");
 const fp = flatpickr(myInput, {
    altInput: true,

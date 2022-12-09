@@ -48,53 +48,53 @@
             <li class="nav-item">
                <a class="nav-link {% active_link 'contact' 'active-nav' %}" href="{% url 'contact' %}">Contact</a>
             </li>
-            <li class="nav-item dropdown ms-2">
-               <a class="nav-link dropdown-toggle" role="button" style="user-select: none;" data-bs-toggle="dropdown"
+            <li class="nav-item dropdown custom-dropdown ms-2">
+               <a class="nav-link" role="button" style="user-select: none;" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   {% if request.user.profile_picture %}
                   <img src="{{request.user.profile_picture.url}}" alt="User Avatar"
-                     class="img-fluid rounded-full  pointer-events-none"
+                     class="img-fluid rounded-full pointer-events-none"
                      style="width: 40px;height: 40px;object-fit: cover;" />
                   {% else %}
                   <img src="{% static 'img/user/custom.jpg' %}" alt="User Avatar"
-                     class="img-fluid rounded-full  pointer-events-none"
+                     class="img-fluid rounded-full pointer-events-none"
                      style="width: 35px;height: 35px;object-fit: cover;" />
-                  {% endif %}
+                  {% endif %}                  
                </a>
-               <ul class="dropdown-menu mt-1 dropdown-menu-end px-2 text-md">
+               <ul class="dropdown-menu mt-1 dropdown-menu-end px-2 text-md nav-dropdown">
                   <small class="text-center text-gray-500 ms-1 cursor-normal">
                      Signed in as {{request.user.get_username}}
                   </small>
 
                   <li>
                      <a href="{% url 'users:dashboard' request.user.slug %}"
-                        class="dropdown-item nav-link rounded-md {% if '/dashboard' in request.path %} bg-light text-black font-medium {% endif %}">
+                        class="dropdown-item nav-link rounded-md {% if '/dashboard' in request.path %} active-dropdown {% endif %}">
                         Dashboard
                      </a>
                   </li>
                   {% if request.user.is_staff %}
                   <li>
                      <a href="{% url 'users:authors' request.user.slug %}"
-                        class="dropdown-item nav-link rounded-md {% if '/authors' in request.path %} bg-light text-black font-medium {% endif %}">
+                        class="dropdown-item nav-link rounded-md {% if '/authors' in request.path %} active-dropdown {% endif %}">
                         Authors
                      </a>
                   </li>
                   <li>
                      <a href="{% url 'users:readers' request.user.slug %}"
-                        class="dropdown-item nav-link rounded-md {% if '/readers' in request.path %} bg-light text-black font-medium {% endif %}">
+                        class="dropdown-item nav-link rounded-md {% if '/readers' in request.path %} active-dropdown {% endif %}">
                         Readers
                      </a>
                   </li>
                   <li>
                      <a href="{% url 'users:subscribers' request.user.slug %}"
-                        class="dropdown-item nav-link rounded-md {% if '/subscribers' in request.path %} bg-light text-black font-medium {% endif %}">
+                        class="dropdown-item nav-link rounded-md {% if '/subscribers' in request.path %} active-dropdown {% endif %}">
                         Subscribers
                      </a>
                   </li>
                   {% endif %}
                   {% if request.user.is_author %}
                   <li>
-                     <a class="dropdown-item nav-link rounded-md" href="{% url 'blog:create_post' %}">
+                     <a class="dropdown-item nav-link rounded-md {% if '/create-post' in request.path %} active-dropdown {% endif %}" href="{% url 'blog:create_post' %}">
                         Create Post
                      </a>
                   </li>
