@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-   Edit Profile ({{request.user.username}})
+Edit Profile ({{request.user.username}})
 {% endblock title %}
 {% block styles %}
+<style>
+   #profile_picture {
+      display: none;
+   }
+
+   #profile_picture.active {
+      display: block;
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {{ user_form.media }}
@@ -21,10 +30,18 @@
       {{user_form.first_name}}
       {{user_form.last_name}}
    </div> -->
+
+   <button type="button" id="show-profile" class="btn btn-blue mb-4">Show Profile Image</button>
    {{user_form.as_p}}
    {{social_form}}
-   <button class="btn btn-sm btn-success my-5">Submit</button>
+
+   <button type="submit" class="btn btn-sm btn-success my-5">Submit</button>
 </form>
 
+<script>
+   $('#show-profile').click(() => {
+      $('#profile_picture').toggleClass("active")
+   })   
+</script>
 
 {% endblock %}

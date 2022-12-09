@@ -155,8 +155,8 @@ class UserUpdateForm(forms.ModelForm):
       widget=forms.DateInput(
          attrs={
             "type":"date",
-            "class": "form-control  my-2",
-            "placeholder":"",
+            "class": "form-control my-2 profileDate bg-white",
+            "placeholder":"Date of Birth",
             "id": 'date_of_birth'
          }
       )

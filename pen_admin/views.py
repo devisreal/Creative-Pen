@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from pages.models import ContactDetail, Subscriber
 from account.models import User
 
+@login_required
 def authors(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
@@ -14,6 +16,7 @@ def authors(request, slug):
       }
       return render(request, 'pen_admin/authors.html', context)
 
+@login_required
 def author_single(request, slug, username):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')      
@@ -25,6 +28,7 @@ def author_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_author.html', context)
 
+@login_required
 def readers(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
@@ -36,6 +40,7 @@ def readers(request, slug):
       }
       return render(request, 'pen_admin/readers.html', context)
       
+@login_required
 def reader_single(request, slug, username):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
@@ -47,7 +52,7 @@ def reader_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_reader.html', context)
 
-
+@login_required
 def subscribers(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')

@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from users.views import author_external
 
 urlpatterns = [
+    path('froala_editor/', include('froala_editor.urls')),
     path('taggit/', include('taggit_selectize.urls')),
     path('pen_admin/', admin.site.urls),
     path('blog/', include('blog.urls')),

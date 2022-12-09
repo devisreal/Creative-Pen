@@ -28,14 +28,15 @@ Contact
                </h5>
                <div class="mt-2 text-md font-outfit font-medium d-flex align-items-center w-fit mx-auto ">
                   <a href="{% url 'home' %}" class="text-decoration-none hero-link d-flex align-items-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" fill="#000000b3" class="d-inline-block me-1"
-                        viewBox="0 0 576 512">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" fill="#000000b3"
+                        class="d-inline-block me-1" viewBox="0 0 576 512">
                         <path
                            d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
                      </svg>
                      Home
                   </a>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-3" width="5px" height="5px" fill="#000000b3" viewBox="0 0 512 512">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-3" width="5px" height="5px" fill="#000000b3"
+                     viewBox="0 0 512 512">
                      <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512z" />
                   </svg>
                   <span class="text-gray-500">
@@ -56,7 +57,7 @@ Contact
             <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="phone"></i>
             <div>
                <h5 class="m-0 p-0">Phone</h4>
-               <p class="m-0 p-0 text-md text-gray-500 font-lig">+234 903-456-7890</p>
+                  <p class="m-0 p-0 text-md text-gray-500 font-lig">+234 903-456-7890</p>
             </div>
          </div>
       </div>
@@ -65,7 +66,7 @@ Contact
             <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="mail"></i>
             <div>
                <h5 class="m-0 p-0">E-mail</h4>
-               <p class="m-0 p-0 text-md text-gray-500 font-lig">help@creativepen.com</p>
+                  <p class="m-0 p-0 text-md text-gray-500 font-lig">help@creativepen.com</p>
             </div>
          </div>
       </div>
@@ -74,7 +75,7 @@ Contact
             <i class="iconsax h-fit contact-icon p-2 rounded-xl me-3" icon-name="map-1"></i>
             <div>
                <h5 class="m-0 p-0">Location</h4>
-               <p class="m-0 p-0 text-md text-gray-500 font-lig">Lagos, Nigeria</p>
+                  <p class="m-0 p-0 text-md text-gray-500 font-lig">Lagos, Nigeria</p>
             </div>
          </div>
       </div>
@@ -86,19 +87,18 @@ Contact
    <div class="row gx-lg-5 contact-form-section">
       <div class="col-md-6 col-lg-4">
          <div class="bg-light contact-form-image h-100 rounded-lg p-4 position-relative">
-            <a href="" class="btn btn-red btn-sm p-4 py-2 text-uppercase position-absolute" style="bottom: 30px;">
-               Click Me
+            <a href="{% url 'latest_posts' %}" class="btn btn-red btn-sm p-4 py-2 text-uppercase position-absolute" style="bottom: 30px;">
+               Read Posts
             </a>
          </div>
       </div>
 
       <!-- ? Contact Form -->
-      <div
-         class="col-md-6 col-lg-8 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center contact-form">
+      <div class="col-md-6 col-lg-8 mt-5 mt-md-0 py-5 py-md-0 col-12 d-grid align-content-center contact-form">
          <div class="">
 
             <form class="container px-lg-0 py-lg-3 px-md-1 px-3" method="POST">
-               <h3 class="mb-4 d-flex align-items-center text-capitalize">                  
+               <h3 class="mb-4 d-flex align-items-center text-capitalize">
                   Let's Talk about Everything
                </h3>
                {% csrf_token %}
@@ -106,15 +106,16 @@ Contact
                <div class="row g-2">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-lg rounded-lg" id="name"
-                           name="name" placeholder="" autocomplete="off" required>
+                        <input type="text" class="form-control rounded-lg rounded-lg" id="name" name="name"
+                           placeholder="" autocomplete="off" required>
                         <label class="" for="name">Name</label>
                      </div>
                   </div>
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-lg" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"
-                           placeholder="" autocomplete="off" required>
+                        <input type="email" class="form-control rounded-lg" id="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" placeholder=""
+                           autocomplete="off" required>
                         <label class="" for="email">Email address</label>
                      </div>
                   </div>
@@ -124,7 +125,8 @@ Contact
                <div class="row gx-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-lg" id="subject" name="subject" placeholder="" autocomplete="off" required>
+                        <input type="text" class="form-control rounded-lg" id="subject" name="subject" placeholder=""
+                           autocomplete="off" required>
                         <label class="" for="subject">Subject</label>
                      </div>
                   </div>
@@ -134,8 +136,8 @@ Contact
                <div class="row gx-3">
                   <div class="col">
                      <div class="form-floating mb-3">
-                        <textarea class="form-control rounded-lg" placeholder="" id="message"
-                           name="message" style="height: 150px;resize: none;" autocomplete="off" required></textarea>
+                        <textarea class="form-control rounded-lg" placeholder="" id="message" name="message"
+                           style="height: 150px;resize: none;" autocomplete="off" required></textarea>
                         <label class="" for="message">Message</label>
                      </div>
                   </div>

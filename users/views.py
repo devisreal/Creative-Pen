@@ -8,7 +8,7 @@ from account.views import user_logout
 
 
 @login_required
-def dashboard(request, slug):   
+def dashboard(request, slug):     
    context = {}
    return render(request, 'users/dashboard.html', context)
 

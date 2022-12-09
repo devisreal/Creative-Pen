@@ -1,8 +1,12 @@
 from django.db import models
 from account.models import User
-from django_quill.fields import QuillField
 from django.core.validators import FileExtensionValidator
 from taggit_selectize.managers import TaggableManager
+from hitcount.models import HitCountMixin, HitCount
+from django.contrib.contenttypes.fields import GenericRelation
+from autoslug import AutoSlugField
+from django.template.defaultfilters import slugify
+from froala_editor.fields import FroalaField
 
 
 class PostCategory(models.Model):
@@ -11,7 +15,7 @@ class PostCategory(models.Model):
    category_image = models.ImageField(
       null=True,
       blank=True,
-      upload_to='category_image',
+      upload_to='category_image/',
       validators=[
          FileExtensionValidator(
             allowed_extensions=[
@@ -28,14 +32,12 @@ class PostCategory(models.Model):
    class Meta:
       verbose_name_plural = "Post Categories"
 
-
 class Post(models.Model):
    post_types =  (      
       ('post', 'Post'),
       ('images', 'Images'),
-      ('video', 'Video'),      
+      ('video', 'Video'),  
    )
-
    post_author = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default="Author")
    post_title = models.CharField(max_length=255)
    post_type = models.CharField(max_length=50, choices=post_types)
@@ -43,7 +45,7 @@ class Post(models.Model):
    post_image = models.ImageField(
       null=True,
       blank=True,
-      upload_to='post_images',
+      upload_to='posts/images',
       validators=[
          FileExtensionValidator(
             allowed_extensions=[
@@ -52,12 +54,38 @@ class Post(models.Model):
          )
       ]
    )
-   post_content = QuillField()
+   post_video = models.FileField(
+      upload_to='posts/videos',
+      null=True,
+      validators=[
+         FileExtensionValidator(
+            allowed_extensions=['MOV','avi','mp4','webm','mkv']
+         )
+      ]
+   )
+   post_content = FroalaField(
+      null=True,
+      theme='dark',
+      options={
+         
+      }
+   )
    category = models.ForeignKey(PostCategory, on_delete=models.CASCADE)
    tags = TaggableManager()
    is_featured = models.BooleanField(null=True, blank=True, default=False)
    date_posted = models.DateTimeField(auto_now_add=True)
    last_updated = models.DateField(auto_now=True)
+   slug = AutoSlugField(unique=True, populate_from='post_title', sep='-', null=True)
+   hit_count_generic = GenericRelation(
+      HitCount,
+      object_id_field='',
+      related_query_name='hit_count_generic_relation'
+   )
 
    def __str__(self):
       return f'{self.post_title} by {self.post_author}'
+      
+   def save(self, *args, **kwargs):
+      self.slug = slugify(self.post_title)
+      super().save(*args, **kwargs)
+   

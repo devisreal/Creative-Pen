@@ -103,6 +103,43 @@ td {
   color: #fff !important;
 }
 
+.btn-outline-blue {
+  color: var(--color-blue);
+  --Iconsax-Color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.btn-outline-blue:hover {
+  color: #fff;
+  --Iconsax-Color: #fff;
+  background-color: #234e70;
+  border-color: #234e70;
+}
+
+.btn-check:focus+.btn-outline-blue,
+.btn-outline-blue:focus {
+  box-shadow: none !important;
+}
+
+.btn-check:active+.btn-outline-blue,
+.btn-check:checked+.btn-outline-blue,
+.btn-outline-blue.active,
+.btn-outline-blue.dropdown-toggle.show,
+.btn-outline-blue:active {
+  color: #fff;
+  --Iconsax-Color: #fff;
+  background-color: #234e70;
+  border-color: #234e70;
+}
+
+.btn-check:active+.btn-outline-blue:focus,
+.btn-check:checked+.btn-outline-blue:focus,
+.btn-outline-blue.active:focus,
+.btn-outline-blue.dropdown-toggle.show:focus,
+.btn-outline-blue:active:focus {
+  box-shadow: none !important;
+}
+
 .btn:focus,
 .btn:active {
   outline: none !important;
@@ -521,7 +558,9 @@ input[type="number"] {
   box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
 }
 
-.form-control {
+
+
+.form-control , .selectize-input{
   border: 0.125em solid gray;
   outline: none !important;
   background-color: var(--white);
@@ -529,7 +568,7 @@ input[type="number"] {
   font-family: "Outfit", sans-serif !important;
 }
 
-.form-control:focus {
+.form-control:focus, .selectize-input.focus {
   border-color: var(--color-blue);
   color: #212529;
   background-color: #fff;
@@ -702,4 +741,10 @@ input[type="search"]::-webkit-search-results-decoration {
     rgba(210, 48, 44, 0.7) 50%,
     rgba(35, 78, 112, 0.7) 80%
   );
+}
+
+
+/* Selectize */
+.selectize-control.multi .selectize-input>div{
+  background: var(--color-blue) !important;  
 }

@@ -6,10 +6,12 @@ from account.models import User
 
 def home(request):
    authors = User.objects.filter(is_author=True)
+   num_visits = request.session.get('num_visits', 0)
+   request.session['num_visits'] = num_visits + 1
    context = {
-      'authors': authors
+      'authors': authors,
+      'num_visits': num_visits
    }
-
    return render(request, 'pages/home.html', context)
 
 def footer(request):

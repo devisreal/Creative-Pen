@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}
 Create Post
 {% endblock title %}
+{{ form.media }}
 {% block styles %}
 {% endblock styles %}
 {% block content %}
@@ -10,5 +12,11 @@ Create Post
 
 
 <h1 class="p-4">Create Post</h1>
+
+<div class="p-5">
+   {{form|crispy}} 
+   
+</div>
+
 
 {% endblock %}
