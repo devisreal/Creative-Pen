@@ -4,6 +4,7 @@
 Edit Profile ({{request.user.username}})
 {% endblock title %}
 {% block styles %}
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
 <style>
    #profile_picture {
       display: none;
@@ -12,36 +13,133 @@ Edit Profile ({{request.user.username}})
    #profile_picture.active {
       display: block;
    }
+
+   .background-img img {
+      height: 220px;
+   }
+
+   .refresh-icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+   
 </style>
 {% endblock styles %}
 {% block content %}
-{{ user_form.media }}
 {% include 'partials/messages.html' %}
 
-<form action="{% url 'users:edit_profile' request.user.slug %}" enctype="multipart/form-data" class="p-5" method="POST">
+<br><br><br><br>
+
+<form action="{% url 'users:edit_profile' request.user.slug %}" enctype="multipart/form-data" class="container px-0"
+   method="POST">
    {% csrf_token %}
-   <!-- <label for="basic-url" class="form-label">Username</label>
-   <div class="input-group mb-3">
-      <span class="input-group-text font-outfit bg-light user-select-none" id="basic-addon3">creativepen.com/user/</span>      
-      {{user_form.username}}
+
+   <div class="row gx-4">
+
+      <div class="col-md-6">
+         <div class="px-3">
+      
+            <div class="mb-4 position-relative z-index-9">
+               <fieldset class="background-img position-relative">
+      
+                  {{user_form.background_image}}
+                  {% if request.user.background_image %}
+                  <img class="w-100 h-100" src="{{request.user.background_image.url}}" id="profile-bg-output"
+                     alt="User Background Image">
+                  {% else %}
+                  <img class="w-100 h-100" src="{% static "img/user/bkg_placeholder2.jpg" %}" id="profile-bg-output"
+                     alt="User Background Image">
+                  {% endif %}
+      
+                  <label for="background_image"
+                     class="bg-light refresh-icon border position-absolute top-0 translate-middle start-100 rounded-circle cursor-pointer">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                        <path fill="lightslategray"
+                           d="M4 21a1 1 0 0 0 .24 0l4-1a1 1 0 0 0 .47-.26L21 7.41a2 2 0 0 0 0-2.82L19.42 3a2 2 0 0 0-2.83 0L4.3 15.29a1.06 1.06 0 0 0-.27.47l-1 4A1 1 0 0 0 3.76 21 1 1 0 0 0 4 21zM18 4.41 19.59 6 18 7.59 16.42 6zM5.91 16.51 15 7.41 16.59 9l-9.1 9.1-2.11.52z">
+                        </path>
+                     </svg>
+                  </label>
+      
+               </fieldset>
+      
+               <fieldset class="card-body pt-0 pb-0">
+                  <div class="row d-flex justify-content-between">
+                     <!-- Avatar -->
+                     <div class="col-sm-12 col-md-auto">
+                        <div class="avatar avatar-xxl mt-n5 position-relative">
+                           <label for="profile_picture"
+                              class="bg-light refresh-icon border position-absolute bottom-0 end-0 rounded-circle cursor-pointer">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path
+                                    d="M22 12C22 17.52 17.52 22 12 22C6.48 22 3.11 16.44 3.11 16.44M3.11 16.44H7.63M3.11 16.44V21.44M2 12C2 6.48 6.44 2 12 2C18.67 2 22 7.56 22 7.56M22 7.56V2.56M22 7.56H17.56"
+                                    stroke="lightslategray" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                           </label>
+                           {{user_form.profile_picture}}
+                           {% if request.user.profile_picture %}
+                           <img class="avatar-img rounded-circle border border-white border-3" id="profile-output"
+                              src="{{request.user.profile_picture.url}}" alt="User Avatar">
+                           {% else %}
+                           <img class="avatar-img rounded-circle border border-white border-3" id="profile-output"
+                              src="{% static 'img/user/custom.jpg' %}" alt="User Avatar">
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+               </fieldset>
+            </div>
+      
+         </div>
+      </div>
+
+      <div class="col-md-6">
+         <div class="">
+
+            <fieldset>
+               <label for="basic-url" class="form-label">Full name</label>
+               <div class="input-group mb-3">
+                  {{user_form.first_name}}
+                  {{user_form.last_name}}
+               </div>
+            </fieldset>
+
+            <fieldset>
+               <label for="username" class="form-label">Username</label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text font-outfit bg-light user-select-none" id="basic-addon3"><span
+                        id="currentHost"></span>/@</span>
+                  {{user_form.username}}
+               </div>
+            </fieldset>
+
+         </div>
+      </div>
+   
    </div>
-   <div class="input-group mb-3">
-      <span class="input-group-text font-outfit bg-white">Full name</span>
-      {{user_form.first_name}}
-      {{user_form.last_name}}
-   </div> -->
 
-   <button type="button" id="show-profile" class="btn btn-blue mb-4">Show Profile Image</button>
-   {{user_form.as_p}}
-   {{social_form}}
 
-   <button type="submit" class="btn btn-sm btn-success my-5">Submit</button>
+   <!-- <button type="submit" class="btn btn-sm btn-success my-5">Submit</button> -->
 </form>
 
-<script>
-   $('#show-profile').click(() => {
-      $('#profile_picture').toggleClass("active")
-   })   
-</script>
 
+<br><br><br><br><br>
+
+<script>
+   let currentHost = document.getElementById('currentHost')
+   currentHost.innerHTML = window.location.host;
+
+   var loadFile = function (event) {
+      var profile_image = document.getElementById('profile-output');
+      profile_image.src = URL.createObjectURL(event.target.files[0]);      
+   };
+
+   var loadBgFile = function(event){
+      var profile_bg_image = document.getElementById('profile-bg-output');
+      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+   }
+
+</script>
 {% endblock %}

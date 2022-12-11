@@ -57,3 +57,10 @@ RADIO FIELD
       </div>
    </div>
 </div>
+
+
+<div class="bg-light border position-relative rounded-circle" style="width: 200px;height: 200px;">
+               <div class="bg-dark position-absolute bottom-0 end-0 translate-middle rounded-circle" style="width: 30px;height: 30px;">
+
+               </div>
+            </div>

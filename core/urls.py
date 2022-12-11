@@ -11,7 +11,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
-    path('@/<slug:slug>/', include('users.urls')),
+    path('@<slug:slug>/', include('users.urls')),
     path('author/<slug:slug>/', author_external, name='author_external'),
     
 ]

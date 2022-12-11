@@ -32,14 +32,16 @@ class UserUpdateForm(forms.ModelForm):
    )
 
    profile_picture = forms.ImageField(
-      label="Profile Picture",
+      label="",
       required=False,
       widget=forms.FileInput(
          attrs={
             "type": "file",
             "placeholder": "",
-            "class": "form-control  my-2",
+            "accept": "image/*",
+            "class": "d-none",
             "id": "profile_picture",
+            "onchange":"loadFile(event)"
          }
       ),
    )
@@ -51,8 +53,10 @@ class UserUpdateForm(forms.ModelForm):
          attrs={
             "type": "file",
             "placeholder": "",
-            "class": "form-control  my-2",
+            "accept": "image/*",
+            "class": "d-none",
             "id": "background_image",
+            "onchange":"loadBgFile(event)"
          }
       ),
    )

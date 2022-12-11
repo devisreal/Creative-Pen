@@ -11,7 +11,7 @@
   background-position: right;
 }
 .login-right {
-  display: grid;
+  display: grid;  
   align-content: center;
 }
 
