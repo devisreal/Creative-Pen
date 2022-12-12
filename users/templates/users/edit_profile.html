@@ -14,8 +14,12 @@ Edit Profile ({{request.user.username}})
       display: block;
    }
 
-   .background-img img {
+   .background-img {
       height: 220px;
+   }
+
+   .background-img img{
+      object-fit: cover;
    }
 
    .refresh-icon {
@@ -40,9 +44,10 @@ Edit Profile ({{request.user.username}})
    <div class="row gx-4">
 
       <div class="col-md-6">
-         <div class="px-3">
-      
+         <div class="px-4 px-sm-3">
             <div class="mb-4 position-relative z-index-9">
+
+               <!-- * Background Image -->
                <fieldset class="background-img position-relative">
       
                   {{user_form.background_image}}
@@ -65,6 +70,7 @@ Edit Profile ({{request.user.username}})
       
                </fieldset>
       
+               <!-- * Profile Picture -->
                <fieldset class="card-body pt-0 pb-0">
                   <div class="row d-flex justify-content-between">
                      <!-- Avatar -->
@@ -90,28 +96,145 @@ Edit Profile ({{request.user.username}})
                      </div>
                   </div>
                </fieldset>
-            </div>
-      
+
+               <hr>
+
+               <!-- * Bio -->
+               <fieldset>
+                  <label for="bio">Bio <span class="text-secondary text-sm">(optional)</span></label>
+                  {{user_form.bio}}
+               </fieldset>
+
+               <!-- * City -->
+               <fieldset>
+                  <label for="city" class="form-label">City</label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">                        
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="20" height="20" fill="#234e70">                           
+                           <path
+                              d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zM448 0c-17.7 0-32 14.3-32 32V512h64V192H624c8.8 0 16-7.2 16-16V48c0-8.8-7.2-16-16-16H480c0-17.7-14.3-32-32-32z" />
+                        </svg>
+                     </span>
+                     {{user_form.city}}
+                  </div>
+               </fieldset>
+
+               <!-- * Address -->
+               <fieldset>
+                  <label for="address" class="form-label">Address</label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20" fill="#234e70">                           
+                           <path
+                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                        </svg>
+                     </span>
+                     {{user_form.address}}
+                  </div>
+               </fieldset>
+
+            </div>      
          </div>
       </div>
 
       <div class="col-md-6">
-         <div class="">
+         <div class="px-4 px-sm-3">
 
+            <!-- * Fullname -->
             <fieldset>
                <label for="basic-url" class="form-label">Full name</label>
                <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#234e70" class="bi bi-person-circle"
+                        viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                           d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                     </svg>
+                  </span>
                   {{user_form.first_name}}
                   {{user_form.last_name}}
                </div>
             </fieldset>
 
+            <!-- * Username -->
             <fieldset>
                <label for="username" class="form-label">Username</label>
                <div class="input-group mb-3">
-                  <span class="input-group-text font-outfit bg-light user-select-none" id="basic-addon3"><span
+                  <span class="input-group-text font-outfit bg-light user-select-none" id="username"><span
                         id="currentHost"></span>/@</span>
                   {{user_form.username}}
+               </div>
+            </fieldset>
+
+            <!-- * Email Address -->
+            <fieldset>
+               <label for="email" class="form-label">Email Address</label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">                     
+                     
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#234e70"  class="bi bi-envelope-at-fill"
+                        viewBox="0 0 16 16">
+                        <path
+                           d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z" />
+                        <path
+                           d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z" />
+                     </svg>
+
+                  </span>                  
+                  {{user_form.email}}
+               </div>
+            </fieldset>
+
+            <hr>
+
+            <!-- * Job Title -->
+            <fieldset>
+               <label for="job_title" class="form-label">Job Title</label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="#234e70">
+                        <path
+                           d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
+                     </svg>
+                  </span>
+                  {{user_form.job_title}}
+               </div>
+            </fieldset>
+
+            <!-- * Mobile No -->
+            <fieldset>
+               <label for="mobile_no" class="form-label">Mobile No.</label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">                                          
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20" fill="#234e70">                        
+                        <path
+                           d="M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z" />
+                     </svg>
+                  </span>                  
+                  {{user_form.mobile_no}}
+               </div>
+            </fieldset>
+         
+
+            <!-- * Date oF Birth -->
+            <fieldset>
+               <label for="date_of_birth">Date Of Birth</label>
+               <div class="input-group mb-3 mt-1">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="#234e70">                        
+                        <path
+                           d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
+                     </svg>
+                  </span>
+                  {{user_form.date_of_birth}}
+               </div>
+            </fieldset>
+
+            <fieldset class="mt-2">
+               <label for="gender">Gender</label>
+               <div class="">
+                  {{user_form.gender}}
                </div>
             </fieldset>
 
@@ -121,7 +244,9 @@ Edit Profile ({{request.user.username}})
    </div>
 
 
-   <!-- <button type="submit" class="btn btn-sm btn-success my-5">Submit</button> -->
+   <div class="d-flex justify-content-end px-3">
+      <button type="submit" class="btn btn- btn-success mt-5">Submit</button>
+   </div>
 </form>
 
 

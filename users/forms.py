@@ -9,8 +9,7 @@ class UserUpdateForm(forms.ModelForm):
       required=True,
       widget=forms.TextInput(
          attrs={
-            "placeholder": "",
-            "aria-describedby":"basic-addon3",
+            "placeholder": "",            
             "class": "form-control",
             "id": "username",
             "type": "text",
@@ -23,10 +22,10 @@ class UserUpdateForm(forms.ModelForm):
       required=True,
       widget=forms.EmailInput(
          attrs={
-            "type": "email",
-            "placeholder": "",
-            "class": "form-control  my-2",
+            "placeholder": "example@email.com",
+            "class": "form-control",
             "id": "email",
+            "type": "email",
          }
       ),
    )
@@ -94,7 +93,7 @@ class UserUpdateForm(forms.ModelForm):
       widget=forms.TextInput(
          attrs={
             "placeholder": "+234...",             
-            "class": "form-control  my-2",
+            "class": "form-control",
             "id": "mobile_no",
             "maxlength": 14
          }
@@ -106,8 +105,8 @@ class UserUpdateForm(forms.ModelForm):
       required=False,
       widget=forms.TextInput(
       attrs={
-         "placeholder": "",
-         "class": "form-control  my-2",
+         "placeholder": "Position at ...",
+         "class": "form-control",
          "id": "job_title",
          "type": "text",
       }
@@ -122,7 +121,7 @@ class UserUpdateForm(forms.ModelForm):
             "placeholder": "Brief description for your profile.",
             "class": "form-control  my-2",
             "id": "bio",
-            "style": "height: 120px",
+            "style": "height: 140px;resize: none;",
          }
       )
    )
@@ -133,7 +132,7 @@ class UserUpdateForm(forms.ModelForm):
       widget=forms.TextInput(
       attrs={
          "placeholder": "",
-         "class": "form-control  my-2",
+         "class": "form-control",
          "id": "city",
          "type": "text",
       }
@@ -145,8 +144,8 @@ class UserUpdateForm(forms.ModelForm):
       required=False,
       widget=forms.TextInput(
       attrs={
-         "placeholder": "",
-         "class": "form-control  my-2",
+         "placeholder": "3 Saka Street, Lagos, Nigeria",
+         "class": "form-control",
          "id": "address",
          "type": "text",
       }
@@ -159,7 +158,7 @@ class UserUpdateForm(forms.ModelForm):
       widget=forms.DateInput(
          attrs={
             "type":"date",
-            "class": "form-control my-2 profileDate bg-white",
+            "class": "form-control profileDate bg-white",
             "placeholder":"Date of Birth",
             "id": 'date_of_birth'
          }
@@ -173,13 +172,13 @@ class UserUpdateForm(forms.ModelForm):
       ('not_saying', 'Prefer not to say'),
    ]
 
-   gender = forms.ChoiceField(
+   gender = forms.CharField(
       label='',
-      required=False,
-      choices=gender_choices,
-      widget=forms.Select(
+      required=False,      
+      widget=forms.RadioSelect(
+         choices=gender_choices,
          attrs={
-            'class': 'form-select ',
+            'class': '',
             'id': 'gender'
          }
       )
