@@ -80,6 +80,13 @@ td {
   background-color: var(--gray-200) !important;
 }
 
+/* ! Dropdown */
+.dropdown-item:focus,
+.dropdown-item:hover {
+  color: #1e2125;
+  background-color: #e9ecef;
+}
+
 /* ! Text Colors */
 .text-blue {
   color: var(--color-blue) !important;

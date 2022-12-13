@@ -13,6 +13,8 @@ urlpatterns = [
 
 
    # Admin Views
+   path('staffs/', admin_views.staffs, name="staffs"),   
+   path('staff__<str:username>/', admin_views.staff_single, name='single_staff'),
    path('authors/', admin_views.authors, name="authors"),   
    path('author__<str:username>/', admin_views.author_single, name='single_author'),
    path('readers/', admin_views.readers, name="readers"),

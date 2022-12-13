@@ -1,14 +1,122 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Author
+Author - {{author.username}}
 {% endblock title %}
 {% block styles %}
+<style>
+   :root {
+      --Iconsax-Size: 20px;
+      --Iconsax-Color: rgb(0, 0, 0, 0.7);
+   }
+   </style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
+<br><br><br>
 
-<h1 class="p-4">Author</h1>
+<div class="container">
+   <div class="row justify-content-center">
+      <div class="col-lg-11">
+         <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
+               <img 
+                  class="img-fluid rounded" 
+                  {% if author.profile_picture %}
+                  src="{{author.profile_picture.url}}" 
+                  {% else %}
+                  src="{% static 'img/user/custom.jpg' %}" 
+                  {% endif %}                  
+                  alt="Thomas Macaulay" 
+                  width="250"
+                  height="250"
+               >
+            </div>
+            <div class="col-lg-9 col-md-12">
+               <p class="mb-2"><span class="fw-bold text-black">03</span> Published posts</p>
+               <div class="mb-2">
+                  <h3 class="text-dark mb-0 pb-0">
+                     {{author.get_full_name|default:"Firstname Lastname"}}
+                     {% if author.usersettings.is_verified %}
+                     <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon" viewBox="0 0 24 24">
+                        <path
+                           d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
+                        </path>
+                     </svg>
+                     {% endif %}
+                  </h3>
+                  <small class="text-gray-500">{{author.get_username}}</small>
+               </div>
+               <div class="content">
+                  <p class="m-0 p-0 pb-3">
+                     {{author.get_full_name}} is a writer based in New York City. He’s interested in all things tech, science, and
+                     photography related, and likes to yo-yo in his free time.
+                  </p>                  
+                  <ul class="list-inline text-md pt-0">
+                  
+                     <!-- ? Author Email -->
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="mail"></i>
+                        {{author.email}}
+                     </li>
+
+                     <!-- ? Author Gender -->
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="story"></i>
+                        {{author.gender}}
+                     </li>
+
+                     <!-- ? Author Job Title -->
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="user-1-octagon"></i>
+                        {{author.job_title|default:"[Job title]"}}
+                     </li>
+                  
+                     <!-- ? Author City -->
+                  
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="location"></i>
+                        {{author.city|default:"[City]"}}
+                     </li>
+
+                     <!-- ? Author Last Login -->
+                  
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="stopwatch"></i>
+                        {{author.last_login|date:"g:i a, dS M Y"}}
+                     </li>
+                  
+                     <!-- ? Author Joined date -->
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="calendar-2"></i>
+                        Joined on {{author.date_joined|date:"D, dS M, Y"}}
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+
+
+         <div class="mt-5">
+            <h3 class="mb-4">Published Posts</h3>
+            <div class="row gx-3 gy-4">
+               <div class="col-10 col-md-6 col-lg-4 mx-auto">
+                  <div class="p-3 bg-light border"></div>
+               </div>
+               <div class="col-10 col-md-6 col-lg-4 mx-auto">
+                  <div class="p-3 bg-light border"></div>
+               </div>
+               <div class="col-10 col-md-6 col-lg-4 mx-auto">
+                  <div class="p-3 bg-light border"></div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+
 
 {% endblock %}

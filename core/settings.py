@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "active_link",
     "hitcount",
     "froala_editor",
+    'django_cleanup.apps.CleanupConfig',
     # Custom Apps
     "account",
     "pen_admin",

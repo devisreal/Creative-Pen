@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Staffs
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Staffs</h1>
+
+{% for author in staffs %}
+
+{% if not author.is_superuser %}
+<a href="{% url 'users:single_staff' request.user.slug author.username %}"
+   class="btn btn-red m-3">{{author.username}}</a>
+{% endif %}
+
+{% endfor %}
+
+
+{% endblock %}

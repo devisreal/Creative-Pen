@@ -4,6 +4,32 @@ from django.contrib.auth.decorators import login_required
 from pages.models import ContactDetail, Subscriber
 from account.models import User
 
+# ! Staffs
+@login_required
+def staffs(request, slug):
+   if not request.user.is_superuser:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      staffs = User.objects.filter(is_staff=True)
+      context = {
+         'staffs': staffs
+      }
+      return render(request, 'pen_admin/staffs.html', context)
+
+@login_required
+def staff_single(request, slug, username):
+   if not request.user.is_superuser:
+      messages.warning(request, 'You are not authorized to access that page')      
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:
+      staff = User.objects.filter(is_staff=True).get(username=username)
+      context = {
+         'staff': staff
+      }
+      return render(request, 'pen_admin/single_staff.html', context)
+
+# ! Authors
 @login_required
 def authors(request, slug):
    if not request.user.is_staff:
@@ -28,6 +54,8 @@ def author_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_author.html', context)
 
+
+# ! Readers
 @login_required
 def readers(request, slug):
    if not request.user.is_staff:
@@ -52,6 +80,9 @@ def reader_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_reader.html', context)
 
+
+
+# ! Subscribers
 @login_required
 def subscribers(request, slug):
    if not request.user.is_staff:

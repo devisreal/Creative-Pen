@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import AbstractUser
 from autoslug import AutoSlugField
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 
 
@@ -53,6 +55,10 @@ class User(AbstractUser):
    def save(self, *args, **kwargs):
       self.slug = slugify(self.username)
       super().save(*args, **kwargs)
+
+@receiver(pre_delete, sender=User)
+def user_image_delete(sender, instance, **kwargs):
+   instance.file.delete(False)
 
 class UserSettings(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)

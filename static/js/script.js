@@ -1,3 +1,6 @@
+$(document).ready(function () {   
+   
+})
 $("#inputTags").selectize({
    plugins: ["restore_on_backspace", "remove_button"],
    delimiter: ",",
