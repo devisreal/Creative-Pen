@@ -5,12 +5,49 @@ Readers
 {% endblock title %}
 {% block styles %}
 <style>
-   .reader-link{
+   .reader-link {
       color: var(--gray-500);
       text-decoration: none;
    }
-   .reader-link:hover{
-      color: rgba(0,0,0,0.6);
+
+   .reader-link:hover {
+      color: rgba(0, 0, 0, 0.6);
+   }
+
+   .page-link:focus {
+      box-shadow: none !important;
+   }
+
+   .pagination .page-item {
+      margin-bottom: 5px;
+      float: left;
+   }
+
+   .pagination-bordered {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 2px;
+      border-radius: 0.25rem;
+   }
+
+   .pagination-bordered .page-item {
+      margin: 2px;
+   }
+
+   .pagination-bordered .page-link {
+      border: transparent;
+      border-radius: 0.25rem;
+   }
+
+   .block-icon i {
+      color: #dc3545;
+      background-color: #FBE9EB;
+      transition: .2s;
+   }
+
+   .block-icon i:hover {
+      color: #fff;
+      background-color: #D6293E;
+      transition: .2s;
    }
 </style>
 {% endblock styles %}
@@ -19,50 +56,87 @@ Readers
 
 
 
-<div class="container">
-   <h1 class="mt-4 mb-5">Readers</h1>
-   <div class="my-3 p-3 bg-body rounded my-shadow-md">
-      <h6 class="border-bottom pb-2 mb-0">Readers</h6>
+<div class="container" style="margin-top: 70px;">
+   <div class="my-3 p-3 pb-1 bg-body rounded my-shadow">
+
+      <div class="border-bottom pb-3">
+         <div class="row d-flex g-3 align-items-center justify-content-between">
+            <div class="col-md-4">
+               <h5 class="mb-0">Readers</h5>
+            </div>
+            <div class="col-md-8">
+               <form class="rounded position-relative">
+                  <input class="form-control bg-transparent" type="search" placeholder="Search reader"
+                     aria-label="Search">
+                  <button
+                     class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
+                     type="submit">
+                     <i class="fas fa-search fs-6"></i>
+                  </button>
+               </form>
+            </div>
+         </div>
+         <!-- Search and select END -->
+      </div>
 
       {% for reader in readers %}
-      <div class="d-flex text-muted pt-3">   
+      <div class="d-flex text-muted pt-3 ">
 
-         {% if reader.profile_picture %}            
-            <img 
-               class="rounded flex-shrink-0 me-2" 
-               src="{{reader.profile_picture.url}}" 
-               width="40" 
-               height="40" 
-               alt="Reader Avatar"
-            >
+         {% if reader.profile_picture %}
+         <img class="rounded flex-shrink-0 me-2" src="{{reader.profile_picture.url}}" width="40" height="40"
+            alt="Reader Avatar">
          {% else %}
-            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="38" height="38" xmlns="http://www.w3.org/2000/svg"
-               role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
-               <title>Placeholder</title>
-               <rect width="100%" height="100%" fill="#234e70" /><text x="50%" y="50%" fill="#234e70" dy=".3em">32x32</text>
-            </svg>
+         <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="38" height="38"
+            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+            preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#f5f5f5" />
+            <text x="14%" class="font-medium font-outfit" y="50%" fill="#000" dy=".3em">
+               {{reader.initials}}
+            </text>
+         </svg>
          {% endif %}
 
-         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+         <div class="pb-2 mb-0 lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between align-items-center">
                <strong class="font-cabin text-md">
                   <a href="{% url 'users:single_reader' request.user.slug reader.username %}" class="reader-link">
                      {{reader.get_full_name|default:"[Fullname]"}}
                   </a>
                </strong>
-               <a href="#">
-                  <i class="iconsax" style="--Iconsax-Size: 20px;--Iconsax-Color: rgba(0, 0, 0, 0.7);" icon-name="user-2-remove"></i>
+               <a class="block-icon" data-bs-toggle="tooltip" data-bs-title="Block Reader" href="#">
+                  <i class="fa-solid fa-ban text-sm p-2 rounded-circle"></i>
                </a>
             </div>
-            <a 
-               href="{% url 'users:single_reader' request.user.slug reader.username %}" 
-               class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit"
-            >
+            <a href="{% url 'users:single_reader' request.user.slug reader.username %}"
+               class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
                @{{reader.get_username}}
             </a>
          </div>
-      </div>  
-      {% endfor %}      
+      </div>
+      {% endfor %}
+
+      <div class="card-footer bg-white pt-4">
+         <!-- Pagination START -->
+         <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+            <p class="mb-sm-0 text-md text-center text-sm-start">Showing 1 to 8 of {{readers.count}} entries</p>
+            <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+               <ul class="pagination pagination-sm pagination-bordered mb-0">
+                  <li class="page-item disabled">
+                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item disabled"><a class="page-link" href="#">..</a></li>
+                  <li class="page-item"><a class="page-link" href="#">15</a></li>
+                  <li class="page-item">
+                     <a class="page-link" href="#">Next</a>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+         <!-- Pagination END -->
+      </div>
    </div>
 </div>
 

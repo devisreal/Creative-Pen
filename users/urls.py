@@ -20,4 +20,5 @@ urlpatterns = [
    path('readers/', admin_views.readers, name="readers"),
    path('reader__<str:username>/', admin_views.reader_single, name='single_reader'),
    path('subscribers/', admin_views.subscribers, name="subscribers"),
+   path('subscriber/delete/<int:id>/', admin_views.delete_subscriber, name="delete_subscriber"),
 ]

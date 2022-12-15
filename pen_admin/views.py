@@ -62,7 +62,8 @@ def readers(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      readers = User.objects.filter(is_author=False)
+      readers = User.objects.filter(is_author=False)      
+   
       context = {
          'readers': readers
       }
@@ -74,9 +75,9 @@ def reader_single(request, slug, username):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:   
-      reader = User.objects.filter(is_author=False).get(username=username)
+      reader = User.objects.filter(is_author=False).get(username=username)      
       context = {
-         'reader': reader
+         'reader': reader         
       }
       return render(request, 'pen_admin/single_reader.html', context)
 
@@ -94,3 +95,15 @@ def subscribers(request, slug):
          'subscribers': subscribers
       }
       return render(request, 'pen_admin/subscribers.html', context)
+
+
+@login_required
+def delete_subscriber(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      subscriber = Subscriber.objects.get(id=id)
+      subscriber.delete()
+      messages.success(request, 'Subscriber deleted!')
+      return redirect('users:subscribers')      

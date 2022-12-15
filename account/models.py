@@ -54,7 +54,9 @@ class User(AbstractUser):
 
    def save(self, *args, **kwargs):
       self.slug = slugify(self.username)
-      super().save(*args, **kwargs)
+      super().save(*args, **kwargs)      
+
+   
 
 @receiver(pre_delete, sender=User)
 def user_image_delete(sender, instance, **kwargs):
