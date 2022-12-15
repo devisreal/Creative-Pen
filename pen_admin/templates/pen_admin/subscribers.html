@@ -56,7 +56,7 @@ Subscribers
                         <td class="text-center">{{subscriber.date_subscribed|date:"g:ia d S M, Y"}}</td>
                         <td class="text-end">
                            <a class="block-icon" data-bs-toggle="modal"
-                              data-bs-target="#deleteSubscriber{{subscriber.id}}" href="#">
+                              data-bs-target="#deleteSubscriber{{subscriber.id}}" href="">
                               <i data-bs-toggle="tooltip" data-bs-title="Delete Subscriber"
                                  class="fa-solid fa-trash-can text-md p-2 rounded-circle"></i>
                            </a>
@@ -85,7 +85,7 @@ Subscribers
                                     </path>
                                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
                                  </svg>
-                                 <h6 class="text-center mt-3">Are you sure you want to delete this subscriber?</h6>
+                                 <h6 class="text-center mt-3">Are you sure you want to delete '{{subscriber.email}}' ?</h6>
                               </div>
                               <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
                                  <a href="{% url 'users:delete_subscriber' request.user.slug subscriber.id %}"

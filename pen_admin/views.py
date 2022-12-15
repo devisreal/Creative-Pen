@@ -82,6 +82,29 @@ def reader_single(request, slug, username):
       return render(request, 'pen_admin/single_reader.html', context)
 
 
+@login_required
+def block_reader(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      reader = User.objects.get(username=username)      
+      reader.is_active = False
+      reader.save()
+      messages.success(request, f"User {reader.username} blocked!")
+      return redirect('users:readers', slug=slug)
+
+@login_required
+def unblock_reader(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      reader = User.objects.get(username=username)      
+      reader.is_active = True
+      reader.save()
+      messages.success(request, f"User {reader.username} unblocked!")
+      return redirect('users:readers', slug=slug)
 
 # ! Subscribers
 @login_required

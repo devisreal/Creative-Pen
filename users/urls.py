@@ -19,6 +19,8 @@ urlpatterns = [
    path('author__<str:username>/', admin_views.author_single, name='single_author'),
    path('readers/', admin_views.readers, name="readers"),
    path('reader__<str:username>/', admin_views.reader_single, name='single_reader'),
+   path('block-reader/<str:username>/', admin_views.block_reader, name='block_reader'),
+   path('unblock-reader/<str:username>/', admin_views.unblock_reader, name='unblock_reader'),
    path('subscribers/', admin_views.subscribers, name="subscribers"),
    path('subscriber/delete/<int:id>/', admin_views.delete_subscriber, name="delete_subscriber"),
 ]
