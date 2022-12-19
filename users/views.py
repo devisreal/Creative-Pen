@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .forms import UserSocialHandleForm, UserUpdateForm
 from django.contrib import messages
-from account.models import User
+from account.models import User, UserSettings
 from account.views import user_logout
+from datetime import datetime
 
 
 
@@ -12,6 +13,19 @@ def dashboard(request, slug):
    context = {}
    return render(request, 'users/dashboard.html', context)
 
+@login_required
+def request_author_access(request, slug, username):   
+   reader_settings = UserSettings.objects.get(user__username=username)
+   user = User.objects.get(username=username)
+   if user.is_author:
+      messages.warning(request, f'You are already an author!')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/')) 
+   else:         
+      reader_settings.request_author_access = True
+      reader_settings.requested_date = datetime.now()            
+      reader_settings.save()      
+      messages.success(request, f"Author access requested!")
+      return redirect('users:dashboard', slug=slug)
 
 @login_required
 def user_profile(request, slug):

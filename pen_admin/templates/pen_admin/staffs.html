@@ -4,21 +4,271 @@
 Staffs
 {% endblock title %}
 {% block styles %}
+<style>
+   .author-link {
+      color: #333;
+      text-decoration: none;
+   }
+
+   .author-link:hover {
+      color: #234e70;
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
 
-<h1 class="p-4">Staffs</h1>
 
-{% for author in staffs %}
+<div class="container pb-2 rounded-md" style="margin-top: 70px;">
 
-{% if not author.is_superuser %}
-<a href="{% url 'users:single_staff' request.user.slug author.username %}"
-   class="btn btn-red m-3">{{author.username}}</a>
-{% endif %}
 
-{% endfor %}
+   <div class="border-bottom py-3">
+      <div class="row d-flex g-3 align-items-center justify-content-between">
+         <div class="col-md-4">
+            <h4 class="mb-0">Staffs</h4>
+         </div>
+         {% if staffs %}
+         <div class="col-md-8">
+            <form class="rounded position-relative">
+               <input class="form-control bg-transparent" type="search" placeholder="Search staff" aria-label="Search">
+               <button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
+                  type="submit">
+                  <i class="fas fa-search fs-6"></i>
+               </button>
+            </form>
+         </div>
+         {% endif %}
+      </div>
+      <!-- Search and select END -->
+   </div>
 
+   {% if staffs %}
+         
+   <div class="row g-4 mt-3">
+
+      <!-- Card item START -->
+      {% for staff in staffs %}
+      
+      <div class="col-md-6 col-xl-4">
+         <div class="card border p-2 my-shadow rounded-lg">
+            <div class="card-body">
+               <div class="d-flex align-items-center justify-content-center">
+                  <div class="avatar avatar-xl flex-shrink-0">
+                     <img class="avatar-img rounded-circle" src="{{staff.profile_picture.url}}" alt="">
+                  </div>
+               </div>
+               <div class="text-center mt-2 d-block">
+                  <h5 class="mb-0 p-0">
+                     <a href="{% url 'users:single_author' request.user.slug staff.username %}"
+                        class="author-link">{{staff.get_full_name}}</a>
+                  </h5>
+                  <small class="text-gray-500 d-block">@{{ staff.username }}</small>
+                  <small class="">{{staff.job_title|default:"[Job Title]"}}</small>
+               </div>
+
+               <div class="d-sm-flex justify-content-center mt-0">
+
+                  <div class="d-flex text-start align-items-center mt-2">
+                     <div class="icon-md bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 640 512">
+                           <path
+                              d="M184 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3V245.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5V416c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V389.2C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112h32c24 0 46.2 7.5 64.4 20.3zM448 416V394.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176h32c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2V416c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32zM568 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm8 157.7v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 160c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64zM240 304c0 16.2 6 31 16 42.3V261.7c-10 11.3-16 26.1-16 42.3zm144-42.3v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2V448c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V405.2c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112h32c61.9 0 112 50.1 112 112z" />
+                        </svg>
+                     </div>
+                     <div class="mx-2">
+                        <h5 class="mb-0">5,354</h5>
+                     </div>
+                     <h6 class="mb-0 fw-light">Followers</h6>
+                  </div>
+
+               </div>
+
+               <div class="d-sm-flex gap-2 mt-3">
+                  <a href="{% url 'users:single_staff' request.user.slug staff.username %}"
+                     class="btn btn-primary-soft w-100">
+                     <i class="fa fa-circle-info pe-2"></i> Details
+                  </a>                  
+                  {% if staff.is_active %}
+                  <a href="" data-bs-toggle="modal" data-bs-target="#blockStaff{{staff.slug}}"
+                     class="btn btn-danger-soft w-100">
+                     <span data-bs-toggle="tooltip" data-bs-title="Block Author" data-bs-placement="bottom">
+                        <i class="fas fa-ban pe-2"></i> Block
+                     </span>
+                  </a>
+                  {% else %}
+                  <a href="" data-bs-toggle="modal" data-bs-target="#unBlockStaff{{staff.slug}}"
+                     class="btn btn-success-soft w-100">
+                     <span data-bs-toggle="tooltip" data-bs-title="Block Author" data-bs-placement="bottom">
+                        <i class="fas fa-unlock pe-2"></i> Unblock
+                     </span>
+                  </a>
+                  {% endif %}
+               </div>
+
+               <a 
+                  data-bs-toggle="modal" data-bs-target="#revokeStaffAccess{{staff.slug}}"
+                  href="{% url 'users:single_staff' request.user.slug staff.username %}" 
+                  class="btn btn-dark-soft w-100 mt-3"
+               >                  
+                  <span data-bs-toggle="tooltip" data-bs-title="Revoke Staff Access" data-bs-placement="bottom">
+                     <i class="fa-solid fa-user-xmark pe-2"></i>
+                     Revoke staff position
+                  </span>
+               </a>
+            </div>
+         </div>
+      </div>
+
+      <!-- ! Block Staff Modal -->
+      <div class="modal fade" id="blockStaff{{staff.slug}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="p-2 pb-0 d-flex justify-content-end">
+                  <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                        <path
+                           d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                        </path>
+                     </svg>
+                  </a>
+               </div>
+               <div class="d-grid justify-content-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#dc2626"
+                     viewBox="0 0 24 24">
+                     <path
+                        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                     </path>
+                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <h6 class="text-center mt-3">Are you sure you want to block '{{staff.username}}' ?</h6>
+               </div>
+               <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+                  <a href="{% url 'users:block_staff' request.user.slug staff.username %}" class="btn btn-sm btn-red">
+                     Yes, I'm sure
+                  </a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">No,
+                     cancel</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- ! UnBlock Staff Modal -->
+      <div class="modal fade" id="unBlockStaff{{staff.slug}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="p-2 pb-0 d-flex justify-content-end">
+                  <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                        <path
+                           d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                        </path>
+                     </svg>
+                  </a>
+               </div>
+               <div class="d-grid justify-content-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#198754"
+                     viewBox="0 0 24 24">
+                     <path
+                        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                     </path>
+                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <h6 class="text-center mt-3">Are you sure you want to unblock {{staff.username}}'s account?</h6>
+               </div>
+               <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+                  <a href="{% url 'users:unblock_staff' request.user.slug staff.username %}"
+                     class="btn btn-sm btn-success">
+                     Yes, I'm sure
+                  </a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">No,
+                     cancel</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- ! Revoke Staff Access Modal -->
+      <div class="modal fade" id="revokeStaffAccess{{staff.slug}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+               <div class="p-2 pb-0 d-flex justify-content-end">
+                  <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                        <path
+                           d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                        </path>
+                     </svg>
+                  </a>
+               </div>
+               <div class="d-grid justify-content-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#191a1f"
+                     viewBox="0 0 24 24">
+                     <path
+                        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                     </path>
+                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <h6 class="text-center mt-3">Are you sure you want to revoke {{staff.username}}'s staff access?</h6>
+               </div>
+               <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+                  <a href="{% url 'users:revoke_staff_access' request.user.slug staff.username %}"
+                     class="btn btn-sm btn-dark">
+                     Yes, I'm sure
+                  </a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">No,
+                     cancel</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   
+      {% endfor %}
+      <!-- Card item END -->
+
+   </div>
+
+   <div class="card-footer mt-5 bg-white pt-3">
+      <!-- Pagination START -->
+      <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+         <p class="mb-sm-0 text-md text-center text-sm-start">Showing 1 to 8 of {{staffs.count}} entries</p>
+         <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+            <ul class="pagination pagination-sm pagination-bordered mb-0">
+               <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+               </li>
+               <li class="page-item"><a class="page-link" href="#">1</a></li>
+               <li class="page-item active"><a class="page-link" href="#">2</a></li>
+               <li class="page-item disabled"><a class="page-link" href="#">..</a></li>
+               <li class="page-item"><a class="page-link" href="#">15</a></li>
+               <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+               </li>
+            </ul>
+         </nav>
+      </div>
+      <!-- Pagination END -->
+   </div>
+
+   {% else %}
+
+   <div class="card-body p-3 text-center mt-5">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#d6293e">
+         <path
+            d="M12.884 2.532c-.346-.654-1.422-.654-1.768 0l-9 17A.999.999 0 0 0 3 21h18a.998.998 0 0 0 .883-1.467L12.884 2.532zM13 18h-2v-2h2v2zm-2-4V9h2l.001 5H11z">
+         </path>
+      </svg>
+      <h4 class="mt-2">No staffs at the moment</h4>
+   </div>   
+
+   {% endif %}
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

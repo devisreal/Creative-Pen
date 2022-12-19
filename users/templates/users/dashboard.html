@@ -11,6 +11,14 @@ Dashboard ({{request.user.username}})
 
 <h1 class="p-4">Dashboard </h1>
 <h3>Welcome {{request.user.username}}</h3>
-<a name="" id="" class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}"
-   role="button">Edit My Profile</a>
+<a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}">Edit My Profile</a>
+
+{% if not request.user.is_author %}
+   {% if not request.user.usersettings.request_author_access %}
+      <a href="{% url 'users:request_author_access' request.user.slug request.user.username %}" class="btn btn-success btn-sm">Request Author Access</a>
+   {% else %}
+   Requested already
+   {% endif %}
+   
+{% endif %}
 {% endblock %}

@@ -72,6 +72,14 @@
                         Dashboard
                      </a>
                   </li>
+                  {% if request.user.is_superuser %}
+                  <li>
+                     <a href="{% url 'users:staffs' request.user.slug %}"
+                        class="dropdown-item nav-link rounded-md {% if '/staffs' in request.path %} active-dropdown {% endif %}">
+                        Staffs
+                     </a>
+                  </li>
+                  {% endif %}
                   {% if request.user.is_staff %}
                   <li>
                      <a href="{% url 'users:authors' request.user.slug %}"
@@ -91,15 +99,7 @@
                         Subscribers
                      </a>
                   </li>
-                  {% endif %}
-                  {% if request.user.is_superuser %}
-                  <li>
-                     <a href="{% url 'users:staffs' request.user.slug %}"
-                        class="dropdown-item nav-link rounded-md {% if '/staffs' in request.path %} active-dropdown {% endif %}">
-                        Staffs
-                     </a>
-                  </li>
-                  {% endif %}
+                  {% endif %}                  
 
                   {% if request.user.is_author %}
                   <li>

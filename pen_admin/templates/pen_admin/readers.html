@@ -12,31 +12,7 @@ Readers
 
    .reader-link:hover {
       color: rgba(0, 0, 0, 0.6);
-   }
-
-   .page-link:focus {
-      box-shadow: none !important;
-   }
-
-   .pagination .page-item {
-      margin-bottom: 5px;
-      float: left;
-   }
-
-   .pagination-bordered {
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 2px;
-      border-radius: 0.25rem;
-   }
-
-   .pagination-bordered .page-item {
-      margin: 2px;
-   }
-
-   .pagination-bordered .page-link {
-      border: transparent;
-      border-radius: 0.25rem;
-   }
+   }   
 
    .block-icon i {
       color: #dc3545;
@@ -60,9 +36,7 @@ Readers
       color: #fff;
       background-color: #198754;
       transition: .2s;
-   }
-
-   
+   }   
 </style>
 {% endblock styles %}
 {% block content %}
@@ -76,8 +50,10 @@ Readers
       <div class="border-bottom pb-3">
          <div class="row d-flex g-3 align-items-center justify-content-between">
             <div class="col-md-4">
-               <h5 class="mb-0">Readers</h5>
+               <h4 class="mb-0">Readers</h4>
             </div>
+
+            {% if readers %}                           
             <div class="col-md-8">
                <form class="rounded position-relative">
                   <input class="form-control bg-transparent" type="search" placeholder="Search reader"
@@ -89,9 +65,12 @@ Readers
                   </button>
                </form>
             </div>
+            {% endif %}
          </div>
          <!-- Search and select END -->
       </div>
+
+      {% if readers %}
 
       {% for reader in readers %}
       <div class="d-flex text-muted pt-3 ">
@@ -229,6 +208,17 @@ Readers
          </div>
          <!-- Pagination END -->
       </div>
+
+      {% else %}
+      <div class="card-body p-3 text-center py-5">
+         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#d6293e">
+            <path
+               d="M12.884 2.532c-.346-.654-1.422-.654-1.768 0l-9 17A.999.999 0 0 0 3 21h18a.998.998 0 0 0 .883-1.467L12.884 2.532zM13 18h-2v-2h2v2zm-2-4V9h2l.001 5H11z">
+            </path>
+         </svg>
+         <h4 class="mt-2">No readers at the moment</h4>
+      </div>
+      {% endif %}
    </div>
 </div>
 

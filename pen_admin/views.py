@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from pages.models import ContactDetail, Subscriber
-from account.models import User
+from account.models import User, UserSettings
+from datetime import datetime
 
+datetime.now()
 # ! Staffs
 @login_required
 def staffs(request, slug):
@@ -11,7 +13,7 @@ def staffs(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      staffs = User.objects.filter(is_staff=True)
+      staffs = User.objects.filter(is_staff=True).exclude(is_superuser=True)
       context = {
          'staffs': staffs
       }
@@ -29,16 +31,55 @@ def staff_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_staff.html', context)
 
+@login_required
+def block_staff(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      staff = User.objects.get(username=username)      
+      staff.is_active = False
+      staff.save()
+      messages.success(request, f"Staff {staff.username} blocked!")
+      return redirect('users:staffs', slug=slug)
+
+@login_required
+def unblock_staff(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      staff = User.objects.get(username=username)      
+      staff.is_active = True
+      staff.save()
+      messages.success(request, f"Staff {staff.username} unblocked!")
+      return redirect('users:staffs', slug=slug)
+      
+@login_required
+def revoke_staff_access(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      staff = User.objects.get(username=username)      
+      staff.is_staff = False
+      staff.save()
+      messages.success(request, f"Staff {staff.username} access revoked!")
+      return redirect('users:staffs', slug=slug)
+
+
 # ! Authors
 @login_required
 def authors(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
-   else:      
-      authors = User.objects.filter(is_author=True)
+   else:            
+      authors = User.objects.filter(is_author=True).exclude(is_staff=True).order_by('-date_joined')      
+      reader_requests = User.objects.filter(usersettings__request_author_access=True)
       context = {
-         'authors': authors
+         'authors': authors,
+         'reader_requests': reader_requests
       }
       return render(request, 'pen_admin/authors.html', context)
 
@@ -54,6 +95,89 @@ def author_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_author.html', context)
 
+@login_required
+def verify_author(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      author = User.objects.get(username=username)            
+      author_settings = UserSettings.objects.get(user__username=username)
+      author_settings.is_verified = True
+      author_settings.save()
+      messages.success(request, f"Author {author.username} verified!")
+      return redirect('users:authors', slug=slug)
+
+@login_required
+def un_verify_author(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      author = User.objects.get(username=username)            
+      author_settings = UserSettings.objects.get(user__username=username)
+      author_settings.is_verified = False
+      author_settings.save()
+      messages.success(request, f"Author {author.username} unverified!")
+      return redirect('users:authors', slug=slug)
+
+@login_required
+def block_author(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      author = User.objects.get(username=username)      
+      author.is_active = False
+      author.save()
+      messages.success(request, f"Author {author.username} blocked!")
+      return redirect('users:authors', slug=slug)
+
+@login_required
+def unblock_author(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      author = User.objects.get(username=username)      
+      author.is_active = True
+      author.save()
+      messages.success(request, f"Author {author.username} unblocked!")
+      return redirect('users:authors', slug=slug)
+
+@login_required
+def accept_author_access(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))   
+   else:     
+      reader_request = UserSettings.objects.get(user__username=username)
+      user = User.objects.get(username=username)
+      if reader_request.user.is_author:
+         messages.warning(request, f'Reader {reader_request.user.username} is already an author!')
+         return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/')) 
+      else:         
+         reader_request.request_author_access = False
+         reader_request.requested_date = None
+         user.is_author = True
+         reader_request.accepted_date = datetime.now()
+         reader_request.save()
+         user.save()
+         messages.success(request, f"Reader {reader_request.user.username} author access Accepted!")
+         return redirect('users:authors', slug=slug)
+
+@login_required
+def reject_author_access(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      reader_request = UserSettings.objects.get(user__username=username)
+      reader_request.request_author_access = False
+      reader_request.requested_date = None
+      reader_request.save()
+      messages.success(request, f"Reader {reader_request.user.username} author access Rejected!")
+      return redirect('users:authors', slug=slug)
 
 # ! Readers
 @login_required
@@ -62,7 +186,7 @@ def readers(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      readers = User.objects.filter(is_author=False)      
+      readers = User.objects.exclude(is_author=True).order_by('date_joined')
    
       context = {
          'readers': readers
@@ -81,7 +205,6 @@ def reader_single(request, slug, username):
       }
       return render(request, 'pen_admin/single_reader.html', context)
 
-
 @login_required
 def block_reader(request, slug, username):
    if not request.user.is_staff:
@@ -91,7 +214,7 @@ def block_reader(request, slug, username):
       reader = User.objects.get(username=username)      
       reader.is_active = False
       reader.save()
-      messages.success(request, f"User {reader.username} blocked!")
+      messages.success(request, f"Reader {reader.username} blocked!")
       return redirect('users:readers', slug=slug)
 
 @login_required
@@ -103,7 +226,7 @@ def unblock_reader(request, slug, username):
       reader = User.objects.get(username=username)      
       reader.is_active = True
       reader.save()
-      messages.success(request, f"User {reader.username} unblocked!")
+      messages.success(request, f"Reader {reader.username} unblocked!")
       return redirect('users:readers', slug=slug)
 
 # ! Subscribers
@@ -119,7 +242,6 @@ def subscribers(request, slug):
       }
       return render(request, 'pen_admin/subscribers.html', context)
 
-
 @login_required
 def delete_subscriber(request, slug, id):
    if not request.user.is_staff:
@@ -129,4 +251,4 @@ def delete_subscriber(request, slug, id):
       subscriber = Subscriber.objects.get(id=id)
       subscriber.delete()
       messages.success(request, 'Subscriber deleted!')
-      return redirect('users:subscribers')      
+      return redirect('users:subscribers', slug=slug)      

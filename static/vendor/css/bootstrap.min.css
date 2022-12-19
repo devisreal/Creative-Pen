@@ -6281,9 +6281,14 @@ fieldset:disabled .btn {
    pointer-events: none;
 }
 
-.modal.fade .modal-dialog {
+/* .modal.fade .modal-dialog {
    transition: transform 0.3s ease-out;
    transform: translate(0, -50px);
+} */
+
+.modal.fade .modal-dialog {
+   transition: transform .3s ease-out;
+   transform: scale(.8);
 }
 
 @media (prefers-reduced-motion: reduce) {
