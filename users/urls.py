@@ -8,7 +8,7 @@ app_name = 'users'
 urlpatterns = [   
    path('', views.dashboard, name="dashboard"),     
    path('request-access/<str:username>/', views.request_author_access, name="request_author_access"),
-   path('profile/', views.user_profile, name="profile"),
+   path('profile/', views.user_profile, name="profile"),   
    path('edit-profile/', views.edit_profile, name="edit_profile"),
    path('delete-account', views.delete_account, name='delete_account'),   
 
@@ -42,4 +42,9 @@ urlpatterns = [
    # Subscribers
    path('subscribers/', admin_views.subscribers, name="subscribers"),
    path('subscriber/delete/<int:id>/', admin_views.delete_subscriber, name="delete_subscriber"),
+
+   # Enquiries
+   path('enquiries/', admin_views.enquiries, name="enquiries"),
+   path('enquiry/<int:id>/', admin_views.single_enquiry, name='single_enquiry'),
+   path('delete_enquiry/<int:id>/', admin_views.delete_enquiry, name='delete_enquiry')
 ]

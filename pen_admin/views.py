@@ -251,4 +251,40 @@ def delete_subscriber(request, slug, id):
       subscriber = Subscriber.objects.get(id=id)
       subscriber.delete()
       messages.success(request, 'Subscriber deleted!')
-      return redirect('users:subscribers', slug=slug)      
+      return redirect('users:subscribers', slug=slug)
+
+# ! Enquiries
+@login_required
+def enquiries(request, slug):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      enquiries = ContactDetail.objects.all()
+      context = {
+         'enquiries': enquiries
+      }
+      return render(request, 'pen_admin/enquiries.html', context)
+
+@login_required
+def single_enquiry(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      enquiry = ContactDetail.objects.get(id=id)
+      context = {
+         'enquiry': enquiry
+      }
+      return render(request, 'pen_admin/single_enquiry.html', context)
+
+@login_required
+def delete_enquiry(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      enquiry = ContactDetail.objects.get(id=id)
+      enquiry.delete()
+      messages.success(request, 'Enquiry deleted!')
+      return redirect('users:enquiries', slug=slug)
