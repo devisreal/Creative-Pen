@@ -230,7 +230,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.facebook.com/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'facebook_handle'
          }
       )
@@ -242,7 +242,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.linkedin.com/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'linkedin_handle'
          }
       )
@@ -254,7 +254,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.twitter.com/ ',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'twitter_handle'
          }
       )
@@ -266,7 +266,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.instagram.com/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'instagram_handle'
          }
       )
@@ -278,7 +278,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.youtube.com/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'youtube_handle'
          }
       )
@@ -290,7 +290,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://www.behance.net/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'behance_handle'
          }
       )
@@ -302,7 +302,7 @@ class UserSocialHandleForm(forms.ModelForm):
       widget=forms.URLInput(
          attrs={
             "placeholder": 'https://dribbble.com/',
-            "class": 'form-control  my-2',
+            "class": 'form-control',
             "id": 'dribbble_handle'
          }
       )

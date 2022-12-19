@@ -133,6 +133,66 @@ Edit Profile ({{request.user.username}})
                   </div>
                </fieldset>
 
+               <hr>
+
+               <!-- ! Social Handles -->
+               <!-- * Facebook -->
+               <fieldset>
+                  <label for="facebook_handle" class="form-label">Facebook <span class="text-secondary text-sm">(optional)</span></label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                           <path
+                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                        </svg>
+                     </span>
+                     {{social_form.facebook}}
+                  </div>
+               </fieldset>
+
+               <!-- * Instagram -->
+               <fieldset>
+                  <label for="instagram_handle" class="form-label">Instagram <span class="text-secondary text-sm">(optional)</span></label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                           <path
+                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                        </svg>
+                     </span>
+                     {{social_form.instagram}}
+                  </div>
+               </fieldset>
+
+               <!-- * Twitter -->
+               <fieldset>
+                  <label for="twitter_handle" class="form-label">Twitter <span class="text-secondary text-sm">(optional)</span></label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                           <path
+                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                        </svg>
+                     </span>
+                     {{social_form.twitter}}
+                  </div>
+               </fieldset>
+
+               <!-- * Dribbble -->
+               <fieldset>
+                  <label for="dribbble_handle" class="form-label">Dribbble <span class="text-secondary text-sm">(optional)</span></label>
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                           <path
+                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                        </svg>
+                     </span>
+                     {{social_form.dribbble}}
+                  </div>
+               </fieldset>
+
+
             </div>      
          </div>
       </div>
@@ -239,6 +299,50 @@ Edit Profile ({{request.user.username}})
                </div>
             </fieldset>
 
+            <hr>
+
+            <!-- * LinkedIn -->
+            <fieldset>
+               <label for="linkedin_handle" class="form-label">LinkedIn <span class="text-secondary text-sm">(optional)</span></label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                        <path
+                           d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                     </svg>
+                  </span>
+                  {{social_form.linkedin}}
+               </div>
+            </fieldset>
+
+            <!-- * Youtube -->
+            <fieldset>
+               <label for="youtube_handle" class="form-label">Youtube <span class="text-secondary text-sm">(optional)</span></label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                        <path
+                           d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                     </svg>
+                  </span>
+                  {{social_form.youtube}}
+               </div>
+            </fieldset>
+
+            <!-- * Behance -->
+            <fieldset>
+               <label for="behance_handle" class="form-label">Behance <span class="text-secondary text-sm">(optional)</span></label>
+               <div class="input-group mb-3">
+                  <span class="input-group-text bg-light">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="16" fill="#234e70">
+                        <path
+                           d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z" />
+                     </svg>
+                  </span>
+                  {{social_form.behance}}
+               </div>
+            </fieldset>
+
          </div>
       </div>
    
@@ -246,7 +350,7 @@ Edit Profile ({{request.user.username}})
 
 
    <div class="d-flex justify-content-end px-3">
-      <button type="submit" class="btn btn- btn-success mt-5">Submit</button>
+      <button type="submit" class="btn btn-sm btn-success">Submit</button>
    </div>
 </form>
 
