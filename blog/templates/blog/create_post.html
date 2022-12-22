@@ -6,17 +6,270 @@ Create Post
 {% endblock title %}
 {{ form.media }}
 {% block styles %}
+<style>
+   .btn-outline-light {
+      background: transparent;
+      border-color: #d0d4d9;
+      color: #595d69;
+   }
+
+   .btn-outline-light:hover,
+   .btn-outline-light:focus,
+   .btn-outline-light:active,
+   .btn-check:checked+.btn-outline-light {
+      background: #d0d4d9;
+      border-color: #d0d4d9;
+      color: #191a1f;
+   }
+
+   .post-image {
+      height: 220px;
+   }
+
+   .post-image img {
+      object-fit: cover;
+   }
+
+   .refresh-icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   #short_description::-webkit-scrollbar {
+      width: 7px;
+   }
+
+   #short_description::-webkit-scrollbar-track {
+      background: #f5f5f5;
+   }
+
+   #short_description::-webkit-scrollbar-thumb {
+      background: #888;
+   }
+
+   #short_description::-webkit-scrollbar-thumb:hover {
+      background: #555;
+      cursor: pointer !important;
+   }
+
+   #post_video_field {
+      display: none;
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
+<br><br>
+<div class="container-sm">
+   <h3 class="mb-3">Create Post</h3>
+   <form class="card p-3 rounded-lg" action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
 
-<h1 class="p-4">Create Post</h1>
 
-<div class="p-5">
-   {{form|crispy}} 
-   
+      <!-- * Post Title -->
+      <fieldset>
+         <label for="post_title" class="mb-2 text-dark">
+            {{create_post_form.post_title.label}}
+         </label>
+         {{create_post_form.post_title}}
+      </fieldset>
+
+      <div class="row mt-4">
+         <div class="col-md-6">
+
+            <!-- * Post Type -->
+            <div class="mb-4">
+               <label class="form-label">Post type</label>
+               <div class="d-flex flex-wrap gap-3">
+
+                  <!-- Post type Post -->
+                  <div class="flex-fill">
+                     <input type="radio" class="btn-check" name="post_type" id="post_default_type" checked>
+                     <label class="btn btn-outline-blue w-100 py-2" for="post_default_type">
+                        <!-- <i class="iconsax" style="--Iconsax-Size: 40px;" icon-name="message-dots"></i> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-2"
+                           width="40" height="40" viewBox="0 0 24 24" stroke-width="1.3" stroke="currentColor"
+                           fill="none">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                           <path
+                              d="M12 20l-3 -3h-2a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-2l-3 3" />
+                           <line x1="8" y1="9" x2="16" y2="9" />
+                           <line x1="8" y1="13" x2="14" y2="13" />
+                        </svg>
+                        <span class="d-block font-medium"> Post </span>
+                     </label>
+                  </div>
+                  <!-- Post type Image -->
+                  <div class="flex-fill">
+                     <input type="radio" class="btn-check" name="post_type" id="post_image_type">
+                     <label class="btn btn-outline-blue w-100 py-2" for="post_image_type">
+                        <!-- <i class="iconsax" style="--Iconsax-Size: 40px;" icon-name="picture"></i> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-plus"
+                           width="40" height="40" viewBox="0 0 24 24" stroke-width="1.3" stroke="currentColor"
+                           fill="none">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                           <path d="M15 8h.01" />
+                           <path d="M12 20h-5a3 3 0 0 1 -3 -3v-10a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v5" />
+                           <path d="M4 15l4 -4c.928 -.893 2.072 -.893 3 0l4 4" />
+                           <path d="M14 14l1 -1c.617 -.593 1.328 -.793 2.009 -.598" />
+                           <path d="M16 19h6" />
+                           <path d="M19 16v6" />
+                        </svg>
+                        <span class="d-block font-medium"> Images </span>
+                     </label>
+                  </div>
+                  <!-- Post type Video -->
+                  <div class="flex-fill">
+                     <input type="radio" class="btn-check" name="post_type" id="post_video_type">
+                     <label class="btn btn-outline-blue w-100 py-2" for="post_video_type">
+                        <!-- <i class="iconsax" style="--Iconsax-Size: 40px;" icon-name="video-1"></i> -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-video-plus"
+                           width="40" height="40" viewBox="0 0 24 24" stroke-width="1.3" stroke="currentColor"
+                           fill="none">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                           <path
+                              d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                           <rect x="3" y="6" width="12" height="12" rx="2" />
+                           <line x1="7" y1="12" x2="11" y2="12" />
+                           <line x1="9" y1="10" x2="9" y2="14" />
+                        </svg>
+                        <span class="d-block font-medium"> Video </span>
+                     </label>
+                  </div>
+
+               </div>
+            </div>
+
+            <hr>
+
+            <!-- * Post Image -->
+            <fieldset class="">
+               <label for="background_image" class="mb-2">{{create_post_form.post_image.label}}</label>
+               <div class="post-image position-relative mb-3">
+
+                  {{create_post_form.post_image}}
+                  <img class="w-100 h-100 rounded" src="{% static "img/post_image_placeholder.jpg" %}"
+                     id="profile-bg-output" alt="Post Image">
+                  <label for="background_image"
+                     class="bg-light refresh-icon border position-absolute top-100 start-100 translate-middle rounded-circle cursor-pointer">
+                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.6996 19.8981H20.0766" stroke="#200E32" stroke-width="1.5" stroke-linecap="round"
+                           stroke-linejoin="round" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                           d="M12.8549 4.9557C13.5919 4.0167 14.7829 4.0657 15.7229 4.8027L17.1129 5.8927C18.0529 6.6297 18.3859 7.7727 17.6489 8.7137L9.3599 19.2887C9.0829 19.6427 8.6599 19.8517 8.2099 19.8567L5.0129 19.8977L4.2889 16.7827C4.1869 16.3457 4.2889 15.8857 4.5659 15.5307L12.8549 4.9557Z"
+                           stroke="#200E32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.3026 6.9361L16.0966 10.6941" stroke="#200E32" stroke-width="1.5"
+                           stroke-linecap="round" stroke-linejoin="round" />
+                     </svg>
+
+                  </label>
+
+               </div>
+               <small>{{create_post_form.post_image.help_text}}</small>
+            </fieldset>
+
+         </div>
+
+         <div class="col-md-6">
+
+            <!-- * Short Description -->
+            <fieldset class="mb-3">
+               <label for="short_description" class="form-label">
+                  {{create_post_form.short_description.label}}
+               </label>
+               {{create_post_form.short_description}}
+            </fieldset>
+
+            <!-- * Post Video -->
+            <fieldset id="post_video_field" class="w-100 mb-3">
+               <label for="post_video" class="mb-1">
+                  {{create_post_form.post_video.label}}
+               </label>
+               {{create_post_form.post_video}}
+               <small class="text-gray-500">
+                  {{create_post_form.post_video.help_text}}
+               </small>
+            </fieldset>
+
+            <!-- * Post Category -->
+            <fieldset>
+               <label for="" class="mb-1">
+                  {{create_post_form.category.label}}
+               </label>
+               {{create_post_form.category}}
+            </fieldset>
+         </div>
+
+      </div>
+
+      <hr>
+
+      <!-- * Post Content -->
+      <fieldset class="mt-1">
+         <label for="id_post_content" class="mb-2">
+            {{create_post_form.post_content.label}}
+         </label>
+         {{create_post_form.post_content}}
+      </fieldset>
+
+
+      <div class="row mt-3">
+         <div class="col-md-7">
+
+            <!-- * Post Tags -->
+            <fieldset class="">
+               <label for="inputTags" class="mb-2">
+                  {{create_post_form.tags.label}}
+               </label>
+               {{create_post_form.tags}}
+               <small class="text-gray-500">
+                  {{create_post_form.tags.help_text}}
+               </small>
+            </fieldset>
+
+         </div>
+
+         <div class="col-md-5">
+
+            <!-- * Post Tags -->
+            <fieldset class="h-100 mt-1 d-flex align-items-center justify-content-center">               
+               <div class="form-check">
+                  {{create_post_form.is_featured}}
+                  <label class="form-check-label" for="is_featured">
+                     Make this post featured?
+                  </label>
+               </div>
+            </fieldset>
+            
+         </div>
+      </div>
+
+      <div class="d-grid mt-5 mb-2">
+         <button type="submit" class="btn btn- btn-success">Create post</>
+      </div>
+
+   </form>
 </div>
+<br><br><br><br>
+<br><br><br><br>
 
-
+<script>
+   var loadBgFile = function (event) {
+      var profile_bg_image = document.getElementById('profile-bg-output');
+      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+   };
+   $('#post_video_type').click(() => {
+      $('#post_video_field').slideDown()
+      $('#post_image_type').click(() => {
+         $('#post_video_field').slideUp()
+      })
+      $('#post_default_type').click(() => {
+         $('#post_video_field').slideUp()
+      })
+   })
+</script>
 {% endblock %}

@@ -105,6 +105,12 @@
                         Enquiries
                      </a>
                   </li>
+                  <li>
+                     <a href="{% url 'users:categories' request.user.slug %}"
+                        class="dropdown-item nav-link rounded-md {% if '/categories' in request.path %} active-dropdown {% endif %}">
+                        Categories
+                     </a>
+                  </li>
                   {% endif %}                  
 
                   {% if request.user.is_author %}

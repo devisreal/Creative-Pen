@@ -46,5 +46,8 @@ urlpatterns = [
    # Enquiries
    path('enquiries/', admin_views.enquiries, name="enquiries"),
    path('enquiry/<int:id>/', admin_views.single_enquiry, name='single_enquiry'),
-   path('delete_enquiry/<int:id>/', admin_views.delete_enquiry, name='delete_enquiry')
+   path('delete_enquiry/<int:id>/', admin_views.delete_enquiry, name='delete_enquiry'),
+
+   # Categories
+   path('categories/', admin_views.categories, name='categories'),
 ]

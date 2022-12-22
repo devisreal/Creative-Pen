@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from pages.models import ContactDetail, Subscriber
 from account.models import User, UserSettings
 from datetime import datetime
+from blog.models import PostCategory
+from blog.forms import AddCategoryForm
 
-datetime.now()
 # ! Staffs
 @login_required
 def staffs(request, slug):
@@ -288,3 +289,29 @@ def delete_enquiry(request, slug, id):
       enquiry.delete()
       messages.success(request, 'Enquiry deleted!')
       return redirect('users:enquiries', slug=slug)
+
+
+# ! Categories
+@login_required
+def categories(request, slug):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:  
+      categories = PostCategory.objects.all()
+      if request.method == 'POST':
+         add_category_form = AddCategoryForm(request.POST or None, request.FILES)
+         if add_category_form.is_valid():
+            add_category_form.save()
+            messages.success(request, f'New category added')
+            return redirect('users:categories', slug=slug)
+         else:
+            messages.error(request, 'An error occured!')
+            return redirect('users:categories', slug=slug)
+      else:
+         add_category_form = AddCategoryForm()
+      context = {
+         'categories': categories,
+         'add_category_form': add_category_form
+      }
+      return render(request, 'pen_admin/categories.html', context)

@@ -1,3 +1,4 @@
+import readtime
 from django.db import models
 from account.models import User
 from django.core.validators import FileExtensionValidator
@@ -11,11 +12,13 @@ from froala_editor.fields import FroalaField
 
 class PostCategory(models.Model):
    name = models.CharField(max_length=150)
-   color = models.CharField(max_length=20, default='#333', null=True, blank=True)
+   color = models.CharField(max_length=20, default='blue', null=True, blank=True)
+   emoji = models.CharField(max_length=5, null=True, blank=True)
+   short_description = models.TextField(max_length=100, null=True, blank=True)
    category_image = models.ImageField(
       null=True,
       blank=True,
-      upload_to='category_image/',
+      upload_to='category_images/',
       validators=[
          FileExtensionValidator(
             allowed_extensions=[
@@ -24,10 +27,15 @@ class PostCategory(models.Model):
          )
       ]
    )
+   slug = AutoSlugField(unique=True, populate_from='name', sep='-', null=True)
    date_created = models.DateTimeField(auto_now_add=True)
 
    def __str__(self):
       return self.name
+
+   def save(self, *args, **kwargs):
+      self.slug = slugify(self.name)
+      super().save(*args, **kwargs)
 
    class Meta:
       verbose_name_plural = "Post Categories"
@@ -63,12 +71,8 @@ class Post(models.Model):
          )
       ]
    )
-   post_content = FroalaField(
-      null=True,
+   post_content = FroalaField(      
       theme='dark',
-      options={
-         
-      }
    )
    category = models.ForeignKey(PostCategory, on_delete=models.CASCADE)
    tags = TaggableManager()
@@ -81,6 +85,7 @@ class Post(models.Model):
       object_id_field='',
       related_query_name='hit_count_generic_relation'
    )
+   read_time = readtime.of_text(post_content).minutes
 
    def __str__(self):
       return f'{self.post_title} by {self.post_author}'

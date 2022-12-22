@@ -9,8 +9,19 @@ def create_post(request):
       messages.warning(request, 'You cannot perform that action')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      form = CreatePostForm()
+      if request.method == "POST":
+         create_post_form = CreatePostForm(request.POST, request.FILES)
+         if create_post_form.is_valid():
+            instance = create_post_form.save(commit=False)
+            instance.post_author = request.user
+            instance.save()
+            create_post_form.save_m2m()
+         else:
+            messages.error(request, f"An error occured")
+            return redirect('blog:create_post')
+      else:
+         create_post_form = CreatePostForm()
       context = {
-         'form': form
+         'create_post_form': create_post_form
       }
       return render(request, 'blog/create_post.html', context)

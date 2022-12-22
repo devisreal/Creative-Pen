@@ -834,8 +834,6 @@ input[type="number"] {
   box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
 }
 
-
-
 .form-control,
 .selectize-input {
   border: 0.125em solid gray;
@@ -850,8 +848,7 @@ input[type="number"] {
   border-color: var(--color-blue);
   color: #212529;
   background-color: #fff;
-  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
-  /* box-shadow: none !important; */
+  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;  
 }
 
 .form-label text-black,

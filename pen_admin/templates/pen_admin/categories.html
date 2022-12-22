@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Categories
+{% endblock title %}
+{% block styles %}
+<style>
+   .category-image {
+      height: 220px;
+   }
+   .category-image img {
+      object-fit: cover;
+   }
+   .refresh-icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+</style>
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<div class="container mt-5">
+   <div class="d-flex justify-content-between align-items-center">
+      <h2 class="mb-2 mb-sm-0 d-flex align-items-center">
+         Categories 
+         <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mt-1">
+            07
+         </span>
+      </h2>
+      <a href="" class="btn btn-sm btn-primary mb-0" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+         <i class="fas fa-plus me-2"></i>
+         Add new category
+      </a>
+   </div>
+</div>
+
+
+{% for category in categories %}
+   <h1>{{category.name}}</h1>
+{% endfor %}
+
+<!-- ! Add Category Modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1"
+   aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="p-2 pb-0 d-flex justify-content-end">
+            <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path
+                     d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                  </path>
+               </svg>
+            </a>
+         </div>
+         <form class="p-2 p-md-4 pt-1" action="" method="POST" enctype="multipart/form-data">            
+            {% csrf_token %}
+            <!-- * Category Name -->
+            <fieldset class="mb-2">
+               <label for="category_name" class="mb-1">
+                  {{add_category_form.name.label}}
+               </label>
+               {{add_category_form.name}}
+            </fieldset>
+
+            <div class="row gx-1 gx-md-2 mb-2">
+               <div class="col-8">
+                  <!-- * Category Color -->
+                  <fieldset class="">
+                     <label for="category_color" class="mb-1">
+                        {{add_category_form.color.label}}
+                     </label>
+                     {{add_category_form.color}}
+                  </fieldset>
+               </div>
+
+               <div class="col">
+                  <!-- * Category Emoji -->
+                  <fieldset class="">
+                     <label for="category_emoji" class="mb-1">
+                        {{add_category_form.emoji.label}}
+                     </label>
+                     {{add_category_form.emoji}}
+                  </fieldset>
+               </div>
+            </div>
+
+            <!-- * Category Short Description -->
+            <fieldset class="mb-2">
+               <label for="short_description" class="mb-1">
+                  {{add_category_form.short_description.label}}
+               </label>
+               {{add_category_form.short_description}}
+            </fieldset>
+
+            <!-- * Category Image -->
+            <fieldset>               
+               <label for="category_image" class="mb-2">{{add_category_form.category_image.label}}</label>
+               <div class="category-image position-relative mb-3">
+               
+                  {{add_category_form.category_image}}
+                  <img class="w-100 h-100 rounded" src="{% static "img/post_image_placeholder.jpg" %}" id="profile-bg-output"
+                     alt="Post Image">
+                  <label for="category_image"
+                     class="bg-light refresh-icon border position-absolute top-100 start-100 translate-middle rounded-circle cursor-pointer">
+                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.6996 19.8981H20.0766" stroke="#200E32" stroke-width="1.5" stroke-linecap="round"
+                           stroke-linejoin="round" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                           d="M12.8549 4.9557C13.5919 4.0167 14.7829 4.0657 15.7229 4.8027L17.1129 5.8927C18.0529 6.6297 18.3859 7.7727 17.6489 8.7137L9.3599 19.2887C9.0829 19.6427 8.6599 19.8517 8.2099 19.8567L5.0129 19.8977L4.2889 16.7827C4.1869 16.3457 4.2889 15.8857 4.5659 15.5307L12.8549 4.9557Z"
+                           stroke="#200E32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.3026 6.9361L16.0966 10.6941" stroke="#200E32" stroke-width="1.5" stroke-linecap="round"
+                           stroke-linejoin="round" />
+                     </svg>
+               
+                  </label>
+               
+               </div>
+               <small>{{create_post_form.post_image.help_text}}</small>
+            </fieldset>
+
+            <div class="d-grid mt-3 mb-1">
+               <button type="submit" class="btn btn- btn-success">Create post</>
+            </div>
+         </>
+      </div>
+   </div>
+</div>
+
+<script>
+   var loadBgFile = function (event) {
+      var profile_bg_image = document.getElementById('profile-bg-output');
+      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+   };
+</script>
+{% endblock %}
