@@ -19,6 +19,7 @@ class AddCategoryForm(forms.ModelForm):
 
    color =  forms.CharField(
       label='Category Color',      
+      required=False,
       widget=forms.TextInput(
          attrs={
             "placeholder": "danger, primary, info ...", 
@@ -30,6 +31,7 @@ class AddCategoryForm(forms.ModelForm):
 
    emoji =  forms.CharField(
       label='Category Emoji',
+      required=False,
       max_length=3,
       widget=forms.TextInput(
          attrs={
@@ -42,6 +44,7 @@ class AddCategoryForm(forms.ModelForm):
 
    short_description = forms.CharField(
       label='Short description',
+      required=False,
       widget=forms.Textarea(
          attrs={
             'placeholder': 'Short description about this category ...',

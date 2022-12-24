@@ -50,4 +50,6 @@ urlpatterns = [
 
    # Categories
    path('categories/', admin_views.categories, name='categories'),
+   path('category/<int:id>/edit/', admin_views.edit_category, name='edit_category'),
+   path('delete_category/<int:id>/', admin_views.delete_category, name='delete_category'),
 ]

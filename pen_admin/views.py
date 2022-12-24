@@ -298,7 +298,7 @@ def categories(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:  
-      categories = PostCategory.objects.all()
+      categories = PostCategory.objects.all().order_by('name')   
       if request.method == 'POST':
          add_category_form = AddCategoryForm(request.POST or None, request.FILES)
          if add_category_form.is_valid():
@@ -315,3 +315,38 @@ def categories(request, slug):
          'add_category_form': add_category_form
       }
       return render(request, 'pen_admin/categories.html', context)
+
+@login_required
+def edit_category(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:  
+      category = PostCategory.objects.get(id=id)
+      if request.method == 'POST':
+         edit_category_form = AddCategoryForm(request.POST or None, request.FILES, instance=category)
+         if edit_category_form.is_valid():
+            edit_category_form.save()
+            messages.success(request, f'Category change successful')
+            return redirect('users:categories', slug=slug)
+         else:
+            messages.error(request, 'An error occured!')
+            return redirect('users:categories', slug=slug)
+      else:
+         edit_category_form = AddCategoryForm(instance=category)
+      context = {
+         'category': category,  
+         'edit_category_form': edit_category_form
+      }
+      return render(request, 'pen_admin/edit_category.html', context)
+
+@login_required
+def delete_category(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      category = PostCategory.objects.get(id=id)
+      category.delete()
+      messages.success(request, 'Category deleted!')
+      return redirect('users:categories', slug=slug)

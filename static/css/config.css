@@ -743,6 +743,29 @@ input[type="number"] {
   object-fit: cover;
 }
 
+.avatar-group {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.avatar-group>li {
+  position: relative;
+}
+
+.avatar-group>li:not(:last-child) {
+  margin-right: -0.8rem;
+}
+
+.avatar-group .avatar-img {
+  border: 2px solid #fff;
+}
+
+.avatar .avatar-name {
+  margin-left: 7px;
+}
+
 .avatar-xs {
   height: 2.1875rem;
   width: 2.1875rem;

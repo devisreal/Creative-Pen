@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Single Category
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<header class="my-shadow border-bottom" style="background-image: url(../../../static/img/doodles.webp);">
+   <div class="container-fluid py-3" style="backdrop-filter: blur(2px) !important;">
+      <div class="row">
+         <div class="col-md-6 d-grid align-content-center p-0">
+            <div class="p-4 p-md-5">
+               <h5 class="text-3xl">
+                  Categories
+               </h5>
+               <p class="font-normal ">
+                  Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error
+                  eius quo, officiis
+                  non maxime quos reiciendis perferendis doloremque maiores!
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+{% endblock %}

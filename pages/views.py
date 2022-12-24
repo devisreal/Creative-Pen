@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import ContactDetail, Subscriber
 from django.contrib import messages
 from account.models import User
+from blog.models import PostCategory
 
 
 def home(request):
@@ -29,6 +30,13 @@ def latest(request):
 def categories(request):
    context = {}
    return render(request, 'pages/categories.html', context)
+
+def single_category(request, slug):
+   category =  PostCategory.objects.get(slug=slug)
+   context = {
+      'category': category
+   }
+   return render(request, 'pages/single_category.html', context)
 
 def about(request):
    context = {}
