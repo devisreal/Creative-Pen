@@ -25,37 +25,17 @@
                Categories
             </h5>
             <hr>
-            <ul class="nav flex-column text-md">
+            <ul class="nav flex-column text-md">               
+               {% for category in footer_categories %}
+                  
                <li class="nav-item mb-2">
-                  <a href="{% url 'home' %}" class="nav-link p-0 footer-link">
+                  <a href="{% url 'category' category.slug %}" class="nav-link p-0 footer-link text-capitalize">
                      <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     Home
+                     {{category.name}}
                   </a>
                </li>
-               <li class="nav-item mb-2">
-                  <a href="{% url 'about' %}" class="nav-link p-0 footer-link">
-                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     About
-                  </a>
-               </li>
-               <li class="nav-item mb-2">
-                  <a href="{% url 'contact' %}" class="nav-link p-0 footer-link">
-                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     Contact
-                  </a>
-               </li>
-               <li class="nav-item mb-2">
-                  <a href="{% url 'latest_posts' %}" class="nav-link p-0 footer-link">
-                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     News
-                  </a>
-               </li>
-               <li class="nav-item mb-2">
-                  <a href="{% url 'categories' %}" class="nav-link p-0 footer-link">
-                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     Categories
-                  </a>
-               </li>
+               
+               {% endfor %}
             </ul>
          </div>
 

@@ -8,7 +8,7 @@ def create_post(request):
    if not request.user.is_author:
       messages.warning(request, 'You cannot perform that action')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
-   else:
+   else:      
       if request.method == "POST":
          create_post_form = CreatePostForm(request.POST, request.FILES)
          if create_post_form.is_valid():
@@ -22,6 +22,6 @@ def create_post(request):
       else:
          create_post_form = CreatePostForm()
       context = {
-         'create_post_form': create_post_form
+         'create_post_form': create_post_form,         
       }
       return render(request, 'blog/create_post.html', context)

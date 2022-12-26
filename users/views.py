@@ -10,6 +10,7 @@ from datetime import datetime
 
 @login_required
 def dashboard(request, slug):     
+   
    context = {}
    return render(request, 'users/dashboard.html', context)
 
@@ -28,8 +29,10 @@ def request_author_access(request, slug, username):
       return redirect('users:dashboard', slug=slug)
 
 @login_required
-def user_profile(request, slug):
-   context = {}
+def user_profile(request, slug):   
+   context = {
+
+   }
    return render(request, 'users/profile.html', context)
 
 

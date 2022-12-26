@@ -7,11 +7,11 @@ from blog.models import PostCategory
 
 def home(request):
    authors = User.objects.filter(is_author=True)
-   num_visits = request.session.get('num_visits', 0)
-   request.session['num_visits'] = num_visits + 1
+   # num_visits = request.session.get('num_visits', 0)
+   # request.session['num_visits'] = num_visits + 1   
    context = {
       'authors': authors,
-      'num_visits': num_visits
+      # 'num_visits': num_visits      
    }
    return render(request, 'pages/home.html', context)
 
@@ -23,26 +23,27 @@ def footer(request):
       messages.success(request, 'Thank you for subscribing! 👍')
       return redirect(request.META.get('HTTP_REFERER'))
 
-def latest(request):
+def latest(request):   
    context = {}
    return render(request, 'pages/latest_posts.html', context)
 
-def categories(request):
-   context = {}
+def categories(request):   
+   context = { }
    return render(request, 'pages/categories.html', context)
 
 def single_category(request, slug):
-   category =  PostCategory.objects.get(slug=slug)
+   category =  PostCategory.objects.get(slug=slug)   
    context = {
-      'category': category
+      'category': category,      
    }
    return render(request, 'pages/single_category.html', context)
 
 def about(request):
-   context = {}
+   
+   context = { }
    return render(request, 'pages/about.html', context)
 
-def contact(request):
+def contact(request):   
    if request.method == 'POST':
       name = request.POST['name']
       subject = request.POST['subject']
@@ -56,5 +57,5 @@ def contact(request):
          message=message
       )
       messages.success(request, 'Your message has been sent!')
-   context = {}
+   context = { }
    return render(request, 'pages/contact.html', context)
