@@ -125,6 +125,46 @@ h1 {
    font-size: calc(1.375rem + 1.5vw);
 }
 
+.text-bg-primary {
+  color: #fff !important;
+  background-color: RGBA(33, 99, 232, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-secondary {
+  color: #fff !important;
+  background-color: RGBA(89, 93, 105, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-success {
+  color: #fff !important;
+  background-color: RGBA(12, 188, 135, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-info {
+  color: #fff !important;
+  background-color: RGBA(79, 158, 248, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-warning {
+  color: #000 !important;
+  background-color: RGBA(247, 195, 46, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-danger {
+  color: #fff !important;
+  background-color: RGBA(214, 41, 62, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-light {
+  color: #000 !important;
+  background-color: RGBA(247, 248, 249, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-dark {
+  color: #fff !important;
+  background-color: RGBA(25, 26, 31, var(--bs-bg-opacity, 1)) !important;
+}
+
 @media (min-width: 1200px) {
 
    .h1,

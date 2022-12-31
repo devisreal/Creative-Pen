@@ -59,3 +59,20 @@ def contact(request):
       messages.success(request, 'Your message has been sent!')
    context = { }
    return render(request, 'pages/contact.html', context)
+
+
+def search_posts(request):
+   if 'q' in request.GET:
+      querystring = request.GET['q']      
+      if querystring:                  
+            context = {
+               'querystring': querystring               
+            }
+            return render(request, 'pages/post_results.html', context)         
+      else:
+         messages.error(request, 'Please enter a search item!')
+         return redirect(request.META.get("HTTP_REFERER"))    
+      
+   else:      
+      messages.error(request, 'Please enter a search item!')
+      return render(request,'pages/post_results.html')      

@@ -237,7 +237,7 @@ def subscribers(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      subscribers = Subscriber.objects.all()
+      subscribers = Subscriber.objects.all().order_by('-date_subscribed')
       context = {
          'subscribers': subscribers
       }

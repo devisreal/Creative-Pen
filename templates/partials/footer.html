@@ -19,13 +19,14 @@
             </small>
          </div>
 
+         <!-- * Categories -->
          <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-2 offset-md-1 mb-3 mb-md-0">
             <h5>
                <i class="iconsax" style="--Iconsax-Size: 22px;--Iconsax-Color: #333;" icon-name="hashtag-down"></i>
                Categories
             </h5>
             <hr>
-            <ul class="nav flex-column text-md">               
+            <!-- <ul class="nav flex-column text-md">               
                {% for category in footer_categories %}
                   
                <li class="nav-item mb-2">
@@ -35,6 +36,16 @@
                   </a>
                </li>
                
+               {% endfor %}
+            </ul> -->
+
+            <ul class="list-inline">
+               {% for category in footer_categories %}
+               <li class="list-inline-item mb-1">
+                  <a href="{% url 'category' category.slug %}" class="btn btn-sm btn-{{category.color}}-soft">
+                     {{category.name}}
+                  </a>
+               </li>
                {% endfor %}
             </ul>
          </div>
@@ -63,19 +74,28 @@
                      <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
                      Contact
                   </a>
-               </li>
-               <li class="nav-item mb-2">
-                  <a href="{% url 'latest_posts' %}" class="nav-link p-0 footer-link">
-                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
-                     News
-                  </a>
-               </li>
+               </li>               
                <li class="nav-item mb-2">
                   <a href="{% url 'categories' %}" class="nav-link p-0 footer-link">
                      <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
                      Categories
                   </a>
                </li>
+               {% if not request.user.is_authenticated %}                  
+               <li class="nav-item mb-2">
+                  <a href="{% url 'login' %}" class="nav-link p-0 footer-link">
+                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
+                     Sign In
+                  </a>
+               </li>
+               {% else %}
+               <li class="nav-item mb-2">
+                  <a href="{% url 'logout' %}" class="nav-link p-0 footer-link">
+                     <i class="iconsax me-1" style="--Iconsax-Size: 16px;" icon-name="thick-arrow-right"></i>
+                     Sign out
+                  </a>
+               </li>
+               {% endif %}
             </ul>
          </div>
 
@@ -106,22 +126,22 @@
          </p>
          <ul class="list-unstyled d-flex">
             <li class="ms-md-3">
-               <a class="link-dark" href="#">
+               <a class="link-dark" target="_blank" href="https://twitter.com/">
                   <i class='bx bxl-twitter fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
-               <a class="link-dark" href="#">
+               <a class="link-dark" target="_blank" href="https://facebook.com/">
                   <i class='bx bxl-facebook fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
-               <a class="link-dark" href="#">
+               <a class="link-dark" target="_blank" href="https://instagram.com/">
                   <i class='bx bxl-instagram-alt fs-5 text-blue'></i>
                </a>
             </li>
             <li class="ms-3">
-               <a class="link-dark" href="#">
+               <a class="link-dark" target="_blank" href="https://vk.com/">
                   <i class='bx bxl-vk fs-5 text-blue'></i>
                </a>
             </li>

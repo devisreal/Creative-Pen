@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Post Results
+{% endblock title %}
+{% block styles %}
+<style>
+   
+</style>
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<main>
+   <section class="pt-2">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-9 mx-auto text-center py-5">
+               <span class="font-outfit">Search results for</span>
+               <h2 class="display-6">
+                  '{{querystring}}'
+               </h2>
+               <span class="font-outfit">25 results found</span>
+               <!-- Search -->
+               <div class="row">
+                  <div class="col-sm-8 col-md-6 col-lg-5 mx-auto">
+                     <form class="input-group mt-4" action="{% url 'search' %}">
+                        <input class="form-control  border-blue" type="text" placeholder="Search"
+                           aria-label="Search" name="q" value={{querystring}}>
+                        <button class="btn btn-blue m-0" type="submit">
+                           <span class="d-none d-md-block">Search</span>
+                           <i class="d-block d-md-none fas fa-search"></i></button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- =======================
+Inner intro END -->
+
+   <!-- =======================
+Main content START -->
+   <section class="position-relative pt-0">
+      <div class="container">
+         <div class="row">
+            <!-- Main Post START -->
+            <div class="col-lg-9 mx-auto">
+               <!-- Card item START -->
+               <div class="card border rounded-3 up-hover p-4 mb-4">
+                  <div class="row g-3">
+                     <div class="col-sm-9">
+                        <!-- Categories -->
+                        <a href="#" class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium">
+                           <i class="fa-solid fa-layer-group me-2 "></i>
+                           Marketing
+                        </a>
+                        <!-- Title -->
+                        <h3 class="card-title">
+                           <a href="post-single-2.html" class="btn-link text-reset stretched-link">
+                              7 common mistakes everyone makes while traveling</a>
+                        </h3>
+                        <!-- Card info -->
+                        <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                           <li class="nav-item">
+                              <div class="nav-link">
+                                 <div class="d-flex align-items-center position-relative">
+                                    <div class="avatar avatar-xs">
+                                       <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                          alt="avatar">
+                                    </div>
+                                    <span class="ms-3">by <a href="#"
+                                          class="stretched-link text-reset btn-link">Samuel</a></span>
+                                 </div>
+                              </div>
+                           </li>
+                           <li class="nav-item">Jan 22, 2022</li>
+                        </ul>
+                     </div>
+                     <!-- Image -->
+                     <div class="col-sm-3">
+                        <img class="rounded-3 img-fluid" src="{% static 'img/01.jpg' %}" alt="Card image">
+                     </div>
+                  </div>
+               </div>
+               <!-- Card item END -->
+
+               <!-- Load more -->
+               <!-- <button type="button" class="btn btn-primary-soft w-100">Load more post <i
+                     class="bi bi-arrow-down-circle ms-2 align-middle"></i></button> -->
+
+            </div>
+            <!-- Main Post END -->
+         </div> <!-- Row end -->
+      </div>
+   </section>
+   <!-- =======================
+Main content END -->
+
+</main>
+
+
+{% endblock %}

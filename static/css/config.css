@@ -80,6 +80,7 @@ td {
   background-color: var(--gray-200) !important;
 }
 
+
 /* ! Dropdown */
 .dropdown-item:focus,
 .dropdown-item:hover {
@@ -90,6 +91,11 @@ td {
 /* ! Text Colors */
 .text-blue {
   color: var(--color-blue) !important;
+}
+
+.text-bg-blue {
+  color: #fff !important;
+  background-color: rgb(35, 78, 112);
 }
 
 .text-red {
@@ -335,6 +341,87 @@ td {
 .pagination-bordered .page-link {
   border: transparent;
   border-radius: 0.25rem;
+}
+
+/* ! Width and Height */
+.h-20 {
+  height: 20px !important;
+}
+
+.h-200 {
+  height: 200px !important;
+}
+
+.h-300 {
+  height: 300px !important;
+}
+
+.h-350 {
+  height: 350px !important;
+}
+
+.h-400 {
+  height: 400px !important;
+}
+
+.h-500 {
+  height: 500px !important;
+}
+
+.h-540 {
+  height: 540px !important;
+}
+
+.h-560 {
+  height: 560px !important;
+}
+
+.h-600 {
+  height: 600px !important;
+}
+
+.h-700 {
+  height: 700px !important;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.w-20 {
+  width: 20px !important;
+}
+
+.w-30 {
+  width: 30px !important;
+}
+
+.w-40 {
+  width: 40px !important;
+}
+
+.w-50 {
+  width: 50px !important;
+}
+
+.w-60 {
+  width: 60px !important;
+}
+
+.w-70 {
+  width: 70px !important;
+}
+
+.w-80 {
+  width: 80px !important;
+}
+
+.w-90 {
+  width: 90px !important;
+}
+
+.w-100 {
+  width: 100% !important;
 }
 
 /* ! Font Awesome Styles */
@@ -610,6 +697,8 @@ input[type="number"] {
   font-size: 2.25rem !important;
 }
 
+
+
 /* ! Font Weights */
 .font-thin {
   font-weight: 100 !important;
@@ -871,7 +960,7 @@ input[type="number"] {
   border-color: var(--color-blue);
   color: #212529;
   background-color: #fff;
-  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;  
+  box-shadow: 0 0 0 1.5px rgba(84, 89, 66, 0.3) !important;
 }
 
 .form-label text-black,
@@ -915,7 +1004,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 #navbar {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .active-nav {
@@ -1096,4 +1185,101 @@ body#body::-webkit-scrollbar-thumb:hover {
   padding: 8px 20px;
   position: relative;
   color: #000;
+}
+
+.nav-search .dropdown-menu {
+  top: 120%;
+  visibility: hidden;
+  opacity: 0;
+  display: block;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  width: 300px;
+  left: auto;
+  right: 0;
+}
+
+.nav-search .dropdown-menu.show {
+  top: 100%;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 575.98px) {
+  .nav-search .dropdown-menu {
+    width: 100%;
+  }
+}
+
+.nav.nav-divider a:not(.dropdown-item) {
+  color: inherit;
+}
+
+.nav.nav-divider .nav-item+.nav-item:before {
+  content: "•";
+  color: inherit;
+  padding-left: 0.65rem;
+  padding-right: 0.75rem;
+  opacity: 0.8;
+}
+
+.nav.nav-divider .nav-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nav.nav-divider .nav-link {
+  padding: 0;
+  color: inherit;
+}
+
+.up-hover {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.up-hover:hover {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+.btn-link {
+  --bs-btn-font-weight: 500;
+  --bs-btn-color: var(--bs-link-color);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: var(--bs-link-hover-color);
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: var(--bs-link-hover-color);
+  --bs-btn-active-border-color: transparent;
+  --bs-btn-disabled-color: #d0d4d9;
+  --bs-btn-disabled-border-color: transparent;
+  --bs-btn-box-shadow: none;
+  --bs-btn-focus-shadow-rgb: 66, 122, 235;
+  text-decoration: none;
+}
+
+.btn-link:focus {
+  color: var(--bs-btn-color);
+}
+
+.btn-link:hover {
+  color: var(--bs-btn-hover-color);
+}
+
+.btn-link {
+  padding-bottom: 0px;
+  background: -webkit-gradient(linear, left top, right top, from(currentColor), to(currentColor));
+  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
+  background-size: 0px 6%;
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  font-weight: inherit;
+  padding: 0;
+}
+
+.btn-link:hover {
+  background-size: 100% 6%;
 }

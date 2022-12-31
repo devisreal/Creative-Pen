@@ -1,31 +1,115 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Single Category
+Category - {{category.name}}
 {% endblock title %}
 {% block styles %}
+<style>
+   .bg-dark-overlay-4 {
+      position: relative;
+      z-index: 99;
+   }
+
+   .bg-dark-overlay-4:before {
+      content: " ";
+      background: #000;
+      opacity: 0.4;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+   }
+
+   .card-img-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: var(--bs-card-img-overlay-padding);
+      border-radius: var(--bs-card-inner-border-radius);
+   }
+
+   .card .card-img-overlay {
+      z-index: 2;
+   }
+
+   .card-bg-scale::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: inherit;
+      -webkit-transition: all 1s !important;
+      transition: all 1s !important;
+      z-index: -2;
+   }
+
+   .card-bg-scale:hover::after {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+      -webkit-transition: all 1s !important;
+      transition: all 1s !important;
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
 
-<header class="my-shadow border-bottom" style="background-image: url(../../../static/img/doodles.webp);">
-   <div class="container-fluid py-3" style="backdrop-filter: blur(2px) !important;">
+<section class="">
+   <div class="">
       <div class="row">
-         <div class="col-md-6 d-grid align-content-center p-0">
-            <div class="p-4 p-md-5">
-               <h5 class="text-3xl">
-                  Categories
-               </h5>
-               <p class="font-normal ">
-                  Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error
-                  eius quo, officiis
-                  non maxime quos reiciendis perferendis doloremque maiores!
-               </p>
+         <div class="col-12">
+            <div 
+               class="card bg-dark-overlay-4 overflow-hidden card-bg-scale h-350 text-center rounded-0 border-0"
+               {% if category.category_image %}
+               style="
+                  background-position: center left; 
+                  background-size: cover; 
+                  background-image: url('{{category.category_image.url}}');
+               "                  
+               {% else %}
+                  style="
+                  background-position: center left; 
+                  background-size: cover; 
+                  background-image: url('{% static "img/user/bkg_placeholder1.jpg" %}');
+               "
+               {% endif %}
+            >
+               <!-- Card Image overlay -->
+               <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+                  <div class="w-100 my-auto">
+                     <p class="text-white mb-3">
+                        Browsing category:
+                     </p>
+                     <h1 class="text-white h5">
+                        <span 
+                           {% if category.color %}
+                              class="badge text-bg-{{category.color}} mb-2 font-medium text-capitalize"
+                           {% else %}                              
+                              class="badge text-bg-dark mb-2 font-medium text-capitalize"
+                           {% endif %}
+                        >
+                           <i class="fa-solid fa-layer-group me-2 "></i>
+                           {{category.name}}
+                        </span>
+                     </h1>
+                     <div class="text-center position-relative">
+                        <span class="badge text-bg-light text-sm font-outfit font-medium">14 posts</span>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
    </div>
-</header>
+</section>
 
 {% endblock %}
