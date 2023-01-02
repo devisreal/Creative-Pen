@@ -1283,3 +1283,15 @@ body#body::-webkit-scrollbar-thumb:hover {
 .btn-link:hover {
   background-size: 100% 6%;
 }
+
+.nav-pill-blue-soft .nav-link {
+  background-color: rgba(35, 78, 112, 0.1);
+  color: #191a1f;
+  border: none;
+}
+
+.nav-pill-blue-soft .nav-link.active,
+.nav-pill-blue-soft .show>.nav-link {
+  color: #fff;
+  background-color: rgba(35, 78, 112);
+}

@@ -5,101 +5,243 @@ Post Results
 {% endblock title %}
 {% block styles %}
 <style>
-   
+   .author-link {
+      color: #333;
+      text-decoration: none;
+   }
+
+   .author-link:hover {
+      color: #234e70;
+   }
+
+   .reader-link {
+      color: #333;
+      text-decoration: none;
+   }
+
+   .reader-link:hover {
+      color: #000;
+   }
 </style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
 
-<main>
-   <section class="pt-2">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-9 mx-auto text-center py-5">
-               <span class="font-outfit">Search results for</span>
-               <h2 class="display-6">
-                  '{{querystring}}'
-               </h2>
-               <span class="font-outfit">25 results found</span>
-               <!-- Search -->
-               <div class="row">
-                  <div class="col-sm-8 col-md-6 col-lg-5 mx-auto">
-                     <form class="input-group mt-4" action="{% url 'search' %}">
-                        <input class="form-control  border-blue" type="text" placeholder="Search"
-                           aria-label="Search" name="q" value={{querystring}}>
-                        <button class="btn btn-blue m-0" type="submit">
-                           <span class="d-none d-md-block">Search</span>
-                           <i class="d-block d-md-none fas fa-search"></i></button>
-                     </form>
-                  </div>
+<section class="">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-9 mx-auto text-center py-5">
+            <span class="font-outfit">Search results for</span>
+            <h2 class="display-6">
+               '{{querystring}}'
+            </h2>
+            <span class="font-outfit">25 results found</span>
+            <div class="row">
+               <div class="col-sm-8 col-md-6 col-lg-5 mx-auto">
+                  <form class="input-group mt-4" action="{% url 'search' %}">
+                     <input class="form-control  border-blue" type="text" placeholder="Search" aria-label="Search"
+                        name="q" value={{querystring}}>
+                     <button class="btn btn-blue m-0" type="submit">
+                        <span class="d-none d-md-block">Search</span>
+                        <i class="d-block d-md-none fas fa-search"></i></button>
+                  </form>
                </div>
             </div>
          </div>
       </div>
-   </section>
-   <!-- =======================
-Inner intro END -->
+   </div>
+</section>
 
-   <!-- =======================
-Main content START -->
-   <section class="position-relative pt-0">
-      <div class="container">
-         <div class="row">
-            <!-- Main Post START -->
-            <div class="col-lg-9 mx-auto">
-               <!-- Card item START -->
-               <div class="card border rounded-3 up-hover p-4 mb-4">
-                  <div class="row g-3">
-                     <div class="col-sm-9">
-                        <!-- Categories -->
-                        <a href="#" class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium">
-                           <i class="fa-solid fa-layer-group me-2 "></i>
-                           Marketing
-                        </a>
-                        <!-- Title -->
-                        <h3 class="card-title">
-                           <a href="post-single-2.html" class="btn-link text-reset stretched-link">
-                              7 common mistakes everyone makes while traveling</a>
-                        </h3>
-                        <!-- Card info -->
-                        <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+<section class="pt-0 pb-4">
+   <div class="container">
+      <div class="row g-4">
+         <div class="col-12">
+
+            <div class="card border-0">
+               <div class="card-header bg-white border-bottom p-2">
+                  <div class="row g-3 align-items-center justify-content-between">
+                     <div class="col-md-6"></div>
+                     <div class="col-md-6">
+                        <ul class="list-inline mb-0 nav nav-pills nav-pill-blue-soft border-0 justify-content-end"
+                           id="pills-tab" role="tablist">
+
                            <li class="nav-item">
-                              <div class="nav-link">
-                                 <div class="d-flex align-items-center position-relative">
-                                    <div class="avatar avatar-xs">
-                                       <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
-                                          alt="avatar">
-                                    </div>
-                                    <span class="ms-3">by <a href="#"
-                                          class="stretched-link text-reset btn-link">Samuel</a></span>
-                                 </div>
-                              </div>
+                              <a href="#posts-tab" class="nav-link text-md mb-0 me-2 active" data-bs-toggle="tab">
+                                 <i class="fa-solid fa-fw fa-file-lines"></i>
+                                 Posts
+                              </a>
                            </li>
-                           <li class="nav-item">Jan 22, 2022</li>
+
+                           <li class="nav-item">
+                              <a href="#authors-tab" class="nav-link text-md me-2 mb-0 inline" data-bs-toggle="tab">
+                                 <i class="fa-solid fa-fw fa-feather"></i>
+                                 Authors
+                              </a>
+                           </li>
+
+                           <li class="nav-item">
+                              <a href="#readers-tab" class="nav-link text-md mb-0" data-bs-toggle="tab">
+                                 <i class="fa-solid fa-fw fa-book-open-reader"></i>
+                                 Readers
+                              </a>
+                           </li>
                         </ul>
-                     </div>
-                     <!-- Image -->
-                     <div class="col-sm-3">
-                        <img class="rounded-3 img-fluid" src="{% static 'img/01.jpg' %}" alt="Card image">
                      </div>
                   </div>
                </div>
-               <!-- Card item END -->
 
-               <!-- Load more -->
-               <!-- <button type="button" class="btn btn-primary-soft w-100">Load more post <i
-                     class="bi bi-arrow-down-circle ms-2 align-middle"></i></button> -->
+               <div class="card-body pb-0">
 
+                  <div class="tab-content py-0 my-0 pt-2">
+
+                     <div class="tab-pane fade show active" id="posts-tab">
+                        <article class="position-relative">
+
+                           <div class="row">
+                              <div class="col-12">
+                                 <div class="card border rounded-lg p-4 mb-4">
+                                    <div class="row g-3">
+                                       <div class="col-lg-5">
+                                          <!-- Categories -->
+                                          <a href="single_category.html"
+                                             class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium">
+                                             <i class="fa-solid fa-layer-group me-2 "></i>
+                                             Marketing
+                                          </a>
+                                          <!-- Title -->
+                                          <h2 class="card-title">
+                                             <a href="post-single.html" class="btn-link text-reset stretched-link">7
+                                                common mistakes everyone
+                                                makes while traveling</a>
+                                          </h2>
+                                          <!-- Author info -->
+                                          <div class="d-flex align-items-center position-relative mt-3">
+                                             <div class="avatar me-2">
+                                                <img class="avatar-img rounded-circle"
+                                                   src="{% static 'img/avatar.jpg' %}" alt="avatar">
+                                             </div>
+                                             <div>
+                                                <h6 class="mb-1"><a href="#"
+                                                      class="stretched-link text-reset btn-link">Lori Ferguson</a>
+                                                </h6>
+                                                <ul class="nav align-items-center small">
+                                                   <li class="nav-item me-3">Mar 07, 2022</li>
+                                                   <li class="nav-item"><i class="far fa-clock me-1"></i>5 min read
+                                                   </li>
+                                                </ul>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- Detail -->
+                                       <div class="col-md-6 col-lg-4 h-fit align-self-center">
+                                          <p class="">
+                                             For who thoroughly her boy estimating conviction. Removed demands
+                                             expense account in outward
+                                             tedious do. Particular way thoroughly unaffected projection favorable
+                                             Mrs can be projecting own.
+                                          </p>
+                                       </div>
+                                       <!-- Image -->
+                                       <div class="col-md-6 col-lg-3">
+                                          <img class="rounded-3 img-fluid" src="{% static 'img/4by3.jpg' %}"
+                                             alt="Card image">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </article>
+                     </div>
+
+                     <div class="tab-pane fade" id="authors-tab">
+                        <div class="row g-4">
+
+                           <div class="col-sm-10 col-md-6 col-xl-4 mx-sm-auto mx-md-0">
+                              <div class="card border p-2 position-relative">
+                                 <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                       <div class="avatar avatar-xl flex-shrink-0">
+                                          <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                             alt="">
+                                       </div>
+                                    </div>
+
+                                    <div class="text-center mt-2 d-block">
+                                       <h4 class="mb-0 p-0">
+                                          <a href="" class="author-link">
+                                             Tunji Gbeborun
+                                          </a>
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon"
+                                             viewBox="0 0 24 24">
+                                             <path
+                                                d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
+                                             </path>
+                                          </svg>
+                                       </h4>
+                                       <small class="">Editor at Creative Pen</small>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-3">
+                                       <div class="d-flex text-start align-items-center mt-3">
+                                          <div
+                                             class="icon-md bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 640 512">
+                                                <path
+                                                   d="M184 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3V245.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5V416c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V389.2C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112h32c24 0 46.2 7.5 64.4 20.3zM448 416V394.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176h32c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2V416c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32zM568 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm8 157.7v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 160c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64zM240 304c0 16.2 6 31 16 42.3V261.7c-10 11.3-16 26.1-16 42.3zm144-42.3v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2V448c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V405.2c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112h32c61.9 0 112 50.1 112 112z" />
+                                             </svg>
+                                          </div>
+                                          <div class="ms-2">
+                                             <h5 class="mb-0">5,354</h5>
+                                             <h6 class="mb-0 fw-light">Followers</h6>
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex text-start align-items-center mt-3">
+                                          <div
+                                             class="icon-md bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 384 512">
+                                                <path
+                                                   d="M365.3 93.38l-74.63-74.64C278.6 6.742 262.3 0 245.4 0L64-.0001c-35.35 0-64 28.65-64 64l.0065 384c0 35.34 28.65 64 64 64H320c35.2 0 64-28.8 64-64V138.6C384 121.7 377.3 105.4 365.3 93.38zM336 448c0 8.836-7.164 16-16 16H64.02c-8.838 0-16-7.164-16-16L48 64.13c0-8.836 7.164-16 16-16h160L224 128c0 17.67 14.33 32 32 32h79.1V448zM96 280C96 293.3 106.8 304 120 304h144C277.3 304 288 293.3 288 280S277.3 256 264 256h-144C106.8 256 96 266.8 96 280zM264 352h-144C106.8 352 96 362.8 96 376s10.75 24 24 24h144c13.25 0 24-10.75 24-24S277.3 352 264 352z" />
+                                             </svg>
+                                          </div>
+                                          <div class="ms-2">
+                                             <h5 class="mb-0">846</h5>
+                                             <h6 class="mb-0 fw-light">Total Blogs</h6>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <a href="" class="btn link-dark btn-sm position-absolute top-0 end-0">
+                                    <span data-bs-toggle="tooltip" data-bs-title="Author Details"
+                                       data-bs-placement="bottom"
+                                       class="d-flex align-items-center justify-content-center">
+                                       <i class='bx bx-link-external text-lg'></i>
+                                    </span>
+                                 </a>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+
+                     <div class="tab-pane fade" id="readers-tab">
+                        <div class="row g-4">
+                           <h1>Rhird Tab</h1>
+                        </div>
+                     </div>
+
+                  </div>
+
+               </div>
             </div>
-            <!-- Main Post END -->
-         </div> <!-- Row end -->
+
+         </div>
       </div>
-   </section>
-   <!-- =======================
-Main content END -->
-
-</main>
-
+   </div>
+</section>
 
 {% endblock %}

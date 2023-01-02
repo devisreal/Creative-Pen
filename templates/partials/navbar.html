@@ -273,6 +273,13 @@
    </div>
    <div class="offcanvas-body">
       <div class="" id="offNav">
+         <form class="input-group mb-2" action="{% url 'search' %}">
+            <input class="form-control  border-blue" type="text" placeholder="Search" aria-label="Search" name="q"
+               value={{querystring}}>
+            <button class="btn btn-blue m-0" type="submit">
+               <span class="d-none d-md-block">Search</span>
+               <i class="d-block d-md-none fas fa-search"></i></button>
+         </form>
          <ul class="mx-auto ms-lg-auto me-lg-0 list-unstyled">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
