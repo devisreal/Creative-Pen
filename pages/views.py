@@ -28,7 +28,10 @@ def latest(request):
    return render(request, 'pages/latest_posts.html', context)
 
 def categories(request):   
-   context = { }
+   sidebar_categories = PostCategory.objects.all()[:5]
+   context = { 
+      'sidebar_categories': sidebar_categories
+   }
    return render(request, 'pages/categories.html', context)
 
 def single_category(request, slug):

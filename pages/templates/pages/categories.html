@@ -9,23 +9,107 @@ Categories
 {% include 'partials/messages.html' %}
 
 
-<header class="my-shadow border-bottom"
-   style="background-image: url(../../../static/img/doodles.webp);">
-   <div class="container-fluid py-3" style="backdrop-filter: blur(2px) !important;">
+<section class="" style="background-image: url(../../../static/img/doodles.webp);background-attachment: fixed;">
+   <div class="container-fluid " style="backdrop-filter: blur(2px) !important;">
       <div class="row">
-         <div class="col-md-6 d-grid align-content-center p-0">
-            <div class="p-4 p-md-5">
-               <h5 class="text-3xl">
-                  Categories                  
-               </h5>
-               <p class="font-normal ">
-                  Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error eius quo, officiis
-                  non maxime quos reiciendis perferendis doloremque maiores!
-               </p>
+         <div class="col-12 mx-auto d-grid align-content-center py-5 border-bottom">
+            <div class="py-4 text-center rounded-3">
+               <h1>Categories</h1>
+               <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+                  <ol class="breadcrumb breadcrumb-dots m-0 text-md">
+                     <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}" class="link-secondary text-decoration-none">
+                           <i class="fa-solid fa-house-chimney fa-fw"></i> Home
+                        </a>
+                     </li>
+                     <li class="breadcrumb-item active text-black">All categories</li>
+                  </ol>
+               </nav>
             </div>
          </div>
       </div>
    </div>
-</header>
+</section>
+
+
+
+<section class="position-relative pt-0 mt-5">
+   <div class="container" data-sticky-container>
+      <div class="row">
+         <!-- Main Post START -->
+         <div class="col-lg-9">
+            <!-- Card item START -->
+            <div class="card mb-4 p-3 border-0">
+               <div class="row">
+                  <div class="col-md-5">
+                     <img class="rounded-3 img-fluid" src="{% static 'img/4by3.jpg' %}" alt="">
+                  </div>
+                  <div class="col-md-7 mt-3 mt-md-0">
+                     <a href="#" class="badge text-bg-danger mb-2 text-decoration-none">
+                        <i class="fa-solid fa-layer-group me-2"></i>Lifestyle
+                     </a>
+                     <h3>
+                        <a href="post-single-2.html" class="btn-link stretched-link text-reset">The pros and cons of
+                           business agency
+                        </a>
+                     </h3>
+                     <p>
+                        Pleasure and so read the was hope entire first decided the so must have as on was want up of I
+                        will rival in came this touched got a physics to travelling so all especially refinement
+                        monstrous desk
+                     </p>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center position-relative">
+                                 <div class="avatar avatar-xs">
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                       alt="avatar">
+                                 </div>
+                                 <span class="ms-3">by <a href="#"
+                                       class="stretched-link text-reset btn-link">Samuel</a></span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item">Jan 22, 2022</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <!-- Card item END -->
+         </div>
+         <!-- Main Post END -->
+
+         <!-- Sidebar START -->
+         <div class="col-lg-3 mt-5 mt-lg-0">
+            <div class="">
+               <div>
+                  <h4 class="mb-3">Trending topics</h4>
+
+                  {% for category in sidebar_categories %}
+
+                  <div 
+                     class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
+                     style="
+                        background-position: center left; 
+                        background-size: cover;
+                        background-image: url('{{category.category_image.url}}');
+                     "
+                  >
+                     <div class="bg-dark-overlay-4 p-3">
+                        <a href="{% url 'category' category.slug %}" class="stretched-link btn-link font-outfit font-medium text-white h5">
+                           {{category.name}}
+                        </a>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+         <!-- Sidebar END -->
+      </div> <!-- Row end -->
+   </div>
+</section>
 
 {% endblock %}
