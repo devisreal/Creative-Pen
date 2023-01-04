@@ -585,4 +585,22 @@ Home
 
 <br><br><br><br>
 
+<div class="container text-center">
+   <div class="row gx-4">
+      {% for category in popular_categories%}
+      <div class="col">
+         <div class="card card-overlay-bottom card-img-scale" >
+            <img class="card-img" src="{{category.category_image.url}}" alt="card image" style="height: 200px; object-fit: cover;" >
+            <div class="card-img-overlay d-flex px-3 px-sm-5">
+               <h5 class="mt-auto mx-auto">
+                  <a href="{% url 'category' category.slug %}" class="stretched-link btn-link fw-bold text-white">
+                     {{category.name}}
+                  </a>
+               </h5>
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+</div>
 {% endblock content %}

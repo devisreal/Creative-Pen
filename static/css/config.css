@@ -1316,6 +1316,26 @@ body#body::-webkit-scrollbar-thumb:hover {
   z-index: -1;
 }
 
+.card {
+  --bs-card-spacer-y: 0.75rem;
+  --bs-card-spacer-x: 1.25rem;
+  --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-border-width: 0;
+  --bs-card-border-color: var(--bs-border-color);
+  --bs-card-border-radius: 0.7rem;
+  --bs-card-box-shadow: ;
+  --bs-card-inner-border-radius: 0.7rem;
+  --bs-card-cap-padding-y: 0.5rem;
+  --bs-card-cap-padding-x: 1rem;
+  --bs-card-cap-bg: #fff;
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
+  --bs-card-bg: #fff;
+  --bs-card-img-overlay-padding: 1.25rem;
+  --bs-card-group-margin: 0.9375rem;  
+}
+
 .card-img-overlay {
   position: absolute;
   top: 0;
@@ -1325,6 +1345,54 @@ body#body::-webkit-scrollbar-thumb:hover {
   padding: var(--bs-card-img-overlay-padding);
   border-radius: var(--bs-card-inner-border-radius);
 }
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  width: 100%;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: var(--bs-card-inner-border-radius);
+  border-top-right-radius: var(--bs-card-inner-border-radius);
+}
+
+.card-img,
+.card-img-bottom {
+  border-bottom-right-radius: var(--bs-card-inner-border-radius);
+  border-bottom-left-radius: var(--bs-card-inner-border-radius);
+}
+
+.card.card-overlay-bottom {
+  overflow: hidden;
+}
+
+.card.card-overlay-bottom:before {
+  content: "";
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(black));
+  background-image: linear-gradient(180deg, transparent, black);
+  z-index: 1;
+}
+
+.card-img-scale .card-img {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.card-img-scale:hover .card-img {
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
 
 .card .card-img-overlay {
   z-index: 2;
@@ -1348,4 +1416,9 @@ body#body::-webkit-scrollbar-thumb:hover {
   transform: scale(1.1);
   -webkit-transition: all 1s !important;
   transition: all 1s !important;
+}
+
+.bg-blur {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }

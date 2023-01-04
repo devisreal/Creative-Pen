@@ -9,36 +9,41 @@ Categories
 {% include 'partials/messages.html' %}
 
 
-<section class="" style="background-image: url(../../../static/img/doodles.webp);background-attachment: fixed;">
-   <div class="container-fluid " style="backdrop-filter: blur(2px) !important;">
+<section style="background-image: url(../../../static/img/doodles.webp);background-attachment: fixed;">
+   <div class="container-fluid" style="backdrop-filter: blur(2px) !important;">
       <div class="row">
-         <div class="col-12 mx-auto d-grid align-content-center py-5 border-bottom">
-            <div class="py-4 text-center rounded-3">
-               <h1>Categories</h1>
-               <nav class="d-flex justify-content-center" aria-label="breadcrumb">
-                  <ol class="breadcrumb breadcrumb-dots m-0 text-md">
-                     <li class="breadcrumb-item">
-                        <a href="{% url 'home' %}" class="link-secondary text-decoration-none">
-                           <i class="fa-solid fa-house-chimney fa-fw"></i> Home
-                        </a>
-                     </li>
-                     <li class="breadcrumb-item active text-black">All categories</li>
-                  </ol>
-               </nav>
+         <div class="col-12 mx-auto d-grid align-content-center py-5 border-bottom my-shadow-sm">
+            <div class="py-5 text-center rounded-3">
+               <h5 class="text-3xl">Categories</h5>
+               <div class="mt-2 text-md font-outfit font-medium d-flex align-items-center w-fit mx-auto">
+                  <a href="{% url 'home' %}" class="text-decoration-none hero-link d-flex align-items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" fill="#000000b3"
+                        class="d-inline-block me-1" viewBox="0 0 576 512">
+                        <path
+                           d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+                     </svg>
+                     Home
+                  </a>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-2" width="5px" height="5px" fill="#000000b3"
+                     viewBox="0 0 512 512">
+                     <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512z" />
+                  </svg>
+                  <span class="text-gray-500">
+                     All categories
+                  </span>
+               </div>
             </div>
          </div>
       </div>
    </div>
 </section>
 
-
-
-<section class="position-relative pt-0 mt-5">
+<section class="position-relative pt-4 mt-5">
    <div class="container" data-sticky-container>
       <div class="row">
-         <!-- Main Post START -->
+
          <div class="col-lg-9">
-            <!-- Card item START -->
+
             <div class="card mb-4 p-3 border-0">
                <div class="row">
                   <div class="col-md-5">
@@ -56,9 +61,9 @@ Categories
                      <p>
                         Pleasure and so read the was hope entire first decided the so must have as on was want up of I
                         will rival in came this touched got a physics to travelling so all especially refinement
-                        monstrous desk
+                        monstrous
                      </p>
-                     <!-- Card info -->
+
                      <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
                         <li class="nav-item">
                            <div class="nav-link">
@@ -77,38 +82,34 @@ Categories
                   </div>
                </div>
             </div>
-            <!-- Card item END -->
+
          </div>
-         <!-- Main Post END -->
 
-         <!-- Sidebar START -->
          <div class="col-lg-3 mt-5 mt-lg-0">
-            <div class="">
-               <div>
-                  <h4 class="mb-3">Trending topics</h4>
 
-                  {% for category in sidebar_categories %}
+            <div>
+               <h4 class="mb-3">Trending topics</h4>
 
-                  <div 
-                     class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
-                     style="
+               {% for category in popular_categories %}
+
+               <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded" style="
                         background-position: center left; 
                         background-size: cover;
                         background-image: url('{{category.category_image.url}}');
-                     "
-                  >
-                     <div class="bg-dark-overlay-4 p-3">
-                        <a href="{% url 'category' category.slug %}" class="stretched-link btn-link font-outfit font-medium text-white h5">
-                           {{category.name}}
-                        </a>
-                     </div>
+                     ">
+                  <div class="bg-dark-overlay-4 p-3">
+                     <a href="{% url 'category' category.slug %}"
+                        class="stretched-link btn-link font-outfit font-medium text-white h5">
+                        {{category.name}}
+                     </a>
                   </div>
-                  {% endfor %}
                </div>
+               {% endfor %}
             </div>
+
          </div>
-         <!-- Sidebar END -->
-      </div> <!-- Row end -->
+
+      </div>
    </div>
 </section>
 
