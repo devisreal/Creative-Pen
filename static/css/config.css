@@ -1422,3 +1422,26 @@ body#body::-webkit-scrollbar-thumb:hover {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
+
+.text-white-force *:not(.btn):not(.dropdown-item):not(.dropdown-item > *):not(.badge) {
+  color: #fff;
+}
+
+.bg-dark-overlay-5 {
+  position: relative;
+  z-index: 99;
+}
+
+.bg-dark-overlay-5:before {
+  content: " ";
+  background: #000;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}

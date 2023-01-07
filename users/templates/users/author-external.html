@@ -9,7 +9,7 @@ Author - {{author.username}}
 {% include 'partials/messages.html' %}
 
 
-<div class="author-info py-4 pt-5 px-2 bg-light text-center border-bottom">
+<div class="author-info py-4 pt-4 px-2 bg-light text-center border-bottom">
    <div class="avatar avatar-xl mb-3">
       {% if author.profile_picture %}
       <img class="avatar-img rounded-circle border-0 pointer-events-none" src="{{author.profile_picture.url}}" alt="">
@@ -18,14 +18,14 @@ Author - {{author.username}}
          alt="">
       {% endif %}
    </div>
-   <h4 class="font-semibold mb-0">Hi, I'm {{author.get_full_name|default:"Author"}}</h4>
-   <small class="d-block text-gray-500 mb-2">
+   <h3 class="font-semibold mb-1">Hi, I'm {{author.get_full_name|default:"Author"}}</h3>
+   <small class="d-block text-gray-500 mb-2 text-md">
       {{author.job_title|default:""}}
    </small>
-   <small class="bg-red py-1 px-2 rounded-pill text-white">
+   <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">
       8 Articles
    </small>
-   <p class="col-md-5 mx-auto text-gray-500 mt-4 font-light">
+   <p class="col-md-5 mx-auto text-gray-500 mt-3 font-light">
       {{author.bio|default:"..."}}
    </p>
    <ul class="list-inline author-profile-icon">
@@ -97,7 +97,74 @@ Author - {{author.username}}
    </ul>
 </div>
 
+<div class="container mt-5">
+   <div class="mt-5 pt-5">
+      <h3 class="mb-4">Latest posts from {{author.get_full_name}}</h3>
+      <div class="row gy-4" data-masonry='{"percentPosition": true }'>
+         {% for x in '1000000000' %}
 
+         <div class="col-4">
+            <div class="card border-0 ">
+               <!-- Card img -->
+               <div class="position-relative ">
+                  <img class="card-img" src="{% static 'img/4by3.jpg' %}" alt="Card image">
+                  <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                     <!-- Card overlay Top -->
+                     <div class="w-100 mb-auto d-flex justify-content-end">
+                        <div class="text-end ms-auto">
+                           <!-- Card format icon -->
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                              title="This post has video"><i class="fas fa-video"></i></div>
+                        </div>
+                     </div>
+                     <!-- Card overlay bottom -->
+                     <div class="w-100 mt-auto">
+                        <!-- Card category -->
+                        <a href="{% url 'categories' %}"
+                           class="badge text-sm text-bg-blue mb-2 text-decoration-none font-outfit font-medium">
+                           <i class="fa-solid fa-layer-group me-2"></i> Technology
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-body px-0 pt-3">
+                  <h4 class="card-title">
+                     <a href="post-single-3.html" class="btn-link text-reset fw-bold">
+                        12 worst types of business accounts you follow on Twitter
+                     </a>
+                  </h4>
+                  <p class="card-text">
+                     assistance joy. Unaffected at ye of compliment alteration to
+                  </p>
+                  <!-- Card info -->
+                  <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                     <li class="nav-item">
+                        <div class="nav-link">
+                           <div class="d-flex align-items-center position-relative">
+                              <div class="avatar avatar-xs">
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                    alt="avatar">
+                              </div>
+                              <span class="ms-3">by <a href="#"
+                                    class="stretched-link text-reset btn-link">Samuel</a></span>
+                           </div>
+                        </div>
+                     </li>
+                     <li class="nav-item">Jan 22, 2022</li>
+                     <li class="nav-item">
+                        <a href="#" class="btn-link">
+                           <i class="fa-regular fa-comments me-1"></i> 5
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+
+         {% endfor %}
+      </div>
+   </div>
+</div>
 <br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

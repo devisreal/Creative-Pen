@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Single Post
+{% endblock title %}
+{% block styles %}
+<style>
+   .dropcap {
+      font-size: 4em;
+      font-weight: bold;
+      display: block;
+      float: left;
+      margin: 0.04em 0.2em 0 0;
+      color: #191a1f;
+      line-height: 1;
+   }
+</style>
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<section class="pt-2 mb-5 pb-1">
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            <div class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-400 text-center rounded-xl"
+               style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}'); background-position:
+               center left; background-size: cover;">
+               <!-- Card Image overlay -->
+               <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+                  <div class="w-100 my-auto">
+                     <!-- Card category -->
+                     <a href="single_category.html" class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium text-sm">
+                        <i class="fa-solid fa-layer-group me-2 "></i>
+                        Marketing
+                     </a>
+                     <!-- Card title -->
+                     <h2 class="text-white display-5">10 tell-tale signs you need to get a new startup.</h2>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider text-white-force align-items-center justify-content-center">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center text-white position-relative">
+                                 <div class="avatar avatar-sm">
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                       alt="avatar">
+                                 </div>
+                                 <span class="ms-3">by <a href="#"
+                                       class="stretched-link text-reset btn-link">Louis</a></span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item">Nov 15, 2022</li>
+                        <li class="nav-item">5 min read</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+<section class="pt-0">
+   <div class="container position-relative" data-sticky-container>
+      <div class="row">
+         <!-- Main Content START -->
+         <div class="col-lg-9 mb-5">
+            <p><span class="dropcap bg-dark text-white px-2">I</span> am newspaper up its enjoyment agreeable depending.
+               Timed voice share led him to widen noisy young. At weddings believed laughing although the material does
+               the exercise of. Up attempt offered ye civilly so sitting to. She new course gets living within Elinor
+               joy. She rapturous suffering concealed. <i>Demesne far hearted suppose venture excited see had has.</i>
+               Dependent on so extremely delivered by. Yet no jokes worse her why. Bed one supposing breakfast day
+               fulfilled off depending questions. Whatever boy her exertion his extended. Ecstatic followed handsome
+               drawings entirely Mrs one yet outweigh. Of acceptance insipidity remarkably is an invitation. </p>                                
+
+            <!-- Author info START -->
+            <div class="d-flex p-2 p-md-4 my-3 bg-primary bg-opacity-10 rounded">
+               <!-- Avatar -->
+               <a href="#">
+                  <div class="avatar avatar-xxl me-2 me-md-4">
+                     <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}" alt="avatar">
+                  </div>
+               </a>
+               <!-- Info -->
+               <div>
+                  <div class="d-sm-flex align-items-center justify-content-between">
+                     <div>
+                        <h4 class="m-0">
+                           <a href="#" class="link-dark text-decoration-none">Louis Ferguson</a>
+                        </h4>
+                        <small>An editor at Blogzine</small>
+                     </div>
+                     <a href="#" class="btn btn-xs btn-primary-soft">View Articles</a>
+                  </div>
+                  <p class="my-2">Louis Ferguson is a senior editor for the blogzine and also reports on breaking news
+                     based in London. He has written about government, criminal justice, and the role of money in
+                     politics since 2015.</p>
+                  <!-- Social icons -->
+                  <ul class="nav">
+                     <li class="nav-item">
+                        <a class="nav-link ps-0 pe-2 fs-5" href="#"><i class="fab fa-facebook-square"></i></a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link px-2 fs-5" href="#"><i class="fab fa-twitter-square"></i></a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link px-2 fs-5" href="#"><i class="fab fa-linkedin"></i></a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <!-- Author info END -->
+            
+         </div>
+         <!-- Main Content END -->
+
+         <!-- Right sidebar START -->
+         <div class="col-lg-3">
+            <div data-sticky data-margin-top="80" data-sticky-for="991">
+               <!-- Categories -->
+               <div class="row g-2">
+                  <h5>Categories</h5>
+                  
+                  {% for category in popular_categories %}                     
+                  <div
+                     class="d-flex justify-content-between align-items-center bg-{{category.color}} bg-opacity-10 rounded p-2 position-relative">
+                     <h6 class="m-0 text-{{category.color}} text-capitalize">
+                        {{category.name}}
+                     </h6>
+                     <a href="{% url 'category' category.slug %}" class="font-outfit badge bg-{{category.color}} stretched-link text-decoration-none ">25</a>
+                  </div>
+                  {% endfor %}
+
+               </div>
+
+               <!-- Newsletter START -->
+               <div class="bg-light p-3 mt-5 rounded-3 text-center">
+                  <h4>Subscribe to our mailing list!</h4>
+                  <form class="mt-2" action="{% url 'footer' %}" method="POST">
+                     {% csrf_token %}
+                     <div class="mb-3">
+                        <input 
+                           type="email" 
+                           name="email" 
+                           id="email" 
+                           title="user@email.com" 
+                           class="form-control text-md" 
+                           placeholder="Email address"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                           required
+                        >
+                     </div>
+                     <button type="submit" class="btn btn-blue">Subscribe</button>                     
+                  </form>
+               </div>
+               <!-- Newsletter END -->
+            </div>
+         </div>
+         <!-- Right sidebar END -->
+      </div>
+   </div>
+</section>
+<!-- =======================
+Main END -->
+
+
+{% endblock %}

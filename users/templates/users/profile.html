@@ -126,7 +126,7 @@ My Profile ({{user.username}})
                            </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
-                           {% if request.user.is_staff %}
+                           {% if request.user.is_superuser %}
                            <li>
                               <a class="dropdown-item" target="_blank" href="/pen_admin/">
                                  <i class="iconsax me-2" icon-name="security-user"></i>
