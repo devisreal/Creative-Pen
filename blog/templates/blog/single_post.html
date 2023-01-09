@@ -7,7 +7,8 @@ Single Post
 <style>
    .dropcap {
       font-size: 4em;
-      font-weight: bold;
+      font-weight: medium;
+      font-family: "Cabin", sans-serif !important;
       display: block;
       float: left;
       margin: 0.04em 0.2em 0 0;
@@ -20,11 +21,11 @@ Single Post
 {% include 'partials/messages.html' %}
 
 
-<section class="pt-2 mb-5 pb-1">
+<section class="pt-3 mb-5 pb-1">
    <div class="container">
       <div class="row">
          <div class="col-12">
-            <div class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-400 text-center rounded-xl"
+            <div class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-350 text-center rounded-xl"
                style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}'); background-position:
                center left; background-size: cover;">
                <!-- Card Image overlay -->
@@ -163,8 +164,6 @@ Single Post
       </div>
    </div>
 </section>
-<!-- =======================
-Main END -->
 
 
 {% endblock %}

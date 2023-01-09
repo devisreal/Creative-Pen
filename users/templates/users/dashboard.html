@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Dashboard ({{request.user.username}})
+Dashboard ({{user.username}})
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -10,12 +10,12 @@ Dashboard ({{request.user.username}})
 
 
 <h1 class="p-4">Dashboard </h1>
-<h3>Welcome {{request.user.username}}</h3>
-<a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' request.user.slug %}">Edit My Profile</a>
+<h3>Welcome {{user.username}}</h3>
+<a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' user.slug %}">Edit My Profile</a>
 
-{% if not request.user.is_author %}
-   {% if not request.user.usersettings.request_author_access %}
-      <a href="{% url 'users:request_author_access' request.user.slug request.user.username %}" class="btn btn-success btn-sm">Request Author Access</a>
+{% if not user.is_author %}
+   {% if not user.usersettings.request_author_access %}
+      <a href="{% url 'users:request_author_access' user.slug user.username %}" class="btn btn-success btn-sm">Request Author Access</a>
    {% else %}
    Requested already
    {% endif %}

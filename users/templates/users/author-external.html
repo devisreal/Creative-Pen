@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Author - {{author.username}}
+Author ({{author.username}})
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -18,11 +18,22 @@ Author - {{author.username}}
          alt="">
       {% endif %}
    </div>
-   <h3 class="font-semibold mb-1">Hi, I'm {{author.get_full_name|default:"Author"}}</h3>
-   <small class="d-block text-gray-500 mb-2 text-md">
-      {{author.job_title|default:""}}
-   </small>
-   <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">
+   <h2 class="font-semibold mb-1">Hi, I'm {{author.get_full_name|default:"Author"}}</h2>   
+   <ul class="list-inline my-2">
+      <li class="list-inline-item">
+         <small class="d-block text-gray-500 text-sm">
+            <i class="fa-solid fa-user fa-sm me-1"></i>
+            {{author.job_title|default:""}}
+         </small>
+      </li>
+      <li class="list-inline-item">
+         <small class="d-block text-gray-500 text-sm">            
+            <i class="fa-solid fa-location-dot fa-sm me-1"></i>
+            {{author.city|default:""}}
+         </small>
+      </li>
+   </ul>
+   <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">            
       8 Articles
    </small>
    <p class="col-md-5 mx-auto text-gray-500 mt-3 font-light">

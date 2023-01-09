@@ -31,8 +31,8 @@ My Profile ({{user.username}})
          <!-- Cover image -->
          <div 
             class="py-5 rounded background-img" 
-            {% if request.user.background_image %}
-               style="background-image: url('{{request.user.background_image.url}}');"
+            {% if user.background_image %}
+               style="background-image: url('{{user.background_image.url}}');"
             {% else %}
                style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');"
             {% endif %}            
@@ -43,9 +43,9 @@ My Profile ({{user.username}})
                <!-- Avatar -->
                <div class="col-sm-12 col-md-auto text-center text-md-start">
                   <div class="avatar avatar-xxl mt-n5">
-                     {% if request.user.profile_picture %}
+                     {% if user.profile_picture %}
                      <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{{request.user.profile_picture.url}}" alt="">
+                        src="{{user.profile_picture.url}}" alt="">
                      {% else %}
                      <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
                         src="{% static 'img/user/custom.jpg' %}" alt="">
@@ -58,9 +58,9 @@ My Profile ({{user.username}})
                   <div>
                      <!-- ? User fullname -->
                      <h4 class="m-0 p-0">                        
-                        {{request.user.get_full_name|default:"Firstname Lastname"}}
+                        {{user.get_full_name|default:"Firstname Lastname"}}
 
-                        {% if request.user.usersettings.is_verified %}
+                        {% if user.usersettings.is_verified %}
                         <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon" viewBox="0 0 24 24">
                            <path
                               d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
@@ -69,33 +69,33 @@ My Profile ({{user.username}})
                         {% endif %}
                      </h4>
                      <small class="font-medium text-gray-500">
-                        {{request.user.get_username}}
+                        {{user.get_username}}
                      </small>
                      <ul class="list-inline text-md pt-1">
 
                         <!-- ? User Job Title -->                        
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="mail"></i>
-                           {{request.user.email}}
+                           {{user.email}}
                         </li>
 
                         <!-- ? User Job Title -->                        
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="user-1-octagon"></i>
-                           {{request.user.job_title|default:"[Job title]"}}
+                           {{user.job_title|default:"[Job title]"}}
                         </li>
 
                         <!-- ? User City -->
 
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="location"></i>
-                           {{request.user.city|default:"[City]"}}
+                           {{user.city|default:"[City]"}}
                         </li>
 
                         <!-- ? User Joined date -->
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="calendar-2"></i>
-                           Joined on {{request.user.date_joined|date:"D, dS F, Y"}}
+                           Joined on {{user.date_joined|date:"D, dS F, Y"}}
                         </li>
                      </ul>
                      <p class="m-0"></p>
@@ -126,7 +126,7 @@ My Profile ({{user.username}})
                            </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
-                           {% if request.user.is_superuser %}
+                           {% if user.is_superuser %}
                            <li>
                               <a class="dropdown-item" target="_blank" href="/pen_admin/">
                                  <i class="iconsax me-2" icon-name="security-user"></i>
@@ -137,7 +137,7 @@ My Profile ({{user.username}})
 
                            <li>
                               <a class="dropdown-item edit-icon"
-                                 href="{% url 'users:edit_profile' request.user.slug %}">
+                                 href="{% url 'users:edit_profile' user.slug %}">
                                  <i class="iconsax me-2" icon-name="user-2-edit"></i>
                                  Edit profile
                               </a>
@@ -186,7 +186,7 @@ My Profile ({{user.username}})
             <h6 class="text-center mt-3">Are you sure you want to delete your account?</h6>
          </div>
          <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
-            <a href="{% url 'users:delete_account' request.user.slug %}" class="btn btn-sm btn-red">
+            <a href="{% url 'users:delete_account' user.slug %}" class="btn btn-sm btn-red">
                Yes, I'm sure
             </a>
             <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">No, cancel</button>

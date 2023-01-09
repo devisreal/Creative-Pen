@@ -27,8 +27,7 @@ def latest(request):
    context = {}
    return render(request, 'pages/latest_posts.html', context)
 
-def categories(request):   
-   
+def categories(request):      
    context = { 
       
    }
@@ -41,8 +40,7 @@ def single_category(request, slug):
    }
    return render(request, 'pages/single_category.html', context)
 
-def about(request):
-   
+def about(request):   
    context = { }
    return render(request, 'pages/about.html', context)
 
@@ -63,7 +61,6 @@ def contact(request):
    context = { }
    return render(request, 'pages/contact.html', context)
 
-
 def search_posts(request):
    if 'q' in request.GET:
       querystring = request.GET['q']      
@@ -78,4 +75,7 @@ def search_posts(request):
       
    else:      
       messages.error(request, 'Please enter a search item!')
-      return render(request,'pages/post_results.html')      
+      return render(request,'pages/post_results.html')  
+
+def _error_page(request):
+   return render(request, 'pages/404.html')

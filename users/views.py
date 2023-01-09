@@ -9,10 +9,19 @@ from datetime import datetime
 
 
 @login_required
-def dashboard(request, slug):     
-   
-   context = {}
-   return render(request, 'users/dashboard.html', context)
+def dashboard(request, slug):
+   if slug != request.user.slug:
+      messages.error(request, "You're not allowed to access this account")
+      return redirect('users:dashboard', slug=request.user.slug)
+   try:
+      user = User.objects.get(slug=slug)
+   except User.DoesNotExist:
+      return redirect('error_page')
+   else:
+      context = {
+         'user': user
+      }
+      return render(request, 'users/dashboard.html', context)
 
 @login_required
 def request_author_access(request, slug, username):   
@@ -30,14 +39,25 @@ def request_author_access(request, slug, username):
 
 @login_required
 def user_profile(request, slug):   
+   if slug != request.user.slug:  
+      messages.error(request, "You're not allowed to access this account")    
+      return redirect('users:profile', slug=request.user.slug)
+   try:
+      user = User.objects.get(slug=slug)
+   except User.DoesNotExist:
+      return redirect('error_page')
    context = {
-
+      "user": user
    }
    return render(request, 'users/profile.html', context)
 
 
 @login_required
 def edit_profile(request, slug):
+   if slug != request.user.slug:  
+      messages.error(request, "You're not allowed to access this account")    
+      return redirect('users:edit_profile', slug=request.user.slug)
+
    if request.method == "POST":
       user_form = UserUpdateForm(request.POST or None, request.FILES or None, instance = request.user)
       social_form = UserSocialHandleForm(request.POST or None, request.FILES or None, instance = request.user.socialhandle ) 
