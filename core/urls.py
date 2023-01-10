@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import author_external
+from users.views import user_external
 
 urlpatterns = [
     path('froala_editor/', include('froala_editor.urls')),
@@ -11,8 +11,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
-    path('@<slug:slug>/', include('users.urls')),
-    path('author/<slug:slug>/', author_external, name='author_external'),
+    path('<slug:slug>/', include('users.urls')),
+    path('@<slug:slug>', user_external, name='author_external'),
     
 ]
 

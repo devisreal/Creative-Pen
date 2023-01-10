@@ -40,6 +40,15 @@ class User(AbstractUser):
     is_author = models.BooleanField(blank=True, default=False)
     slug = AutoSlugField(unique=True, populate_from="username", sep="_", null=True)
 
+    def initials(self):
+        x = self.get_full_name()
+        fullname = str(x)
+        l = [] 
+        for i in fullname.split(' '): 
+            l.append(i[0]) 
+        result = ".".join(l) + '.'
+        return result
+        
     def __str__(self):
         return f"{self.username}"
 

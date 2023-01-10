@@ -8,7 +8,8 @@ Author ({{author.username}})
 {% block content %}
 {% include 'partials/messages.html' %}
 
-
+{% if author %}
+   
 <div class="author-info py-4 pt-4 px-2 bg-light text-center border-bottom">
    <div class="avatar avatar-xl mb-3">
       {% if author.profile_picture %}
@@ -20,24 +21,28 @@ Author ({{author.username}})
    </div>
    <h2 class="font-semibold mb-1">Hi, I'm {{author.get_full_name|default:"Author"}}</h2>   
    <ul class="list-inline my-2">
+      {% if author.job_title %}         
       <li class="list-inline-item">
          <small class="d-block text-gray-500 text-sm">
             <i class="fa-solid fa-user fa-sm me-1"></i>
             {{author.job_title|default:""}}
          </small>
       </li>
+      {% endif %}
+      {% if author.city %}         
       <li class="list-inline-item">
          <small class="d-block text-gray-500 text-sm">            
             <i class="fa-solid fa-location-dot fa-sm me-1"></i>
             {{author.city|default:""}}
          </small>
       </li>
+      {% endif %}
    </ul>
    <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">            
       8 Articles
    </small>
    <p class="col-md-5 mx-auto text-gray-500 mt-3 font-light">
-      {{author.bio|default:"..."}}
+      {{author.bio|default:""}}
    </p>
    <ul class="list-inline author-profile-icon">
 
@@ -176,6 +181,12 @@ Author ({{author.username}})
       </div>
    </div>
 </div>
+
+{% elif reader %}
+
+{{reader.get_full_name}}
+
+{% endif %}
 <br><br><br><br><br><br><br><br><br><br>
 
 {% endblock %}

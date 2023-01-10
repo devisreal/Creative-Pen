@@ -88,13 +88,25 @@ def delete_account(request, slug):
    return redirect('logout')
 
 
-def author_external(request, slug):   
-   author = User.objects.get(slug=slug)
-   if request.user == author:
-      return redirect('users:profile', slug=slug)   
-   else:
-      context = {
-         'author': author
-      }
-      return render(request, 'users/author-external.html', context)
+def user_external(request, slug):
+
+   try:
+      user = User.objects.get(slug=slug)
+      if request.user == user:
+         return redirect('users:profile', slug=slug)  
+      if user.is_superuser:
+         return redirect('home')
+      elif user.is_author:
+         context = {
+            'author': user,
+         }
+         return render(request, 'users/author-external.html', context)
+      else:
+         context = {
+            'reader': user
+         }
+         return render(request, 'users/author-external.html', context)
+   except User.DoesNotExist:
+      return redirect('error_page')
+         
    
