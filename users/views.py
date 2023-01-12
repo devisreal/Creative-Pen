@@ -100,12 +100,12 @@ def user_external(request, slug):
          context = {
             'author': user,
          }
-         return render(request, 'users/author-external.html', context)
+         return render(request, 'users/user-external.html', context)
       else:
          context = {
             'reader': user
          }
-         return render(request, 'users/author-external.html', context)
+         return render(request, 'users/user-external.html', context)
    except User.DoesNotExist:
       return redirect('error_page')
          
