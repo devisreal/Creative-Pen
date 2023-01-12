@@ -19,6 +19,9 @@ My Profile ({{user.username}})
       fill: rgba(0, 0, 0, 0.8) !important;
       transition: 0.1s;
    }
+   .background-img{
+      filter: brightness(0.8);
+   }
 </style>
 {% endblock styles %}
 {% block content %}
@@ -69,7 +72,7 @@ My Profile ({{user.username}})
                         {% endif %}
                      </h4>
                      <small class="font-medium text-gray-500">
-                        {{user.get_username}}
+                        @{{user.get_username}}
                      </small>
                      <ul class="list-inline text-md pt-1">
 
@@ -143,10 +146,21 @@ My Profile ({{user.username}})
                               </a>
                            </li>                        
                            <li>
+                              <a 
+                                 data-bs-toggle="modal" data-bs-target="#shareProfileModal"
+                                 class="dropdown-item edit-icon"
+                                 href="{% url 'users:edit_profile' user.slug %}"
+                              >
+                                 <!-- <i class="iconsax me-2" icon-name="user-2-edit"></i> -->
+                                 <i class='bx bx-share-alt me-2'></i>
+                                 Share profile
+                              </a>
+                           </li>                        
+                           <li>
                               <hr class="dropdown-divider">
                            </li>
                            <li>
-                              <a class="dropdown-item text-danger cancel-icon cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                              <a class="dropdown-item text-danger cancel-icon cursor-pointer" data-bs-toggle="modal" data-bs-target="#deleteModal" >
                                  <i class="iconsax me-2" icon-name="close-circle"></i>
                                  Delete profile
                               </a>
@@ -164,7 +178,7 @@ My Profile ({{user.username}})
 
 
 <!-- ! Delete Account Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
          <div class="p-2 pb-0 d-flex justify-content-end">
@@ -195,7 +209,64 @@ My Profile ({{user.username}})
    </div>
 </div>
 
-{% comment %}
-{% endcomment %}
+
+<!-- ! Share Profile Modal -->
+<div class="modal fade" id="shareProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="p-2 pb-0 d-flex justify-content-end">
+            <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+               <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                  <path
+                     d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                  </path>
+               </svg>
+            </a>
+         </div>
+         <div class="p-3 pt-1">
+            <p class="mb-2">
+               <i class="iconsax" icon-name="link-3"></i>
+               Share profile url
+            </p>
+            <div class="input-group">
+               <input                   
+                  id="user-url-input"
+                  type="text" 
+                  class="form-control bg-white" 
+                  placeholder="User's Profile Link" 
+                  aria-label="User's Profile Link"
+                  aria-describedby="user-url-copy"
+                  value="http://localhost:700/@{{user.username}}"
+                  readonly
+               >
+               <button class="input-group-text cursor-pointer user-url-copy" data-clipboard-action="copy" data-clipboard-target="#user-url-input">
+                  <!-- <i class="fa-solid fa-clipboard"></i> -->
+                  <i class="iconsax" style="--Iconsax-Size: 25px;" icon-name="clipboard-text-2"></i>
+               </button>
+            </div>
+            <small class="text-blue d-none" id="clipboard-mesaage">
+               Copied!!
+            </small>
+         </div>         
+      </div>
+   </div>
+</div>
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+    var clipboard = new ClipboardJS('.user-url-copy');
+
+      clipboard.on('success', function (e) {      
+         $('#clipboard-mesaage').removeClass('d-none');
+         setTimeout(function () {
+            $('#clipboard-mesaage').addClass('d-none');
+         }, 2000);
+      });
+
+      clipboard.on('error', function (e) {
+         console.log(e);
+      });
+</script>
+{% endblock scripts %}

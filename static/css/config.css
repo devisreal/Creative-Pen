@@ -349,6 +349,10 @@ td {
   height: 200px !important;
 }
 
+.h-250 {
+  height: 250px !important;
+}
+
 .h-300 {
   height: 300px !important;
 }
@@ -800,7 +804,7 @@ input[type="number"] {
 }
 
 .mt-n2 {
-  margin-top: -0.5rem !important;
+  margin-top: -0.5rem !important;  
 }
 
 .mt-n3 {
@@ -813,6 +817,10 @@ input[type="number"] {
 
 .mt-n5 {
   margin-top: -3rem !important;
+}
+
+.mt-n7 {
+  margin-top: -7rem !important;
 }
 
 .avatar {

@@ -12,7 +12,7 @@ urlpatterns = [
     path('auth/', include('account.urls')),
     path('', include('pages.urls')),
     path('<slug:slug>/', include('users.urls')),
-    path('@<slug:slug>', user_external, name='author_external'),
+    path('@<slug:slug>/', user_external, name='author_external'),
     
 ]
 

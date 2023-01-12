@@ -129,10 +129,14 @@
    <!-- * Vendors -->
 
    <script src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'vendor/js/clipboard.min.js' %}"></script>
    <script src="{% static 'vendor/js/selectize.min.js' %}"></script>
    <script src="{% static 'vendor/js/masonry.pkgd.min.js' %}"></script>
    <script src="{% static 'vendor/js/flatpickr.js' %}"></script>
    <script src="{% static 'js/script.js' %}"></script>
+   {% block scripts %}
+      
+   {% endblock scripts %}
 
 
    <!-- * Custom Scripts -->
@@ -141,6 +145,8 @@
          $(".loader").fadeOut();
          $("#preloder").delay(200).fadeOut("slow");      
       });
+
+     
    </script>
 </body>
 

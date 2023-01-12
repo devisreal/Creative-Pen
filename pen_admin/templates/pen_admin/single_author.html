@@ -65,7 +65,7 @@ Author ({{author.username}})
                      <li class="list-inline-item">
                         <i class="iconsax me-1 pb-1" icon-name="mail"></i>
                         {{author.email}}
-                     </li>
+                     </li>                     
 
                      <!-- ? Author Gender -->
                      <li class="list-inline-item">
@@ -91,6 +91,12 @@ Author ({{author.username}})
                      <li class="list-inline-item">
                         <i class="iconsax me-1 pb-1" icon-name="stopwatch"></i>
                         GMT {{author.last_login|date:"g:i a, dS M Y"}}
+                     </li>
+
+                     <!-- ? Author Mobile Number -->
+                     <li class="list-inline-item">
+                        <i class="iconsax me-1 pb-1" icon-name="phone"></i>
+                        {{author.mobile_no|default:'+234......'}}
                      </li>
 
                      <!-- ? Author Joined date -->
