@@ -2,9 +2,9 @@
 {% load static %}
 {% block title %}
    {% if author%}
-      {{author.get_full_name}}
+      {{author.username}} ({{author.get_full_name}})
    {% elif reader %}
-      {{reader.get_full_name}}
+      {{reader.username}} ({{reader.get_full_name}})
    {% endif %}
 {% endblock title %}
 {% block styles %}
