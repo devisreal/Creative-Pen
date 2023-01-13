@@ -144,7 +144,9 @@ My Profile ({{user.username}})
                                  <i class="iconsax me-2" icon-name="user-2-edit"></i>
                                  Edit profile
                               </a>
-                           </li>                        
+                           </li>  
+                           
+                           {% if not user.is_superuser %}
                            <li>
                               <a 
                                  data-bs-toggle="modal" data-bs-target="#shareProfileModal"
@@ -155,7 +157,8 @@ My Profile ({{user.username}})
                                  <i class='bx bx-share-alt me-2'></i>
                                  Share profile
                               </a>
-                           </li>                        
+                           </li>      
+                           {% endif %}
                            <li>
                               <hr class="dropdown-divider">
                            </li>
@@ -232,21 +235,55 @@ My Profile ({{user.username}})
                <input                   
                   id="user-url-input"
                   type="text" 
-                  class="form-control bg-white" 
+                  class="form-control bg-white border-1 text-md" 
                   placeholder="User's Profile Link" 
                   aria-label="User's Profile Link"
                   aria-describedby="user-url-copy"
                   value="http://localhost:700/@{{user.username}}"
                   readonly
                >
-               <button class="input-group-text cursor-pointer user-url-copy" data-clipboard-action="copy" data-clipboard-target="#user-url-input">
-                  <!-- <i class="fa-solid fa-clipboard"></i> -->
+               <button class="input-group-text cursor-pointer user-url-copy " data-clipboard-action="copy" data-clipboard-target="#user-url-input">                  
                   <i class="iconsax" style="--Iconsax-Size: 25px;" icon-name="clipboard-text-2"></i>
                </button>
+            </div>            
+            
+            <!-- ! Successful profile toast -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+               <div id="successToast" class="toast " role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header d-flex align-items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1" width="25" height="25"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#198754" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M9 12l2 2l4 -4"></path>
+                     </svg>
+                     <span class="me-auto text-success font-medium font-cabin fs-6">Success</span>
+                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body bg-white font-outfit text-md">
+                     Profile URL copied!
+                  </div>
+               </div>
             </div>
-            <small class="text-blue d-none" id="clipboard-mesaage">
-               Copied!!
-            </small>
+
+            <!-- ! Error profile toast -->
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+               <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header d-flex align-items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1" width="25" height="25"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#DC3545" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M9 12l2 2l4 -4"></path>
+                     </svg>
+                     <span class="me-auto text-danger font-medium font-cabin fs-6">Error</span>
+                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body bg-white font-outfit text-md">
+                     An error occured!
+                  </div>
+               </div>
+            </div>
          </div>         
       </div>
    </div>
@@ -256,17 +293,16 @@ My Profile ({{user.username}})
 
 {% block scripts %}
 <script>
-    var clipboard = new ClipboardJS('.user-url-copy');
-
-      clipboard.on('success', function (e) {      
-         $('#clipboard-mesaage').removeClass('d-none');
-         setTimeout(function () {
-            $('#clipboard-mesaage').addClass('d-none');
-         }, 2000);
-      });
-
-      clipboard.on('error', function (e) {
-         console.log(e);
-      });
+   var clipboard = new ClipboardJS('.user-url-copy');
+   const successToast = document.getElementById('successToast')
+   const toast1 = new bootstrap.Toast(successToast)
+   const errorToast = document.getElementById('errorToast')
+   const toast2 = new bootstrap.Toast(errorToast)
+   clipboard.on('success', function (e) {            
+      toast1.show()
+   });
+   clipboard.on('error', function (e) {
+      toast2.show()
+   });
 </script>
 {% endblock scripts %}
