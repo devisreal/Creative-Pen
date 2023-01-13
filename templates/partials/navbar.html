@@ -95,7 +95,7 @@
                   Signed in as {{request.user.get_username}}
                </small>
          
-               <li class="">
+               <li>
                   <a href="{% url 'users:dashboard' request.user.slug %}"
                      class="dropdown-item nav-link m-0 px-2  rounded-md {% if '/dashboard' in request.path %} active-dropdown {% endif %}">
                      <i class='bx bxs-grid-alt bx-fw'></i>
@@ -111,6 +111,7 @@
                   </a>
                </li>
                {% endif %}
+               
                {% if request.user.is_staff %}
                <li>
                   <a href="{% url 'users:authors' request.user.slug %}"
@@ -158,6 +159,13 @@
                   </a>
                </li>
                {% endif %}
+               <li>
+                  <a class="dropdown-item nav-link m-0 px-2 rounded-md {% if '/bookmarks' in request.path %} active-dropdown {% endif %}"
+                     href="{% url 'users:bookmarks' request.user.slug %}">
+                     <i class='bx bxs-bookmarks bx-fw'></i>
+                     Bookmarks
+                  </a>
+               </li>
                <li>
                   <a class="dropdown-item nav-link m-0 px-2 rounded-md {% if '/profile' in request.path or '/edit-profile' in request.path%} active-dropdown {% endif %}"
                      href="{% url 'users:profile' request.user.slug %}">

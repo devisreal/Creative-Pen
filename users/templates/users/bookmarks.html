@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Bookmarks ({{user.username}})
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<h1 class="p-4">Bookmarks</h1>
+
+{% endblock %}

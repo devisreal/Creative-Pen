@@ -38,6 +38,21 @@ def request_author_access(request, slug, username):
       return redirect('users:dashboard', slug=slug)
 
 @login_required
+def bookmarks(request, slug):
+   if slug != request.user.slug:
+      messages.error(request, "You're not allowed to access this account")
+      return redirect('users:bookmarks', slug=request.user.slug)
+   try:
+      user = User.objects.get(slug=slug)
+   except User.DoesNotExist:
+      return redirect('error_page')
+   else:
+      context = {
+         'user': user
+      }
+      return render(request, 'users/bookmarks.html', context)   
+
+@login_required
 def user_profile(request, slug):   
    if slug != request.user.slug:  
       messages.error(request, "You're not allowed to access this account")    
@@ -50,7 +65,6 @@ def user_profile(request, slug):
       "user": user
    }
    return render(request, 'users/profile.html', context)
-
 
 @login_required
 def edit_profile(request, slug):
@@ -87,7 +101,6 @@ def delete_account(request, slug):
    messages.success(request, "Account deleted successfully! 👋")
    return redirect('logout')
 
-
 def user_external(request, slug):
 
    try:
@@ -109,4 +122,3 @@ def user_external(request, slug):
    except User.DoesNotExist:
       return redirect('error_page')
          
-   
