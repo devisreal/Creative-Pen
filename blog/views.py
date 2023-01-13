@@ -8,7 +8,6 @@ def single_post(request):
    context = {}
    return render(request, 'blog/single_post.html', context)
 
-
 @login_required
 def create_post(request):
    if not request.user.is_author:
