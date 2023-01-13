@@ -102,6 +102,7 @@
                      Dashboard
                   </a>
                </li>
+               
                {% if request.user.is_superuser %}
                <li>
                   <a href="{% url 'users:staffs' request.user.slug %}"
@@ -353,6 +354,7 @@
                         <li class="">
                            <a href="{% url 'users:dashboard' request.user.slug %}"
                               class=" nav-link rounded-md {% if '/dashboard' in request.path %} bg-light text-black font-medium {% endif %}">
+                              <i class='bx bxs-grid-alt bx-fw'></i>
                               Dashboard
                            </a>
                         </li>
@@ -360,6 +362,7 @@
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/staffs' in request.path %} active-dropdown {% endif %}"
                               href="{% url 'users:staffs' request.user.slug %}">
+                              <i class='bx bxs-group bx-fw'></i>
                               Staffs
                            </a>
                         </li>
@@ -367,26 +370,31 @@
                         {% if request.user.is_staff %}
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/authors' in request.path %} active-dropdown {% endif %}" href="{% url 'users:authors' request.user.slug %}">
+                              <i class="fa-solid fa-feather fa-fw me-1"></i>
                               Authors
                            </a>
                         </li>
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/readers' in request.path %} active-dropdown {% endif %}" href="{% url 'users:readers' request.user.slug %}">
+                              <i class="fa-solid fa-people-group fa-fw me-1"></i>
                               Readers
                            </a>
                         </li>
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/subscribers' in request.path %} active-dropdown {% endif %}" href="{% url 'users:subscribers' request.user.slug %}">
+                              <i class="fa-solid fa-users-rectangle fa-fw me-1"></i>
                               Subscribers
                            </a>
                         </li>                        
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/enquiries' in request.path %} active-dropdown {% endif %}" href="{% url 'users:subscribers' request.user.slug %}">
+                              <i class="fa-solid fa-circle-question fa-fw me-1"></i>
                               Enquiries
                            </a>
                         </li>                        
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/categories' in request.path %} active-dropdown {% endif %}" href="{% url 'users:subscribers' request.user.slug %}">
+                              <i class='bx bxs-category bx-fw'></i>
                               Categories
                            </a>
                         </li>                        
@@ -394,19 +402,29 @@
                         {% if request.user.is_author %}
                         <li class="">
                            <a class=" nav-link rounded-md {% if '/create-post' in request.path %} active-dropdown {% endif %}" href="{% url 'blog:create_post' %}" href="{% url 'blog:create_post' %}">
+                              <i class="fa-solid fa-notes-medical fa-fw me-1"></i>
                               Create Post
                            </a>
                         </li>
                         {% endif %}
                         <li class="">
-                           <a class=" nav-link rounded-md {% if '/profile' in request.path or '/edit-profile' in request.path%} bg-light text-black font-medium {% endif %}"
+                           <a class=" nav-link rounded-md {% if '/bookmarks' in request.path %} active-dropdown {% endif %}"
+                              href="{% url 'users:bookmarks' request.user.slug %}">
+                              <i class='bx bxs-bookmarks bx-fw'></i>
+                              Bookmarks
+                           </a>
+                        </li>
+                        <li class="">
+                           <a class=" nav-link rounded-md {% if '/profile' in request.path or '/edit-profile' in request.path%} active-dropdown {% endif %}"
                               href="{% url 'users:profile' request.user.slug %}">
+                              <i class="fa-solid fa-address-card fa-fw me-1"></i>
                               My Profile
                            </a>
                         </li>
                         <hr class=" p-0 m-0 my-1">
                         <li class="">
                            <a class=" nav-link rounded-md" href="{% url 'logout' %}">
+                              <i class="fa-solid fa-right-from-bracket fa-fw me-1"></i>
                               Sign out
                            </a>
                         </li>
