@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import ContactDetail, Subscriber
 from django.contrib import messages
 from account.models import User
-from blog.models import PostCategory
+from blog.models import PostCategory, Post
 
 
 def home(request):
@@ -24,7 +24,10 @@ def footer(request):
       return redirect(request.META.get('HTTP_REFERER'))
 
 def latest(request):   
-   context = {}
+   posts = Post.objects.all()
+   context = {
+      'posts': posts
+   }
    return render(request, 'pages/latest_posts.html', context)
 
 def categories(request):      

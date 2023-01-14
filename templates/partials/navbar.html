@@ -169,8 +169,8 @@
                </li>
                <li>
                   <a class="dropdown-item nav-link m-0 px-2 rounded-md {% if '/profile' in request.path or '/edit-profile' in request.path%} active-dropdown {% endif %}"
-                     href="{% url 'users:profile' request.user.slug %}">
-                     <i class="fa-solid fa-address-card fa-fw me-1"></i>
+                     href="{% url 'users:profile' request.user.slug %}">                     
+                     <i class="fa-solid fa-id-badge fa-fw me-1"></i>
                      My Profile
                   </a>
                </li>
