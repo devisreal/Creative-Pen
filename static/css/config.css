@@ -315,6 +315,7 @@ td {
   border-color: transparent;
 }
 
+
 /* ! Pagination Styles */
 .page-link:focus {
   box-shadow: none !important;
@@ -1139,6 +1140,21 @@ body#body::-webkit-scrollbar-thumb:hover {
   border-color: var(--gray-500) !important;
   transition: .2s;
 }
+
+.post-author-profile-icon li a i {
+  color: #fff;
+  background-color: var(--color-blue);
+  transition: .2s;
+}
+
+.post-author-profile-icon li a i:hover {
+  color: #fff;
+  background-color: #555;
+  transition: .2s;
+}
+
+
+
 
 
 .contact-icon {

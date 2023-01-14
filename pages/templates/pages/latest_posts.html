@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Latest
+Latest Posts
 {% endblock title %}
 {% block styles %}
-
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
@@ -155,8 +154,8 @@ Latest
                   <div class="w-100 mt-auto">
                      <!-- Card category -->
                      <a 
-                        href="{% url 'categories' %}" 
-                        class="badge text-sm text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium"
+                        href="{% url 'category' post.category.slug %}" 
+                        class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium"
                      >
                         <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
                      </a>
@@ -167,12 +166,12 @@ Latest
                <h4 
                   class="card-title"
                >
-                  <a href="{% url 'blog:single_post' %}" class="btn-link text-reset fw-bold">
+                  <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
                      {{post.post_title}}
                   </a>
                </h4>
                <p class="card-text">
-                  {{post.short_description}}
+                  {{post.short_description}}                  
                </p>
                <!-- Card info -->
                <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">

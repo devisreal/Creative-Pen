@@ -2,10 +2,17 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CreatePostForm
+from .models import Post
 
 
-def single_post(request):
-   context = {}
+def single_post(request, slug):
+   try:
+      post = Post.objects.get(slug=slug)         
+   except Post.DoesNotExist:
+      return redirect('error_page')
+   context = {
+      'post': post
+   }
    return render(request, 'blog/single_post.html', context)
 
 @login_required

@@ -24,7 +24,10 @@ def footer(request):
       return redirect(request.META.get('HTTP_REFERER'))
 
 def latest(request):   
-   posts = Post.objects.all()
+   try:
+      posts = Post.objects.all()
+   except Post.DoesNotExist:
+      return redirect('error_page')   
    context = {
       'posts': posts
    }
@@ -36,8 +39,11 @@ def categories(request):
    }
    return render(request, 'pages/categories.html', context)
 
-def single_category(request, slug):
-   category =  PostCategory.objects.get(slug=slug)   
+def single_category(request, slug):   
+   try:
+      category =  PostCategory.objects.get(slug=slug)   
+   except PostCategory.DoesNotExist:
+      return redirect('error_page')
    context = {
       'category': category,      
    }

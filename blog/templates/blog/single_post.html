@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Single Post
+{{post.post_title}}
 {% endblock title %}
 {% block styles %}
 <style>
@@ -25,35 +25,57 @@ Single Post
    <div class="container">
       <div class="row">
          <div class="col-12">
-            <div class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-350 text-center rounded-xl"
-               style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}'); background-position:
-               center left; background-size: cover;">
+            <div 
+               class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-350 text-center rounded-xl"
+               style="background-image: url('{{post.post_image.url}}'); background-position: center; background-size: cover;"
+            >
                <!-- Card Image overlay -->
                <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
                   <div class="w-100 my-auto">
                      <!-- Card category -->
-                     <a href="single_category.html" class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium text-sm">
+                     <a 
+                        href="{% url 'category' post.category.slug %}" 
+                        class="text-decoration-none badge text-bg-{{post.category.color}} mb-2 font-outfit font-medium text-sm"
+                     >
                         <i class="fa-solid fa-layer-group me-2 "></i>
-                        Marketing
+                        {{post.category}}
                      </a>
                      <!-- Card title -->
-                     <h2 class="text-white display-5">10 tell-tale signs you need to get a new startup.</h2>
+                     <h2 class="text-white display-5">
+                        {{post.post_title}}
+                     </h2>
                      <!-- Card info -->
                      <ul class="nav nav-divider text-white-force align-items-center justify-content-center">
                         <li class="nav-item">
                            <div class="nav-link">
                               <div class="d-flex align-items-center text-white position-relative">
                                  <div class="avatar avatar-sm">
-                                    <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
-                                       alt="avatar">
+                                    {% if post.post_author.profile_picture %}
+                                    <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                    {% endif %}
                                  </div>
-                                 <span class="ms-3">by <a href="#"
-                                       class="stretched-link text-reset btn-link">Louis</a></span>
+                                 <span 
+                                    class="ms-3"
+                                 >
+                                    by 
+                                    <a 
+                                       href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link"
+                                    >
+                                       {{post.post_author.get_short_name}}
+                                    </a>
+                                 </span>
                               </div>
                            </div>
                         </li>
-                        <li class="nav-item">Nov 15, 2022</li>
-                        <li class="nav-item">5 min read</li>
+                        <li class="nav-item">
+                           {{post.date_posted|date:"dS M , Y"}}
+                        </li>
+                        <li class="nav-item">
+                           {{post.read_time}} min read
+                        </li>
                      </ul>
                   </div>
                </div>
@@ -69,48 +91,109 @@ Single Post
       <div class="row">
          <!-- Main Content START -->
          <div class="col-lg-9 mb-5">
-            <p><span class="dropcap bg-dark text-white px-2">I</span> am newspaper up its enjoyment agreeable depending.
-               Timed voice share led him to widen noisy young. At weddings believed laughing although the material does
-               the exercise of. Up attempt offered ye civilly so sitting to. She new course gets living within Elinor
-               joy. She rapturous suffering concealed. <i>Demesne far hearted suppose venture excited see had has.</i>
-               Dependent on so extremely delivered by. Yet no jokes worse her why. Bed one supposing breakfast day
-               fulfilled off depending questions. Whatever boy her exertion his extended. Ecstatic followed handsome
-               drawings entirely Mrs one yet outweigh. Of acceptance insipidity remarkably is an invitation. </p>                                
+            <p>
+               {{post.post_content|safe}}
+            </p>
 
+            <br><br><br><br><br>
             <!-- Author info START -->
-            <div class="d-flex p-2 p-md-4 my-3 bg-primary bg-opacity-10 rounded">
+            <div class="d-flex p-2 p-md-4 my-3 bg-opacity-10 rounded bg-{{post.category.color}}">
                <!-- Avatar -->
                <a href="#">
-                  <div class="avatar avatar-xxl me-2 me-md-4">
-                     <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}" alt="avatar">
+                  <div class="avatar avatar-xxl me-2 me-md-4">                     
+                     {% if post.post_author.profile_picture %}
+                     <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                     {% else %}
+                     <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                     {% endif %}
                   </div>
                </a>
                <!-- Info -->
                <div>
-                  <div class="d-sm-flex align-items-center justify-content-between">
+                  <div class="col d-sm-flex align-items-center justify-content-between">
                      <div>
                         <h4 class="m-0">
-                           <a href="#" class="link-dark text-decoration-none">Louis Ferguson</a>
+                           <a href="{% url 'author_external' post.post_author.slug %}" class="link-dark text-decoration-none text-capitalize">{{post.post_author.get_full_name}}</a>
                         </h4>
-                        <small>An editor at Blogzine</small>
+                        <small class="">{{post.post_author.job_title}}</small>
                      </div>
-                     <a href="#" class="btn btn-xs btn-primary-soft">View Articles</a>
+                     <!-- <a href="{% url 'author_external' post.post_author.slug %}" class="btn btn-sm btn-primary-soft ">
+                        View Articles
+                     </a> -->
                   </div>
-                  <p class="my-2">Louis Ferguson is a senior editor for the blogzine and also reports on breaking news
-                     based in London. He has written about government, criminal justice, and the role of money in
-                     politics since 2015.</p>
-                  <!-- Social icons -->
-                  <ul class="nav">
-                     <li class="nav-item">
-                        <a class="nav-link ps-0 pe-2 fs-5" href="#"><i class="fab fa-facebook-square"></i></a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link px-2 fs-5" href="#"><i class="fab fa-twitter-square"></i></a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link px-2 fs-5" href="#"><i class="fab fa-linkedin"></i></a>
-                     </li>
-                  </ul>
+                  <div>
+                     <p class="my-2">
+                        {{post.post_author.bio}}
+                     </p>
+                     <!-- Social icons -->
+                     <ul class="list-inline post-author-profile-icon mt-3 mb-0">
+                     
+                        <!-- Facebook -->
+                        {% if post.post_author.socialhandle.facebook %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.facebook}}">
+                              <i class='bx bxl-facebook text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                        <!-- LinkedIn -->
+                        {% if post.post_author.socialhandle.linkedin %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.linkedin}}">
+                              <i class='bx bxl-linkedin-square text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                        <!-- Twitter -->
+                        {% if post.post_author.socialhandle.twitter %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.twitter}}">
+                              <i class='bx bxl-twitter text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                        <!-- Instagram -->
+                        {% if post.post_author.socialhandle.instagram %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.instagram}}">
+                              <i class='bx bxl-instagram text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                     
+                        <!-- Youtube -->
+                        {% if post.post_author.socialhandle.youtube %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.youtube}}">
+                              <i class='bx bxl-youtube text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                        <!-- Behance -->
+                        {% if post.post_author.socialhandle.behance %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.behance}}">
+                              <i class='bx bxl-behance text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     
+                     
+                        <!-- Dribble -->
+                        {% if post.post_author.socialhandle.dribbble %}
+                        <li class="list-inline-item">
+                           <a href="{{post.post_author.socialhandle.dribbble}}">
+                              <i class='bx bxl-dribbble text-sm border p-2  rounded-circle'></i>
+                           </a>
+                        </li>
+                        {% endif %}
+                     </ul>
+                  </div>
                </div>
             </div>
             <!-- Author info END -->
