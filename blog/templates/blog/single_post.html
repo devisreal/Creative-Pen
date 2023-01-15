@@ -99,7 +99,7 @@
             <!-- Author info START -->
             <div class="d-flex p-2 p-md-4 my-3 bg-opacity-10 rounded bg-{{post.category.color}}">
                <!-- Avatar -->
-               <a href="#">
+               <a href="{% url 'author_external' post.post_author.slug %}">
                   <div class="avatar avatar-xxl me-2 me-md-4">                     
                      {% if post.post_author.profile_picture %}
                      <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
@@ -116,10 +116,7 @@
                            <a href="{% url 'author_external' post.post_author.slug %}" class="link-dark text-decoration-none text-capitalize">{{post.post_author.get_full_name}}</a>
                         </h4>
                         <small class="">{{post.post_author.job_title}}</small>
-                     </div>
-                     <!-- <a href="{% url 'author_external' post.post_author.slug %}" class="btn btn-sm btn-primary-soft ">
-                        View Articles
-                     </a> -->
+                     </div>                     
                   </div>
                   <div>
                      <p class="my-2">

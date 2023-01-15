@@ -37,7 +37,7 @@ class User(AbstractUser):
     mobile_no = models.CharField(max_length=14, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=50, choices=gender_choices, null=True)
-    is_author = models.BooleanField(blank=True, default=False)
+    is_author = models.BooleanField(blank=True, default=False)    
     slug = AutoSlugField(unique=True, populate_from="username", sep="_", null=True)
 
     def initials(self):
@@ -89,3 +89,4 @@ class SocialHandle(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Social Handles"
+

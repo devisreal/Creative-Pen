@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users.views import user_external
+from blog.views import create_post
 
 urlpatterns = [
     path('froala_editor/', include('froala_editor.urls')),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('<slug:slug>/', include('users.urls')),
     path('@<slug:slug>/', user_external, name='author_external'),
+    path('post/new/', create_post, name='new_post')
     
 ]
 

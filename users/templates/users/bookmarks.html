@@ -9,6 +9,113 @@ Bookmarks ({{user.username}})
 {% include 'partials/messages.html' %}
 
 
-<h1 class="p-4">Bookmarks</h1>
+
+
+
+<div class="container">
+   <h1 class="mt-4">Bookmarks</h1>
+   <div class="mt-5">      
+      <div class="row gy-4" data-masonry='{"percentPosition": true }'>
+   
+         {% for post in bookmarks %}
+   
+   
+         <div class="col-4">
+            <div class="card border-0 ">
+               <!-- Card img -->
+               <div class="position-relative ">
+                  <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
+                  <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                     <!-- Card overlay Top -->
+                     <div class="w-100 mb-auto d-flex justify-content-end">
+                        <div class="text-end ms-auto">
+                           <!-- * Post Type -->
+                           {% if post.post_type == video %}
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                              data-bs-title="This post has video" data-bs-placement="right">
+                              <i class="fas fa-video"></i>
+                           </div>
+                           {% elif post.post_type == video %}
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                              data-bs-title="This post has video" data-bs-placement="right">
+                              <i class="fa-solid fa-images text-md"></i>
+                           </div>
+                           {% endif %}
+                        </div>
+                     </div>
+                     <!-- Card overlay bottom -->
+                     <div class="w-100 mt-auto">
+                        <!-- Card category -->
+                        <a href="{% url 'category' post.category.slug %}"
+                           class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                           <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="card-body px-0 pt-3">
+                  <div class="d-sm-flex justify-content-between">
+                     <h4 class="card-title m-0 p-0 pb-2">
+                        <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                           {{post.post_title}}
+                        </a>
+                     </h4>
+
+                     {% if request.user.is_authenticated %}
+                        
+                     
+                     <div class="w-fit col-1">
+                        <a href="" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                        </a>
+                        <a href="" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Remove from bookmarks" data-bs-placement="bottom">
+                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-slash"></i>
+                        </a>
+                     </div>
+
+                     {% endif %}
+                  </div>
+                  <p class="card-text">
+                     {{post.short_description}}
+                  </p>
+                  <!-- Card info -->
+                  <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                     <li class="nav-item">
+                        <div class="nav-link">
+                           <div class="d-flex align-items-center position-relative">
+                              <div class="avatar avatar-xs">
+                                 {% if post.post_author.profile_picture %}
+                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
+                                    alt="avatar">
+                                 {% else %}
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                 {% endif %}
+                              </div>
+                              <span class="ms-3">by
+                                 <a href="{% url 'author_external' post.post_author.slug %}"
+                                    class="stretched-link text-reset btn-link">
+                                    {{post.post_author.get_short_name}}
+                                 </a>
+                              </span>
+                           </div>
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        {{post.date_posted|date:"dS M , Y"}}
+                     </li>
+                     <li class="nav-item">
+                        <a href="#" class="btn-link">
+                           <i class="fa-regular fa-comments me-1"></i> 5
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+   
+         {% endfor %}
+      </div>
+   </div>
+</div>
 
 {% endblock %}

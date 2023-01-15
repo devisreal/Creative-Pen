@@ -50,9 +50,7 @@ class Post(models.Model):
    post_title = models.CharField(max_length=255)
    post_type = models.CharField(max_length=50, choices=post_types)
    short_description = models.TextField(null=True, blank=True)
-   post_image = models.ImageField(
-      null=True,
-      blank=True,
+   post_image = models.ImageField(      
       upload_to='posts/images',
       validators=[
          FileExtensionValidator(
@@ -74,6 +72,7 @@ class Post(models.Model):
    )
    post_content = FroalaField(      
       theme='dark',
+      null=True, blank=True
    )
    category = models.ForeignKey(PostCategory, on_delete=models.CASCADE)
    tags = TaggableManager()
@@ -83,10 +82,11 @@ class Post(models.Model):
    slug = AutoSlugField(unique=True, populate_from='post_title', sep='-', null=True)
    hit_count_generic = GenericRelation(
       HitCount,
-      object_id_field='',
+      object_id_field='object_pk',
       related_query_name='hit_count_generic_relation'
    )
    read_time = readtime.of_text(post_content).minutes
+   bookmarks = models.ManyToManyField(User, related_name='favourite', default=None, blank=True)
 
    def __str__(self):
       return f'{self.post_title} by {self.post_author}'
@@ -95,3 +95,13 @@ class Post(models.Model):
       self.slug = slugify(self.post_title)
       super().save(*args, **kwargs)
    
+# class Bookmark(models.Model):
+#    user = models.ForeignKey(User, on_delete=models.CASCADE)
+#    posts = models.ManyToManyField(Post, related_name="bookmarks")
+#    date_added = models.DateTimeField(auto_now_add=True)
+
+#    class Meta:
+#       pass
+
+#    def __str__(self):
+#       return f'{self.user.username} on '

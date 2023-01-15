@@ -5,7 +5,7 @@ from django.contrib import messages
 from account.models import User, UserSettings
 from account.views import user_logout
 from datetime import datetime
-
+from blog.models import Post
 
 
 @login_required
@@ -44,13 +44,18 @@ def bookmarks(request, slug):
       return redirect('users:bookmarks', slug=request.user.slug)
    try:
       user = User.objects.get(slug=slug)
+      bookmarks = Post.objects.filter(bookmarks=request.user)
    except User.DoesNotExist:
       return redirect('error_page')
    else:
       context = {
-         'user': user
+         'user': user,
+         'bookmarks': bookmarks
       }
       return render(request, 'users/bookmarks.html', context)   
+
+
+
 
 @login_required
 def user_profile(request, slug):   

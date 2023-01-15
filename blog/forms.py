@@ -82,10 +82,7 @@ class AddCategoryForm(forms.ModelForm):
 class CreatePostForm(forms.ModelForm):
    
    post_title = forms.CharField(
-      label='Post Title', 
-      error_messages={
-         'required': 'Please enter post title'
-      },
+      label='Post Title',       
       widget=forms.TextInput(
          attrs={
             "placeholder": "Post title", 
@@ -168,12 +165,12 @@ class CreatePostForm(forms.ModelForm):
       ]
    )
 
-   post_content = forms.CharField(
-      label='Post content',
-      widget=FroalaEditor(
+   # post_content = forms.CharField(
+   #    label='Post content',
+   #    widget=FroalaEditor(
          
-      )
-   )
+   #    )
+   # )
 
    category = forms.ModelChoiceField(
       label='Post category',
@@ -187,7 +184,8 @@ class CreatePostForm(forms.ModelForm):
    )
 
    tags = TagField(
-      label='Tags',      
+      label='Tags',  
+      required=False,    
       help_text='Maximum of 6 keywords. Keywords should all be in lowercase and separated by commas.',
       widget=TagWidget(
          attrs={

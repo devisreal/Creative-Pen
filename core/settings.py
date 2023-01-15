@@ -50,9 +50,9 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     # Custom Apps
     "account",
+    "blog",
     "pen_admin",
     "users",
-    "blog",
     "pages",
 ]
 

@@ -14,3 +14,4 @@ class UserSettingsAdmin(admin.ModelAdmin):
 @admin.register(SocialHandle)
 class SocialHandleAdmin(admin.ModelAdmin):
    pass
+

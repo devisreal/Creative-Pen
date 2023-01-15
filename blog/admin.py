@@ -6,6 +6,7 @@ from . import models
 class PostCategoryAdmin(admin.ModelAdmin):
    list_display = ('name',)
 
+
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
    list_display = ('post_title','post_author', 'is_featured')
@@ -23,5 +24,4 @@ class PostAdmin(admin.ModelAdmin):
 ! search_fields = ['title']
 ! list_editable = ['unit_price']
 
-"""
-
+"""   

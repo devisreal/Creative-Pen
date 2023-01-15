@@ -7,7 +7,7 @@ from .models import Post
 
 def single_post(request, slug):
    try:
-      post = Post.objects.get(slug=slug)         
+      post = Post.objects.get(slug=slug)
    except Post.DoesNotExist:
       return redirect('error_page')
    context = {
@@ -21,16 +21,19 @@ def create_post(request):
       messages.warning(request, 'You cannot perform that action')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      if request.method == "POST":
+      if request.method == "POST":         
          create_post_form = CreatePostForm(request.POST, request.FILES)
          if create_post_form.is_valid():
             instance = create_post_form.save(commit=False)
             instance.post_author = request.user
             instance.save()
             create_post_form.save_m2m()
+
+            messages.success(request, f"New post created")
+            return redirect('home')
          else:
             messages.error(request, f"An error occured")
-            return redirect('blog:create_post')
+            return redirect('new_post')
       else:
          create_post_form = CreatePostForm()
       context = {
