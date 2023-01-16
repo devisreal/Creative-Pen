@@ -58,9 +58,19 @@
       </li>
       {% endif %}
    </ul>
+   
+   {% if author_posts %}      
    <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">
-      8 Articles
+      {{author_posts|length}}
+      {% if author_post > 1 %}
+         Articles
+      {% else %}
+         Article
+      {% endif %}
    </small>
+   {% endif %}
+
+
    <p class="col-md-5 mx-auto text-gray-500 mt-2 font-light">
       {{author.bio|default:""}}
    </p>
@@ -291,7 +301,7 @@
          <!-- Cover image -->
          <div class="py-5 rounded background-img rounded-lg h-200 " {% if reader.background_image %}
             style="background-image: url('{{reader.background_image.url}}');" {% else %}
-            style="background-image: url('{% static " img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
+            style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
          </div>
          <div class="card-body pb-0">
             <div class="row d-flex flex-column justify-content-between">

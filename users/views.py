@@ -116,13 +116,10 @@ def delete_account(request, slug):
 
 
 def user_external(request, slug):
-
    try:
       user = User.objects.get(slug=slug)
       if request.user == user:
-         return redirect('users:profile', slug=slug)  
-      if user.is_superuser:
-         return redirect('home')
+         return redirect('users:profile', slug=slug)        
       elif user.is_author:
          author_posts = Post.objects.filter(post_author=user)
          context = {
