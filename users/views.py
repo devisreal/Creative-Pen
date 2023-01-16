@@ -55,7 +55,16 @@ def bookmarks(request, slug):
       return render(request, 'users/bookmarks.html', context)   
 
 
-
+@ login_required
+def bookmark_add(request, slug, id):
+   post = get_object_or_404(Post, id=id)
+   if post.bookmarks.filter(id=request.user.id).exists():
+      post.bookmarks.remove(request.user)
+      messages.success(request, "Post removed from bookmarks")
+   else:   
+      post.bookmarks.add(request.user)
+      messages.success(request, "Post added to bookmarks")
+   return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
 def user_profile(request, slug):   

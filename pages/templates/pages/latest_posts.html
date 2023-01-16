@@ -119,7 +119,7 @@ Latest Posts
       {% for post in posts %}
          
       
-      <div class="col-4">
+      <div class="col-sm-6 col-lg-4 ">
          <div class="card border-0 ">
             <!-- Card img -->
             <div class="position-relative ">
@@ -163,13 +163,53 @@ Latest Posts
                </div>
             </div>
             <div class="card-body px-0 pt-3">
-               <h4 
-                  class="card-title"
-               >
-                  <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
-                     {{post.post_title}}
-                  </a>
-               </h4>
+               <div class="d-sm-flex justify-content-between">
+                  <h4 class="card-title m-0 p-0 pb-2">
+                     <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                        {{post.post_title}}
+                     </a>
+                  </h4>
+               
+                  {% if request.user.is_authenticated %}               
+                  <div class="w-fit col-1">
+
+                     {% if request.user in post.bookmarks.all %}
+                     <a 
+                        href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
+                        class="text-decoration-none" 
+                        data-bs-toggle="tooltip" 
+                        data-bs-title="Remove from bookmarks"
+                        data-bs-placement="bottom"
+                     >
+                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-slash"></i>
+                     </a>                        
+                     {% else %}
+                     <a 
+                        href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
+                        class="text-decoration-none" 
+                        data-bs-toggle="tooltip" 
+                        data-bs-title="Add to bookmarks"
+                        data-bs-placement="bottom"
+                     >
+                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                     </a>
+                     {% endif %}
+                                       
+                  </div>               
+                  {% else %}
+                  <div class="w-fit col-1">
+                     <a 
+                        href="{% url 'login' %}" 
+                        class="text-decoration-none" 
+                        data-bs-toggle="tooltip" 
+                        data-bs-title="Add to bookmarks"
+                        data-bs-placement="bottom"
+                     >
+                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                     </a>
+                  </div>
+                  {% endif %}
+               </div>
                <p class="card-text">
                   {{post.short_description}}                  
                </p>

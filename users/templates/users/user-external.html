@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-   {% if author%}
-      {{author.username}} ({{author.get_full_name}})
-   {% elif reader %}
-      {{reader.username}} ({{reader.get_full_name}})
-   {% endif %}
+{% if author%}
+{{author.username}} ({{author.get_full_name}})
+{% elif reader %}
+{{reader.username}} ({{reader.get_full_name}})
+{% endif %}
 {% endblock title %}
 {% block styles %}
 <style>
@@ -13,6 +13,7 @@
       --Iconsax-Size: 20px;
       --Iconsax-Color: rgba(0, 0, 0, 0.7);
    }
+
    .background-img {
       filter: brightness(0.8);
       background-size: cover;
@@ -25,7 +26,7 @@
 {% include 'partials/messages.html' %}
 
 {% if author %}
-   
+
 <div class="author-info py-4 pt-4 px-2 bg-light text-center border-bottom">
    <div class="avatar avatar-xxl mb-3">
       {% if author.profile_picture %}
@@ -35,12 +36,12 @@
          alt="">
       {% endif %}
    </div>
-   <h2 class="font-semibold mb-0">Hi, I'm {{author.get_full_name}}</h2>   
+   <h2 class="font-semibold mb-0">Hi, I'm {{author.get_full_name}}</h2>
    <small class="font-medium text-gray-500">
       @{{author.get_username}}
    </small>
    <ul class="list-inline my-1">
-      {% if author.job_title %}         
+      {% if author.job_title %}
       <li class="list-inline-item">
          <small class="d-block text-gray-500 text-sm">
             <i class="fa-solid fa-user fa-sm me-1"></i>
@@ -48,16 +49,16 @@
          </small>
       </li>
       {% endif %}
-      {% if author.city %}         
+      {% if author.city %}
       <li class="list-inline-item">
-         <small class="d-block text-gray-500 text-sm">            
+         <small class="d-block text-gray-500 text-sm">
             <i class="fa-solid fa-location-dot fa-sm me-1"></i>
             {{author.city|default:""}}
          </small>
       </li>
       {% endif %}
    </ul>
-   <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">            
+   <small class="bg-red py-1 px-2 rounded-pill text-white badge font-medium">
       8 Articles
    </small>
    <p class="col-md-5 mx-auto text-gray-500 mt-2 font-light">
@@ -138,7 +139,7 @@
       <div class="row gy-4" data-masonry='{"percentPosition": true }'>
          {% for x in '1000000000' %}
 
-         <div class="col-4">
+         <div class="col-sm-6 col-lg-4 ">
             <div class="card border-0 ">
                <!-- Card img -->
                <div class="position-relative ">
@@ -207,12 +208,9 @@
    <div class="col-12">
       <div class="mb-4 position-relative z-index-9">
          <!-- Cover image -->
-         <div class="py-5 rounded background-img rounded-lg h-200 " 
-            {% if reader.background_image %}
-               style="background-image: url('{{reader.background_image.url}}');" 
-            {% else %}
-               style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');" 
-            {% endif %}>
+         <div class="py-5 rounded background-img rounded-lg h-200 " {% if reader.background_image %}
+            style="background-image: url('{{reader.background_image.url}}');" {% else %}
+            style="background-image: url('{% static " img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
          </div>
          <div class="card-body pb-0">
             <div class="row d-flex flex-column justify-content-between">
@@ -227,13 +225,12 @@
                         src="{% static 'img/user/custom.jpg' %}" alt="">
                      {% endif %}
                   </div>
-               </div>                    
-               <div
-                  class="col-sm-12 mt-2 col-md text-center">
+               </div>
+               <div class="col-sm-12 mt-2 col-md text-center">
                   <div>
                      <!-- ? User fullname -->
                      <h4 class="m-0 p-0">
-                        {{reader.get_full_name|default:"Firstname Lastname"}}               
+                        {{reader.get_full_name|default:"Firstname Lastname"}}
                         {% if reader.usersettings.is_verified %}
                         <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon" viewBox="0 0 24 24">
                            <path
@@ -242,7 +239,7 @@
                         </svg>
                         {% endif %}
                      </h4>
-                     <small class="font-medium text-gray-500">                        
+                     <small class="font-medium text-gray-500">
                         @{{reader.get_username}}
                      </small>
                      <ul class="list-inline text-sm pt-1 mb-1">
@@ -253,7 +250,7 @@
                            {{reader.job_title}}
                         </li>
                         {% endif %}
-               
+
                         <!-- ? User City -->
                         {% if reader.city %}
                         <li class="list-inline-item">
@@ -265,16 +262,16 @@
                      <p class="col-md-6 mx-auto text-gray-500 m-0 p-0 font-normal mb-3">
                         {{reader.bio}}
                      </p>
-                  </div>               
+                  </div>
                   <!-- Links -->
                   <div class="d-flex align-items-center justify-content-center">
                      {% if request.user.is_authenticated %}
-                        <a href="#" class="btn btn-blue btn-sm">Follow</a>
+                     <a href="#" class="btn btn-blue btn-sm">Follow</a>
                      {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-blue btn-sm">Follow</a>
+                     <a href="{% url 'login' %}" class="btn btn-blue btn-sm">Follow</a>
                      {% endif %}
                   </div>
-               </div>               
+               </div>
             </div>
          </div>
       </div>

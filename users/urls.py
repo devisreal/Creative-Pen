@@ -6,9 +6,10 @@ from pen_admin import views as admin_views
 app_name = 'users'
 
 urlpatterns = [   
-   path('', views.dashboard, name="dashboard"),     
+   path('dashboard/', views.dashboard, name="dashboard"),     
    path('request-access/<str:username>/', views.request_author_access, name="request_author_access"),
    path('bookmarks/', views.bookmarks, name="bookmarks"),
+   path('bookmark/<int:id>/', views.bookmark_add, name='bookmark_add'),
    path('profile/', views.user_profile, name="profile"),      
    path('edit-profile/', views.edit_profile, name="edit_profile"),
    path('delete-account', views.delete_account, name='delete_account'),   
