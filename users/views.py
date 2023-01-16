@@ -54,7 +54,6 @@ def bookmarks(request, slug):
       }
       return render(request, 'users/bookmarks.html', context)   
 
-
 @ login_required
 def bookmark_add(request, slug, id):
    post = get_object_or_404(Post, id=id)
@@ -115,6 +114,7 @@ def delete_account(request, slug):
    messages.success(request, "Account deleted successfully! 👋")
    return redirect('logout')
 
+
 def user_external(request, slug):
 
    try:
@@ -124,8 +124,10 @@ def user_external(request, slug):
       if user.is_superuser:
          return redirect('home')
       elif user.is_author:
+         author_posts = Post.objects.filter(post_author=user)
          context = {
             'author': user,
+            'author_posts': author_posts
          }
          return render(request, 'users/user-external.html', context)
       else:

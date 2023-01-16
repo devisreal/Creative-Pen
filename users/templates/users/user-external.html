@@ -137,40 +137,76 @@
    <div class="mt-5 pt-5">
       <h3 class="mb-4">Latest posts from {{author.get_full_name}}</h3>
       <div class="row gy-4" data-masonry='{"percentPosition": true }'>
-         {% for x in '1000000000' %}
+         {% for post in author_posts %}
 
          <div class="col-sm-6 col-lg-4 ">
             <div class="card border-0 ">
                <!-- Card img -->
                <div class="position-relative ">
-                  <img class="card-img" src="{% static 'img/4by3.jpg' %}" alt="Card image">
+                  <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
                   <div class="card-img-overlay d-flex align-items-start flex-column p-3">
                      <!-- Card overlay Top -->
                      <div class="w-100 mb-auto d-flex justify-content-end">
                         <div class="text-end ms-auto">
-                           <!-- Card format icon -->
-                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
-                              title="This post has video"><i class="fas fa-video"></i></div>
+                           <!-- * Post Type -->
+                           {% if post.post_type == video %}
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                              data-bs-title="This post has video" data-bs-placement="right">
+                              <i class="fas fa-video"></i>
+                           </div>
+                           {% elif post.post_type == video %}
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                              data-bs-title="This post has video" data-bs-placement="right">
+                              <i class="fa-solid fa-images text-md"></i>
+                           </div>
+                           {% endif %}
                         </div>
                      </div>
                      <!-- Card overlay bottom -->
                      <div class="w-100 mt-auto">
                         <!-- Card category -->
-                        <a href="{% url 'categories' %}"
-                           class="badge text-sm text-bg-blue mb-2 text-decoration-none font-outfit font-medium">
-                           <i class="fa-solid fa-layer-group me-2"></i> Technology
+                        <a href="{% url 'category' post.category.slug %}"
+                           class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                           <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
                         </a>
                      </div>
                   </div>
                </div>
                <div class="card-body px-0 pt-3">
-                  <h4 class="card-title">
-                     <a href="post-single-3.html" class="btn-link text-reset fw-bold">
-                        12 worst types of business accounts you follow on Twitter
-                     </a>
-                  </h4>
+                  <div class="d-sm-flex justify-content-between">
+                     <h4 class="card-title m-0 p-0 pb-2">
+                        <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                           {{post.post_title}}
+                        </a>
+                     </h4>
+         
+                     {% if request.user.is_authenticated %}
+                     <div class="w-fit col-1">
+         
+                        {% if request.user in post.bookmarks.all %}
+                        <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
+                           data-bs-toggle="tooltip" data-bs-title="Remove from bookmarks" data-bs-placement="bottom">
+                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-slash"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
+                           data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                        </a>
+                        {% endif %}
+         
+                     </div>
+                     {% else %}
+                     <div class="w-fit col-1">
+                        <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                           data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                        </a>
+                     </div>
+                     {% endif %}
+                  </div>
                   <p class="card-text">
-                     assistance joy. Unaffected at ye of compliment alteration to
+                     {{post.short_description}}
                   </p>
                   <!-- Card info -->
                   <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
@@ -178,15 +214,25 @@
                         <div class="nav-link">
                            <div class="d-flex align-items-center position-relative">
                               <div class="avatar avatar-xs">
-                                 <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                 {% if post.post_author.profile_picture %}
+                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
                                     alt="avatar">
+                                 {% else %}
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                 {% endif %}
                               </div>
-                              <span class="ms-3">by <a href="#"
-                                    class="stretched-link text-reset btn-link">Samuel</a></span>
+                              <span class="ms-3">by
+                                 <a href="{% url 'author_external' post.post_author.slug %}"
+                                    class="stretched-link text-reset btn-link">
+                                    {{post.post_author.get_short_name}}
+                                 </a>
+                              </span>
                            </div>
                         </div>
                      </li>
-                     <li class="nav-item">Jan 22, 2022</li>
+                     <li class="nav-item">
+                        {{post.date_posted|date:"dS M , Y"}}
+                     </li>
                      <li class="nav-item">
                         <a href="#" class="btn-link">
                            <i class="fa-regular fa-comments me-1"></i> 5
