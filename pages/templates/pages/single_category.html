@@ -16,7 +16,7 @@ Category - {{category.name}}
    <div class="">
       <div class="row">
          <div class="col-12">
-            <div class="card bg-dark-overlay-4 overflow-hidden h-350 text-center rounded-0 border-0" 
+            <div class="card bg-dark-overlay-4 card-bg-scale overflow-hidden h-350 text-center rounded-0 border-0" 
                {% if category.category_image %} style="
                   background-position: center left; 
                   background-size: cover; 
@@ -42,7 +42,18 @@ Category - {{category.name}}
                      </span>
                   </h1>
                   <div class="text-center position-relative">
-                     <span class="badge text-bg-light text-sm font-outfit font-medium">14 posts</span>
+                     <span class="badge text-bg-light text-sm font-outfit font-medium">
+                        {% if category_posts %}
+                           {{category_posts|length}}
+                           {% if category_posts|length > 1 %}
+                              posts
+                           {% else %}
+                              post
+                           {% endif %}
+                        {% else %}
+                           No posts
+                        {% endif %}
+                     </span>
                   </div>
                </div>
             </div>

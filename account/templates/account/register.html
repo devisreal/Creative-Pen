@@ -28,8 +28,19 @@ Register | Creative Pen
                   <path
                      d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
                </svg>
-               <input type="email" id="email" class="form-control" placeholder="john@email.com" name="email"
-                  title="Email Address" autocomplete="off" autofocus required>
+               <input 
+                  type="email" 
+                  id="email" 
+                  class="form-control" 
+                  placeholder="john@email.com" 
+                  name="email"
+                  title="Email Address" 
+                  autocomplete="off" 
+                  autofocus 
+                  required
+                  onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = 'john@email.com'"
+               >
             </div>
          </fieldset>
 
@@ -42,8 +53,18 @@ Register | Creative Pen
                   <path
                      d="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H144V144z" />
                </svg>
-               <input type="password" id="password" class="form-control" placeholder="********" name="password"
-                  autocomplete="off" title="Password" required>
+               <input 
+                  type="password" 
+                  id="password" 
+                  class="form-control" 
+                  placeholder="********" 
+                  name="password"
+                  autocomplete="off" 
+                  title="Password" 
+                  required
+                  onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = '********'"
+               >
             </div>
          </fieldset>
 
@@ -56,8 +77,18 @@ Register | Creative Pen
                   <path
                      d="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144v48H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64H144V144z" />
                </svg>
-               <input type="password" id="confirm_password" class="form-control" placeholder="********"
-                  name="confirm_password" autocomplete="off" title="Confirm Password" required>
+               <input 
+                  type="password" 
+                  id="confirm_password" 
+                  class="form-control" 
+                  placeholder="********"
+                  name="confirm_password" 
+                  autocomplete="off" 
+                  title="Confirm Password" 
+                  required
+                  onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = '********'"
+               >
             </div>
          </fieldset>
 
