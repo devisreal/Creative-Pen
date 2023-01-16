@@ -24,14 +24,6 @@ Categories
 {% block content %}
 {% include 'partials/messages.html' %}
 
-<a 
-   tabindex="0" 
-   class="btn btn-lg btn-danger" 
-   role="button" 
-   
->  
-   Dismissible popover
-</a>
 <div class="container mt-5">
    <div class="d-flex justify-content-between align-items-center">
       <h2 class="mb-2 mb-sm-0 d-flex align-items-center">
@@ -142,57 +134,12 @@ Categories
                            Edit
                         </a>
                      </li>
-                     <li>
-                        <a 
-                           class="dropdown-item " 
-                           href="#"
-                           data-bs-toggle="modal"
-                           data-bs-target="#deleteCategory{{category.id}}"
-                        >
-                           <i class="fa-solid fa-trash me-1 text-danger"></i>
-                           Delete
-                        </a>
-                     </li>
                   </ul>
                </div>
             </div>
          </div>         
       </div>
          
-      <!-- ! Delete Category Modal -->
-      <div class="modal fade" id="deleteCategory{{category.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-               <div class="p-2 pb-0 d-flex justify-content-end">
-                  <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
-                        <path
-                           d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
-                        </path>
-                     </svg>
-                  </a>
-               </div>
-               <div class="d-grid justify-content-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#dc2626"
-                     viewBox="0 0 24 24">
-                     <path
-                        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
-                     </path>
-                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
-                  </svg>
-                  <h6 class="text-center mt-3">Are you sure you want to delete '{{category.name}}' ?</h6>
-               </div>
-               <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
-                  <a href="{% url 'users:delete_category' request.user.slug category.id %}" class="btn btn-sm btn-red">
-                     Yes, I'm sure
-                  </a>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">No, cancel</button>
-               </div>
-            </div>
-         </div>
-      </div>
-
       {% endfor %}
    </div>
 </div>
@@ -290,8 +237,8 @@ Categories
 
 <script>
    var loadBgFile = function (event) {
-      var profile_bg_image = document.getElementById('profile-bg-output');
-      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+      var category_image = document.getElementById('profile-bg-output');
+      category_image.src = URL.createObjectURL(event.target.files[0]);
    };
 </script>
 {% endblock %}
