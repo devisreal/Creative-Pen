@@ -41,11 +41,13 @@ def categories(request):
 
 def single_category(request, slug):   
    try:
-      category =  PostCategory.objects.get(slug=slug)   
+      category =  PostCategory.objects.get(slug=slug)
+      category_posts = Post.objects.filter(category=category)
    except PostCategory.DoesNotExist:
       return redirect('error_page')
    context = {
-      'category': category,      
+      'category': category,   
+      'category_posts': category_posts
    }
    return render(request, 'pages/single_category.html', context)
 
