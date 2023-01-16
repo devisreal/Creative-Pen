@@ -105,37 +105,61 @@ Post Results
                      <!-- * Posts -->
                      <div class="tab-pane fade show active" id="posts-tab">
                         <article class="position-relative">
-
+                           {% if post_results %}                              
+                           
                            <div class="row">
                               <div class="col-12">
+                                 {% for post in post_results %}
+                                                                     
                                  <div class="card border up-hover rounded-lg p-4 mb-4">
                                     <div class="row g-3">
                                        <div class="col-lg-5">
                                           <!-- Categories -->
                                           <a href="single_category.html"
-                                             class="text-decoration-none badge text-bg-danger mb-2 font-outfit font-medium">
+                                             class="text-decoration-none badge text-bg-{{post.category.color}} mb-2 font-outfit font-medium">
                                              <i class="fa-solid fa-layer-group me-2 "></i>
-                                             Marketing
+                                             {{post.category.name}}
                                           </a>
                                           <!-- Title -->
                                           <h2 class="card-title">
-                                             <a href="" class="btn-link text-reset stretched-link">7
-                                                common mistakes everyone
-                                                makes while traveling</a>
+                                             <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset stretched-link">
+                                                {{post.post_title|truncatechars:32}}
+                                             </a>
                                           </h2>
                                           <!-- Author info -->
                                           <div class="d-flex align-items-center position-relative mt-3">
                                              <div class="avatar me-2">
-                                                <img class="avatar-img rounded-circle"
-                                                   src="{% static 'img/avatar.jpg' %}" alt="avatar">
+                                                {% if post.post_author.profile_picture %}
+                                                <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                                                {% else %}
+                                                <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                                {% endif %}
                                              </div>
                                              <div>
-                                                <h6 class="mb-1"><a href="#"
-                                                      class="stretched-link text-reset btn-link">Lori Ferguson</a>
+                                                <h6 class="mb-1">
+                                                   <a 
+                                                      href="{% url 'author_external' post.post_author.slug %}"
+                                                      class="stretched-link text-reset btn-link"
+                                                      data-bs-toggle="popover"  
+                                                      data-bs-trigger="hover"
+                                                      data-bs-delay="500"
+                                                      data-bs-html="true"
+                                                      data-bs-container="body"
+                                                      data-bs-offset="10,20"                                 
+                                                      data-bs-content="
+                                                         <div>
+                                                            <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
+                                                            <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                                         </div>
+                                                      "
+                                                   >
+                                                      {{post.post_author.get_full_name}}
+                                                   </a>
                                                 </h6>
                                                 <ul class="nav align-items-center small">
-                                                   <li class="nav-item me-3">Mar 07, 2022</li>
-                                                   <li class="nav-item"><i class="far fa-clock me-1"></i>5 min read
+                                                   <li class="nav-item me-3">{{post.date_posted|date:"dS M , Y"}}</li>
+                                                   <li class="nav-item">
+                                                      <i class="far fa-clock me-1"></i>{{post.read_time}} min read
                                                    </li>
                                                 </ul>
                                              </div>
@@ -144,52 +168,72 @@ Post Results
                                        <!-- Detail -->
                                        <div class="col-md-6 col-lg-4 h-fit align-self-center">
                                           <p class="">
-                                             For who thoroughly her boy estimating conviction. Removed demands
-                                             expense account in outward
-                                             tedious do. Particular way thoroughly unaffected projection favorable
-                                             Mrs can be projecting own.
+                                             {{post.short_description}}
                                           </p>
                                        </div>
                                        <!-- Image -->
                                        <div class="col-md-6 col-lg-3">
-                                          <img class="rounded-3 img-fluid" src="{% static 'img/4by3.jpg' %}"
-                                             alt="Card image">
+                                          <img class="rounded-3 img-fluid" src="{{post.post_image.url}}" alt="Card image" style="aspect-ratio: 4/3;object-fit: cover;">
                                        </div>
                                     </div>
                                  </div>
+                                 
+                                 {% endfor %}
                               </div>
                            </div>
 
+                           {% else %}
+
+                           <div class="d-grid justify-content-center pt-2 mt-5">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                                 <path
+                                    d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                                 </path>
+                                 <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                              </svg>
+                              <h4 class="text-center mt-3">No Posts</h4>
+                              <p>No post matches your search.</p>
+                           </div>
+                           
+                           {% endif %}
                         </article>
                      </div>
 
                      <!-- * Authors -->
                      <div class="tab-pane fade" id="authors-tab">
-                        <div class="row g-4">
+                        {% if author_results %}
 
+                        <div class="row g-4">
+                                 
+                           {% for author in author_results %}
+                                                         
                            <div class="col-sm-10 col-md-6 col-xl-4 mx-sm-auto mx-md-0">
                               <div class="card border p-2 position-relative">
                                  <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-center">
                                        <div class="avatar avatar-xl flex-shrink-0">
-                                          <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
-                                             alt="">
+                                          {% if author.profile_picture %}
+                                          <img class="avatar-img rounded-circle" src="{{author.profile_picture.url}}" alt="Author Avatar">
+                                          {% else %}
+                                          <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="Author Avatar">
+                                          {% endif %}
                                        </div>
                                     </div>
 
                                     <div class="text-center mt-2 d-block">
                                        <h4 class="mb-0 p-0">
-                                          <a href="" class="author-link">
-                                             Tunji Gbeborun
+                                          <a href="{% url 'author_external' author.slug %}" class="author-link">
+                                             {{author.get_full_name}}
                                           </a>
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon"
-                                             viewBox="0 0 24 24">
+                                          {% if author.usersettings.is_verified %}
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon" viewBox="0 0 24 24">
                                              <path
                                                 d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
                                              </path>
                                           </svg>
+                                          {% endif %}
                                        </h4>
-                                       <small class="">Editor at Creative Pen</small>
+                                       <small class="">{{author.job_title|default:''}}</small>
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-3">
@@ -224,7 +268,18 @@ Post Results
                                        </div>
                                     </div>
                                  </div>
-                                 <a href="" class="btn link-dark btn-sm position-absolute top-0 end-0">
+                                 <div class="d-flex gap-2 mt-2">
+                                    {% if request.user.is_authenticated %}
+                                    <a href="" class="btn btn-primary-soft w-100">
+                                       <i class="fa-solid fa-user-plus pe-2"></i> Follow
+                                    </a>
+                                    {% else %}
+                                    <a href="{% url 'login' %}" class="btn btn-primary-soft w-100">
+                                       <i class="fa-solid fa-user-plus pe-2"></i> Follow
+                                    </a>
+                                    {% endif %}
+                                 </div>
+                                 <a href="{% url 'author_external' author.slug %}" class="btn link-dark btn-sm position-absolute top-0 end-0">
                                     <span data-bs-toggle="tooltip" data-bs-title="Author Details"
                                        data-bs-placement="bottom"
                                        class="d-flex align-items-center justify-content-center">
@@ -234,55 +289,122 @@ Post Results
                               </div>
                            </div>
 
+                           {% endfor %}
                         </div>
+
+                        {% else %}
+                        
+                        <div class="d-grid justify-content-center pt-2 mt-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                              <path
+                                 d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                              </path>
+                              <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                           </svg>
+                           <h4 class="text-center mt-3">No Authors</h4>
+                           <p>No author matches your search.</p>
+                        </div>
+
+                        {% endif %}
                      </div>
 
                      <!-- * Readers -->
                      <div class="tab-pane fade" id="readers-tab">
+                        {% if readers_results %}
+                                                   
                         <div class="row g-4">
+                           {% for reader in readers_results %}
+                                                         
                            <div class="col-sm-10 col-md-6 col-xl-4 mx-sm-auto mx-md-0">
                               <div class="card border p-0 position-relative my-shadow-sm rounded-lg">
-                                 <div class="card-body">
+                                 <div class="card-body position-relative">
                                     <div class="d-flex align-items-center justify-content-between">
                                        <div class="avatar avatar-xl flex-shrink-0">
-                                          <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
-                                             alt="">
+                                          {% if reader.profile_picture %}                                             
+                                          <img class="avatar-img rounded-circle" src="{{reader.profile_picture.url}}" alt="Reader Avatar">
+                                          {% else %}
+                                          <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="Reader Avatar">
+                                          {% endif %}
                                        </div>
 
                                        <div class="text-center mt-2 d-block">
                                           <h4 class="mb-0 p-0">
-                                             <a href="" class="author-link">
-                                                Tunji Gbeborun
+                                             <a href="{% url 'author_external' reader.slug %}" class="author-link">
+                                                {{reader.get_full_name}}
                                              </a>
                                           </h4>
                                           <small class="">Editor at Creative Pen</small>
+                                          
                                        </div>
-                                    </div>
+                                    </div> 
                                     
-                                    <div class="d-flex gap-2 mt-4">
-                                       {% if request.user.is_authenticated %}                                       
-                                       <a href="" class="btn btn-primary-soft w-100">
-                                          <i class="fa-solid fa-user-plus pe-2"></i> Follow
-                                       </a>
-                                       {% else %}
-                                       <a href="{% url 'login' %}" class="btn btn-primary-soft w-100">
-                                          <i class="fa-solid fa-user-plus pe-2"></i> Follow
-                                       </a>
-                                       {% endif %}
-                                    </div>
+                                    <a href="{% url 'author_external' reader.slug %}" class="btn link-dark btn-sm position-absolute top-0 end-0">
+                                       <span data-bs-toggle="tooltip" data-bs-title="Reader Details" data-bs-placement="bottom"
+                                          class="d-flex align-items-center justify-content-center">
+                                          <i class='bx bx-link-external text-lg'></i>
+                                       </span>
+                                    </a>
                                  </div>
                               </div>
                            </div>
+
+                           {% endfor %}
                         </div>
+
+                        {% else %}
+                        
+                        <div class="d-grid justify-content-center pt-2 mt-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                              <path
+                                 d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                              </path>
+                              <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                           </svg>
+                           <h4 class="text-center mt-3">No Readers</h4>
+                           <p>No reader matches your search.</p>
+                        </div>
+
+                        {% endif %}
                      </div>
 
                      <!-- * Categories -->
                      <div class="tab-pane fade" id="categories-tab">
-                        <div class="row g-4">
-                           <div class="col-sm-10 col-md-6 col-xl-4 mx-sm-auto mx-md-0">
-                              Categories
+
+                        {% if categories_result %}
+                                                   
+                        <div class="row g-2">
+                           {% for category in categories_result%}
+                           <div class="col-md-4">
+                              <div class="card border-0 card-overlay-bottom card-img-scale">
+                                 <img class="card-img rounded-2" src="{{category.category_image.url}}" alt="card image"
+                                    style="height: 200px; object-fit: cover;">
+                                 <div class="card-img-overlay d-flex px-3 px-sm-5">
+                                    <h5 class="mt-auto mx-auto">
+                                       <a href="{% url 'category' category.slug %}" class="stretched-link btn-link fw-bold text-white">
+                                          {{category.name}}
+                                       </a>
+                                    </h5>
+                                 </div>
+                              </div>
                            </div>
+
+                           {% endfor %}
                         </div>
+                        
+                        {% else %}
+                        
+                        <div class="d-grid justify-content-center pt-2 mt-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                              <path
+                                 d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                              </path>
+                              <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                           </svg>
+                           <h4 class="text-center mt-3">No Categories</h4>
+                           <p>No category matches your search.</p>
+                        </div>
+
+                        {% endif %}
                      </div>
 
                   </div>

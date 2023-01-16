@@ -3,6 +3,7 @@ from .models import ContactDetail, Subscriber
 from django.contrib import messages
 from account.models import User
 from blog.models import PostCategory, Post
+from django.db.models import Q
 
 
 def home(request):
@@ -75,11 +76,46 @@ def contact(request):
 def search_posts(request):
    if 'q' in request.GET:
       querystring = request.GET['q']      
-      if querystring:                  
-            context = {
-               'querystring': querystring               
-            }
-            return render(request, 'pages/post_results.html', context)         
+      if querystring:
+         post_results = Post.objects.filter(
+            Q(post_title__icontains=querystring) |
+            Q(post_author__username__icontains=querystring) |
+            Q(post_type__icontains=querystring) |            
+            Q(slug__icontains=querystring) |
+            Q(short_description__icontains=querystring)
+         )
+
+         author_results = User.objects.filter(is_author=True).filter(
+            Q(username__icontains=querystring) |
+            Q(first_name__icontains=querystring) |
+            Q(last_name__icontains=querystring) |
+            Q(email__icontains=querystring) |
+            Q(slug__icontains=querystring) |
+            Q(job_title__icontains=querystring)
+         ).order_by('first_name')
+         
+         readers_results = User.objects.filter(is_author=False).filter(
+            Q(username__icontains=querystring) |
+            Q(first_name__icontains=querystring) |
+            Q(last_name__icontains=querystring) |
+            Q(email__icontains=querystring) |
+            Q(slug__icontains=querystring) |
+            Q(job_title__icontains=querystring)
+         ).order_by('first_name')
+
+         categories_result = PostCategory.objects.filter(
+            Q(name__icontains=querystring) |            
+            Q(slug__icontains=querystring)
+         )
+
+         context = {
+            'querystring': querystring,
+            'post_results': post_results,
+            'author_results': author_results,
+            'readers_results': readers_results,
+            'categories_result': categories_result
+         }
+         return render(request, 'pages/post_results.html', context)         
       else:
          messages.error(request, 'Please enter a search item!')
          return redirect(request.META.get("HTTP_REFERER"))    
