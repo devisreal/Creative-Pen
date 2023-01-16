@@ -73,8 +73,14 @@ Bookmarks ({{user.username}})
                            data-bs-toggle="tooltip" 
                            data-bs-title="Remove from bookmarks" 
                            data-bs-placement="bottom"
-                        >
-                           <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-slash"></i>
+                        >                           
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 2L2 22" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M20.68 8.70996V19.71C20.68 21.72 19.24 22.57 17.48 21.59L11 17.54" stroke="#292D32" stroke-width="1.5"
+                                 stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M3.31995 19.95V5.86C3.31995 3.74 5.04995 2 7.17995 2H16.8299C18.0399 2 19.1199 2.56 19.8299 3.44"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
                         </a>
                      </div>
 
@@ -97,8 +103,22 @@ Bookmarks ({{user.username}})
                                  {% endif %}
                               </div>
                               <span class="ms-3">by
-                                 <a href="{% url 'author_external' post.post_author.slug %}"
-                                    class="stretched-link text-reset btn-link">
+                                 <a 
+                                    href="{% url 'author_external' post.post_author.slug %}"
+                                    class="stretched-link text-reset btn-link"
+                                    data-bs-toggle="popover"  
+                                    data-bs-trigger="hover"
+                                    data-bs-delay="500"
+                                    data-bs-html="true"
+                                    data-bs-container="body"
+                                    data-bs-offset="10,20"                                 
+                                    data-bs-content="
+                                    <div>
+                                       <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
+                                       <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                    </div>
+                                 "
+                                 >
                                     {{post.post_author.get_short_name}}
                                  </a>
                               </span>

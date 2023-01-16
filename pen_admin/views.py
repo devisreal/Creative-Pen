@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from pages.models import ContactDetail, Subscriber
 from account.models import User, UserSettings
 from datetime import datetime
-from blog.models import PostCategory
+from blog.models import PostCategory, Post
 from blog.forms import AddCategoryForm
 
 # ! Staffs
@@ -90,9 +90,14 @@ def author_single(request, slug, username):
       messages.warning(request, 'You are not authorized to access that page')      
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      author = User.objects.filter(is_author=True).get(username=username)
+      try:
+         author = User.objects.filter(is_author=True).get(username=username)
+         author_posts = Post.objects.filter(post_author=author)
+      except User.DoesNotExist:
+         return redirect('error_page')      
       context = {
-         'author': author
+         'author': author,
+         'author_posts': author_posts
       }
       return render(request, 'pen_admin/single_author.html', context)
 
@@ -299,6 +304,7 @@ def categories(request, slug):
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:  
       categories = PostCategory.objects.all().order_by('name')   
+      no_of_posts = Post.objects.all()
       if request.method == 'POST':
          add_category_form = AddCategoryForm(request.POST or None, request.FILES)
          if add_category_form.is_valid():
@@ -312,9 +318,16 @@ def categories(request, slug):
          add_category_form = AddCategoryForm()
       context = {
          'categories': categories,
+         'no_of_posts': no_of_posts,
          'add_category_form': add_category_form
       }
       return render(request, 'pen_admin/categories.html', context)
+
+from django import template
+register = template.Library()
+@register.filter
+def in_category(things, category):
+   return things.filter(category=category)
 
 @login_required
 def edit_category(request, slug, id):
