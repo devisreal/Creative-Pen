@@ -17,11 +17,14 @@ Category - {{category.name}}
       <div class="row">
          <div class="col-12">
             <div class="card bg-dark-overlay-4 card-bg-scale overflow-hidden h-350 text-center rounded-0 border-0" 
-               {% if category.category_image %} style="
+            {% if category.category_image %} 
+               style="
                   background-position: center left; 
                   background-size: cover; 
                   background-image: url('{{category.category_image.url}}');
-               " {% else %} style="
+               " 
+               {% else %} 
+               style="
                   background-position: center left; 
                   background-size: cover; 
                   background-image: url('{% static "img/user/bkg_placeholder1.jpg" %}'); "
@@ -42,16 +45,14 @@ Category - {{category.name}}
                      </span>
                   </h1>
                   <div class="text-center position-relative">
-                     <span class="badge text-bg-light text-sm font-outfit font-medium">
+                     <span class="badge text-bg-light text-sm font-outfit font-medium">                     
                         {% if category_posts %}
-                           {{category_posts|length}}
-                           {% if category_posts|length > 1 %}
-                              posts
-                           {% else %}
-                              post
-                           {% endif %}
+                        {% with category_posts=category_posts|length %}
+                        {{category_posts}}
+                        post{{ category_posts|pluralize }}
+                        {% endwith %}
                         {% else %}
-                           No posts
+                        No posts
                         {% endif %}
                      </span>
                   </div>
@@ -65,7 +66,7 @@ Category - {{category.name}}
 
 
 {% if category_posts %}
-   
+
 <div class="container mt-5 pt-5">
    <div class="row gy-4" data-masonry='{"percentPosition": true }'>
 
@@ -83,13 +84,13 @@ Category - {{category.name}}
                      <div class="text-end ms-auto">
                         <!-- * Post Type -->
                         {% if post.post_type == video %}
-                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                           data-bs-title="This post has video" data-bs-placement="right">
+                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                           data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                            <i class="fas fa-video"></i>
                         </div>
                         {% elif post.post_type == video %}
-                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                           data-bs-title="This post has video" data-bs-placement="right">
+                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                           data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                            <i class="fa-solid fa-images text-md"></i>
                         </div>
                         {% endif %}
@@ -106,16 +107,16 @@ Category - {{category.name}}
                </div>
             </div>
             <div class="card-body px-0 pt-3">
-               <div class="d-sm-flex justify-content-between">
+               <div class="d-flex justify-content-between">
                   <h4 class="card-title m-0 p-0 pb-2">
                      <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
                         {{post.post_title}}
                      </a>
                   </h4>
-      
+
                   {% if request.user.is_authenticated %}
                   <div class="w-fit col-1">
-      
+
                      {% if request.user in post.bookmarks.all %}
                      <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
                         data-bs-toggle="tooltip" data-bs-title="Already in bookmarks" data-bs-placement="bottom">
@@ -128,16 +129,18 @@ Category - {{category.name}}
                      {% else %}
                      <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
                         data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom">
-                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;"
+                           icon-name="bookmark-add"></i>
                      </a>
                      {% endif %}
-      
+
                   </div>
                   {% else %}
                   <div class="w-fit col-1">
                      <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
                         data-bs-title="Add to bookmarks" data-bs-placement="bottom">
-                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                        <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;"
+                           icon-name="bookmark-add"></i>
                      </a>
                   </div>
                   {% endif %}
@@ -146,7 +149,7 @@ Category - {{category.name}}
                   {{post.short_description}}
                </p>
                <!-- Card info -->
-               <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+               <ul class="nav nav-divider align-items-center">
                   <li class="nav-item">
                      <div class="nav-link">
                         <div class="d-flex align-items-center position-relative">
@@ -155,26 +158,20 @@ Category - {{category.name}}
                               <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
                                  alt="avatar">
                               {% else %}
-                              <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                              <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                 alt="avatar">
                               {% endif %}
                            </div>
                            <span class="ms-3">by
-                              <a 
-                                 href="{% url 'author_external' post.post_author.slug %}"
-                                 class="stretched-link text-reset btn-link"
-                                 data-bs-toggle="popover"  
-                                 data-bs-trigger="hover"
-                                 data-bs-delay="500"
-                                 data-bs-html="true"
-                                 data-bs-container="body"
-                                 data-bs-offset="10,20"                                 
-                                 data-bs-content="
+                              <a href="{% url 'author_external' post.post_author.slug %}"
+                                 class="stretched-link text-reset btn-link" data-bs-toggle="popover"
+                                 data-bs-trigger="hover" data-bs-delay="500" data-bs-html="true"
+                                 data-bs-container="body" data-bs-offset="10,20" data-bs-content="
                                     <div>
                                        <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
                                        <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
                                     </div>
-                                 "
-                              >
+                                 ">
                                  {{post.post_author.get_short_name}}
                               </a>
                            </span>

@@ -6,6 +6,7 @@ from account.models import User, UserSettings
 from datetime import datetime
 from blog.models import PostCategory, Post
 from blog.forms import AddCategoryForm
+from django.db.models import Count
 
 # ! Staffs
 @login_required
@@ -303,8 +304,8 @@ def categories(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:  
-      categories = PostCategory.objects.all().order_by('name')   
-      no_of_posts = Post.objects.all().count
+      categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')   
+            
       if request.method == 'POST':
          add_category_form = AddCategoryForm(request.POST or None, request.FILES)
          if add_category_form.is_valid():
@@ -317,8 +318,7 @@ def categories(request, slug):
       else:
          add_category_form = AddCategoryForm()
       context = {
-         'categories': categories,
-         'no_of_posts': no_of_posts,
+         'categories': categories,         
          'add_category_form': add_category_form
       }
       return render(request, 'pen_admin/categories.html', context)

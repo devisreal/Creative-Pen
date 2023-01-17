@@ -211,7 +211,9 @@
                      <h6 class="m-0 text-{{category.color}} text-capitalize">
                         {{category.name}}
                      </h6>
-                     <a href="{% url 'category' category.slug %}" class="link-light font-outfit badge bg-{{category.color}} stretched-link text-decoration-none ">25</a>
+                     <a href="{% url 'category' category.slug %}" class="link-light font-outfit badge bg-{{category.color}} stretched-link text-decoration-none ">
+                        {{category.posts_count}}
+                     </a>
                   </div>
                   {% endfor %}
 

@@ -14,7 +14,7 @@ class PostCategory(models.Model):
    name = models.CharField(max_length=150)
    color = models.CharField(max_length=20, default='blue', null=True, blank=True)
    emoji = models.CharField(max_length=5, null=True, blank=True)
-   short_description = models.TextField(max_length=100, null=True, blank=True)
+   short_description = models.TextField(max_length=200, null=True, blank=True)
    category_image = models.ImageField(
       null=True,
       blank=True,

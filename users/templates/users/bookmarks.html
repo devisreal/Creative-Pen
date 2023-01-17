@@ -13,16 +13,16 @@ Bookmarks ({{user.username}})
 
 
 <div class="container">
-   
+
 
    {% if bookmarks %}
    <h1 class="mt-4">Bookmarks</h1>
-   <div class="mt-5">      
+   <div class="mt-5">
       <div class="row gy-4" data-masonry='{"percentPosition": true }'>
-   
+
          {% for post in bookmarks %}
-   
-   
+
+
          <div class="col-sm-6 col-lg-4 ">
             <div class="card border-0 ">
                <!-- Card img -->
@@ -34,13 +34,13 @@ Bookmarks ({{user.username}})
                         <div class="text-end ms-auto">
                            <!-- * Post Type -->
                            {% if post.post_type == video %}
-                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                              data-bs-title="This post has video" data-bs-placement="right">
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                              data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                               <i class="fas fa-video"></i>
                            </div>
                            {% elif post.post_type == video %}
-                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                              data-bs-title="This post has video" data-bs-placement="right">
+                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                              data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                               <i class="fa-solid fa-images text-md"></i>
                            </div>
                            {% endif %}
@@ -57,28 +57,26 @@ Bookmarks ({{user.username}})
                   </div>
                </div>
                <div class="card-body px-0 pt-3">
-                  <div class="d-sm-flex justify-content-between">
+                  <div class="d-flex justify-content-between">
                      <h4 class="card-title m-0 p-0 pb-2">
                         <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
                            {{post.post_title}}
                         </a>
                      </h4>
 
-                     {% if request.user.is_authenticated %}                        
-                     
-                     <div class="w-fit col-1">                        
-                        <a 
-                           href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
-                           class="text-decoration-none" 
-                           data-bs-toggle="tooltip" 
-                           data-bs-title="Remove from bookmarks" 
-                           data-bs-placement="bottom"
-                        >                           
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path d="M22 2L2 22" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M20.68 8.70996V19.71C20.68 21.72 19.24 22.57 17.48 21.59L11 17.54" stroke="#292D32" stroke-width="1.5"
-                                 stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M3.31995 19.95V5.86C3.31995 3.74 5.04995 2 7.17995 2H16.8299C18.0399 2 19.1199 2.56 19.8299 3.44"
+                     {% if request.user.is_authenticated %}
+
+                     <div class="w-fit col-1">
+                        <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
+                           data-bs-toggle="tooltip" data-bs-title="Remove from bookmarks" data-bs-placement="bottom">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none">
+                              <path d="M22 2L2 22" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                              <path d="M20.68 8.70996V19.71C20.68 21.72 19.24 22.57 17.48 21.59L11 17.54"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path
+                                 d="M3.31995 19.95V5.86C3.31995 3.74 5.04995 2 7.17995 2H16.8299C18.0399 2 19.1199 2.56 19.8299 3.44"
                                  stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                            </svg>
                         </a>
@@ -90,7 +88,7 @@ Bookmarks ({{user.username}})
                      {{post.short_description}}
                   </p>
                   <!-- Card info -->
-                  <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                  <ul class="nav nav-divider align-items-center">
                      <li class="nav-item">
                         <div class="nav-link">
                            <div class="d-flex align-items-center position-relative">
@@ -99,26 +97,20 @@ Bookmarks ({{user.username}})
                                  <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
                                     alt="avatar">
                                  {% else %}
-                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                    alt="avatar">
                                  {% endif %}
                               </div>
                               <span class="ms-3">by
-                                 <a 
-                                    href="{% url 'author_external' post.post_author.slug %}"
-                                    class="stretched-link text-reset btn-link"
-                                    data-bs-toggle="popover"  
-                                    data-bs-trigger="hover"
-                                    data-bs-delay="500"
-                                    data-bs-html="true"
-                                    data-bs-container="body"
-                                    data-bs-offset="10,20"                                 
-                                    data-bs-content="
+                                 <a href="{% url 'author_external' post.post_author.slug %}"
+                                    class="stretched-link text-reset btn-link" data-bs-toggle="popover"
+                                    data-bs-trigger="hover" data-bs-delay="500" data-bs-html="true"
+                                    data-bs-container="body" data-bs-offset="10,20" data-bs-content="
                                     <div>
                                        <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
                                        <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
                                     </div>
-                                 "
-                                 >
+                                 ">
                                     {{post.post_author.get_short_name}}
                                  </a>
                               </span>
@@ -137,13 +129,13 @@ Bookmarks ({{user.username}})
                </div>
             </div>
          </div>
-   
+
          {% endfor %}
       </div>
    </div>
 
    {% else %}
-   
+
    <div class="d-grid justify-content-center py-5">
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
          <path
@@ -153,7 +145,7 @@ Bookmarks ({{user.username}})
       </svg>
       <h4 class="text-center mt-3">No Bookmarks</h4>
       <p>You have no post in your bookmarks.</p>
-   </div>   
+   </div>
 
    {% endif %}
 

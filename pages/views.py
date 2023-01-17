@@ -80,16 +80,15 @@ def search_posts(request):
          post_results = Post.objects.filter(
             Q(post_title__icontains=querystring) |
             Q(post_author__username__icontains=querystring) |
-            Q(post_type__icontains=querystring) |            
-            Q(slug__icontains=querystring) |
-            Q(short_description__icontains=querystring)
+            Q(post_type__icontains=querystring) |
+            Q(category__name__icontains=querystring) |
+            Q(slug__icontains=querystring)
          )
 
          author_results = User.objects.filter(is_author=True).filter(
             Q(username__icontains=querystring) |
             Q(first_name__icontains=querystring) |
             Q(last_name__icontains=querystring) |
-            Q(email__icontains=querystring) |
             Q(slug__icontains=querystring) |
             Q(job_title__icontains=querystring)
          ).order_by('first_name')
@@ -98,7 +97,6 @@ def search_posts(request):
             Q(username__icontains=querystring) |
             Q(first_name__icontains=querystring) |
             Q(last_name__icontains=querystring) |
-            Q(email__icontains=querystring) |
             Q(slug__icontains=querystring) |
             Q(job_title__icontains=querystring)
          ).order_by('first_name')

@@ -65,7 +65,7 @@ Author ({{author.username}})
                      <li class="list-inline-item">
                         <i class="iconsax me-1 pb-1" icon-name="mail"></i>
                         {{author.email}}
-                     </li>                     
+                     </li>
 
                      <!-- ? Author Gender -->
                      <li class="list-inline-item">
@@ -115,7 +115,7 @@ Author ({{author.username}})
             <h3 class="mb-4">Published Posts</h3>
             <div class="row gy-4" data-masonry='{"percentPosition": true }'>
                {% for post in author_posts %}
-               
+
                <div class="col-sm-6 col-lg-4 ">
                   <div class="card border-0 ">
                      <!-- Card img -->
@@ -127,13 +127,15 @@ Author ({{author.username}})
                               <div class="text-end ms-auto">
                                  <!-- * Post Type -->
                                  {% if post.post_type == video %}
-                                 <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                    data-bs-title="This post has video" data-bs-placement="right">
+                                 <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                    data-bs-toggle="tooltip" data-bs-title="This post has video"
+                                    data-bs-placement="right">
                                     <i class="fas fa-video"></i>
                                  </div>
                                  {% elif post.post_type == video %}
-                                 <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                    data-bs-title="This post has video" data-bs-placement="right">
+                                 <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                    data-bs-toggle="tooltip" data-bs-title="This post has video"
+                                    data-bs-placement="right">
                                     <i class="fa-solid fa-images text-md"></i>
                                  </div>
                                  {% endif %}
@@ -150,38 +152,43 @@ Author ({{author.username}})
                         </div>
                      </div>
                      <div class="card-body px-0 pt-3">
-                        <div class="d-sm-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
                            <h4 class="card-title m-0 p-0 pb-2">
                               <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
                                  {{post.post_title}}
                               </a>
                            </h4>
-               
+
                            {% if request.user.is_authenticated %}
                            <div class="w-fit col-1">
-               
+
                               {% if request.user in post.bookmarks.all %}
                               <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
-                                 data-bs-toggle="tooltip" data-bs-title="Already in bookmarks" data-bs-placement="bottom">
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 data-bs-toggle="tooltip" data-bs-title="Already in bookmarks"
+                                 data-bs-placement="bottom">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
                                     <path
                                        d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
                                        fill="#292D32" />
                                  </svg>
                               </a>
                               {% else %}
-                              <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
-                                 data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom">
-                                 <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                              <a href="{% url 'users:bookmark_add' request.user.slug post.id %}"
+                                 class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                                 data-bs-placement="bottom">
+                                 <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;"
+                                    icon-name="bookmark-add"></i>
                               </a>
                               {% endif %}
-               
+
                            </div>
                            {% else %}
                            <div class="w-fit col-1">
                               <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
                                  data-bs-title="Add to bookmarks" data-bs-placement="bottom">
-                                 <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;" icon-name="bookmark-add"></i>
+                                 <i class="iconsax" style="--Iconsax-Size: 24px;--Iconsax-Color: #000;"
+                                    icon-name="bookmark-add"></i>
                               </a>
                            </div>
                            {% endif %}
@@ -190,23 +197,24 @@ Author ({{author.username}})
                            {{post.short_description}}
                         </p>
                         <!-- Card info -->
-                        <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                        <ul class="nav nav-divider align-items-center">
                            <li class="nav-item">
                               <div class="nav-link">
                                  <div class="d-flex align-items-center position-relative">
                                     <div class="avatar avatar-xs">
                                        {% if post.post_author.profile_picture %}
-                                       <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
-                                          alt="avatar">
+                                       <img class="avatar-img rounded-circle"
+                                          src="{{post.post_author.profile_picture.url}}" alt="avatar">
                                        {% else %}
-                                       <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                       <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                          alt="avatar">
                                        {% endif %}
                                     </div>
                                     <span class="ms-3">by
                                        <a href="{% url 'author_external' post.post_author.slug %}"
-                                          class="stretched-link text-reset btn-link" data-bs-toggle="popover" data-bs-trigger="hover"
-                                          data-bs-delay="500" data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
-                                          data-bs-content="
+                                          class="stretched-link text-reset btn-link" data-bs-toggle="popover"
+                                          data-bs-trigger="hover" data-bs-delay="500" data-bs-html="true"
+                                          data-bs-container="body" data-bs-offset="10,20" data-bs-content="
                                                    <div>
                                                       <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
                                                       <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
@@ -230,7 +238,7 @@ Author ({{author.username}})
                      </div>
                   </div>
                </div>
-               
+
                {% endfor %}
             </div>
          </div>
@@ -238,7 +246,8 @@ Author ({{author.username}})
          {% else %}
 
          <div class="d-grid justify-content-center pt-5 mt-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+               viewBox="0 0 24 24">
                <path
                   d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
                </path>

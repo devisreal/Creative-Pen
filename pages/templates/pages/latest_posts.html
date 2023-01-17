@@ -8,117 +8,12 @@ Latest Posts
 {% block content %}
 {% include 'partials/messages.html' %}
 
-
-<!-- <div class="container-lg px-4 px-sm-2 px-md-4 px-lg-0 my-5">
-   <div class="row" data-masonry='{"percentPosition": true }'>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4 ">
-         <div class="card">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-               role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-               <title>Placeholder</title>
-               <rect width="100%" height="100%" fill="#868e96" /><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image
-                  cap</text>
-            </svg>
-
-            <div class="card-body">
-               <h5 class="card-title">Card title that wraps to a new line</h5>
-               <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                  content. This content is a little bit longer.</p>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card p-3">
-            <figure class="p-3 mb-0">
-               <blockquote class="blockquote">
-                  <p>A well-known quote, contained in a blockquote element.</p>
-               </blockquote>
-               <figcaption class="blockquote-footer mb-0 text-muted">
-                  Someone famous in <cite title="Source Title">Source Title</cite>
-               </figcaption>
-            </figure>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-               role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-               <title>Placeholder</title>
-               <rect width="100%" height="100%" fill="#868e96" /><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image
-                  cap</text>
-            </svg>
-
-            <div class="card-body">
-               <h5 class="card-title">Card title</h5>
-               <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card bg-primary text-white text-center p-3">
-            <figure class="mb-0">
-               <blockquote class="blockquote">
-                  <p>A well-known quote, contained in a blockquote element.</p>
-               </blockquote>
-               <figcaption class="blockquote-footer mb-0 text-white">
-                  Someone famous in <cite title="Source Title">Source Title</cite>
-               </figcaption>
-            </figure>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card text-center">
-            <div class="card-body">
-               <h5 class="card-title">Card title</h5>
-               <p class="card-text">This card has a regular title and short paragraph of text below it.</p>
-               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card">
-            <svg class="bd-placeholder-img card-img" width="100%" height="260" xmlns="http://www.w3.org/2000/svg"
-               role="img" aria-label="Placeholder: Card image" preserveAspectRatio="xMidYMid slice" focusable="false">
-               <title>Placeholder</title>
-               <rect width="100%" height="100%" fill="#868e96" /><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Card
-                  image</text>
-            </svg>
-
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card p-3 text-end">
-            <figure class="mb-0">
-               <blockquote class="blockquote">
-                  <p>A well-known quote, contained in a blockquote element.</p>
-               </blockquote>
-               <figcaption class="blockquote-footer mb-0 text-muted">
-                  Someone famous in <cite title="Source Title">Source Title</cite>
-               </figcaption>
-            </figure>
-         </div>
-      </div>
-      <div class="col-sm-6 mx-auto col-lg-4 mb-4">
-         <div class="card">
-            <div class="card-body">
-               <h5 class="card-title">Card title</h5>
-               <p class="card-text">This is another card with title and supporting text below. This card has some
-                  additional content to make it slightly taller overall.</p>
-               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-         </div>
-      </div>
-   </div>
-</div> -->
-
-
-<div class="container mt-5">
+<div class="container-md mt-5 ">
    <div class="row gy-4" data-masonry='{"percentPosition": true }'>
 
       {% for post in posts %}
-         
-      
+
+
       <div class="col-sm-6 col-lg-4 ">
          <div class="card border-0 ">
             <!-- Card img -->
@@ -128,23 +23,15 @@ Latest Posts
                   <!-- Card overlay Top -->
                   <div class="w-100 mb-auto d-flex justify-content-end">
                      <div class="text-end ms-auto">
-                        <!-- * Post Type -->                        
-                        {% if post.post_type == video %}                                                   
-                        <div 
-                           class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" 
-                           data-bs-toggle="tooltip" 
-                           data-bs-title="This post has video"
-                           data-bs-placement="right"
-                        >
+                        <!-- * Post Type -->
+                        {% if post.post_type == video %}
+                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                           data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                            <i class="fas fa-video"></i>
                         </div>
                         {% elif post.post_type == video %}
-                        <div 
-                           class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" 
-                           data-bs-toggle="tooltip" 
-                           data-bs-title="This post has video"
-                           data-bs-placement="right"
-                        >                           
+                        <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                           data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
                            <i class="fa-solid fa-images text-md"></i>
                         </div>
                         {% endif %}
@@ -153,75 +40,58 @@ Latest Posts
                   <!-- Card overlay bottom -->
                   <div class="w-100 mt-auto">
                      <!-- Card category -->
-                     <a 
-                        href="{% url 'category' post.category.slug %}" 
-                        class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium"
-                     >
+                     <a href="{% url 'category' post.category.slug %}"
+                        class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
                         <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
                      </a>
                   </div>
                </div>
             </div>
             <div class="card-body px-0 pt-3">
-               <div class="d-sm-flex justify-content-between">
+               <div class="d-flex justify-content-between">
                   <h4 class="card-title m-0 p-0 pb-2">
                      <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
                         {{post.post_title}}
                      </a>
                   </h4>
-               
-                  {% if request.user.is_authenticated %}               
+
+                  {% if request.user.is_authenticated %}
                   <div class="w-fit col-1">
 
                      {% if request.user in post.bookmarks.all %}
-                     <a 
-                        href="{% url 'users:bookmarks' request.user.slug %}" 
-                        class="text-decoration-none" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Already in bookmarks"
-                        data-bs-placement="bottom"
-                     >
+                     <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
+                        data-bs-toggle="tooltip" data-bs-title="Already in bookmarks" data-bs-placement="bottom">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                            <path
                               d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
                               fill="#292D32" />
                         </svg>
-                     </a>                        
+                     </a>
                      {% else %}
-                     <a 
-                        href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
-                        class="text-decoration-none" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Add to bookmarks"
-                        data-bs-placement="bottom"
-                     >
+                     <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
+                        data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                           <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                           <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                              stroke-linejoin="round" />
+                           <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
                            <path
                               d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                      </a>
                      {% endif %}
-                                       
-                  </div>               
+
+                  </div>
                   {% else %}
                   <div class="w-fit col-1">
-                     <a 
-                        href="{% url 'login' %}" 
-                        class="text-decoration-none" 
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Add to bookmarks"
-                        data-bs-placement="bottom"
-                     >
+                     <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                        data-bs-title="Add to bookmarks" data-bs-placement="bottom">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                           <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                              stroke-linejoin="round" />
-                           <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                              stroke-linejoin="round" />
+                           <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
                            <path
                               d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -231,38 +101,32 @@ Latest Posts
                   {% endif %}
                </div>
                <p class="card-text">
-                  {{post.short_description}}                  
+                  {{post.short_description}}
                </p>
                <!-- Card info -->
-               <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+               <ul class="nav nav-divider align-items-center">
                   <li class="nav-item">
                      <div class="nav-link">
                         <div class="d-flex align-items-center position-relative">
                            <div class="avatar avatar-xs">
-                              {% if post.post_author.profile_picture %}                                 
-                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                              {% if post.post_author.profile_picture %}
+                              <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
+                                 alt="avatar">
                               {% else %}
-                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                              <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                 alt="avatar">
                               {% endif %}
                            </div>
-                           <span 
-                              class="ms-3">by 
-                              <a 
-                                 href="{% url 'author_external' post.post_author.slug %}"
-                                 class="stretched-link text-reset btn-link"
-                                 data-bs-toggle="popover"  
-                                 data-bs-trigger="hover"
-                                 data-bs-delay="500"
-                                 data-bs-html="true"
-                                 data-bs-container="body"
-                                 data-bs-offset="10,20"                                 
-                                 data-bs-content="
+                           <span class="ms-3">by
+                              <a href="{% url 'author_external' post.post_author.slug %}"
+                                 class="stretched-link text-reset btn-link" data-bs-toggle="popover"
+                                 data-bs-trigger="hover" data-bs-delay="500" data-bs-html="true"
+                                 data-bs-container="body" data-bs-offset="10,20" data-bs-content="
                                     <div>
                                        <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
                                        <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
                                     </div>
-                                 "
-                              >
+                                 ">
                                  {{post.post_author.get_short_name}}
                               </a>
                            </span>

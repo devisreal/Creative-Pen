@@ -82,10 +82,14 @@ Categories
                <!-- Followers and Post -->
                <div class="d-flex justify-content-between">
                   <!-- Total post -->
+                  {% with total_posts=category.posts_count %}                  
                   <div>
-                     <h5 class="mb-0">540</h5>
-                     <h6 class="mb-0 fw-light">Total posts</h6>
+                     <h5 class="mb-0">{{total_posts}}</h5>
+                     <h6 class="mb-0 fw-light">
+                        Total post{{ total_posts|pluralize }}
+                     </h6>
                   </div>
+                  {% endwith %}
    
                   <!-- Avatar group -->
                   <ul class="avatar-group mb-0">
