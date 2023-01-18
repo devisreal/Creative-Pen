@@ -89,16 +89,14 @@ def search_posts(request):
             Q(username__icontains=querystring) |
             Q(first_name__icontains=querystring) |
             Q(last_name__icontains=querystring) |
-            Q(slug__icontains=querystring) |
-            Q(job_title__icontains=querystring)
+            Q(slug__icontains=querystring)
          ).order_by('first_name')
          
          readers_results = User.objects.filter(is_author=False).filter(
             Q(username__icontains=querystring) |
             Q(first_name__icontains=querystring) |
             Q(last_name__icontains=querystring) |
-            Q(slug__icontains=querystring) |
-            Q(job_title__icontains=querystring)
+            Q(slug__icontains=querystring)
          ).order_by('first_name')
 
          categories_result = PostCategory.objects.filter(

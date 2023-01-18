@@ -39,9 +39,11 @@ Categories
 </section>
 
 <section class="position-relative pt-4 mt-5">
-   <div class="container" data-sticky-container>
+   <div class="container">
       <div class="row">
 
+         {% for x in '0' %}
+                     
          <div class="col-lg-9">
 
             <div class="card mb-4 p-3 border-0">
@@ -85,7 +87,9 @@ Categories
 
          </div>
 
-         <div class="col-lg-3 mt-5 mt-lg-0">
+         {% endfor %}
+
+         <div class="col-lg-3 mt-5 mt-lg-0 ">
 
             <div>
                <h4 class="mb-3">Trending topics</h4>
