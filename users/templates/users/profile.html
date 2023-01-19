@@ -151,9 +151,7 @@ My Profile ({{user.username}})
                                  <i class="iconsax me-2" icon-name="user-2-edit"></i>
                                  Edit profile
                               </a>
-                           </li>  
-                           
-                           {% if not user.is_superuser %}
+                           </li>                                                        
                            <li>
                               <a 
                                  data-bs-toggle="modal" data-bs-target="#shareProfileModal"
@@ -164,8 +162,7 @@ My Profile ({{user.username}})
                                  <i class='bx bx-share-alt me-2'></i>
                                  Share profile
                               </a>
-                           </li>      
-                           {% endif %}
+                           </li>                                 
                            <li>
                               <hr class="dropdown-divider">
                            </li>
