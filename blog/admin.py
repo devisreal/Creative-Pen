@@ -9,10 +9,11 @@ class PostCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
-   list_display = ('post_title','post_author', 'is_featured')
+   list_display = ('post_title', 'post_author', 'is_featured', 'tag_list')
    list_per_page = 15 
    search_fields = ('post_title', 'post_author', 'category')
    list_editable = ['is_featured']
+
    def get_queryset(self, request):
       return super().get_queryset(request).prefetch_related('tags')
 

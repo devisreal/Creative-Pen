@@ -11,65 +11,153 @@
 {% include 'partials/messages.html' %}
 
 
-<section class="pt-3 mb-5 pb-1">
+<section 
+   class="bg-dark-overlay-5 mb-5 pb-1 py-5 py-lg-0"
+   style="background-image: url('{{post.post_image.url}}'); background-position: center left; background-size: cover;"
+>
    <div class="container">
       <div class="row">
-         <div class="col-12">
-            <div 
-               class="card bg-dark-overlay-5 overflow-hidden card-bg-scale h-350 text-center rounded-xl"
-               style="background-image: url('{{post.post_image.url}}'); background-position: center; background-size: cover;"
+         <div class="col-lg-8 py-4 py-md-5 my-lg-5">
+            <a 
+               href="{% url 'category' post.category.slug %}" 
+               class="text-decoration-none badge text-bg-{{post.category.color}} mb-3 font-outfit font-medium text-sm"
             >
-               <!-- Card Image overlay -->
-               <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
-                  <div class="w-100 my-auto">
-                     <!-- Card category -->
-                     <a 
-                        href="{% url 'category' post.category.slug %}" 
-                        class="text-decoration-none badge text-bg-{{post.category.color}} mb-2 font-outfit font-medium text-sm"
-                     >
-                        <i class="fa-solid fa-layer-group me-2 "></i>
-                        {{post.category}}
-                     </a>
-                     <!-- Card title -->
-                     <h2 class="text-white display-5">
-                        {{post.post_title}}
-                     </h2>
-                     <!-- Card info -->
-                     <ul class="nav nav-divider text-white-force align-items-center justify-content-center">                        
-                        <li class="nav-item">
-                           {{post.date_posted|naturalday}}
-                        </li>
-                        <li class="nav-item">
-                           {{post.read_time}} min read
-                        </li>
-                        <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
+               <i class="fa-solid fa-layer-group me-2 "></i>
+               {{post.category}}
+            </a>
+            <h1 class="text-white">
+               {{post.post_title}}
+            </h1>
+            <p class="lead text-white mt-4 mt-md-2">
+               {{post.short_description}}
+            </p>
+            <!-- Info -->
+            <ul class="nav nav-divider text-white-force align-items-center">
+               <li class="nav-item">
+                  <div class="nav-link">
+                     <div class="d-flex align-items-center text-white position-relative">
+                        <div class="avatar avatar-sm">
+                           {% if post.post_author.profile_picture %}
+                           <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                           {% else %}
+                           <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                           {% endif %}
+                        </div>
+                        <span 
+                           class="ms-3"
+                        >by 
+                           <a 
+                              href="{% url 'author_external' post.post_author.slug %}"
+                              class="stretched-link text-reset btn-link" tabindex="0" data-bs-toggle="popover"
+                              data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                              data-bs-container="body" data-bs-offset="10,20" data-bs-placement="right"
+                              data-bs-content="
+                                 <div class='custom-popover-content'>
+                                    <div class='d-flex justify-content-between align-items-center'>
+                                       <h6 class='font-cabin font-medium m-0 p-0'>
+                                          <a 
+                                             href='{% url 'author_external' post.post_author.slug %}'
+                                             class='text-reset btn-link'
+                                          >
+                                             {{post.post_author.get_full_name}}
+                                          </a>
+                                       </h6>
+                                       <small class='font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                    </div>
+                                    <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                       {{post.post_author.bio|truncatewords:10}}
+                                    </p>
+                                    <hr class='m-0 p-0 my-2'>
+                                    <div class='d-flex justify-content-between align-items-center'>
+                                       <p class='m-0 p-0'>573 Followers</p>
+                                       <a 
+                                          href=''
+                                          class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
+                                       >
+                                          Follow
+                                       </a>
+                                    </div>
+                                 </div>
+                              ">
+                              Louis Ferguson
                            </a>
-                        </li>
-                        <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-comments me-1"></i> 5
-                           </a>
-                        </li>
-                        <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
-                           </a>
-                        </li>
-                     </ul>
+                        </span>
+                     </div>
                   </div>
-               </div>
-            </div>
+               </li>
+               <li class="nav-item">
+                  {{post.date_posted|naturalday}}
+               </li>
+               <li class="nav-item">
+                  <i class="fa-regular fa-clock me-1"></i>
+                  {{post.read_time}} min read
+               </li>
+               <li class="nav-item">
+                  <i class="far fa-eye me-1"></i>{% get_hit_count for post %}
+               </li>
+               <li class="nav-item">
+                  <a 
+                     href="{% url 'users:like_post' request.user.slug post.id %}" 
+                     class="text-decoration-none"
+                     data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                  >
+                     {% if request.user in post.likes.all %}
+                     <i class="fas fa-heart me-1 text-white"></i>
+                     {% else %}                     
+                     <i class="fa-regular fa-heart me-1"></i>
+                     {% endif %}
+                  </a> 266
+               </li>
+            </ul>
+            <!-- Tagd -->
+            <ul class="nav nav-divider text-white-force align-items-center py-4">
+               {% for tag in post.tags.all %}
+               <li class="nav-item">
+                  #{{tag}}
+               </li>
+               {% endfor %}
+            </ul>
+            <!-- Share post -->
+            <!-- <div class="d-md-flex align-items-center mt-4">
+               <h5 class="text-white me-3">Share on: </h5>
+               <ul class="nav text-white-force">
+                  <li class="nav-item">
+                     <a class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-facebook" href="#">
+                        <i class="fab fa-facebook-square align-middle"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-twitter" href="#">
+                        <i class="fab fa-twitter-square align-middle"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-linkedin" href="#">
+                        <i class="fab fa-linkedin align-middle"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-pinterest" href="#">
+                        <i class="fab fa-pinterest align-middle"></i>
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-primary" href="#">
+                        <i class="far fa-envelope align-middle"></i>
+                     </a>
+                  </li>
+               </ul>
+            </div> -->
          </div>
       </div>
    </div>
 </section>
 
 
+<br><br>
 <section class="pt-0">
    <div class="container position-relative" data-sticky-container>
-      <div class="row">
+      <div class="row g-5">
          <!-- Main Content START -->
          <div class="col-lg-9 mb-5">
             <p>
