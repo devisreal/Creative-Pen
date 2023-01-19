@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+{% load hitcount_tags %}
 {% block title %}
 {% if author%}
 {{author.username}} ({{author.get_full_name}})
@@ -343,7 +344,7 @@
                      </li>
                      <li class="nav-item">
                         <a href="#" class="btn-link">
-                           <i class="fa-regular fa-eye me-1"></i> 5
+                           <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
                         </a>
                      </li>
                   </ul>

@@ -15,11 +15,13 @@ def dashboard(request, slug):
       return redirect('users:dashboard', slug=request.user.slug)
    try:
       user = User.objects.get(slug=slug)
+      liked_posts = Post.objects.filter(likes=request.user)
    except User.DoesNotExist:
       return redirect('error_page')
    else:
       context = {
-         'user': user
+         'user': user,
+         'liked_posts': liked_posts
       }
       return render(request, 'users/dashboard.html', context)
 

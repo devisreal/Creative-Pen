@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from hitcount.views import HitCountDetailView
 from .forms import CreatePostForm
 from .models import Post
 
@@ -14,6 +15,28 @@ def single_post(request, slug):
       'post': post
    }
    return render(request, 'blog/single_post.html', context)
+
+
+class PostDetailView(HitCountDetailView):
+   model = Post
+   template_name = 'blog/single_post.html'
+   context_object_name = 'post'
+   slug_field = 'slug'
+   # set to True to count the hit
+   count_hit = True
+
+   def get_context_data(self, **kwargs):
+      context = super(PostDetailView, self).get_context_data(**kwargs)
+      context.update({
+         'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
+      })
+      return context
+
+
+"""
+
+
+"""
 
 @login_required
 def create_post(request):

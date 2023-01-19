@@ -1,21 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+{% load hitcount_tags %}
 {% block title %}
 {{post.post_title}}
 {% endblock title %}
 {% block styles %}
-<style>
-   .dropcap {
-      font-size: 4em;
-      font-weight: medium;
-      font-family: "Cabin", sans-serif !important;
-      display: block;
-      float: left;
-      margin: 0.04em 0.2em 0 0;
-      color: #191a1f;
-      line-height: 1;
-   }
-</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
@@ -45,36 +35,27 @@
                         {{post.post_title}}
                      </h2>
                      <!-- Card info -->
-                     <ul class="nav nav-divider text-white-force align-items-center justify-content-center">
+                     <ul class="nav nav-divider text-white-force align-items-center justify-content-center">                        
                         <li class="nav-item">
-                           <div class="nav-link">
-                              <div class="d-flex align-items-center text-white position-relative">
-                                 <div class="avatar avatar-sm">
-                                    {% if post.post_author.profile_picture %}
-                                    <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
-                                    {% else %}
-                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
-                                    {% endif %}
-                                 </div>
-                                 <span 
-                                    class="ms-3"
-                                 >
-                                    by 
-                                    <a 
-                                       href="{% url 'author_external' post.post_author.slug %}"
-                                       class="stretched-link text-reset btn-link"
-                                    >
-                                       {{post.post_author.get_short_name}}
-                                    </a>
-                                 </span>
-                              </div>
-                           </div>
-                        </li>
-                        <li class="nav-item">
-                           {{post.date_posted|date:"dS M , Y"}}
+                           {{post.date_posted|naturalday}}
                         </li>
                         <li class="nav-item">
                            {{post.read_time}} min read
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-comments me-1"></i> 5
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
+                           </a>
                         </li>
                      </ul>
                   </div>
@@ -113,7 +94,7 @@
                   <div class="col d-sm-flex align-items-center justify-content-between">
                      <div>
                         <h4 class="m-0">
-                           <a href="{% url 'author_external' post.post_author.slug %}" class="link-dark text-decoration-none text-capitalize">{{post.post_author.get_full_name}}</a>
+                           <a href="{% url 'author_external' post.post_author.slug %}" class="text-reset btn-link">{{post.post_author.get_full_name}}</a>
                         </h4>
                         <small class="">{{post.post_author.job_title}}</small>
                      </div>                     
@@ -207,7 +188,7 @@
                   
                   {% for category in popular_categories %}                     
                   <div
-                     class="d-flex justify-content-between align-items-center bg-{{category.color}} bg-opacity-10 rounded p-2 position-relative">
+                     class="d-flex justify-content-between align-items-center bg-light bg-opacity-100 my-shadow-sm rounded p-2 position-relative">
                      <h6 class="m-0 text-{{category.color}} text-capitalize">
                         {{category.name}}
                      </h6>

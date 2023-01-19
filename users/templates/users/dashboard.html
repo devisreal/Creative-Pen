@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+{% load hitcount_tags %}
 {% block title %}
 Dashboard ({{user.username}})
 {% endblock title %}
@@ -12,6 +14,13 @@ Dashboard ({{user.username}})
 <h1 class="p-4">Dashboard </h1>
 <h3>Welcome {{user.username}}</h3>
 <a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' user.slug %}">Edit My Profile</a>
+
+<!-- Some borders are removed -->
+<ul class="list-group list-group-flush">
+   {% for post in liked_posts %}   
+   <li class="list-group-item">{{post.post_title}}</li>   
+   {% endfor %}
+</ul>
 
 {% if not user.is_author %}
    {% if not user.usersettings.request_author_access %}
