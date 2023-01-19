@@ -35,8 +35,12 @@ def latest(request):
    return render(request, 'pages/latest_posts.html', context)
 
 def categories(request):      
+   categories = PostCategory.objects.all()
+   for category in categories:
+      category_posts = Post.objects.distinct('category__name').order_by('category__name', '-date_posted')
    context = { 
-      
+      'categories': categories,
+      'category_posts': category_posts
    }
    return render(request, 'pages/categories.html', context)
 
