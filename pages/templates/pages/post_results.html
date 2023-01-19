@@ -115,7 +115,7 @@ Post Results
                                     <div class="row g-3">
                                        <div class="col-lg-5">
                                           <!-- Categories -->
-                                          <a href="single_category.html"
+                                          <a href="{% url 'category' post.category.slug %}"
                                              class="text-decoration-none badge text-bg-{{post.category.color}} mb-2 font-outfit font-medium">
                                              <i class="fa-solid fa-layer-group me-2 "></i>
                                              {{post.category.name}}
@@ -123,7 +123,7 @@ Post Results
                                           <!-- Title -->
                                           <h2 class="card-title">
                                              <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset stretched-link">
-                                                {{post.post_title|truncatechars:32}}
+                                                {{post.post_title|truncatechars:28}}
                                              </a>
                                           </h2>
                                           <!-- Author info -->
@@ -192,7 +192,7 @@ Post Results
                                        <!-- Detail -->
                                        <div class="col-md-6 col-lg-4 h-fit align-self-center">
                                           <p class="">
-                                             {{post.short_description}}
+                                             {{post.short_description|truncatewords:15}}
                                           </p>
                                        </div>
                                        <!-- Image -->

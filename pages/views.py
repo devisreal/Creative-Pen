@@ -26,7 +26,7 @@ def footer(request):
 
 def latest(request):   
    try:
-      posts = Post.objects.all()
+      posts = Post.objects.all().order_by('date_posted')
    except Post.DoesNotExist:
       return redirect('error_page')   
    context = {

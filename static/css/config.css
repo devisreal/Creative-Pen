@@ -1010,7 +1010,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 #navbar {
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .active-nav {
@@ -1236,12 +1236,12 @@ body#body::-webkit-scrollbar-thumb:hover {
   color: inherit;
 }
 
-.nav.nav-divider .nav-item+.nav-item:before {
-  content: "•";
-  color: inherit;
+.nav.nav-divider .nav-item+.nav-item:before {    
+  content: "\22C5";
+  color: #000;
   padding-left: 0.65rem;
   padding-right: 0.75rem;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .nav.nav-divider .nav-item {

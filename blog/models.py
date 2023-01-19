@@ -87,6 +87,7 @@ class Post(models.Model):
    )
    read_time = readtime.of_text(post_content).minutes
    bookmarks = models.ManyToManyField(User, related_name='favourite', default=None, blank=True)
+   likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
 
    def __str__(self):
       return f'{self.post_title} by {self.post_author}'
@@ -94,14 +95,3 @@ class Post(models.Model):
    def save(self, *args, **kwargs):
       self.slug = slugify(self.post_title)
       super().save(*args, **kwargs)
-   
-# class Bookmark(models.Model):
-#    user = models.ForeignKey(User, on_delete=models.CASCADE)
-#    posts = models.ManyToManyField(Post, related_name="bookmarks")
-#    date_added = models.DateTimeField(auto_now_add=True)
-
-#    class Meta:
-#       pass
-
-#    def __str__(self):
-#       return f'{self.user.username} on '

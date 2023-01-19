@@ -66,6 +66,16 @@ def bookmark_add(request, slug, id):
    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
+def like_post(request, slug, id):
+   post = get_object_or_404(Post, id=id)
+   if post.likes.filter(id=request.user.id).exists():
+      post.likes.remove(request.user)   
+   else:
+      post.likes.add(request.user)      
+   return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
 def user_profile(request, slug):   
    if slug != request.user.slug:  
       messages.error(request, "You're not allowed to access this account")    
