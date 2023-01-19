@@ -4,6 +4,7 @@ from django.contrib import messages
 from account.models import User
 from blog.models import PostCategory, Post
 from django.db.models import Q
+from django.db.models import Count
 
 
 def home(request):
@@ -94,7 +95,8 @@ def search_posts(request):
             Q(first_name__icontains=querystring) |
             Q(last_name__icontains=querystring) |
             Q(slug__icontains=querystring)
-         ).order_by('first_name')
+         ).annotate(posts_count=Count('post')).order_by('first_name')
+         #  !categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')   
          
          readers_results = User.objects.filter(is_author=False).filter(
             Q(username__icontains=querystring) |

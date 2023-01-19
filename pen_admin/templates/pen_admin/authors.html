@@ -119,8 +119,12 @@ Authors
                         </svg>
                      </div>
                      <div class="ms-2">
-                        <h5 class="mb-0">846</h5>
-                        <h6 class="mb-0 fw-light">Total Blogs</h6>
+                        <h5 class="mb-0">{{author.posts_count}}</h5>
+                        <h6 class="mb-0 fw-light">                           
+                           {% with author_posts=author.posts_count %}                           
+                           Total Blog{{ author_posts|pluralize }}
+                           {% endwith %}                           
+                        </h6>                        
                      </div>
                   </div>
                </div>

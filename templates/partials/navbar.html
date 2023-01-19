@@ -392,13 +392,13 @@
                            </a>
                         </li>                        
                         <li class="">
-                           <a class=" nav-link rounded-md {% if '/enquiries' in request.path %} active-dropdown {% endif %}" href="{% url 'users:subscribers' request.user.slug %}">
+                           <a class=" nav-link rounded-md {% if '/enquiries' in request.path %} active-dropdown {% endif %}" href="{% url 'users:enquiries' request.user.slug %}">
                               <i class="fa-solid fa-circle-question fa-fw me-1"></i>
                               Enquiries
                            </a>
                         </li>                        
                         <li class="">
-                           <a class=" nav-link rounded-md {% if '/categories' in request.path %} active-dropdown {% endif %}" href="{% url 'users:subscribers' request.user.slug %}">
+                           <a class=" nav-link rounded-md {% if '/categories' in request.path %} active-dropdown {% endif %}" href="{% url 'users:categories' request.user.slug %}">
                               <i class='bx bxs-category bx-fw'></i>
                               Categories
                            </a>
