@@ -240,15 +240,46 @@
                                  {% endif %}
                               </div>
                               <span class="ms-3">by
-                                 <a href="{% url 'author_external' post.post_author.slug %}"
-                                    class="stretched-link text-reset btn-link" data-bs-toggle="popover"
-                                    data-bs-trigger="hover" data-bs-delay="500" data-bs-html="true"
-                                    data-bs-container="body" data-bs-offset="10,20" data-bs-content="
-                                    <div>
-                                       <h6 class='font-cabin font-medium m-0 p-0'>{{post.post_author.get_full_name}}</h6>
-                                       <small class='font-medium font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
-                                    </div>
-                                 ">
+                                 <a 
+                                    href="{% url 'author_external' post.post_author.slug %}" 
+                                    class="stretched-link text-reset btn-link"
+                                    tabindex="0"
+                                    data-bs-toggle="popover" 
+                                    data-bs-trigger="hover focus" 
+                                    data-bs-delay="500"
+                                    data-bs-html="true" 
+                                    data-bs-container="body"                                       
+                                    data-bs-offset="10,20" 
+                                    data-bs-placement="right"
+                                    data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                <a 
+                                                   href='{% url 'author_external' post.post_author.slug %}'
+                                                   class='text-reset btn-link'
+                                                >
+                                                   {{post.post_author.get_full_name}}
+                                                </a>
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{post.post_author.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>573 Followers</p>
+                                             <a 
+                                                href=''
+                                                class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
+                                             >
+                                                Follow
+                                             </a>
+                                          </div>
+                                       </div>
+                                    "
+                                 >
                                     {{post.post_author.get_short_name}}
                                  </a>
                               </span>
