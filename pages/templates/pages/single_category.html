@@ -18,15 +18,19 @@ Category - {{category.name}}
    <div class="">
       <div class="row">
          <div class="col-12">
-            <div class="card bg-dark-overlay-4 card-bg-scale overflow-hidden h-350 text-center rounded-0 border-0" {% if
-               category.category_image %} style="
+            <div class="card bg-dark-overlay-4 card-bg-scale overflow-hidden h-350 text-center rounded-0 border-0" 
+            {% if category.category_image %} 
+               style="
                   background-position: center left; 
                   background-size: cover; 
                   background-image: url('{{category.category_image.url}}');
-               " {% else %} style="
+               " 
+            {% else %} 
+               style="
                   background-position: center left; 
                   background-size: cover; 
-                  background-image: url('{% static " img/user/bkg_placeholder1.jpg" %}'); "
+                  background-image: url('{% static "img/user/bkg_placeholder1.jpg" %}'); 
+               "
             {% endif %}
             >
                <!-- Card Image overlay -->

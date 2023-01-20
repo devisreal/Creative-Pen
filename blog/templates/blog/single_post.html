@@ -98,22 +98,48 @@
                <li class="nav-item">
                   <a 
                      href="{% url 'users:like_post' request.user.slug post.id %}" 
-                     class="text-decoration-none"
-                     data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                     class="text-decoration-none"                     
                   >
                      {% if request.user in post.likes.all %}
-                     <i class="fas fa-heart me-1 text-white"></i>
+                     <i 
+                        class="fas fa-heart me-1 text-white"
+                        data-bs-toggle="tooltip" data-bs-title="Unlike post" data-bs-placement="bottom"
+                     ></i>
                      {% else %}                     
-                     <i class="fa-regular fa-heart me-1"></i>
+                     <i 
+                        class="fa-regular fa-heart me-1"
+                        data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                     ></i>
                      {% endif %}
-                  </a> 266
+                  </a> {{post.likes.count}}
+               </li>
+               <li class="nav-item">
+                  <a 
+                     href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
+                     class="text-decoration-none"                  
+                  >
+                     {% if request.user in post.bookmarks.all %}                     
+                     <i 
+                        class="fa-solid fa-bookmark me-1 text-white"
+                        data-bs-toggle="tooltip" data-bs-title="Added to bookmarks" data-bs-placement="bottom"
+                     ></i>
+                     {% else %}                     
+                     <i 
+                        class="fa-regular fa-bookmark me-1"
+                        data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom"
+                     ></i>
+                     {% endif %}
+                  </a>
                </li>
             </ul>
-            <!-- Tagd -->
+
+            <!-- Tags -->
             <ul class="nav nav-divider text-white-force align-items-center py-4">
                {% for tag in post.tags.all %}
                <li class="nav-item">
-                  #{{tag}}
+                  <span class="badge bg-light text-dark text-md">
+                     #{{tag}}                     
+                  </span>
                </li>
                {% endfor %}
             </ul>
@@ -156,8 +182,8 @@
 
 <br><br>
 <section class="pt-0">
-   <div class="container position-relative" data-sticky-container>
-      <div class="row g-5">
+   <div class="container p-0 position-relative" data-sticky-container>
+      <div class="row g-4">
          <!-- Main Content START -->
          <div class="col-lg-9 mb-5">
             <p>
@@ -269,7 +295,12 @@
 
          <!-- Right sidebar START -->
          <div class="col-lg-3">
-            <div data-sticky data-margin-top="80" data-sticky-for="991">
+            <div>
+               <!-- Popular posts -->
+               {% for post in popular_posts %}
+                  <h1>{{post.post_title}}</h1>
+               {% endfor %}
+
                <!-- Categories -->
                <div class="row g-2">
                   <h5>Categories</h5>
@@ -316,5 +347,5 @@
    </div>
 </section>
 
-
+<br><br><br><br><br>
 {% endblock %}
