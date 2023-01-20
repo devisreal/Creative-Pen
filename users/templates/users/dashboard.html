@@ -15,12 +15,22 @@ Dashboard ({{user.username}})
 <h3>Welcome {{user.username}}</h3>
 <a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' user.slug %}">Edit My Profile</a>
 
-<!-- Some borders are removed -->
-<ul class="list-group list-group-flush">
+
+<ul class="list-group list-group-flush p-4">
+   <h5>Liked Posts</h5>
    {% for post in liked_posts %}   
    <li class="list-group-item">{{post.post_title}}</li>   
    {% endfor %}
 </ul>
+
+{% if user.is_author %}
+   <ul class="list-group list-group-flush p-4">
+      <h5>My Posts</h5>
+      {% for post in author_posts %}
+      <li class="list-group-item">{{post.post_title}}</li>
+      {% endfor %}
+   </ul>
+{% endif %}
 
 {% if not user.is_author %}
    {% if not user.usersettings.request_author_access %}
