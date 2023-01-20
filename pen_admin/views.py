@@ -77,8 +77,7 @@ def authors(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:            
-      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('-date_joined')
-      # categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')   
+      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('-date_joined')      
       reader_requests = User.objects.filter(usersettings__request_author_access=True)
       context = {
          'authors': authors,

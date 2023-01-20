@@ -1,7 +1,37 @@
 $(document).ready(function () {   
    // $('#shareProfileModal').modal('show')
 })
+$(function () {
 
+   if ($('.owl-2').length > 0) {
+      $('.owl-2').owlCarousel({
+         center: false,
+         items: 1,
+         loop: true,
+         stagePadding: 0,
+         margin: 20,
+         smartSpeed: 1000,
+         autoplay: false,
+         nav: true,
+         dots: true,
+         pauseOnHover: false,
+         responsive: {
+            600: {
+               margin: 20,
+               nav: true,
+               items: 1
+            },
+            1000: {
+               margin: 20,
+               stagePadding: 0,
+               nav: true,
+               items: 1
+            }
+         }
+      });
+   }
+
+})
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')

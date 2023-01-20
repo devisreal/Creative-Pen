@@ -1474,3 +1474,42 @@ body#body::-webkit-scrollbar-thumb:hover {
   text-align: start !important;
   border-bottom: none !important;
 }
+
+
+/* * OWL CAROUSEL STYLE */
+
+.owl-2-style .owl-nav {
+  display: none;
+}
+
+.owl-2-style .owl-dots {
+  text-align: center;
+  position: relative;
+  bottom: -20px;
+}
+
+.owl-2-style .owl-dots .owl-dot {
+  display: inline-block;
+}
+
+.owl-2-style .owl-dots .owl-dot span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 0px;
+  background: #cccccc;
+  -webkit-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  -o-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+  margin: 3px;
+  border-radius: 50%;
+}
+
+.owl-2-style .owl-dots .owl-dot.active span {
+  background: #007bff;
+}
+
+.owl-2-style .owl-dots .owl-dot:active,
+.owl-2-style .owl-dots .owl-dot:focus {
+  outline: none;
+}

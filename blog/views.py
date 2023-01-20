@@ -33,11 +33,6 @@ class PostDetailView(HitCountDetailView):
       return context
 
 
-"""
-
-
-"""
-
 @login_required
 def create_post(request):
    if not request.user.is_author:
