@@ -326,61 +326,66 @@
          <!-- Right sidebar START -->
          <div class="col-lg-3">
             <div>
-               <h5 class="my-3">Popular Categories</h5>
-               <div class="mb-5">
-                  <div class="owl-2-style px-4 px-md-0">               
-                     <div class="owl-carousel owl-2">
-                              
-                        {% for popular_post in popular_posts %}
-                        {% if popular_post != post %}
-                        <div class="card border-0">
-                           <!-- Card img -->
-                           <div class="position-relative">
-                              <img class="card-img" src="{{popular_post.post_image.url}}" style="aspect-ratio: 4/3;object-fit: cover;" alt="Card image">
-                              <div class="card-img-overlay d-flex align-items-start flex-column p-2">
-                                 <!-- Card overlay Top -->
-                                 <div class="w-100 mb-auto d-flex justify-content-end">
-                                    <div class="text-end ms-auto">
-                                       <!-- * Post Type -->
-                                       {% if popular_post.post_type == video %}
-                                       <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                          data-bs-title="This post has video" data-bs-placement="right">
-                                          <i class="fas fa-video"></i>
+               {% if popular_posts %}
+                                 
+               <div>
+                  <h5 class="my-3">Popular posts</h5>
+                  <div class="mb-5">
+                     <div class="owl-2-style px-4 px-md-0">               
+                        <div class="owl-carousel owl-2">
+                                 
+                           {% for popular_post in popular_posts %}
+                           {% if popular_post != post %}
+                           <div class="card border-0">
+                              <!-- Card img -->
+                              <div class="position-relative">
+                                 <img class="card-img" src="{{popular_post.post_image.url}}" style="aspect-ratio: 4/3;object-fit: cover;" alt="Card image">
+                                 <div class="card-img-overlay d-flex align-items-start flex-column p-2">
+                                    <!-- Card overlay Top -->
+                                    <div class="w-100 mb-auto d-flex justify-content-end">
+                                       <div class="text-end ms-auto">
+                                          <!-- * Post Type -->
+                                          {% if popular_post.post_type == video %}
+                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                                             data-bs-title="This post has video" data-bs-placement="right">
+                                             <i class="fas fa-video"></i>
+                                          </div>
+                                          {% elif popular_post.post_type == video %}
+                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
+                                             data-bs-title="This post has video" data-bs-placement="right">
+                                             <i class="fa-solid fa-images text-md"></i>
+                                          </div>
+                                          {% endif %}
                                        </div>
-                                       {% elif popular_post.post_type == video %}
-                                       <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                          data-bs-title="This post has video" data-bs-placement="right">
-                                          <i class="fa-solid fa-images text-md"></i>
-                                       </div>
-                                       {% endif %}
+                                    </div>
+                                    <!-- Card overlay bottom -->
+                                    <div class="w-100 mt-auto">
+                                       <a href="{% url 'category' popular_post.category.slug %}"
+                                          class="badge text-xs text-bg-{{popular_post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                                          <i class="fa-solid fa-layer-group me-2"></i> {{popular_post.category}}
+                                       </a>
                                     </div>
                                  </div>
-                                 <!-- Card overlay bottom -->
-                                 <div class="w-100 mt-auto">
-                                    <a href="{% url 'category' popular_post.category.slug %}"
-                                       class="badge text-xs text-bg-{{popular_post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
-                                       <i class="fa-solid fa-layer-group me-2"></i> {{popular_post.category}}
-                                    </a>
-                                 </div>
                               </div>
-                           </div>
-                           <div class="card-body p-0 pt-3">
-                              <h5 
-                                 class="card-title"
-                              >
-                                 <a href="{% url 'blog:single_post' popular_post.slug %}" class="btn-link text-reset fw-bold">
-                                    {{popular_post.post_title}}
-                                 </a>
-                              </h5>
-                           </div>
-                        </div>     
-                        {% endif %}
-                        {% endfor %}
+                              <div class="card-body p-0 pt-3">
+                                 <h5 
+                                    class="card-title"
+                                 >
+                                    <a href="{% url 'blog:single_post' popular_post.slug %}" class="btn-link text-reset fw-bold">
+                                       {{popular_post.post_title}}
+                                    </a>
+                                 </h5>
+                              </div>
+                           </div>     
+                           {% endif %}
+                           {% endfor %}
 
-                     </div>               
+                        </div>               
+                     </div>
                   </div>
                </div>
 
+               {% endif %}
                <!-- Categories -->
                <div class="row g-2">
                   <h5>Categories</h5>

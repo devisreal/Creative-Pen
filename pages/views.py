@@ -8,12 +8,9 @@ from django.db.models import Count
 
 
 def home(request):
-   authors = User.objects.filter(is_author=True)
-   # num_visits = request.session.get('num_visits', 0)
-   # request.session['num_visits'] = num_visits + 1   
+   authors = User.objects.filter(is_author=True)   
    context = {
-      'authors': authors,
-      # 'num_visits': num_visits      
+      'authors': authors,      
    }
    return render(request, 'pages/home.html', context)
 
@@ -25,9 +22,9 @@ def footer(request):
       messages.success(request, 'Thank you for subscribing! 👍')
       return redirect(request.META.get('HTTP_REFERER'))
 
-def latest(request):   
+def latest_posts(request):   
    try:
-      posts = Post.objects.all().order_by('date_posted')
+      posts = Post.objects.all().order_by('-date_posted')
    except Post.DoesNotExist:
       return redirect('error_page')   
    context = {
