@@ -115,13 +115,14 @@ def search_posts(request):
             Q(name__icontains=querystring) |            
             Q(slug__icontains=querystring)
          )
-
+         
          context = {
             'querystring': querystring,
             'post_results': post_results,
             'author_results': author_results,
             'readers_results': readers_results,
-            'categories_result': categories_result
+            'categories_result': categories_result,
+            'search_count': post_results.count() + author_results.count() + readers_results.count() + categories_result.count()
          }
          return render(request, 'pages/post_results.html', context)         
       else:
