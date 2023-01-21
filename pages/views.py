@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import ContactDetail, Subscriber
 from django.contrib import messages
-from account.models import User
-from blog.models import PostCategory, Post
 from django.db.models import Q
 from django.db.models import Count
+from django.core.paginator import Paginator
+from account.models import User
+from blog.models import PostCategory, Post
+from .models import ContactDetail, Subscriber
 
 
 def home(request):
@@ -54,8 +55,16 @@ def single_category(request, slug):
    }
    return render(request, 'pages/single_category.html', context)
 
-def about(request):   
-   context = { }
+def about(request):
+   categories = PostCategory.objects.all()
+   p = Paginator(categories, 5)
+   page = request.GET.get('page')
+   paginated_categories = p.get_page(page)
+   
+   
+   context = { 
+      'paginated_categories': paginated_categories
+   }
    return render(request, 'pages/about.html', context)
 
 def contact(request):   

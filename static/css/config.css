@@ -317,8 +317,78 @@ td {
 
 
 /* ! Pagination Styles */
+
+.pagination {
+  --bs-pagination-padding-x: 1rem;
+  --bs-pagination-padding-y: 0.7rem;
+  --bs-pagination-font-size: 1rem;
+  --bs-pagination-color: var(--bs-gray-600);
+  --bs-pagination-bg: #fff;
+  --bs-pagination-border-width: 1px;
+  --bs-pagination-border-color: #dfe0e5;
+  --bs-pagination-border-radius: 0.25rem;
+  --bs-pagination-hover-color: var(--bs-white);
+  --bs-pagination-hover-bg: var(--color-blue);
+  --bs-pagination-hover-border-color: var(--color-blue);
+  --bs-pagination-focus-color: var(--bs-link-hover-color);
+  --bs-pagination-focus-bg: #f0f1f3;
+  --bs-pagination-focus-box-shadow: 0 0 0 0 rgba(33, 99, 232, 0.25);
+  --bs-pagination-active-color: #fff;
+  --bs-pagination-active-bg: var(--color-blue);
+  --bs-pagination-active-border-color: var(--color-blue);
+  --bs-pagination-disabled-color: #d0d4d9;
+  --bs-pagination-disabled-bg: #fff;
+  --bs-pagination-disabled-border-color: #dfe0e5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+  font-size: var(--bs-pagination-font-size);
+  color: var(--bs-pagination-color);
+  background-color: var(--bs-pagination-bg);
+  border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);  
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: var(--bs-pagination-hover-color);
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
 .page-link:focus {
-  box-shadow: none !important;
+  z-index: 3;
+  color: var(--bs-pagination-focus-color);
+  background-color: var(--bs-pagination-focus-bg);
+  outline: 0;
+  -webkit-box-shadow: var(--bs-pagination-focus-box-shadow);
+  box-shadow: var(--bs-pagination-focus-box-shadow);
+}
+
+.page-link.active,
+.active>.page-link {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: -1px;
 }
 
 .pagination .page-item {
@@ -1513,3 +1583,6 @@ body#body::-webkit-scrollbar-thumb:hover {
 .owl-2-style .owl-dots .owl-dot:focus {
   outline: none;
 }
+
+
+
