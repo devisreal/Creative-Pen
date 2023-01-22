@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models import Count
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from account.models import User
 from blog.models import PostCategory, Post
 from .models import ContactDetail, Subscriber
@@ -56,11 +56,10 @@ def single_category(request, slug):
    return render(request, 'pages/single_category.html', context)
 
 def about(request):
-   categories = PostCategory.objects.all()
-   p = Paginator(categories, 5)
+   categories = PostCategory.objects.all().order_by('name')
+   p = Paginator(categories, 5)   
    page = request.GET.get('page')
-   paginated_categories = p.get_page(page)
-   
+   paginated_categories = p.get_page(page)   
    
    context = { 
       'paginated_categories': paginated_categories

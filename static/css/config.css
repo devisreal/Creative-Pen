@@ -359,8 +359,8 @@ td {
 .page-link:hover {
   z-index: 2;
   color: var(--bs-pagination-hover-color);
-  background-color: var(--color-blue);
-  border-color: var(--color-blue);
+  background-color: rgba(35, 78, 112, 0.9);
+  border-color: rgba(35, 78, 112, 0.9);
 }
 
 .page-item.active .page-link {

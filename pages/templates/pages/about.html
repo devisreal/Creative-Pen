@@ -1118,27 +1118,69 @@ About
       <a class="page-link" href="?page={{ paginated_categories.previous_page_number }}">
          <i class="fa-solid fa-caret-left"></i>
       </a>
-   </li>    
-   {% endif %}  
-
-   {% for i in paginated_categories.paginator.get_elided_page_range %}
-   {% if paginated_categories.number == i %}
-   <li class="page-item active" aria-current="page">
-      <a class="page-link" href="">{{ i }}</a>
-   </li>
+   </li> 
+      {% if paginated_categories.number > 3 %}
+      <li class="page-item">
+         <a class="page-link" href="?page=1">1</a>
+      </li>
+         {% if paginated_categories.number > 4 %}
+            <li class="page-item disabled">
+               <a class="page-link">...</a>
+            </li>
+         {% endif %}
+      {% endif %}
    {% else %}
-   <li class="page-item">
-      <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+   <li class="page-item disabled" style="opacity: 0.5;" title="No next">
+      <a class="page-link" aria-disabled="true">
+         <i class="fa-solid fa-caret-left"></i>
+      </a>
    </li>
    {% endif %}
+ 
+
+   {% for num in paginated_categories.paginator.page_range %}
+      {% if paginated_categories.number == num %}
+      <li class="page-item active" aria-current="page">
+         <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+      </li>
+      {% elif num > paginated_categories.number|add:'-2' and num < paginated_categories.number|add:'2' %}
+      <li class="page-item">
+         <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+      </li>
+      {% endif %}
    {% endfor %}
       
    {% if paginated_categories.has_next %}
+
+      {% if paginated_categories.number < paginated_categories.paginator.num_pages|add:'-2' %} 
+         <li class="page-item disabled">
+            <a class="page-link">...</a>
+         </li>
+         <li class="page-item">
+            <a href="?page={{ paginated_categories.paginator.num_pages }}" class="page-link">
+               {{ paginated_categories.paginator.num_pages }}
+            </a>
+         </li>
+      {% elif paginated_categories.number < paginated_categories.paginator.num_pages|add:'-2' %} 
+         <li class="page-item">
+            <a href="?page={{ paginated_categories.paginator.num_pages }}" class="page-link">
+               {{ paginated_categories.paginator.num_pages }}
+            </a>
+         </li>
+      {% endif %}
+
    <li class="page-item">
       <a class="page-link" href="?page={{ paginated_categories.next_page_number }}">
          <i class="fa-solid fa-caret-right"></i>
       </a>
    </li>  
+
+   {% else %}
+   <li class="page-item disabled" style="opacity: 0.5;" title="No next">
+      <a class="page-link" aria-disabled="true">
+         <i class="fa-solid fa-caret-right"></i>
+      </a>
+   </li>
    {% endif %}
 
    <li class="page-item">
@@ -1152,45 +1194,4 @@ About
 
 
 <br><br><br><br><br>
-
-{# 
-   
-   {% if paginated_vehicles %}
-   <nav aria-label="Page navigation example " class="mb-4" style="margin-top: 60px;">
-      <ul class="pagination justify-content-center font-semibold">
-         {% if paginated_vehicles.has_previous %}
-         <li class="page-item">
-            <a class="page-link" href="?page={{ paginated_vehicles.previous_page_number }}">&laquo;</a>
-         </li>
-         {% else %}
-         <li class="page-item disabled" style="cursor: not-allowed !important;" title="No previous">
-            <a class="page-link " href="" aria-label="Previous"><span class="opacity-75 ">&laquo;</span></a>
-         </li>
-         {% endif %}
-         {% for i in paginated_vehicles.paginator.page_range %}
-         {% if paginated_vehicles.number == i %}
-         <li class="page-item active" aria-current="page">
-            <a class="page-link" href="">{{ i }}</a>
-         </li>
-         {% else %}
-         <li class="page-item">
-            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
-         </li>
-         {% endif %}
-         {% endfor %}
-         {% if paginated_vehicles.has_next %}
-         <li class="page-item">
-            <a href="?page={{ paginated_vehicles.next_page_number }}" class="page-link">&raquo;</a>
-         </li>
-         {% else %}
-         <li class="page-item disabled" style="cursor: not-allowed !important;" title="No next">
-            <span class="page-link opacity-75 ">&raquo;</span>
-         </li>
-         {% endif %}
-      </ul>
-   </nav>
-   {% endif %}
-   
-   #}
-
 {% endblock content %}
