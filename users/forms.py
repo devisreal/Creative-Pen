@@ -131,7 +131,7 @@ class UserUpdateForm(forms.ModelForm):
       required=False,
       widget=forms.TextInput(
       attrs={
-         "placeholder": "",
+         "placeholder": "Lagos",
          "class": "form-control",
          "id": "city",
          "type": "text",

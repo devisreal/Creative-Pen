@@ -69,7 +69,7 @@ def revoke_staff_access(request, slug, username):
       messages.success(request, f"Staff {staff.username} access revoked!")
       return redirect('users:staffs', slug=slug)
 
-
+from django.core.paginator import Paginator
 # ! Authors
 @login_required
 def authors(request, slug):
@@ -77,7 +77,7 @@ def authors(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:            
-      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('-date_joined')      
+      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('first_name')
       reader_requests = User.objects.filter(usersettings__request_author_access=True)
       context = {
          'authors': authors,
