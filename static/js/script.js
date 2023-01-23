@@ -1,5 +1,5 @@
 $(document).ready(function () {   
-   $('#shareProfileModal').modal('show')
+   // $('#shareProfileModal').modal('show')
 })
 $(function () {
 
