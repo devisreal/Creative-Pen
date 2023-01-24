@@ -26,7 +26,7 @@ urlpatterns = [
    # Authors
    path('authors/', admin_views.authors, name="authors"),   
    path('author__<str:username>/', admin_views.author_single, name='single_author'),
-
+   
    path('verify-author/<str:username>/', admin_views.verify_author, name='verify_author'),
    path('unverify-author/<str:username>/', admin_views.un_verify_author, name='unverify_author'),
    path('block-author/<str:username>/', admin_views.block_author, name='block_author'),

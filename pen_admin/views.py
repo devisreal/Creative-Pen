@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
-from django.db.models import Count
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Count, Q
+from datetime import datetime
 from blog.forms import AddCategoryForm
 from blog.models import PostCategory, Post
 from pages.models import ContactDetail, Subscriber
@@ -88,7 +88,7 @@ def authors(request, slug):
       
       try:
          paginated_author_requests = paginator_author_request.page(page_r)
-         paginated_authors = paginator_author.page(page_a)  
+         paginated_authors = paginator_author.page(page_a)
       except PageNotAnInteger:
          paginated_author_requests = paginator_author_request.page(1)
          paginated_authors = paginator_author.page(1)         
@@ -104,6 +104,7 @@ def authors(request, slug):
          'paginated_author_requests': paginated_author_requests
       }
       return render(request, 'pen_admin/authors.html', context)
+
 
 @login_required
 def author_single(request, slug, username):
@@ -178,19 +179,19 @@ def accept_author_access(request, slug, username):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))   
    else:     
-      reader_request = UserSettings.objects.get(user__username=username)
+      author_request = UserSettings.objects.get(user__username=username)
       user = User.objects.get(username=username)
-      if reader_request.user.is_author:
-         messages.warning(request, f'Reader {reader_request.user.username} is already an author!')
+      if author_request.user.is_author:
+         messages.warning(request, f'Reader {author_request.user.username} is already an author!')
          return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/')) 
       else:         
-         reader_request.request_author_access = False
-         reader_request.requested_date = None
+         author_request.request_author_access = False
+         author_request.requested_date = None
          user.is_author = True
-         reader_request.accepted_date = datetime.now()
-         reader_request.save()
+         author_request.accepted_date = datetime.now()
+         author_request.save()
          user.save()
-         messages.success(request, f"Reader {reader_request.user.username} author access Accepted!")
+         messages.success(request, f"Reader {author_request.user.username} author access Accepted!")
          return redirect('users:authors', slug=slug)
 
 @login_required
@@ -199,11 +200,11 @@ def reject_author_access(request, slug, username):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      reader_request = UserSettings.objects.get(user__username=username)
-      reader_request.request_author_access = False
-      reader_request.requested_date = None
-      reader_request.save()
-      messages.success(request, f"Reader {reader_request.user.username} author access Rejected!")
+      author_request = UserSettings.objects.get(user__username=username)
+      author_request.request_author_access = False
+      author_request.requested_date = None
+      author_request.save()
+      messages.success(request, f"Reader {author_request.user.username} author access Rejected!")
       return redirect('users:authors', slug=slug)
 
 # ! Readers

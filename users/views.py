@@ -135,12 +135,16 @@ def user_external(request, slug):
       if request.user == user:
          return redirect('users:profile', slug=slug)        
       elif user.is_author:
-         author_posts = Post.objects.filter(post_author=user)
-         context = {
-            'author': user,
-            'author_posts': author_posts
-         }
-         return render(request, 'users/user-external.html', context)
+         if request.user.is_staff:
+            return redirect('users:single_author', slug=request.user.slug, username=user.username)
+         else:
+            author_posts = Post.objects.filter(post_author=user)
+            context = {
+               'author': user,
+               'author_posts': author_posts
+            }
+            return render(request, 'users/user-external.html', context)
+         
       else:
          context = {
             'reader': user

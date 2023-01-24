@@ -36,13 +36,22 @@ Authors
          <div class="col-md-4">
             <h4 class="mb-0">Authors</h4>
          </div>
-         {% if authors %}
+         {% if paginated_authors %}
 
          <div class="col-md-8">
-            <form class="rounded position-relative">
-               <input class="form-control bg-transparent" type="search" placeholder="Search author" aria-label="Search">
-               <button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
-                  type="submit">
+            <form class="rounded position-relative" action="{% url 'search' %}" method="GET">
+               <input 
+                  class="form-control bg-transparent" 
+                  type="search" 
+                  placeholder="Search author" 
+                  aria-label="Search" 
+                  name="q"
+                  value={{querystring}}
+               >
+               <button 
+                  class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
+                  type="submit"
+               >
                   <i class="fas fa-search fs-6"></i>
                </button>
             </form>
@@ -293,14 +302,7 @@ Authors
                      </svg>
                   </a>
                </div>
-               <div class="d-grid justify-content-center">
-                  <!-- <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#191a1f"
-                     viewBox="0 0 24 24">
-                     <path
-                        d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
-                     </path>
-                     <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
-                  </svg> -->
+               <div class="d-grid justify-content-center">                  
                   <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#191a1f"
                      viewBox="0 0 24 24">
                      <path
