@@ -10,8 +10,7 @@ from blog.models import Post
 
 @login_required
 def dashboard(request, slug):
-   if slug != request.user.slug:
-      messages.error(request, "You're not allowed to access this account")
+   if slug != request.user.slug:      
       return redirect('users:dashboard', slug=request.user.slug)
    try:
       user = User.objects.get(slug=slug)
