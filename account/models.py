@@ -11,8 +11,7 @@ class User(AbstractUser):
     gender_choices = (
         ("Male", "Male"),
         ("Female", "Female"),
-        ("Other", "Other"),
-        ("not_saying", "Prefer not to say"),
+        ("Other", "Other"),        
     )
     profile_picture = models.ImageField(
         null=True,

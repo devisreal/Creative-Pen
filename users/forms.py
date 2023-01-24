@@ -168,8 +168,7 @@ class UserUpdateForm(forms.ModelForm):
    gender_choices =  [
       ('Male', 'Male'),
       ('Female', 'Female'),
-      ('Other', 'Other'),
-      ('not_saying', 'Prefer not to say'),
+      ('Other', 'Other'),      
    ]
 
    gender = forms.CharField(
