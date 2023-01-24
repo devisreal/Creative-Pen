@@ -214,7 +214,7 @@ def readers(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      readers = User.objects.exclude(is_author=True).order_by('date_joined')
+      readers = User.objects.exclude(is_author=True).order_by('first_name')
       paginator_reader = Paginator(readers, 10)
       page = request.GET.get('page', 1)
 
@@ -276,8 +276,22 @@ def subscribers(request, slug):
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
       subscribers = Subscriber.objects.all().order_by('-date_subscribed')
+
+      paginator_subscriber = Paginator(subscribers, 15)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_subscribers = paginator_subscriber.page(page)
+      except PageNotAnInteger:
+         paginated_subscribers = paginator_subscriber.page(1)
+      except EmptyPage:
+         paginated_subscribers = paginator_subscriber.page(1)
+
+      paginated_subscribers.adjusted_elided_pages = paginator_subscriber.get_elided_page_range(page)
+
       context = {
-         'subscribers': subscribers
+         'subscribers': subscribers,
+         'paginated_subscribers': paginated_subscribers
       }
       return render(request, 'pen_admin/subscribers.html', context)
 
