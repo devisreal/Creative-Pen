@@ -53,11 +53,17 @@ Readers
                <h4 class="mb-0">Readers</h4>
             </div>
 
-            {% if readers %}                           
+            {% if paginated_readers %}                           
             <div class="col-md-8">
-               <form class="rounded position-relative">
-                  <input class="form-control bg-transparent" type="search" placeholder="Search reader"
-                     aria-label="Search">
+               <form class="rounded position-relative" method="GET" action="{% url 'search' %}">
+                  <input 
+                     class="form-control bg-transparent" 
+                     type="search" 
+                     placeholder="Search reader"
+                     aria-label="Search"
+                     name="q"
+                     value={{querystring}}
+                  >
                   <button
                      class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
                      type="submit">
@@ -70,9 +76,9 @@ Readers
          <!-- Search and select END -->
       </div>
 
-      {% if readers %}
+      {% if paginated_readers %}
 
-      {% for reader in readers %}
+      {% for reader in paginated_readers %}
       <div class="d-flex text-muted pt-3 ">
 
          {% if reader.profile_picture %}
@@ -190,19 +196,50 @@ Readers
       <div class="card-footer bg-white pt-4">
          <!-- Pagination START -->
          <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-            <p class="mb-sm-0 text-md text-center text-sm-start">Showing 1 to 8 of {{readers.count}} entries</p>
+            <p class="mb-sm-0 text-md text-center text-sm-start">
+               Showing {{ paginated_readers.start_index }} to {{ paginated_readers.end_index }} of {{paginated_readers.paginator.count }} entries
+            </p>
             <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
                <ul class="pagination pagination-sm pagination-bordered mb-0">
-                  <li class="page-item disabled">
-                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-                  <li class="page-item"><a class="page-link" href="#">15</a></li>
+                  {% if paginated_readers.has_previous %}
                   <li class="page-item">
-                     <a class="page-link" href="#">Next</a>
+                     <a class="page-link" href="?page={{ paginated_readers.previous_page_number }}">
+                        <i class="fa-solid fa-caret-left"></i>
+                     </a>
                   </li>
+                  {% else %}
+                  <li class="page-item disabled" style="opacity: 0.5;">
+                     <a class="page-link" href="#" aria-disabled="true">
+                        <i class="fa-solid fa-caret-left"></i>
+                     </a>
+                  </li>
+                  {% endif %}
+
+                  {% for i in paginated_readers.adjusted_elided_pages %}
+                  {% if i == paginated_readers.paginator.ELLIPSIS %}
+                  <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+                  {% else %}
+                  <li class="page-item {% if i == paginated_readers.number %}active{% endif %}">
+                     <a class="page-link" href="?page={{ i }}">
+                        {{i}}
+                     </a>
+                  </li>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if paginated_readers.has_next %}
+                  <li class="page-item">
+                     <a class="page-link" href="?page={{ paginated_readers.next_page_number }}">
+                        <i class="fa-solid fa-caret-right"></i>
+                     </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled" style="opacity: 0.5;">
+                     <a class="page-link" href="#" aria-disabled="true">
+                        <i class="fa-solid fa-caret-right"></i>
+                     </a>
+                  </li>
+                  {% endif %}
                </ul>
             </nav>
          </div>
@@ -218,8 +255,10 @@ Readers
          </svg>
          <h4 class="mt-2">No readers at the moment</h4>
       </div>
+
       {% endif %}
    </div>
 </div>
 
+<br><br><br><br><br>
 {% endblock %}

@@ -215,9 +215,20 @@ def readers(request, slug):
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
       readers = User.objects.exclude(is_author=True).order_by('date_joined')
-   
-      context = {
-         'readers': readers
+      paginator_reader = Paginator(readers, 10)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_readers = paginator_reader.page(page)
+      except PageNotAnInteger:
+         paginated_readers = paginator_reader.page(1)
+      except EmptyPage:
+         paginated_readers = paginator_reader.page(1)
+
+      paginated_readers.adjusted_elided_pages = paginator_reader.get_elided_page_range(page)
+
+      context = {         
+         'paginated_readers': paginated_readers
       }
       return render(request, 'pen_admin/readers.html', context)
       
