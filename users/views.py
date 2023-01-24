@@ -42,8 +42,7 @@ def request_author_access(request, slug, username):
 
 @login_required
 def bookmarks(request, slug):
-   if slug != request.user.slug:
-      messages.error(request, "You're not allowed to access this account")
+   if slug != request.user.slug:      
       return redirect('users:bookmarks', slug=request.user.slug)
    try:
       user = User.objects.get(slug=slug)
@@ -80,8 +79,7 @@ def like_post(request, slug, id):
 
 @login_required
 def user_profile(request, slug):   
-   if slug != request.user.slug:  
-      messages.error(request, "You're not allowed to access this account")    
+   if slug != request.user.slug:        
       return redirect('users:profile', slug=request.user.slug)
    try:
       user = User.objects.get(slug=slug)
@@ -94,8 +92,7 @@ def user_profile(request, slug):
 
 @login_required
 def edit_profile(request, slug):
-   if slug != request.user.slug:  
-      messages.error(request, "You're not allowed to access this account")    
+   if slug != request.user.slug:        
       return redirect('users:edit_profile', slug=request.user.slug)
 
    if request.method == "POST":
@@ -126,7 +123,6 @@ def delete_account(request, slug):
    user.save()
    messages.success(request, "Account deleted successfully! 👋")
    return redirect('logout')
-
 
 def user_external(request, slug):
    try:
