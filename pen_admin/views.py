@@ -313,9 +313,22 @@ def enquiries(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      enquiries = ContactDetail.objects.all()
+      enquiries = ContactDetail.objects.all().order_by('-date_posted')
+      paginator_enquiry = Paginator(enquiries, 15)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_enquiries = paginator_enquiry.page(page)
+      except PageNotAnInteger:
+         paginated_enquiries = paginator_enquiry.page(1)
+      except EmptyPage:
+         paginated_enquiries = paginator_enquiry.page(1)
+
+      paginated_enquiries.adjusted_elided_pages = paginator_enquiry.get_elided_page_range(page)
+
       context = {
-         'enquiries': enquiries
+         'enquiries': enquiries,
+         'paginated_enquiries': paginated_enquiries
       }
       return render(request, 'pen_admin/enquiries.html', context)
 
