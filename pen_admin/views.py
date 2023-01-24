@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.db.models import Count
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from blog.forms import AddCategoryForm
+from blog.models import PostCategory, Post
 from pages.models import ContactDetail, Subscriber
 from account.models import User, UserSettings
-from datetime import datetime
-from blog.models import PostCategory, Post
-from blog.forms import AddCategoryForm
-from django.db.models import Count
 
 # ! Staffs
 @login_required
@@ -69,7 +70,6 @@ def revoke_staff_access(request, slug, username):
       messages.success(request, f"Staff {staff.username} access revoked!")
       return redirect('users:staffs', slug=slug)
 
-from django.core.paginator import Paginator
 # ! Authors
 @login_required
 def authors(request, slug):
@@ -77,11 +77,31 @@ def authors(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:            
-      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('first_name')
-      reader_requests = User.objects.filter(usersettings__request_author_access=True)
-      context = {
-         'authors': authors,
-         'reader_requests': reader_requests
+      authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('first_name')      
+      author_requests = User.objects.filter(usersettings__request_author_access=True)      
+
+      paginator_author = Paginator(authors, 6)
+      paginator_author_request = Paginator(author_requests, 6)
+
+      page_a = request.GET.get('page', 1)
+      page_r = request.GET.get('page_r', 1)
+      
+      try:
+         paginated_author_requests = paginator_author_request.page(page_r)
+         paginated_authors = paginator_author.page(page_a)  
+      except PageNotAnInteger:
+         paginated_author_requests = paginator_author_request.page(1)
+         paginated_authors = paginator_author.page(1)         
+      except EmptyPage:
+         paginated_author_requests = paginator_author_request.page(1)
+         paginated_authors = paginator_author.page(1)   
+
+      paginated_author_requests.adjusted_elided_pages = paginator_author_request.get_elided_page_range(page_r)
+      paginated_authors.adjusted_elided_pages = paginator_author.get_elided_page_range(page_a)
+
+      context = {         
+         'paginated_authors': paginated_authors,
+         'paginated_author_requests': paginated_author_requests
       }
       return render(request, 'pen_admin/authors.html', context)
 
