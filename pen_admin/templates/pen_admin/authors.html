@@ -73,21 +73,35 @@ Authors
          <div class="card border p-2 my-shadow rounded-lg position-relative">
             <div class="card-body">
                <div class="d-flex align-items-center justify-content-center">
-                  {% if author.profile_picture %}
                   <div class="avatar avatar-xl flex-shrink-0">
-                     <img class="avatar-img rounded-circle" src="{{author.profile_picture.url}}" alt="">
-                  </div>
-                  {% else %}
-                  <svg class="bd-placeholder-img flex-shrink-0 rounded-circle" width="5.125rem" height="5.125rem"
-                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                     preserveAspectRatio="xMidYMid slice" focusable="false">
-                     <title>Placeholder</title>
-                     <rect width="100%" height="100%" fill="#f5f5f5" />
-                     <text x="30%" class="font-medium font-outfit text-xl" y="50%" fill="#000" dy=".3em">
-                        {{author.initials}}
-                     </text>
-                  </svg>
-                  {% endif %}
+                     {% if author.profile_picture %}
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                        src="{{author.profile_picture.url}}" 
+                        alt="Author Avatar"
+                     >
+                     {% else %}
+                        {% if author.gender == 'Male' %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/male.jpg' %}" 
+                           alt="Author Avatar"
+                        >
+                        {% elif author.gender == 'Female' %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/female.jpg' %}" 
+                           alt="Author Avatar"
+                        >
+                        {% else %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/custom.jpg' %}" 
+                           alt="Author Avatar"
+                        >
+                        {% endif %}
+                     {% endif %}
+                  </div>                  
                </div>
 
                <div class="text-center mt-2 d-block">
@@ -430,22 +444,35 @@ Authors
                         <td>
                            <div class="d-flex align-items-center position-relative">
                               <!-- Image -->
-                              {% if author_request.profile_picture %}
                               <div class="avatar avatar-md">
-                                 <img class="avatar-img rounded-circle" src="{{author_request.profile_picture.url}}"
-                                    alt="Reader Avatar">
+                                 {% if author_request.profile_picture %}
+                                    <img 
+                                       class="avatar-img rounded-circle" 
+                                       src="{{author_request.profile_picture.url}}"
+                                       alt="Reader Avatar"
+                                    >                                 
+                                 {% else %}
+                                    {% if author_request.gender == 'Male' %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/male.jpg' %}"
+                                          alt="Reader Avatar"
+                                       >                                    
+                                    {% elif author_request.gender == 'Female' %}                                    
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/female.jpg' %}"
+                                          alt="Reader Avatar"
+                                       >
+                                    {% else %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/custom.jpg' %}"
+                                          alt="Reader Avatar"
+                                       >
+                                    {% endif %}
+                                 {% endif %}
                               </div>
-                              {% else %}
-                              <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="40" height="40"
-                                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                                 preserveAspectRatio="xMidYMid slice" focusable="false">
-                                 <title>Placeholder</title>
-                                 <rect width="100%" height="100%" fill="#f5f5f5" />
-                                 <text x="14%" class="font-medium font-outfit" y="50%" fill="#000" dy=".3em">
-                                    {{author_request.initials}}
-                                 </text>
-                              </svg>
-                              {% endif %}
 
                               <div class="mb-0 ms-2">
                                  <h6 class="mb-0">

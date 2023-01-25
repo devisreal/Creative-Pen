@@ -11,9 +11,6 @@ Bookmarks ({{user.username}})
 {% include 'partials/messages.html' %}
 
 
-
-
-
 <div class="container" style="margin-top: 40px;">
 
    <div class="border-bottom py-3">
@@ -136,11 +133,31 @@ Bookmarks ({{user.username}})
                            <div class="d-flex align-items-center position-relative">
                               <div class="avatar avatar-xs">
                                  {% if post.post_author.profile_picture %}
-                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
-                                    alt="avatar">
+                                 <img 
+                                    class="avatar-img rounded-circle" 
+                                    src="{{post.post_author.profile_picture.url}}" 
+                                    alt="Author avatar"
+                                 >
                                  {% else %}
-                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
-                                    alt="avatar">
+                                    {% if post.post_author.gender == 'Male' %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/male.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% elif post.post_author.gender == 'Female' %}                                                   
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/female.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% else %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/custom.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% endif %} 
                                  {% endif %}
                               </div>
                               <span class="ms-3">by

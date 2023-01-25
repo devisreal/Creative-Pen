@@ -131,9 +131,31 @@ Post Results
                                           <div class="d-flex align-items-center position-relative mt-3">
                                              <div class="avatar me-2">
                                                 {% if post.post_author.profile_picture %}
-                                                <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                                                <img 
+                                                   class="avatar-img rounded-circle" 
+                                                   src="{{post.post_author.profile_picture.url}}" 
+                                                   alt="Author avatar"
+                                                >
                                                 {% else %}
-                                                <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                                                   {% if post.post_author.gender == 'Male' %}
+                                                      <img 
+                                                         class="avatar-img rounded-circle" 
+                                                         src="{% static 'img/user/male.jpg' %}" 
+                                                         alt="Author Avatar"
+                                                      >
+                                                   {% elif post.post_author.gender == 'Female' %}                                                   
+                                                      <img 
+                                                         class="avatar-img rounded-circle" 
+                                                         src="{% static 'img/user/female.jpg' %}" 
+                                                         alt="Author Avatar"
+                                                      >
+                                                   {% else %}
+                                                      <img 
+                                                         class="avatar-img rounded-circle" 
+                                                         src="{% static 'img/user/custom.jpg' %}" 
+                                                         alt="Author Avatar"
+                                                      >
+                                                   {% endif %} 
                                                 {% endif %}
                                              </div>
                                              <div>

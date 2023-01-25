@@ -38,9 +38,31 @@
                      <div class="d-flex align-items-center text-white position-relative">
                         <div class="avatar avatar-sm">
                            {% if post.post_author.profile_picture %}
-                           <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{{post.post_author.profile_picture.url}}" 
+                              alt="Author avatar"
+                           >
                            {% else %}
-                           <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                              {% if post.post_author.gender == 'Male' %}
+                                 <img 
+                                    class="avatar-img rounded-circle" 
+                                    src="{% static 'img/user/male.jpg' %}" 
+                                    alt="Author Avatar"
+                                 >
+                              {% elif post.post_author.gender == 'Female' %}                                                   
+                                 <img 
+                                    class="avatar-img rounded-circle" 
+                                    src="{% static 'img/user/female.jpg' %}" 
+                                    alt="Author Avatar"
+                                 >
+                              {% else %}
+                                 <img 
+                                    class="avatar-img rounded-circle" 
+                                    src="{% static 'img/user/custom.jpg' %}" 
+                                    alt="Author Avatar"
+                                 >
+                              {% endif %} 
                            {% endif %}
                         </div>
                         <span 
@@ -225,11 +247,33 @@
             <div class="d-flex p-2 p-md-4 my-3 bg-opacity-10 rounded bg-{{post.category.color}}">
                <!-- Avatar -->
                <a href="{% url 'author_external' post.post_author.slug %}">
-                  <div class="avatar avatar-xxl me-2 me-md-4">                     
+                  <div class="avatar avatar-xxl me-2 me-md-4">
                      {% if post.post_author.profile_picture %}
-                     <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}" alt="avatar">
+                     <img 
+                        class="avatar-img rounded-circle" 
+                        src="{{post.post_author.profile_picture.url}}" 
+                        alt="Author avatar"
+                     >
                      {% else %}
-                     <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                        {% if post.post_author.gender == 'Male' %}
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{% static 'img/user/male.jpg' %}" 
+                              alt="Author Avatar"
+                           >
+                        {% elif post.post_author.gender == 'Female' %}                                                   
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{% static 'img/user/female.jpg' %}" 
+                              alt="Author Avatar"
+                           >
+                        {% else %}
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{% static 'img/user/custom.jpg' %}" 
+                              alt="Author Avatar"
+                           >
+                        {% endif %} 
                      {% endif %}
                   </div>
                </a>

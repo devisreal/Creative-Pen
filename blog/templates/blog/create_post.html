@@ -65,11 +65,23 @@ Create Post
 
 <br><br>
 <div class="container-sm">
-   <h3 class="mb-3">Create Post</h3>
+
+   <div class="border-bottom pb-3 mb-5">
+      <div class="row d-flex g-3 align-items-center justify-content-between">
+         <div class="col-md-4">
+            <h4 class="mb-0">
+               Create post               
+            </h4>
+         </div>
+   
+      </div>
+      <!-- Search and select END -->
+   </div>
+
+
+
    <form class="card p-3 rounded-lg" action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-
-
       <!-- * Post Title -->
       <fieldset>
          <label for="post_title" class="mb-2 text-dark">

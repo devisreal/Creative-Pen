@@ -30,12 +30,30 @@
 {% if author %}
 
 <div class="author-info py-4 pt-4 px-2 bg-light text-center border-bottom">
-   <div class="avatar avatar-xxl mb-3">
+   <div class="avatar avatar-xxl mt-n7">
       {% if author.profile_picture %}
-      <img class="avatar-img rounded-circle border-0 pointer-events-none" src="{{author.profile_picture.url}}" alt="">
-      {% else %}
-      <img class="avatar-img rounded-circle border-0 pointer-events-none" src="{% static 'img/user/custom.jpg' %}"
-         alt="">
+      <img 
+         class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+         src="{{author.profile_picture.url}}" 
+         alt="Author Avatar"
+      >
+      {% else %}                     
+         {% if author.gender == 'Male' %}
+            <img 
+               class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+               src="{% static 'img/user/male.jpg' %}" alt="Author Avatar"
+            >
+         {% elif author.gender == 'Female' %}
+            <img 
+               class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+               src="{% static 'img/user/female.jpg' %}" alt="Author Avatar"
+            >
+         {% else %}
+            <img 
+               class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+               src="{% static 'img/user/custom.jpg' %}" alt="Author Avatar"
+            >
+         {% endif %}
       {% endif %}
    </div>
    <h2 class="font-semibold mb-0">Hi, I'm {{author.get_full_name}}</h2>
@@ -69,7 +87,6 @@
       {% endwith %}
    </small>
    {% endif %}
-
 
    <p class="col-md-5 mx-auto text-gray-500 mt-2 font-light">
       {{author.bio|default:""}}
@@ -286,11 +303,31 @@
                            <div class="d-flex align-items-center position-relative">
                               <div class="avatar avatar-xs">
                                  {% if post.post_author.profile_picture %}
-                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
-                                    alt="avatar">
+                                 <img 
+                                    class="avatar-img rounded-circle" 
+                                    src="{{post.post_author.profile_picture.url}}" 
+                                    alt="Author avatar"
+                                 >
                                  {% else %}
-                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
-                                    alt="avatar">
+                                    {% if post.post_author.gender == 'Male' %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/male.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% elif post.post_author.gender == 'Female' %}                                                   
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/female.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% else %}
+                                       <img 
+                                          class="avatar-img rounded-circle" 
+                                          src="{% static 'img/user/custom.jpg' %}" 
+                                          alt="Author Avatar"
+                                       >
+                                    {% endif %} 
                                  {% endif %}
                               </div>
                               <span class="ms-3">by
@@ -388,11 +425,28 @@
                <div class="col-sm-12 col-md-auto text-center text-md-start mx-auto">
                   <div class="avatar avatar-xxl mt-n7">
                      {% if reader.profile_picture %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{{reader.profile_picture.url}}" alt="">
-                     {% else %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{% static 'img/user/custom.jpg' %}" alt="">
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{{reader.profile_picture.url}}" 
+                        alt="Reader Avatar"
+                     >
+                     {% else %}                     
+                        {% if reader.gender == 'Male' %}
+                           <img 
+                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                              src="{% static 'img/user/male.jpg' %}" alt="Reader Avatar"
+                           >
+                        {% elif reader.gender == 'Female' %}
+                           <img 
+                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                              src="{% static 'img/user/female.jpg' %}" alt="Reader Avatar"
+                           >
+                        {% else %}
+                           <img 
+                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                              src="{% static 'img/user/custom.jpg' %}" alt="Reader Avatar"
+                           >
+                        {% endif %}
                      {% endif %}
                   </div>
                </div>

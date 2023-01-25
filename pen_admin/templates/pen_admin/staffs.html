@@ -45,7 +45,33 @@ Staffs
             <div class="card-body">
                <div class="d-flex align-items-center justify-content-center">
                   <div class="avatar avatar-xl flex-shrink-0">
-                     <img class="avatar-img rounded-circle" src="{{staff.profile_picture.url}}" alt="">
+                     {% if staff.profile_picture %}
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                        src="{{staff.profile_picture.url}}" 
+                        alt="Staff Avatar"
+                     >
+                     {% else %}
+                        {% if staff.gender == 'Male' %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/male.jpg' %}" 
+                           alt="Staff Avatar"
+                        >
+                        {% elif staff.gender == 'Female' %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/female.jpg' %}" 
+                           alt="Staff Avatar"
+                        >
+                        {% else %}
+                        <img 
+                           class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                        
+                           src="{% static 'img/user/custom.jpg' %}" 
+                           alt="Staff Avatar"
+                        >
+                        {% endif %}
+                     {% endif %}
                   </div>
                </div>
                <div class="text-center mt-2 d-block">

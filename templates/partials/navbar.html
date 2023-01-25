@@ -13,7 +13,7 @@
 <nav id="navbar" class="navbar navbar-expand-md navbar-light py-1 border-bottom sticky-top top-0">
    <div class="container-fluid px-md-5 px-4">
       <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
-         <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
+         <img src="{% static 'img/tmp1.png' %}" alt="Creative Pen Logo" width="30px">
          <h1 class="font-righteous text-xl mt-2 ms-1 text-uppercase">
             Creative
             <span class="text-red">
@@ -83,11 +83,34 @@
          <li class="nav-item dropdown custom-dropdown ms-0 list-unstyled">
             <a class="nav-link" role="button" style="user-select: none;" data-bs-toggle="dropdown" aria-expanded="false">
                {% if request.user.profile_picture %}
-               <img src="{{request.user.profile_picture.url}}" alt="User Avatar"
-                  class="img-fluid rounded-full pointer-events-none" style="width: 40px;height: 40px;object-fit: cover;" />
-               {% else %}
-               <img src="{% static 'img/user/custom.jpg' %}" alt="User Avatar" class="img-fluid rounded-full pointer-events-none"
-                  style="width: 35px;height: 35px;object-fit: cover;" />
+               <img 
+                  src="{{request.user.profile_picture.url}}" 
+                  alt="User Avatar"
+                  class="img-fluid rounded-full pointer-events-none" style="width: 40px;height: 40px;object-fit: cover;" 
+               />
+               {% else %}               
+                  {% if request.user.gender == 'Male' %}
+                     <img 
+                        src="{% static 'img/user/male.jpg' %}" 
+                        alt="User Avatar" 
+                        class="img-fluid rounded-full pointer-events-none"
+                        style="width: 40px;height: 40px;object-fit: cover;" 
+                     />
+                     {% elif request.user.gender == 'Female' %}
+                     <img 
+                        src="{% static 'img/user/female.jpg' %}" 
+                        alt="User Avatar" 
+                        class="img-fluid rounded-full pointer-events-none"
+                        style="width: 40px;height: 40px;object-fit: cover;" 
+                     />
+                     {% else %}
+                     <img 
+                        src="{% static 'img/user/custom.jpg' %}" 
+                        alt="User Avatar" 
+                        class="img-fluid rounded-full pointer-events-none"
+                        style="width: 40px;height: 40px;object-fit: cover;" 
+                     />
+                     {% endif %}
                {% endif %}
             </a>
             <ul class="dropdown-menu mt-1 dropdown-menu-end px-2 text-md nav-dropdown">
@@ -221,7 +244,7 @@
 <nav id="navbar" class="navbar navbar-expand-md navbar-light py-1 border-bottom sticky-top top-0">
    <div class="container-fluid px-lg-5 px-4">
       <a href="{% url 'home' %}" class="navbar-brand  d-flex align-items-center">
-         <img src="{% static 'img/tmp1.png' %}" alt="" width="30px">
+         <img src="{% static 'img/tmp1.png' %}" alt="Creative Pen Logo" width="30px">
          <h1 class="font-righteous  text-xl mt-2 ms-1 text-uppercase">
             Creative
             <span class="text-red">
@@ -312,7 +335,7 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header d-flex align-items-center">
       <a href="{% url 'home' %}" class="text-dark text-decoration-none d-flex align-items-center">
-         <img src="{% static 'img/tmp1.png' %}" alt="" width="25px">
+         <img src="{% static 'img/tmp1.png' %}" alt="Creative Pen Logo" width="25px">
          <h1 class="font-righteous text-xl mt-2 ms-1 text-uppercase">
             Creative
             <span class="text-red">
