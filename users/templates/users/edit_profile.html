@@ -88,9 +88,29 @@ Edit Profile ({{request.user.username}})
                            {% if request.user.profile_picture %}
                            <img class="avatar-img rounded-circle border border-white border-3" id="profile-output"
                               src="{{request.user.profile_picture.url}}" alt="User Avatar">
-                           {% else %}
-                           <img class="avatar-img rounded-circle border border-white border-3" id="profile-output"
-                              src="{% static 'img/user/custom.jpg' %}" alt="User Avatar">
+                           {% else %}                           
+                              {% if post.post_author.gender == 'Male' %}
+                                 <img 
+                                    class="avatar-img rounded-circle border border-white border-3" 
+                                    id="profile-output"
+                                    src="{% static 'img/user/male.jpg' %}" 
+                                    alt="User Avatar"
+                                 >
+                              {% elif post.post_author.gender == 'Female' %}                                                   
+                                 <img 
+                                    class="avatar-img rounded-circle border border-white border-3" 
+                                    id="profile-output"
+                                    src="{% static 'img/user/female.jpg' %}" 
+                                    alt="User Avatar"
+                                 >
+                              {% else %}
+                                 <img 
+                                    class="avatar-img rounded-circle border border-white border-3" 
+                                    id="profile-output"
+                                    src="{% static 'img/user/custom.jpg' %}" 
+                                    alt="User Avatar"
+                                 >
+                              {% endif %}                                     
                            {% endif %}
                         </div>
                      </div>

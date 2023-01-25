@@ -3,7 +3,7 @@
 {% load humanize %}
 {% load hitcount_tags %}
 {% block title %}
-Dashboard ({{user.username}})
+Dashboard [{{user.username}}]
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -40,4 +40,6 @@ Dashboard ({{user.username}})
    {% endif %}
    
 {% endif %}
+
+<br><br><br><br><br>
 {% endblock %}

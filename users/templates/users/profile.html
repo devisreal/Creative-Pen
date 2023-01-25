@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block title %}
-My Profile ({{user.username}})
+My Profile [{{user.username}}]
 {% endblock title %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/user.css' %}">
@@ -11,21 +11,26 @@ My Profile ({{user.username}})
       --Iconsax-Size: 20px;
       --Iconsax-Color: rgba(0, 0, 0, 0.7);
    }
-   .cancel-modal svg{
+
+   .cancel-modal svg {
       fill: rgba(0, 0, 0, 0.5) !important;
       transition: 0.1s;
    }
-   .cancel-modal:hover svg{
+
+   .cancel-modal:hover svg {
       fill: rgba(0, 0, 0, 0.8) !important;
       transition: 0.1s;
    }
-   .background-img{
+
+   .background-img {
       filter: brightness(0.8);
    }
-   .social-links-share{
+
+   .social-links-share {
       transition: .2s;
    }
-   .social-links-share:hover{
+
+   .social-links-share:hover {
       fill: #234e70;
       transition: .2s;
    }
@@ -39,14 +44,9 @@ My Profile ({{user.username}})
    <div class="col-12">
       <div class="mb-4 position-relative z-index-9">
          <!-- Cover image -->
-         <div 
-            class="py-5 rounded background-img" 
-            {% if user.background_image %}
-               style="background-image: url('{{user.background_image.url}}');"
-            {% else %}
-               style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');"
-            {% endif %}            
-         >
+         <div class="py-5 rounded background-img" {% if user.background_image %}
+            style="background-image: url('{{user.background_image.url}}');" {% else %}
+            style="background-image: url('{% static " img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
          </div>
          <div class="card-body pt-3 pb-0">
             <div class="row d-flex justify-content-between">
@@ -54,28 +54,19 @@ My Profile ({{user.username}})
                <div class="col-sm-12 col-md-auto text-center text-md-start">
                   <div class="avatar avatar-xxl mt-n7">
                      {% if user.profile_picture %}
-                     <img 
-                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{{user.profile_picture.url}}" 
-                        alt="User Avatar"
-                     >
-                     {% else %}                     
-                        {% if user.gender == 'Male' %}
-                           <img 
-                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                              src="{% static 'img/user/male.jpg' %}" alt="User Avatar"
-                           >
-                        {% elif user.gender == 'Female' %}
-                           <img 
-                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                              src="{% static 'img/user/female.jpg' %}" alt="User Avatar"
-                           >
-                        {% else %}
-                           <img 
-                              class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                              src="{% static 'img/user/custom.jpg' %}" alt="User Avatar"
-                           >
-                        {% endif %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{{user.profile_picture.url}}" alt="User Avatar">
+                     {% else %}
+                     {% if user.gender == 'Male' %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{% static 'img/user/male.jpg' %}" alt="User Avatar">
+                     {% elif user.gender == 'Female' %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{% static 'img/user/female.jpg' %}" alt="User Avatar">
+                     {% else %}
+                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
+                        src="{% static 'img/user/custom.jpg' %}" alt="User Avatar">
+                     {% endif %}
                      {% endif %}
                   </div>
                </div>
@@ -84,7 +75,7 @@ My Profile ({{user.username}})
                   class="col-sm-12 mt-3 mt-md-0 col-md text-center text-md-start d-md-flex justify-content-between align-items-center">
                   <div>
                      <!-- ? User fullname -->
-                     <h4 class="m-0 p-0">                        
+                     <h4 class="m-0 p-0">
                         {{user.get_full_name|default:"Firstname Lastname"}}
 
                         {% if user.usersettings.is_verified %}
@@ -100,13 +91,13 @@ My Profile ({{user.username}})
                      </small>
                      <ul class="list-inline text-md pt-1">
 
-                        <!-- ? User Job Title -->                        
+                        <!-- ? User Job Title -->
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="mail"></i>
                            {{user.email}}
                         </li>
 
-                        <!-- ? User Job Title -->                        
+                        <!-- ? User Job Title -->
                         <li class="list-inline-item">
                            <i class="iconsax me-1 pb-1" icon-name="user-1-octagon"></i>
                            {{user.job_title|default:"[Job title]"}}
@@ -134,22 +125,25 @@ My Profile ({{user.username}})
                      <!-- Card action START -->
                      <div class="dropdown ms-3">
                         <a class="text-secondary" href="" id="profileDropdown" role="button" data-bs-toggle="dropdown"
-                           data-bs-auto-close="outside" aria-expanded="false">                           
-                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M22 6.5H16" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                 stroke-linejoin="round" />
-                              <path d="M6 6.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                 stroke-linejoin="round" />
+                           data-bs-auto-close="outside" aria-expanded="false">
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M22 6.5H16" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                 stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M6 6.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                 stroke-linecap="round" stroke-linejoin="round" />
                               <path
                                  d="M10 10C11.933 10 13.5 8.433 13.5 6.5C13.5 4.567 11.933 3 10 3C8.067 3 6.5 4.567 6.5 6.5C6.5 8.433 8.067 10 10 10Z"
-                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M22 17.5H18" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                                  stroke-linejoin="round" />
-                              <path d="M8 17.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                 stroke-linejoin="round" />
+                              <path d="M22 17.5H18" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                 stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M8 17.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                 stroke-linecap="round" stroke-linejoin="round" />
                               <path
                                  d="M14 21C15.933 21 17.5 19.433 17.5 17.5C17.5 15.567 15.933 14 14 14C12.067 14 10.5 15.567 10.5 17.5C10.5 19.433 12.067 21 14 21Z"
-                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                 stroke-linejoin="round" />
                            </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
@@ -163,28 +157,25 @@ My Profile ({{user.username}})
                            {% endif %}
 
                            <li>
-                              <a class="dropdown-item edit-icon"
-                                 href="{% url 'users:edit_profile' user.slug %}">
+                              <a class="dropdown-item edit-icon" href="{% url 'users:edit_profile' user.slug %}">
                                  <i class="iconsax me-2" icon-name="user-2-edit"></i>
                                  Edit profile
                               </a>
-                           </li>                                                        
+                           </li>
                            <li>
-                              <a 
-                                 data-bs-toggle="modal" data-bs-target="#shareProfileModal"
-                                 class="dropdown-item edit-icon"
-                                 href="{% url 'users:edit_profile' user.slug %}"
-                              >
+                              <a data-bs-toggle="modal" data-bs-target="#shareProfileModal"
+                                 class="dropdown-item edit-icon" href="{% url 'users:edit_profile' user.slug %}">
                                  <!-- <i class="iconsax me-2" icon-name="user-2-edit"></i> -->
                                  <i class='bx bx-share-alt me-2'></i>
                                  Share profile
                               </a>
-                           </li>                                 
+                           </li>
                            <li>
                               <hr class="dropdown-divider">
                            </li>
                            <li>
-                              <a class="dropdown-item text-danger cancel-icon cursor-pointer" data-bs-toggle="modal" data-bs-target="#deleteModal" >
+                              <a class="dropdown-item text-danger cancel-icon cursor-pointer" data-bs-toggle="modal"
+                                 data-bs-target="#deleteModal">
                                  <i class="iconsax me-2" icon-name="close-circle"></i>
                                  Delete profile
                               </a>
@@ -206,7 +197,7 @@ My Profile ({{user.username}})
    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
          <div class="p-2 pb-0 d-flex justify-content-end">
-            <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">               
+            <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
                   <path
                      d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
@@ -215,7 +206,8 @@ My Profile ({{user.username}})
             </a>
          </div>
          <div class="d-grid justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#dc2626" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#dc2626"
+               viewBox="0 0 24 24">
                <path
                   d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
                </path>
@@ -237,7 +229,7 @@ My Profile ({{user.username}})
 <!-- ! Share Profile Modal -->
 <div class="modal fade" id="shareProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-4">         
+      <div class="modal-content p-4">
          <div class="">
             <ul class="avatar-group mb-0 mx-auto w-fit">
                <li class="avatar avatar-sm">
@@ -248,68 +240,68 @@ My Profile ({{user.username}})
                </li>
                <li class="avatar avatar-sm">
                   {% if user.profile_picture %}
-                     <img class="avatar-img rounded-circle" src="{{request.user.profile_picture.url}}" alt="avatar">
+                  <img class="avatar-img rounded-circle" src="{{request.user.profile_picture.url}}" alt="avatar">
                   {% else %}
-                     <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
+                  {% if user.gender == 'Male' %}
+                  <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}" alt="avatar">
+                  {% elif user.gender == 'Female' %}
+                  <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}" alt="avatar">
+                  {% else %}
+                  <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}" alt="avatar">
                   {% endif %}
-               </li>               
+                  {% endif %}
+               </li>
             </ul>
             <h5 class="text-center my-3">Invite Your Friends</h5>
-            <p class="mb-2">               
+            <p class="mb-2">
                Share link
             </p>
             <div class="input-group">
-               <input                   
-                  id="user-url-input"
-                  type="text" 
-                  class="form-control bg-white border-1 text-md" 
-                  placeholder="User's Profile Link" 
-                  aria-label="User's Profile Link"
-                  aria-describedby="user-url-copy"
-                  value="http://localhost:700/@{{user.username}}"
-                  readonly
-               >
-               <button class="input-group-text cursor-pointer user-url-copy " data-clipboard-action="copy" data-clipboard-target="#user-url-input">                  
+               <input id="user-url-input" type="text" class="form-control bg-white border-1 text-md"
+                  placeholder="User's Profile Link" aria-label="User's Profile Link" aria-describedby="user-url-copy"
+                  value="http://localhost:700/@{{user.username}}" readonly>
+               <button class="input-group-text cursor-pointer user-url-copy " data-clipboard-action="copy"
+                  data-clipboard-target="#user-url-input">
                   <i class="iconsax" style="--Iconsax-Size: 25px;" icon-name="clipboard-text-2"></i>
                </button>
-            </div>           
+            </div>
 
             <div class="mt-3 d-flex justify-content-center">
                <!-- ! Twitter -->
-               <a 
-                  href=" https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.localhost%3A700%2F%40george&text=Hey%2C%20check%20out%20my%20Creative%20Pen%20profile%20at" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-               >
-                  <svg class="mx-1 social-links-share" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512" width="30" height="30">
-                  <path
-                     d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z" />
+               <a href=" https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.localhost%3A700%2F%40george&text=Hey%2C%20check%20out%20my%20Creative%20Pen%20profile%20at"
+                  target="_blank" rel="noopener noreferrer">
+                  <svg class="mx-1 social-links-share" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                     width="30" height="30">
+                     <path
+                        d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z" />
                   </svg>
                </a>
 
-               <svg class="mx-1 social-links-share" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512" width="30" height="30">
+               <svg class="mx-1 social-links-share" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="30"
+                  height="30">
                   <path
                      d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
-               </svg>               
-            </div> 
-            
+               </svg>
+            </div>
+
             <div class="d-flex justify-content-center mt-3">
-               <button type="button" class="btn btn-secondary-soft btn-sm px-3" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               <button type="button" class="btn btn-secondary-soft btn-sm px-3" data-bs-dismiss="modal"
+                  aria-label="Close">Close</button>
             </div>
             <!-- ! Successful profile toast -->
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                <div id="successToast" class="toast " role="alert" aria-live="assertive" aria-atomic="true">
                   <div class="toast-header d-flex align-items-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1" width="25" height="25"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#198754" stroke-linecap="round" stroke-linejoin="round">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1"
+                        width="25" height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#198754"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M9 12l2 2l4 -4"></path>
                      </svg>
                      <span class="me-auto text-success font-medium font-cabin fs-6">Success</span>
-                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                   </div>
                   <div class="toast-body bg-white font-outfit text-md">
                      Profile URL copied!
@@ -321,21 +313,23 @@ My Profile ({{user.username}})
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                   <div class="toast-header d-flex align-items-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1" width="25" height="25"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#DC3545" stroke-linecap="round" stroke-linejoin="round">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check me-1"
+                        width="25" height="25" viewBox="0 0 24 24" stroke-width="2" stroke="#fff" fill="#DC3545"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M9 12l2 2l4 -4"></path>
                      </svg>
                      <span class="me-auto text-danger font-medium font-cabin fs-6">Error</span>
-                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast" aria-label="Close"></button>
+                     <button type="button" class="btn-close btn btn-sm" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
                   </div>
                   <div class="toast-body bg-white font-outfit text-md">
                      An error occured!
                   </div>
                </div>
             </div>
-         </div>         
+         </div>
       </div>
    </div>
 </div>
@@ -349,7 +343,7 @@ My Profile ({{user.username}})
    const toast1 = new bootstrap.Toast(successToast)
    const errorToast = document.getElementById('errorToast')
    const toast2 = new bootstrap.Toast(errorToast)
-   clipboard.on('success', function (e) {            
+   clipboard.on('success', function (e) {
       toast1.show()
    });
    clipboard.on('error', function (e) {

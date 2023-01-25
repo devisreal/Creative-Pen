@@ -3,7 +3,7 @@
 {% load humanize %}
 {% load hitcount_tags %}
 {% block title %}
-Bookmarks ({{user.username}})
+Bookmarks [{{user.username}}]
 {% endblock title %}
 {% block styles %}
 {% endblock styles %}
@@ -20,14 +20,11 @@ Bookmarks ({{user.username}})
                Bookmarks
                <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mt-1">
                   {% if bookmarks %}
-                     {% if bookmarks.count < 10 %} 0{{bookmarks.count}} {% else %} {{bookmarks.count}} {% endif %}
-                  {% else %}
-                     0
-                  {% endif %}
-               </span>
+                  {% if bookmarks.count < 10 %} 0{{bookmarks.count}} {% else %} {{bookmarks.count}} {% endif %} {% else
+                     %} 0 {% endif %} </span>
             </h4>
          </div>
-   
+
       </div>
       <!-- Search and select END -->
    </div>
@@ -133,31 +130,19 @@ Bookmarks ({{user.username}})
                            <div class="d-flex align-items-center position-relative">
                               <div class="avatar avatar-xs">
                                  {% if post.post_author.profile_picture %}
-                                 <img 
-                                    class="avatar-img rounded-circle" 
-                                    src="{{post.post_author.profile_picture.url}}" 
-                                    alt="Author avatar"
-                                 >
+                                 <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
+                                    alt="Author avatar">
                                  {% else %}
-                                    {% if post.post_author.gender == 'Male' %}
-                                       <img 
-                                          class="avatar-img rounded-circle" 
-                                          src="{% static 'img/user/male.jpg' %}" 
-                                          alt="Author Avatar"
-                                       >
-                                    {% elif post.post_author.gender == 'Female' %}                                                   
-                                       <img 
-                                          class="avatar-img rounded-circle" 
-                                          src="{% static 'img/user/female.jpg' %}" 
-                                          alt="Author Avatar"
-                                       >
-                                    {% else %}
-                                       <img 
-                                          class="avatar-img rounded-circle" 
-                                          src="{% static 'img/user/custom.jpg' %}" 
-                                          alt="Author Avatar"
-                                       >
-                                    {% endif %} 
+                                 {% if post.post_author.gender == 'Male' %}
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                    alt="Author Avatar">
+                                 {% elif post.post_author.gender == 'Female' %}
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                    alt="Author Avatar">
+                                 {% else %}
+                                 <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                    alt="Author Avatar">
+                                 {% endif %}
                                  {% endif %}
                               </div>
                               <span class="ms-3">by

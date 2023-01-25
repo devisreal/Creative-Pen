@@ -12,18 +12,37 @@ from blog.models import Post
 def dashboard(request, slug):
    if slug != request.user.slug:      
       return redirect('users:dashboard', slug=request.user.slug)
+   
    try:
       user = User.objects.get(slug=slug)
       liked_posts = Post.objects.filter(likes=user)
       author_posts = Post.objects.filter(post_author=user)
+      total_users = User.objects.all().count()
+      total_posts = Post.objects.all().count()
+      
+      total_posts_likes = 0
+      for post in Post.objects.all():
+         total_posts_likes += post.likes.all().count()
+      total_likes = total_posts_likes
+
    except User.DoesNotExist:
       return redirect('error_page')
-   else:
-      context = {
-         'user': user,
-         'liked_posts': liked_posts,
-         'author_posts': author_posts
-      }
+      
+   context = {
+      'user': user,
+      'liked_posts': liked_posts,
+      'author_posts': author_posts,
+      'total_users': total_users
+   }
+
+   if user.is_staff or user.is_superuser:
+      context.update({
+         'total_users': total_users,
+         'total_posts': total_posts,
+         'total_likes': total_likes
+      })
+      return render(request, 'pen_admin/dashboard.html', context)
+   else:      
       return render(request, 'users/dashboard.html', context)
 
 @login_required

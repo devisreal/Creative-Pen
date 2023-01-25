@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load hitcount_tags %}
+{% block title %}
+Dashboard [{{user.username}}]
+{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+
+<div class="container mt-5">
+   <div class="row gx-4">
+      <div class="col-12">
+         <!-- Counter START -->
+         <div class="row g-4">
+      
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-3">
+               <div class="card card-body border p-3">
+                  <div class="d-flex align-items-center">
+                     <!-- Icon -->
+                     <div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">                        
+                        <i class="fa-solid fa-binoculars"></i>
+                     </div>
+                     <!-- Content -->
+                     <div class="ms-3">
+                        <h3>134K</h3>
+                        <h6 class="mb-0 font-outfit">Pageviews</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-3">
+               <div class="card card-body border p-3">
+                  <div class="d-flex align-items-center">
+                     <!-- Icon -->
+                     <div class="icon-xl fs-1 bg-primary bg-opacity-10 rounded-3 text-primary">
+                        <i class="fa-solid fa-file-lines"></i>
+                     </div>
+                     <!-- Content -->
+                     <div class="ms-3">
+                        <h3>{{total_posts}}</h3>
+                        <h6 class="mb-0 font-outfit">Posts</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-3">
+               <div class="card card-body border p-3">
+                  <div class="d-flex align-items-center">
+                     <!-- Icon -->
+                     <div class="icon-xl fs-1 bg-danger bg-opacity-10 rounded-3 text-danger">
+                        <i class="fa-solid fa-heart"></i>
+                     </div>
+                     <!-- Content -->
+                     <div class="ms-3">
+                        <h3>{{total_likes}}</h3>
+                        <h6 class="mb-0 font-outfit">Likes</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      
+            <!-- Counter item -->
+            <div class="col-sm-6 col-lg-3">
+               <div class="card card-body border p-3">
+                  <div class="d-flex align-items-center">
+                     <!-- Icon -->
+                     <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">                        
+                        <i class="fa-solid fa-users-line"></i>
+                     </div>
+                     <!-- Content -->
+                     <div class="ms-3">
+                        <h3>{{total_users}}</h3>
+                        <h6 class="mb-0 font-outfit">Users</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      
+         </div>
+         <!-- Counter END -->
+      </div>
+   </div>
+</div>
+
+
+<br><br><br><br><br>
+{% endblock %}
