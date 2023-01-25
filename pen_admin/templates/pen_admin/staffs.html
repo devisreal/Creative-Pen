@@ -20,7 +20,7 @@ Staffs
 
 
 
-<div class="container pb-2 rounded-md" style="margin-top: 70px;">
+<div class="container pb-2 rounded-md" style="margin-top: 30px;">
 
 
    <div class="border-bottom py-3">
@@ -28,27 +28,17 @@ Staffs
          <div class="col-md-4">
             <h4 class="mb-0">Staffs</h4>
          </div>
-         {% if staffs %}
-         <div class="col-md-8">
-            <form class="rounded position-relative">
-               <input class="form-control bg-transparent" type="search" placeholder="Search staff" aria-label="Search">
-               <button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
-                  type="submit">
-                  <i class="fas fa-search fs-6"></i>
-               </button>
-            </form>
-         </div>
-         {% endif %}
+         
       </div>
       <!-- Search and select END -->
    </div>
 
-   {% if staffs %}
+   {% if paginated_staffs %}
          
    <div class="row g-4 mt-3">
 
       <!-- Card item START -->
-      {% for staff in staffs %}
+      {% for staff in paginated_staffs %}
       
       <div class="col-md-6 col-xl-4">
          <div class="card border p-2 my-shadow rounded-lg">
@@ -239,22 +229,54 @@ Staffs
 
    </div>
 
-   <div class="card-footer mt-5 bg-white pt-3">
+   <div class="card-footer mt-2 border-0 bg-white pt-3 mb-2">
       <!-- Pagination START -->
       <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-         <p class="mb-sm-0 text-md text-center text-sm-start">Showing 1 to 8 of {{staffs.count}} entries</p>
+         <p class="mb-sm-0 text-md text-center text-sm-start">
+            Showing {{ paginated_staffs.start_index }} to {{ paginated_staffs.end_index }} of
+            {{paginated_staffs.paginator.count }} entries
+         </p>
          <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
             <ul class="pagination pagination-sm pagination-bordered mb-0">
-               <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-               </li>
-               <li class="page-item"><a class="page-link" href="#">1</a></li>
-               <li class="page-item active"><a class="page-link" href="#">2</a></li>
-               <li class="page-item disabled"><a class="page-link" href="#">..</a></li>
-               <li class="page-item"><a class="page-link" href="#">15</a></li>
+               {% if paginated_staffs.has_previous %}
                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
+                  <a class="page-link" href="?page={{ paginated_staffs.previous_page_number }}">
+                     <i class="fa-solid fa-caret-left"></i>
+                  </a>
                </li>
+               {% else %}
+               <li class="page-item disabled" style="opacity: 0.5;">
+                  <a class="page-link" href="#" aria-disabled="true">
+                     <i class="fa-solid fa-caret-left"></i>
+                  </a>
+               </li>
+               {% endif %}
+   
+               {% for i in paginated_staffs.adjusted_elided_pages %}
+                  {% if i == paginated_staffs.paginator.ELLIPSIS %}
+                     <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+                  {% else %}
+                     <li class="page-item {% if i == paginated_staffs.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">
+                           {{i}}
+                        </a>
+                     </li>
+                  {% endif %}
+               {% endfor %}
+   
+               {% if paginated_staffs.has_next %}
+               <li class="page-item">
+                  <a class="page-link" href="?page={{ paginated_staffs.next_page_number }}">
+                     <i class="fa-solid fa-caret-right"></i>
+                  </a>
+               </li>
+               {% else %}
+               <li class="page-item disabled" style="opacity: 0.5;">
+                  <a class="page-link" href="#" aria-disabled="true">
+                     <i class="fa-solid fa-caret-right"></i>
+                  </a>
+               </li>
+               {% endif %}
             </ul>
          </nav>
       </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from django.db.models import Count, Q
 from datetime import datetime
 from blog.forms import AddCategoryForm
@@ -16,9 +16,25 @@ def staffs(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:      
-      staffs = User.objects.filter(is_staff=True).exclude(is_superuser=True)
+      staffs = User.objects.filter(is_staff=True).exclude(is_superuser=True).order_by('first_name')
+
+      paginator_staff = Paginator(staffs, 12)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_staffs = paginator_staff.page(page)
+      except PageNotAnInteger:
+         messages.error(request, 'Invalid page number')
+         return redirect('users:staffs', slug=slug)
+      except EmptyPage:         
+         messages.error(request, 'No staffs found.')
+         return redirect('users:staffs', slug=slug)
+
+      paginated_staffs.adjusted_elided_pages = paginator_staff.get_elided_page_range(page)
+
       context = {
-         'staffs': staffs
+         'staffs': staffs,
+         'paginated_staffs': paginated_staffs
       }
       return render(request, 'pen_admin/staffs.html', context)
 
@@ -90,11 +106,11 @@ def authors(request, slug):
          paginated_author_requests = paginator_author_request.page(page_r)
          paginated_authors = paginator_author.page(page_a)
       except PageNotAnInteger:
-         paginated_author_requests = paginator_author_request.page(1)
-         paginated_authors = paginator_author.page(1)         
+         messages.error(request, 'Invalid page number')
+         return redirect('users:authors', slug=slug)
       except EmptyPage:
-         paginated_author_requests = paginator_author_request.page(1)
-         paginated_authors = paginator_author.page(1)   
+         messages.error(request, 'No results found.')
+         return redirect('users:authors', slug=slug)
 
       paginated_author_requests.adjusted_elided_pages = paginator_author_request.get_elided_page_range(page_r)
       paginated_authors.adjusted_elided_pages = paginator_author.get_elided_page_range(page_a)
@@ -104,7 +120,6 @@ def authors(request, slug):
          'paginated_author_requests': paginated_author_requests
       }
       return render(request, 'pen_admin/authors.html', context)
-
 
 @login_required
 def author_single(request, slug, username):
@@ -221,9 +236,11 @@ def readers(request, slug):
       try:
          paginated_readers = paginator_reader.page(page)
       except PageNotAnInteger:
-         paginated_readers = paginator_reader.page(1)
+         messages.error(request, 'Invalid page number')
+         return redirect('users:readers', slug=slug)
       except EmptyPage:
-         paginated_readers = paginator_reader.page(1)
+         messages.error(request, 'No readers found.')
+         return redirect('users:authors', slug=slug)
 
       paginated_readers.adjusted_elided_pages = paginator_reader.get_elided_page_range(page)
 
@@ -283,9 +300,11 @@ def subscribers(request, slug):
       try:
          paginated_subscribers = paginator_subscriber.page(page)
       except PageNotAnInteger:
-         paginated_subscribers = paginator_subscriber.page(1)
+         messages.error(request, 'Invalid page number')
+         return redirect('users:subscribers', slug=slug)
       except EmptyPage:
-         paginated_subscribers = paginator_subscriber.page(1)
+         messages.error(request, 'No subscribers found.')
+         return redirect('users:subscribers', slug=slug)
 
       paginated_subscribers.adjusted_elided_pages = paginator_subscriber.get_elided_page_range(page)
 
@@ -320,14 +339,15 @@ def enquiries(request, slug):
       try:
          paginated_enquiries = paginator_enquiry.page(page)
       except PageNotAnInteger:
-         paginated_enquiries = paginator_enquiry.page(1)
+         messages.error(request, 'Invalid page number')
+         return redirect('users:enquiries', slug=slug)
       except EmptyPage:
-         paginated_enquiries = paginator_enquiry.page(1)
+         messages.error(request, 'No enquiries found.')
+         return redirect('users:enquiries', slug=slug)
 
       paginated_enquiries.adjusted_elided_pages = paginator_enquiry.get_elided_page_range(page)
 
-      context = {
-         'enquiries': enquiries,
+      context = {         
          'paginated_enquiries': paginated_enquiries
       }
       return render(request, 'pen_admin/enquiries.html', context)
@@ -363,7 +383,7 @@ def categories(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:  
-      categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')   
+      categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')
             
       if request.method == 'POST':
          add_category_form = AddCategoryForm(request.POST or None, request.FILES)
@@ -381,7 +401,6 @@ def categories(request, slug):
          'add_category_form': add_category_form
       }
       return render(request, 'pen_admin/categories.html', context)
-
 
 @login_required
 def edit_category(request, slug, id):
