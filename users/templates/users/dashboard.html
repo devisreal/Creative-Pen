@@ -6,6 +6,155 @@
 Dashboard [{{user.username}}]
 {% endblock title %}
 {% block styles %}
+<style>
+   .owl-carousel.carousel-2 {
+      position: relative;
+   }
+
+   .owl-carousel.carousel-2 .owl-item {
+      opacity: 1;
+   }
+
+   .new-arrivals-carousel.owl-carousel.carousel-2 .item {
+      padding: 20px 0 !important;
+   }
+
+   .owl-carousel.carousel-2 .owl-item.active {
+      opacity: 1;
+   }
+
+   .owl-carousel.carousel-2 .owl-nav {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+   }
+
+   .owl-carousel.carousel-2 .owl-nav .owl-prev,
+   .owl-carousel.carousel-2 .owl-nav .owl-next {
+      position: absolute;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin-top: -10px;
+      color: rgba(0, 0, 0, 0.8) !important;
+      -webkit-transition: 0.7s;
+      -o-transition: 0.7s;
+      transition: 0.7s;
+      opacity: 1;
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+
+      .owl-carousel.carousel-2 .owl-nav .owl-prev,
+      .owl-carousel.carousel-2 .owl-nav .owl-next {
+         -webkit-transition: none;
+         -o-transition: none;
+         transition: none;
+      }
+   }
+
+   .owl-carousel.carousel-2 .owl-nav .owl-prev span:before,
+   .owl-carousel.carousel-2 .owl-nav .owl-next span:before {
+      font-size: 18px;
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s;
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+
+      .owl-carousel.carousel-2 .owl-nav .owl-prev span:before,
+      .owl-carousel.carousel-2 .owl-nav .owl-next span:before {
+         -webkit-transition: none;
+         -o-transition: none;
+         transition: none;
+      }
+   }
+
+   .owl-carousel.carousel-2 .owl-nav .owl-prev:hover span:before,
+   .owl-carousel.carousel-2 .owl-nav .owl-next:hover span:before {
+      color: #234e70;
+   }
+
+   .owl-carousel.carousel-2 .owl-nav .owl-prev {
+      right: 0;
+      margin-right: 20px;
+   }
+
+   .owl-carousel.carousel-2 .owl-nav .owl-next {
+      right: 0;
+   }
+
+   .owl-carousel.carousel-2 .owl-dots {
+      text-align: left;
+      margin-top: 10px;
+   }
+
+   .owl-carousel.carousel-2 .owl-dots .owl-dot {
+      width: 7px;
+      height: 7px;
+      margin: 4px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.1);
+      position: relative;
+   }
+
+   .owl-carousel.carousel-2 .owl-dots .owl-dot:hover,
+   .owl-carousel.carousel-2 .owl-dots .owl-dot:focus {
+      outline: none !important;
+   }
+
+   .owl-carousel.carousel-2 .owl-dots .owl-dot.active {
+      background: #234e70;
+   }
+   .shop-card{
+  border-radius: 20px;  
+  transition: .2s;
+}
+.shop-card.view-more{
+  height: 325px !important;
+  display: grid;
+  place-content: center !important;
+}
+.shop-card .view-more-link a{
+  color: #333;
+  text-decoration: none;
+  transition: .2s;
+}
+.shop-card .view-more-link a:hover{
+  color: var(--color-blue) !important;  
+}
+.shop-card-img{
+  height: 250px;    
+  background-color: #f5f5f5;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.shop-card-img img{
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: contain !important;
+}
+.shop-card-link{
+  text-decoration: none;
+  color: #000;
+  transition: .2s;
+}
+.shop-card-price{
+  cursor: default !important;
+}
+.shop-card-link:hover{
+  text-decoration: none;
+  color: var(--color-blue);
+  transition: .2s;
+}
+
+.shop-card-bottom{
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
@@ -18,27 +167,240 @@ Dashboard [{{user.username}}]
 
 <ul class="list-group list-group-flush p-4">
    <h5>Liked Posts</h5>
-   {% for post in liked_posts %}   
-   <li class="list-group-item">{{post.post_title}}</li>   
+   {% for post in liked_posts %}
+   <li class="list-group-item">{{post.post_title}}</li>
    {% endfor %}
 </ul>
 
 {% if user.is_author %}
-   <ul class="list-group list-group-flush p-4">
-      <h5>My Posts</h5>
-      {% for post in author_posts %}
-      <li class="list-group-item">{{post.post_title}}</li>
-      {% endfor %}
-   </ul>
+
+<section class="">
+   <div class="container">
+      <div class="border-bottom mb-5">
+         <h4 class=" px-3 px-md-0 font-semibold">My Posts</h4>
+      </div>
+
+      {% if author_posts %}
+               
+      <div class="row px-3 px-sm-0">
+
+         <div class="col-md-12">
+            <div class="author-posts owl-carousel carousel-2">
+               
+               {% for post in author_posts %}
+               <div class="card border-0 item">
+                  <!-- Card img -->
+                  <div class="position-relative ">
+                     <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
+                     <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                        <!-- Card overlay Top -->
+                        <div class="w-100 mb-auto d-flex justify-content-end">
+                           <div class="text-end ms-auto">
+                              <!-- * Post Type -->
+                              {% if post.post_type == video %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fas fa-video"></i>
+                              </div>
+                              {% elif post.post_type == video %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fa-solid fa-images text-md"></i>
+                              </div>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- Card overlay bottom -->
+                        <div class="w-100 mt-auto">
+                           <!-- Card category -->
+                           <a href="{% url 'category' post.category.slug %}"
+                              class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body px-0 pt-3">
+                     <small class="d-flex justify-content-end mb-2">{{post.date_posted|naturalday}}</small>
+                     <div class="d-flex justify-content-between">
+                        <h4 class="card-title m-0 p-0 pb-2">
+                           <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                              {{post.post_title}}
+                           </a>
+                        </h4>
+
+                        {% if request.user.is_authenticated %}
+                        <div class="w-fit col-1">
+
+                           <!-- * Like Post -->
+                           {% if request.user in post.likes.all %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path
+                                    d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                           <!-- * Bookmark Post -->
+                           {% if request.user in post.bookmarks.all %}
+                           <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path
+                                    d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                        </div>
+                        {% else %}
+                        <div class="w-fit col-1">
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Like post" data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <p class="card-text mt-2">
+                        {{post.short_description|truncatewords:15}}
+                     </p>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider align-items-center just">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center position-relative">
+                                 <div class="avatar avatar-xs">
+                                    {% if post.post_author.profile_picture %}
+                                    <img 
+                                       class="avatar-img rounded-circle" 
+                                       src="{{post.post_author.profile_picture.url}}" 
+                                       alt="Author avatar"
+                                    >
+                                    {% else %}
+                                       {% if post.post_author.gender == 'Male' %}
+                                          <img 
+                                             class="avatar-img rounded-circle" 
+                                             src="{% static 'img/user/male.jpg' %}" 
+                                             alt="Author Avatar"
+                                          >
+                                       {% elif post.post_author.gender == 'Female' %}                                                   
+                                          <img 
+                                             class="avatar-img rounded-circle" 
+                                             src="{% static 'img/user/female.jpg' %}" 
+                                             alt="Author Avatar"
+                                          >
+                                       {% else %}
+                                          <img 
+                                             class="avatar-img rounded-circle" 
+                                             src="{% static 'img/user/custom.jpg' %}" 
+                                             alt="Author Avatar"
+                                          >
+                                       {% endif %} 
+                                    {% endif %}
+                                 </div>
+                                 <span class="ms-3">by
+                                    <a 
+                                       href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link" 
+                                       tabindex="0"
+                                    >
+                                       {{post.post_author.get_short_name}}
+                                    </a>
+                                 </span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-comments me-1"></i> 5
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="#" class="btn-link">
+                              <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               {% endfor %}
+
+            </div>
+         </div>
+      </div>
+
+      {% endif %}
+
+   </div>
+</section>
+
+
+
+
+
+
+
+
+
 {% endif %}
 
 {% if not user.is_author %}
-   {% if not user.usersettings.request_author_access %}
-      <a href="{% url 'users:request_author_access' user.slug user.username %}" class="btn btn-success btn-sm">Request Author Access</a>
-   {% else %}
-   Requested already
-   {% endif %}
-   
+{% if not user.usersettings.request_author_access %}
+<a href="{% url 'users:request_author_access' user.slug user.username %}" class="btn btn-success btn-sm">Request Author
+   Access</a>
+{% else %}
+Requested already
+{% endif %}
 {% endif %}
 
 <br><br><br><br><br>

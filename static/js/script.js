@@ -32,6 +32,37 @@ $(function () {
    }
 
 })
+
+var AuthorPosts = function () {
+   $(".author-posts").owlCarousel({
+      loop: false,
+      autoplay: false,
+      margin: 20,
+      autoplayTimeout: 3000,
+      animateOut: "fadeOut",
+      animateIn: "fadeIn",
+      nav: true,
+      dots: true,
+      autoplayHoverPause: true,
+      items: 1,
+      navText: [         
+         "<i class='fa-solid fa-caret-left text-xl'></i>",
+         "<i class='fa-solid fa-caret-right text-xl'></i>",
+      ],
+      responsive: {
+         0: {
+            items: 1,
+         },
+         600: {
+            items: 2,
+         },
+         1000: {
+            items: 3,
+         },
+      },
+   });
+};
+AuthorPosts();
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
