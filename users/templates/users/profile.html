@@ -334,9 +334,21 @@ My Profile [{{user.username}}]
                <input id="user-url-input" type="text" class="form-control bg-white border-1 text-md"
                   placeholder="User's Profile Link" aria-label="User's Profile Link" aria-describedby="user-url-copy"
                   value="http://localhost:700/@{{user.username}}" readonly>
-               <button class="input-group-text cursor-pointer user-url-copy " data-clipboard-action="copy"
+               <button class="input-group-text cursor-pointer user-url-copy bg-primary bg-opacity-10" data-clipboard-action="copy"
                   data-clipboard-target="#user-url-input">
-                  <i class="iconsax" style="--Iconsax-Size: 25px;" icon-name="clipboard-text-2"></i>
+                  
+                  <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path
+                        d="M19 7.00195C21.175 7.01406 22.3529 7.11051 23.1213 7.87889C24 8.75757 24 10.1718 24 13.0002V19.0002C24 21.8286 24 23.2429 23.1213 24.1215C22.2426 25.0002 20.8284 25.0002 18 25.0002H12C9.17157 25.0002 7.75736 25.0002 6.87868 24.1215C6 23.2429 6 21.8286 6 19.0002V13.0002C6 10.1718 6 8.75757 6.87868 7.87889C7.64706 7.11051 8.82497 7.01406 11 7.00195"
+                        stroke="#1C274C" stroke-width="1.5" />
+                     <path d="M11 17H19" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                     <path d="M10 13.5H20" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                     <path d="M12 20.5H18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                     <path
+                        d="M11 6.5C11 5.67157 11.6716 5 12.5 5H17.5C18.3284 5 19 5.67157 19 6.5V7.5C19 8.32843 18.3284 9 17.5 9H12.5C11.6716 9 11 8.32843 11 7.5V6.5Z"
+                        stroke="#1C274C" stroke-width="1.5" />
+                  </svg>
+
                </button>
             </div>
 
