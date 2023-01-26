@@ -9,7 +9,7 @@ My Profile [{{user.username}}]
 <style>
    :root {
       --Iconsax-Size: 20px;
-      --Iconsax-Color: rgba(0, 0, 0, 0.7);
+      --Iconsax-Color: #000000b3;
    }
 
    .cancel-modal svg {
@@ -46,7 +46,7 @@ My Profile [{{user.username}}]
          <!-- Cover image -->
          <div class="py-5 rounded background-img" {% if user.background_image %}
             style="background-image: url('{{user.background_image.url}}');" {% else %}
-            style="background-image: url('{% static " img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
+            style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
          </div>
          <div class="card-body pt-3 pb-0">
             <div class="row d-flex justify-content-between">
@@ -91,28 +91,63 @@ My Profile [{{user.username}}]
                      </small>
                      <ul class="list-inline text-md pt-1">
 
-                        <!-- ? User Job Title -->
-                        <li class="list-inline-item">
-                           <i class="iconsax me-1 pb-1" icon-name="mail"></i>
+                        <!-- ? User Email -->
+                        <li class="list-inline-item">                           
+                           <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="#292D32" stroke-width="1.5"
+                                 stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
                            {{user.email}}
                         </li>
 
                         <!-- ? User Job Title -->
                         <li class="list-inline-item">
-                           <i class="iconsax me-1 pb-1" icon-name="user-1-octagon"></i>
+                           <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                 d="M21.08 8.58003V15.42C21.08 16.54 20.48 17.58 19.51 18.15L13.57 21.58C12.6 22.14 11.4 22.14 10.42 21.58L4.48003 18.15C3.51003 17.59 2.91003 16.55 2.91003 15.42V8.58003C2.91003 7.46003 3.51003 6.41999 4.48003 5.84999L10.42 2.42C11.39 1.86 12.59 1.86 13.57 2.42L19.51 5.84999C20.48 6.41999 21.08 7.45003 21.08 8.58003Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path
+                                 d="M12 11.0001C13.2869 11.0001 14.33 9.95687 14.33 8.67004C14.33 7.38322 13.2869 6.34009 12 6.34009C10.7132 6.34009 9.67004 7.38322 9.67004 8.67004C9.67004 9.95687 10.7132 11.0001 12 11.0001Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M16 16.6601C16 14.8601 14.21 13.4001 12 13.4001C9.79 13.4001 8 14.8601 8 16.6601" stroke="#292D32"
+                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
+
                            {{user.job_title|default:"[Job title]"}}
                         </li>
 
                         <!-- ? User City -->
 
                         <li class="list-inline-item">
-                           <i class="iconsax me-1 pb-1" icon-name="location"></i>
+                           <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                 d="M12 13.4299C13.7231 13.4299 15.12 12.0331 15.12 10.3099C15.12 8.58681 13.7231 7.18994 12 7.18994C10.2769 7.18994 8.88 8.58681 8.88 10.3099C8.88 12.0331 10.2769 13.4299 12 13.4299Z"
+                                 stroke="#292D32" stroke-width="1.5" />
+                              <path
+                                 d="M3.62001 8.49C5.59001 -0.169998 18.42 -0.159997 20.38 8.5C21.53 13.58 18.37 17.88 15.6 20.54C13.59 22.48 10.41 22.48 8.39001 20.54C5.63001 17.88 2.47001 13.57 3.62001 8.49Z"
+                                 stroke="#292D32" stroke-width="1.5" />
+                           </svg>
                            {{user.city|default:"[City]"}}
                         </li>
 
                         <!-- ? User Joined date -->
                         <li class="list-inline-item">
-                           <i class="iconsax me-1 pb-1" icon-name="calendar-2"></i>
+                           <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                              <path d="M16 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                              <path d="M3.5 9.08997H20.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                 stroke-linejoin="round" />
+                              <path d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M11.9955 13.7H12.0045" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M8.29431 13.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M8.29431 16.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
+
                            Joined on {{user.date_joined|date:"D, dS F, Y"}}
                         </li>
                      </ul>
@@ -149,8 +184,13 @@ My Profile [{{user.username}}]
                         <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
                            {% if user.is_superuser %}
                            <li>
-                              <a class="dropdown-item" target="_blank" href="/pen_admin/">
-                                 <i class="iconsax me-2" icon-name="security-user"></i>
+                              <a class="dropdown-item" target="_blank" href="/pen_admin/">                                 
+                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                       d="M6 13.4167C6 10.2191 6 8.62028 6.37752 8.08241C6.75503 7.54454 8.25832 7.02996 11.2649 6.00079L11.8377 5.80472C13.405 5.26824 14.1886 5 15 5C15.8114 5 16.595 5.26824 18.1623 5.80472L18.7351 6.00079C21.7417 7.02996 23.245 7.54454 23.6225 8.08241C24 8.62028 24 10.2191 24 13.4167V14.9914C24 20.6294 19.761 23.3655 17.1014 24.5273C16.38 24.8424 16.0193 25 15 25C13.9807 25 13.62 24.8424 12.8986 24.5273C10.239 23.3655 6 20.6294 6 14.9914V13.4167ZM17 12C17 13.1046 16.1046 14 15 14C13.8954 14 13 13.1046 13 12C13 10.8954 13.8954 10 15 10C16.1046 10 17 10.8954 17 12ZM15 20C19 20 19 19.1046 19 18C19 16.8954 17.2091 16 15 16C12.7909 16 11 16.8954 11 18C11 19.1046 11 20 15 20Z"
+                                       fill="#1C274C" />
+                                 </svg>
+
                                  Admin Panel
                               </a>
                            </li>
@@ -158,26 +198,60 @@ My Profile [{{user.username}}]
 
                            <li>
                               <a class="dropdown-item edit-icon" href="{% url 'users:edit_profile' user.slug %}">
-                                 <i class="iconsax me-2" icon-name="user-2-edit"></i>
+                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                       d="M15 13C17.2091 13 19 11.2091 19 9C19 6.79086 17.2091 5 15 5C12.7909 5 11 6.79086 11 9C11 11.2091 12.7909 13 15 13Z"
+                                       fill="#1C274C" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                       d="M21 18.75C19.2051 18.75 17.75 20.2051 17.75 22C17.75 23.7949 19.2051 25.25 21 25.25C22.7949 25.25 24.25 23.7949 24.25 22C24.25 20.2051 22.7949 18.75 21 18.75ZM19.25 22C19.25 21.0335 20.0335 20.25 21 20.25C21.2063 20.25 21.4043 20.2857 21.5881 20.3513L19.3513 22.5881C19.2857 22.4043 19.25 22.2063 19.25 22ZM20.4119 23.6487L22.6487 21.4119C22.7143 21.5957 22.75 21.7937 22.75 22C22.75 22.9665 21.9665 23.75 21 23.75C20.7937 23.75 20.5957 23.7143 20.4119 23.6487Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M15 25C7 25 7 22.9853 7 20.5C7 18.0147 10.5817 16 15 16C17.3695 16 19.4983 16.5794 20.9632 17.5001C18.4949 17.5199 16.5 19.527 16.5 22C16.5 23.1115 16.903 24.1288 17.5708 24.9139C16.8219 24.9704 15.9697 25 15 25Z"
+                                       fill="#1C274C" />
+                                 </svg>
+
                                  Edit profile
                               </a>
                            </li>
                            <li>
                               <a data-bs-toggle="modal" data-bs-target="#shareProfileModal"
                                  class="dropdown-item edit-icon" href="{% url 'users:edit_profile' user.slug %}">
-                                 <!-- <i class="iconsax me-2" icon-name="user-2-edit"></i> -->
-                                 <i class='bx bx-share-alt me-2'></i>
+                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                       d="M12 9C12 10.6569 13.3431 12 15 12C16.6569 12 18 10.6569 18 9C18 7.34315 16.6569 6 15 6C13.3431 6 12 7.34315 12 9Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M5.5 21C5.5 22.6569 6.84315 24 8.5 24C10.1569 24 11.5 22.6569 11.5 21C11.5 19.3431 10.1569 18 8.5 18C6.84315 18 5.5 19.3431 5.5 21Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M21.5 24C19.8431 24 18.5 22.6569 18.5 21C18.5 19.3431 19.8431 18 21.5 18C23.1569 18 24.5 19.3431 24.5 21C24.5 22.6569 23.1569 24 21.5 24Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M10.2047 10.5623C10.5152 10.2882 10.5448 9.81426 10.2707 9.5037C9.99659 9.19315 9.52264 9.1636 9.21208 9.43769C7.39676 11.0399 6.25 13.3865 6.25 16C6.25 16.4142 6.58579 16.75 7 16.75C7.41421 16.75 7.75 16.4142 7.75 16C7.75 13.8347 8.69828 11.8919 10.2047 10.5623Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M20.7879 9.43769C20.4774 9.1636 20.0034 9.19315 19.7293 9.5037C19.4552 9.81426 19.4848 10.2882 19.7953 10.5623C21.3017 11.8919 22.25 13.8347 22.25 16C22.25 16.4142 22.5858 16.75 23 16.75C23.4142 16.75 23.75 16.4142 23.75 16C23.75 13.3865 22.6032 11.0399 20.7879 9.43769Z"
+                                       fill="#1C274C" />
+                                    <path
+                                       d="M13.1869 23.0217C12.7858 22.9184 12.3769 23.1599 12.2737 23.561C12.1704 23.9622 12.4119 24.3711 12.8131 24.4743C13.5129 24.6544 14.2458 24.75 15 24.75C15.7542 24.75 16.4871 24.6544 17.1869 24.4743C17.5881 24.3711 17.8296 23.9622 17.7263 23.561C17.6231 23.1599 17.2142 22.9184 16.8131 23.0217C16.2344 23.1706 15.627 23.25 15 23.25C14.373 23.25 13.7656 23.1706 13.1869 23.0217Z"
+                                       fill="#1C274C" />
+                                 </svg>                                 
                                  Share profile
                               </a>
                            </li>
                            <li>
                               <hr class="dropdown-divider">
                            </li>
-                           <li>
-                              <a class="dropdown-item text-danger cancel-icon cursor-pointer" data-bs-toggle="modal"
+                           <li class="my-0 py-0">
+                              <a class="dropdown-item text-danger cursor-pointer d-flex align-items-center" data-bs-toggle="modal"
                                  data-bs-target="#deleteModal">
-                                 <i class="iconsax me-2" icon-name="close-circle"></i>
-                                 Delete profile
+                                 <svg class="me-1" width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                       d="M25 15C25 20.5228 20.5228 25 15 25C9.47715 25 5 20.5228 5 15C5 9.47715 9.47715 5 15 5C20.5228 5 25 9.47715 25 15ZM11.9696 11.9696C12.2625 11.6768 12.7374 11.6768 13.0303 11.9696L15 13.9393L16.9696 11.9697C17.2625 11.6768 17.7374 11.6768 18.0303 11.9697C18.3232 12.2626 18.3232 12.7374 18.0303 13.0303L16.0606 15L18.0303 16.9696C18.3232 17.2625 18.3232 17.7374 18.0303 18.0303C17.7374 18.3232 17.2625 18.3232 16.9696 18.0303L15 16.0607L13.0303 18.0303C12.7374 18.3232 12.2625 18.3232 11.9696 18.0303C11.6768 17.7374 11.6768 17.2625 11.9696 16.9697L13.9393 15L11.9696 13.0303C11.6767 12.7374 11.6767 12.2625 11.9696 11.9696Z"
+                                       fill="#dc3545" />
+                                 </svg>
+
+                                 <span>Delete profile</span>
                               </a>
                            </li>
                         </ul>
@@ -334,6 +408,7 @@ My Profile [{{user.username}}]
    </div>
 </div>
 
+<br><br><br><br><br>
 {% endblock %}
 
 {% block scripts %}
