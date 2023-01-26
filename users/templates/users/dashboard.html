@@ -107,86 +107,40 @@ Dashboard [{{user.username}}]
    .owl-carousel.carousel-2 .owl-dots .owl-dot.active {
       background: #234e70;
    }
-   .shop-card{
-  border-radius: 20px;  
-  transition: .2s;
-}
-.shop-card.view-more{
-  height: 325px !important;
-  display: grid;
-  place-content: center !important;
-}
-.shop-card .view-more-link a{
-  color: #333;
-  text-decoration: none;
-  transition: .2s;
-}
-.shop-card .view-more-link a:hover{
-  color: var(--color-blue) !important;  
-}
-.shop-card-img{
-  height: 250px;    
-  background-color: #f5f5f5;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-.shop-card-img img{
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  object-fit: contain !important;
-}
-.shop-card-link{
-  text-decoration: none;
-  color: #000;
-  transition: .2s;
-}
-.shop-card-price{
-  cursor: default !important;
-}
-.shop-card-link:hover{
-  text-decoration: none;
-  color: var(--color-blue);
-  transition: .2s;
-}
-
-.shop-card-bottom{
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
 </style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
 
 
-<h1 class="p-4">Dashboard </h1>
-<h3>Welcome {{user.username}}</h3>
-<a class="btn btn-primary btn-sm" href="{% url 'users:edit_profile' user.slug %}">Edit My Profile</a>
-
-
-<ul class="list-group list-group-flush p-4">
-   <h5>Liked Posts</h5>
-   {% for post in liked_posts %}
-   <li class="list-group-item">{{post.post_title}}</li>
-   {% endfor %}
-</ul>
-
+<!-- * Author Posts -->
 {% if user.is_author %}
 
-<section class="">
+<section class="my-4">
    <div class="container">
-      <div class="border-bottom mb-5">
-         <h4 class=" px-3 px-md-0 font-semibold">My Posts</h4>
+      <div class="border-bottom mb-4">
+         <h3 class=" px-3 px-md-0 font-semibold">
+            <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M5 9.94975C5 9.06722 5 8.62595 5.06935 8.25839C5.37464 6.64031 6.64031 5.37464 8.25839 5.06935C8.62595 5 9.06722 5 9.94975 5C10.3364 5 10.5298 5 10.7156 5.01738C11.5167 5.09229 12.2765 5.40704 12.8959 5.92051C13.0396 6.03961 13.1763 6.17633 13.4497 6.44975L14 7C14.8158 7.81578 15.2237 8.22367 15.7121 8.49543C15.9804 8.64471 16.2651 8.7626 16.5604 8.84678C17.0979 9 17.6747 9 18.8284 9H19.2021C21.8345 9 23.1506 9 24.0062 9.76946C24.0849 9.84024 24.1598 9.91514 24.2305 9.99383C25 10.8494 25 12.1655 25 14.7979V17C25 20.7712 25 22.6569 23.8284 23.8284C22.6569 25 20.7712 25 17 25H13C9.22876 25 7.34315 25 6.17157 23.8284C5 22.6569 5 20.7712 5 17V9.94975Z"
+                  fill="#222" />
+               <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M15.25 13C15.25 12.5858 15.5858 12.25 16 12.25H21C21.4142 12.25 21.75 12.5858 21.75 13C21.75 13.4142 21.4142 13.75 21 13.75H16C15.5858 13.75 15.25 13.4142 15.25 13Z"
+                  fill="white" />
+               <path
+                  d="M19.9856 6.02094C19.8321 6 19.6492 6 19.2835 6H15L15.3699 6.38312C16.0359 7.07299 16.2919 7.33051 16.5877 7.50096C16.7594 7.5999 16.9415 7.67804 17.1304 7.73383C17.4559 7.82993 17.8128 7.83538 18.7546 7.83538L19.089 7.83538C20.0914 7.83536 20.8995 7.83535 21.5389 7.91862C21.6984 7.93939 21.8521 7.96582 22 8C21.8144 6.96313 21.0043 6.15985 19.9856 6.02094Z"
+                  fill="#222" />
+            </svg>
+            My Posts
+         </h3>
       </div>
 
       {% if author_posts %}
-               
-      <div class="row px-3 px-sm-0">
 
+      <div class="row px-3 px-sm-0">
          <div class="col-md-12">
             <div class="author-posts owl-carousel carousel-2">
-               
+
                {% for post in author_posts %}
                <div class="card border-0 item">
                   <!-- Card img -->
@@ -235,7 +189,8 @@ Dashboard [{{user.username}}]
                            <!-- * Like Post -->
                            {% if request.user in post.likes.all %}
                            <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path
                                     d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z"
                                     fill="#292D32" />
@@ -245,10 +200,12 @@ Dashboard [{{user.username}}]
                            <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none"
                               data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
                               data-bs-offset="10,5">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path
                                     d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
-                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                               </svg>
                            </a>
                            {% endif %}
@@ -256,26 +213,29 @@ Dashboard [{{user.username}}]
                            <!-- * Bookmark Post -->
                            {% if request.user in post.bookmarks.all %}
                            <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
-                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks" data-bs-placement="bottom"
-                              data-bs-offset="10,5">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path
                                     d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
                                     fill="#292D32" />
                               </svg>
                            </a>
                            {% else %}
-                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none"
-                              data-bs-toggle="tooltip" data-bs-title="Add to bookmarks" data-bs-placement="bottom"
-                              data-bs-offset="10,5">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}"
+                              class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
                                     stroke-linecap="round" stroke-linejoin="round" />
                                  <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
                                     stroke-linecap="round" stroke-linejoin="round" />
                                  <path
                                     d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
-                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                               </svg>
                            </a>
                            {% endif %}
@@ -285,22 +245,26 @@ Dashboard [{{user.username}}]
                         <div class="w-fit col-1">
                            <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
                               data-bs-title="Like post" data-bs-placement="bottom" data-bs-offset="10,5">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path
                                     d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
-                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                               </svg>
                            </a>
                            <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
                               data-bs-title="Add to bookmarks" data-bs-placement="bottom">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                  <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
                                     stroke-linecap="round" stroke-linejoin="round" />
                                  <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
                                     stroke-linecap="round" stroke-linejoin="round" />
                                  <path
                                     d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
-                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                               </svg>
                            </a>
                         </div>
@@ -316,39 +280,24 @@ Dashboard [{{user.username}}]
                               <div class="d-flex align-items-center position-relative">
                                  <div class="avatar avatar-xs">
                                     {% if post.post_author.profile_picture %}
-                                    <img 
-                                       class="avatar-img rounded-circle" 
-                                       src="{{post.post_author.profile_picture.url}}" 
-                                       alt="Author avatar"
-                                    >
+                                    <img class="avatar-img rounded-circle"
+                                       src="{{post.post_author.profile_picture.url}}" alt="Author avatar">
                                     {% else %}
-                                       {% if post.post_author.gender == 'Male' %}
-                                          <img 
-                                             class="avatar-img rounded-circle" 
-                                             src="{% static 'img/user/male.jpg' %}" 
-                                             alt="Author Avatar"
-                                          >
-                                       {% elif post.post_author.gender == 'Female' %}                                                   
-                                          <img 
-                                             class="avatar-img rounded-circle" 
-                                             src="{% static 'img/user/female.jpg' %}" 
-                                             alt="Author Avatar"
-                                          >
-                                       {% else %}
-                                          <img 
-                                             class="avatar-img rounded-circle" 
-                                             src="{% static 'img/user/custom.jpg' %}" 
-                                             alt="Author Avatar"
-                                          >
-                                       {% endif %} 
+                                    {% if post.post_author.gender == 'Male' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% elif post.post_author.gender == 'Female' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% endif %}
                                     {% endif %}
                                  </div>
                                  <span class="ms-3">by
-                                    <a 
-                                       href="{% url 'author_external' post.post_author.slug %}"
-                                       class="stretched-link text-reset btn-link" 
-                                       tabindex="0"
-                                    >
+                                    <a href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link" tabindex="0">
                                        {{post.post_author.get_short_name}}
                                     </a>
                                  </span>
@@ -356,19 +305,13 @@ Dashboard [{{user.username}}]
                            </div>
                         </li>
                         <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
-                           </a>
+                           <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
                         </li>
                         <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-comments me-1"></i> 5
-                           </a>
+                           <i class="fa-regular fa-comments me-1"></i> 5
                         </li>
                         <li class="nav-item">
-                           <a href="#" class="btn-link">
-                              <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
-                           </a>
+                           <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
                         </li>
                      </ul>
                   </div>
@@ -379,20 +322,279 @@ Dashboard [{{user.username}}]
          </div>
       </div>
 
+      {% else %}
+
+      <div class="d-grid justify-content-center pt-5 mt-5">
+         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+            viewBox="0 0 24 24">
+            <path
+               d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+            </path>
+            <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+         </svg>
+         <h4 class="text-center mt-3">No posts</h4>
+         <p>You haven't created any posts.</p>
+      </div>
+
       {% endif %}
 
    </div>
 </section>
 
-
-
-
-
-
-
-
-
 {% endif %}
+
+<!-- * Liked Posts -->
+<section class="">
+   <div class="container">
+      <div class="border-bottom mb-4">
+         <h3 class=" px-3 px-md-0 font-semibold">
+            <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M11.1063 21.2468C8.29819 19.0833 5 16.5422 5 12.1371C5 7.27416 10.5002 3.82546 15 8.50063L17 10.4993C17.2929 10.7921 17.7678 10.792 18.0607 10.4991C18.3535 10.2061 18.3534 9.73127 18.0605 9.43843L16.1285 7.50712C20.3685 4.40309 25 7.67465 25 12.1371C25 16.5422 21.7018 19.0833 18.8937 21.2468C18.6019 21.4717 18.3153 21.6925 18.0383 21.9109C17 22.7294 16 23.5 15 23.5C14 23.5 13 22.7294 11.9617 21.9109C11.6847 21.6925 11.3981 21.4717 11.1063 21.2468Z"
+                  fill="#222" />
+            </svg>
+            Recently Liked Posts
+         </h3>
+      </div>
+
+      {% if liked_posts %}
+
+      <div class="row px-3 px-sm-0">
+
+         <div class="col-md-12">
+            <div class="author-posts owl-carousel carousel-2">
+
+               {% for post in liked_posts %}
+               <div class="card border-0 item">
+                  <!-- Card img -->
+                  <div class="position-relative ">
+                     <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
+                     <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                        <!-- Card overlay Top -->
+                        <div class="w-100 mb-auto d-flex justify-content-end">
+                           <div class="text-end ms-auto">
+                              <!-- * Post Type -->
+                              {% if post.post_type == video %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fas fa-video"></i>
+                              </div>
+                              {% elif post.post_type == video %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fa-solid fa-images text-md"></i>
+                              </div>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- Card overlay bottom -->
+                        <div class="w-100 mt-auto">
+                           <!-- Card category -->
+                           <a href="{% url 'category' post.category.slug %}"
+                              class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body px-0 pt-3">
+                     <small class="d-flex justify-content-end mb-2">{{post.date_posted|naturalday}}</small>
+                     <div class="d-flex justify-content-between">
+                        <h4 class="card-title m-0 p-0 pb-2">
+                           <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                              {{post.post_title}}
+                           </a>
+                        </h4>
+
+                        {% if request.user.is_authenticated %}
+                        <div class="w-fit col-1">
+
+                           <!-- * Like Post -->
+                           {% if request.user in post.likes.all %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                           <!-- * Bookmark Post -->
+                           {% if request.user in post.bookmarks.all %}
+                           <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}"
+                              class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                        </div>
+                        {% else %}
+                        <div class="w-fit col-1">
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Like post" data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <p class="card-text mt-2">
+                        {{post.short_description|truncatewords:15}}
+                     </p>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider align-items-center just">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center position-relative">
+                                 <div class="avatar avatar-xs">
+                                    {% if post.post_author.profile_picture %}
+                                    <img class="avatar-img rounded-circle"
+                                       src="{{post.post_author.profile_picture.url}}" alt="Author avatar">
+                                    {% else %}
+                                    {% if post.post_author.gender == 'Male' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% elif post.post_author.gender == 'Female' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% endif %}
+                                    {% endif %}
+                                 </div>
+                                 <span class="ms-3">by
+                                    <a href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link" tabindex="0" data-bs-toggle="popover"
+                                       data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                       data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                       data-bs-content="
+                                          <div class='custom-popover-content'>
+                                             <div class='d-flex justify-content-between align-items-center'>
+                                                <h6 class='font-cabin font-medium m-0 p-0'>
+                                                   <a 
+                                                      href='{% url 'author_external' post.post_author.slug %}'
+                                                      class='text-reset btn-link'
+                                                   >
+                                                      {{post.post_author.get_full_name}}
+                                                   </a>
+                                                </h6>
+                                                <small class='font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                             </div>
+                                             <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                                {{post.post_author.bio|truncatewords:10}}
+                                             </p>
+                                             <hr class='m-0 p-0 my-2'>
+                                             <div class='d-flex justify-content-between align-items-center'>
+                                                <p class='m-0 p-0'>573 Followers</p>
+                                                <a 
+                                                   href=''
+                                                   class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
+                                                >
+                                                   Follow
+                                                </a>
+                                             </div>
+                                          </div>
+                                       "
+                                    >
+                                       {{post.post_author.get_short_name}}
+                                    </a>
+                                 </span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item">
+                           <i class="fa-regular fa-heart me-1"></i> {{post.likes.count}}
+                        </li>
+                        <li class="nav-item">
+                           <i class="fa-regular fa-comments me-1"></i> 5
+                        </li>
+                        <li class="nav-item">
+                           <i class="fa-regular fa-eye me-1"></i> {% get_hit_count for post %}
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               {% endfor %}
+
+            </div>
+         </div>
+      </div>
+
+      {% else %}
+
+      <div class="d-grid justify-content-center pt-5 mt-5">
+         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+            viewBox="0 0 24 24">
+            <path
+               d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+            </path>
+            <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+         </svg>
+         <h4 class="text-center mt-3">No liked posts</h4>
+         <p>You haven't liked any posts.</p>
+      </div>
+
+      {% endif %}
+
+   </div>
+</section>
+
 
 {% if not user.is_author %}
 {% if not user.usersettings.request_author_access %}
