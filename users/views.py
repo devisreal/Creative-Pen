@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserSocialHandleForm, UserUpdateForm
 from django.contrib import messages
 from account.models import User, UserSettings
-from account.views import user_logout
-from datetime import datetime
+import datetime
 from blog.models import Post
+import pandas
 
 
 @login_required
@@ -17,13 +17,26 @@ def dashboard(request, slug):
       user = User.objects.get(slug=slug)
       liked_posts = Post.objects.filter(likes=user)
       author_posts = Post.objects.filter(post_author=user)
-      total_users = User.objects.all().count()
-      total_posts = Post.objects.all().count()
-      
+      total_users = User.objects.all()
+      total_posts = Post.objects.all().count()      
       total_posts_likes = 0
       for post in Post.objects.all():
          total_posts_likes += post.likes.all().count()
       total_likes = total_posts_likes
+      
+      user_values = total_users.values().order_by("date_joined")
+      df = pandas.DataFrame(user_values)
+      date_joined = df['date_joined'].tolist()
+      sum_user_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      sum_user_list_prev = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      for date in date_joined:
+         if datetime.date.today().year == date.year:
+            sum_user_list[date.month - 1] += 1
+         elif datetime.date.today().year-1 == date.year:
+            sum_user_list_prev[date.month - 1] += 1
+      else:
+         print(sum_user_list)
+         print(sum_user_list_prev)
 
    except User.DoesNotExist:
       return redirect('error_page')
@@ -37,9 +50,11 @@ def dashboard(request, slug):
 
    if user.is_staff or user.is_superuser:
       context.update({
-         'total_users': total_users,
+         'total_users': total_users.count(),
          'total_posts': total_posts,
-         'total_likes': total_likes
+         'total_likes': total_likes,
+         'y1': sum_user_list,
+         'y2': sum_user_list_prev,
       })
       return render(request, 'pen_admin/dashboard.html', context)
    else:      

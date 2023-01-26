@@ -20,7 +20,7 @@ Dashboard [{{user.username}}]
       
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border p-3">
+               <div class="card card-body border p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">                        
@@ -37,7 +37,7 @@ Dashboard [{{user.username}}]
       
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border p-3">
+               <div class="card card-body border p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-primary bg-opacity-10 rounded-3 text-primary">
@@ -54,7 +54,7 @@ Dashboard [{{user.username}}]
       
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border p-3">
+               <div class="card card-body border p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-danger bg-opacity-10 rounded-3 text-danger">
@@ -71,7 +71,7 @@ Dashboard [{{user.username}}]
       
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border p-3">
+               <div class="card card-body border p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">                        
@@ -80,7 +80,7 @@ Dashboard [{{user.username}}]
                      <!-- Content -->
                      <div class="ms-3">
                         <h3>{{total_users}}</h3>
-                        <h6 class="mb-0 font-outfit">Users</h6>
+                        <h6 class="mb-0 font-outfit">Registered Users</h6>
                      </div>
                   </div>
                </div>
@@ -89,9 +89,81 @@ Dashboard [{{user.username}}]
          </div>
          <!-- Counter END -->
       </div>
+
+      <div class="col-12 mt-5">
+         <!-- Chart START -->
+         <div class="card border h-100">
+      
+            <!-- Card header -->
+            <div class="card-header p-3 border-bottom bg-white">
+               <h5 class="card-header-title mb-0">Page Traffic</h5>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+               <!-- Apex chart -->
+               <div id="pageTraffic" class="mt-2"></div>
+            </div>
+         </div>
+         <!-- Chart END -->
+      </div>
    </div>
 </div>
 
 
 <br><br><br><br><br>
 {% endblock %}
+
+{% block scripts %}
+<script>
+   var options = {
+         colors: [
+            '#234e70', '#d2302c',
+         ],
+         series: [
+            {
+               name: 'This Year',
+               data: {{y1|safe}}
+            }, 
+            {
+               name: 'Previous Year',
+               data: {{y2|safe}}
+            }
+         ],
+         chart: {
+            height: 350,
+            stacked: true,
+            type: 'area',
+            toolbar: {
+               show: false
+            }
+         },
+         grid: {
+            strokeDashArray: 4,
+            position: 'back'
+         },
+         legend: {
+            show: true,
+            horizontalAlign: 'right',
+            position: 'top',
+            labels: {},
+            markers: {
+               width: 8,
+               height: 8
+            }
+         },
+         dataLabels: {
+            enabled: false
+         },
+         stroke: {
+            curve: 'smooth'
+         },
+         xaxis: {
+            // type: 'datetime',
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+         },
+      };
+
+      var chart = new ApexCharts(document.querySelector("#pageTraffic"), options);
+      chart.render();
+</script>
+{% endblock scripts %}
