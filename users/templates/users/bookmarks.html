@@ -20,8 +20,15 @@ Bookmarks [{{user.username}}]
                Bookmarks
                <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mt-1">
                   {% if bookmarks %}
-                  {% if bookmarks.count < 10 %} 0{{bookmarks.count}} {% else %} {{bookmarks.count}} {% endif %} {% else
-                     %} 0 {% endif %} </span>
+                     {% if bookmarks.count < 10 %} 
+                        0{{bookmarks.count}} 
+                     {% else %} 
+                        {{bookmarks.count}} 
+                     {% endif %} 
+                  {% else %} 
+                     0 
+                  {% endif %} 
+               </span>
             </h4>
          </div>
 

@@ -161,25 +161,27 @@ My Profile [{{user.username}}]
                      <div class="dropdown ms-3">
                         <a class="text-secondary" href="" id="profileDropdown" role="button" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" aria-expanded="false">
-                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path d="M22 6.5H16" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                 stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M6 6.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                 stroke-linecap="round" stroke-linejoin="round" />
+                           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path
-                                 d="M10 10C11.933 10 13.5 8.433 13.5 6.5C13.5 4.567 11.933 3 10 3C8.067 3 6.5 4.567 6.5 6.5C6.5 8.433 8.067 10 10 10Z"
-                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                 stroke-linejoin="round" />
-                              <path d="M22 17.5H18" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                 stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M8 17.5H2" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                 stroke-linecap="round" stroke-linejoin="round" />
+                                 d="M12.25 17C13.9069 17 15.25 18.3431 15.25 20C15.25 21.6569 13.9069 23 12.25 23C10.5931 23 9.25 21.6569 9.25 20C9.25 18.3431 10.5931 17 12.25 17Z"
+                                 fill="#1C274C" />
                               <path
-                                 d="M14 21C15.933 21 17.5 19.433 17.5 17.5C17.5 15.567 15.933 14 14 14C12.067 14 10.5 15.567 10.5 17.5C10.5 19.433 12.067 21 14 21Z"
-                                 stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                 stroke-linejoin="round" />
+                                 d="M17.25 7C15.5931 7 14.25 8.34315 14.25 10C14.25 11.6569 15.5931 13 17.25 13C18.9069 13 20.25 11.6569 20.25 10C20.25 8.34315 18.9069 7 17.25 7Z"
+                                 fill="#1C274C" />
+                              <path
+                                 d="M11.75 9.20852C12.1642 9.20852 12.5 9.54431 12.5 9.95852C12.5 10.3727 12.1642 10.7085 11.75 10.7085L4.75 10.7085C4.33579 10.7085 4 10.3727 4 9.95852C4 9.54431 4.33579 9.20852 4.75 9.20852H11.75Z"
+                                 fill="#1C274C" />
+                              <path
+                                 d="M17.75 19.2085C17.3358 19.2085 17 19.5443 17 19.9585C17 20.3727 17.3358 20.7085 17.75 20.7085H24.75C25.1642 20.7085 25.5 20.3727 25.5 19.9585C25.5 19.5443 25.1642 19.2085 24.75 19.2085H17.75Z"
+                                 fill="#1C274C" />
+                              <path
+                                 d="M4 19.9585C4 19.5443 4.33579 19.2085 4.75 19.2085H6.75C7.16421 19.2085 7.5 19.5443 7.5 19.9585C7.5 20.3727 7.16421 20.7085 6.75 20.7085H4.75C4.33579 20.7085 4 20.3727 4 19.9585Z"
+                                 fill="#1C274C" />
+                              <path
+                                 d="M24.75 9.20852C25.1642 9.20852 25.5 9.54431 25.5 9.95852C25.5 10.3727 25.1642 10.7085 24.75 10.7085L22.75 10.7085C22.3358 10.7085 22 10.3727 22 9.95852C22 9.54431 22.3358 9.20852 22.75 9.20852H24.75Z"
+                                 fill="#1C274C" />
                            </svg>
+
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="profileDropdown">
                            {% if user.is_superuser %}
