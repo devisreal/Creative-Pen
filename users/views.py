@@ -35,8 +35,7 @@ def dashboard(request, slug):
          elif datetime.date.today().year-1 == date.year:
             sum_user_list_prev[date.month - 1] += 1
       else:
-         print(sum_user_list)
-         print(sum_user_list_prev)
+         pass
 
    except User.DoesNotExist:
       return redirect('error_page')
