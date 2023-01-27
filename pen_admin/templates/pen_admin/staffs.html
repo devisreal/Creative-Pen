@@ -108,7 +108,7 @@ Staffs
                </div>
 
                <div class="d-sm-flex gap-2 mt-3">
-                  <a href="{% url 'users:single_staff' request.user.slug staff.username %}"
+                  <a href="{% url 'users:single_author' request.user.slug staff.username %}"
                      class="btn btn-primary-soft w-100">
                      <i class="fa fa-circle-info pe-2"></i> Details
                   </a>                  
@@ -131,7 +131,7 @@ Staffs
 
                <a 
                   data-bs-toggle="modal" data-bs-target="#revokeStaffAccess{{staff.slug}}"
-                  href="{% url 'users:single_staff' request.user.slug staff.username %}" 
+                  href="{% url 'users:single_author' request.user.slug staff.username %}" 
                   class="btn btn-dark-soft w-100 mt-3"
                >                  
                   <span data-bs-toggle="tooltip" data-bs-title="Revoke Staff Access" data-bs-placement="bottom">

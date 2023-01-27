@@ -113,7 +113,6 @@
       }
    </style>
 </head>
-
 <body id="body">
 
    <!-- <div id="preloder">
@@ -123,12 +122,9 @@
    {% block content %}
 
    {% endblock content %}
-
    {% include 'partials/footer.html' %}
 
-
    <!-- * Vendors -->
-
    <script src="{% static 'vendor/js/bootstrap.bundle.min.js' %}"></script>
    <script src="{% static 'vendor/js/clipboard.min.js' %}"></script>
    <script src="{% static 'vendor/js/apexcharts.min.js' %}"></script>
@@ -141,14 +137,12 @@
       
    {% endblock scripts %}
 
-
    <!-- * Custom Scripts -->
    <script>
       $(window).on('load', function () {
          $(".loader").fadeOut();
          $("#preloder").delay(200).fadeOut("slow");      
       });
-
      
    </script>
 </body>

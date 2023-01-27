@@ -39,18 +39,6 @@ def staffs(request, slug):
       return render(request, 'pen_admin/staffs.html', context)
 
 @login_required
-def staff_single(request, slug, username):
-   if not request.user.is_superuser:
-      messages.warning(request, 'You are not authorized to access that page')      
-      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
-   else:
-      staff = User.objects.filter(is_staff=True).get(username=username)
-      context = {
-         'staff': staff
-      }
-      return render(request, 'pen_admin/single_staff.html', context)
-
-@login_required
 def block_staff(request, slug, username):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')

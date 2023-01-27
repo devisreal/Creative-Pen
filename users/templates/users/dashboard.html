@@ -113,10 +113,62 @@ Dashboard [{{user.username}}]
 {% include 'partials/messages.html' %}
 
 
+
+
 <!-- * Author Posts -->
 {% if user.is_author %}
 
-<section class="my-4">
+<!-- * Author Stats -->
+<section class="container my-4 mb-5">
+   <div class="row g-4">
+      <div class="col-12">
+         <!-- Grid START -->
+         <div class="row g-4">
+
+            <!-- Earning item -->
+            <div class="col-md-12 col-xl-6">
+               <div class="card card-body bg-success bg-opacity-10 p-4 h-100 border-0 my-shadow">
+                  <h6>Earning
+                     <a tabindex="0" class="h6 mb-0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                        data-bs-placement="top" data-bs-content="After US royalty withholding tax"
+                        data-bs-original-title="" title="">
+                        <i class="bi bi-info-circle-fill small"></i>
+                     </a>
+                  </h6>
+                  <h2 class="fs-1 text-success">$750.35</h2>
+                  <p class="mb-2"><span class="text-primary me-1">0.20%<i class="bi bi-arrow-up"></i></span>vs last
+                     month</p>
+                  <div class="mt-auto"><a href="#" class="btn btn-link text-reset p-0 mb-0">View statement</a></div>
+               </div>
+            </div>
+
+            <!-- Grid item -->
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow">
+                  <h6>Number of posts</h6>
+                  <h2 class="fs-1 text-danger">{{author_posts.count}}</h2>
+                  <div class="mt-auto"><a href="#author-posts" class="btn btn-link text-reset p-0 mb-0">View posts</a></div>
+               </div>
+            </div>
+
+            <!-- Grid item -->
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-primary bg-opacity-10 p-4 h-100 border-0 my-shadow">
+                  <h6>Followers</h6>
+                  <h2 class="fs-1 text-primary">1,586</h2>
+                  <p class="mb-2"><span class="text-success me-1">15<i class="bi bi-arrow-up"></i></span>from last month
+                  </p>
+                  <div class="mt-auto"><a href="#" class="btn btn-link text-reset p-0 mb-0">Manage followers</a></div>
+               </div>
+            </div>
+
+         </div>
+         <!-- Grid END -->
+      </div>
+   </div>
+</section>
+
+<section class="my-4" id="author-posts" style="scroll-margin: 75px;">
    <div class="container">
       <div class="border-bottom mb-4">
          <h3 class=" px-3 px-md-0 font-semibold">
@@ -137,7 +189,7 @@ Dashboard [{{user.username}}]
 
       {% if author_posts %}
 
-      <div class="row px-3 px-sm-0">
+      <div class="row px-3 px-sm-0" >
          <div class="col-md-12">
             <div class="author-posts owl-carousel carousel-2">
 
@@ -340,6 +392,10 @@ Dashboard [{{user.username}}]
 
    </div>
 </section>
+
+{% else %}
+
+<br><br>
 
 {% endif %}
 

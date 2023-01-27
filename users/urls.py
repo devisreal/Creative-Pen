@@ -17,8 +17,7 @@ urlpatterns = [
 
 
    # Admin Views
-   path('staffs/', admin_views.staffs, name="staffs"),   
-   path('staff__<str:username>/', admin_views.staff_single, name='single_staff'),
+   path('staffs/', admin_views.staffs, name="staffs"),      
    path('block-staff/<str:username>/', admin_views.block_staff, name='block_staff'),
    path('unblock-staff/<str:username>/', admin_views.unblock_staff, name='unblock_staff'),
    path('revoke/<str:username>/', admin_views.revoke_staff_access, name='revoke_staff_access'),
