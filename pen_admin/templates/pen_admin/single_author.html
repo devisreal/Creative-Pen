@@ -66,8 +66,16 @@ Author ({{author.username}})
                      <i class="fa-solid fa-clipboard-user fa-fw"></i>
                      staff
                   </a>
+                  {% endif %}                  
+                  {% if author_posts %}
+                     {% with author_posts=author_posts|length %}                        
+                        <span class="fw-bold text-black">{{author_posts}}</span>  
+                        Published post{{ author_posts|pluralize }}
+                     {% endwith %}
+                  {% else %}
+                     No Published posts
                   {% endif %}
-                  <span class="fw-bold text-black">03</span> Published posts </p>
+               </p>
                <div class="mb-2">
                   <h3 class="text-dark mb-0 pb-0">
                      {{author.get_full_name|default:"Firstname Lastname"}}
