@@ -18,7 +18,7 @@ def dashboard(request, slug):
       liked_posts = Post.objects.filter(likes=user)
       author_posts = Post.objects.filter(post_author=user)
       total_users = User.objects.all()
-      total_posts = Post.objects.all().count()      
+      total_posts = Post.objects.all()
       total_posts_likes = 0
       for post in Post.objects.all():
          total_posts_likes += post.likes.all().count()
@@ -50,7 +50,7 @@ def dashboard(request, slug):
    if user.is_staff or user.is_superuser:
       context.update({
          'total_users': total_users.count(),
-         'total_posts': total_posts,
+         'total_posts': total_posts.count(),
          'total_likes': total_likes,
          'y1': sum_user_list,
          'y2': sum_user_list_prev,
