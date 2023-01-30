@@ -24,63 +24,43 @@ Author ({{author.username}})
          <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-6">
                {% if author.profile_picture %}
-                  <img 
-                     class="img-fluid rounded" 
-                     src="{{author.profile_picture.url}}" 
-                     alt="{{author.getusername}}'s Avatar"
-                     width="250" 
-                     height="250"
-                  >
+               <img class="img-fluid rounded" src="{{author.profile_picture.url}}" alt="{{author.getusername}}'s Avatar"
+                  width="250" height="250">
                {% else %}
-                  {% if author.gender == 'Male' %}                     
-                     <img 
-                        class="img-fluid rounded" 
-                        src="{% static 'img/user/male.jpg' %}" 
-                        alt="{{author.getusername}}'s Avatar"
-                        width="250" 
-                        height="250"
-                     >
-                  {% elif author.gender == 'Female' %}                                                   
-                     <img 
-                        class="img-fluid rounded" 
-                        src="{% static 'img/user/female.jpg' %}" 
-                        alt="{{author.getusername}}'s Avatar"
-                        width="250" 
-                        height="250"
-                     >
-                  {% else %}
-                     <img 
-                        class="img-fluid rounded" 
-                        src="{% static 'img/user/custom.jpg' %}" 
-                        alt="{{author.getusername}}'s Avatar"
-                        width="250" 
-                        height="250"
-                     >
-                  {% endif %}   
-               {% endif %}                
-            </div>                           
+               {% if author.gender == 'Male' %}
+               <img class="img-fluid rounded" src="{% static 'img/user/male.jpg' %}"
+                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+               {% elif author.gender == 'Female' %}
+               <img class="img-fluid rounded" src="{% static 'img/user/female.jpg' %}"
+                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+               {% else %}
+               <img class="img-fluid rounded" src="{% static 'img/user/custom.jpg' %}"
+                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+               {% endif %}
+               {% endif %}
+            </div>
             <div class="col-xl-9 col-lg-8 col-md-12">
                <p class="mb-2">
                   {% if author.is_staff %}
-                     {% if author.is_superuser %}
-                        <a class="badge text-xs text-bg-blue mb-0 me-2 text-decoration-none font-outfit font-medium">
-                           <i class="fa-solid fa-clipboard-user fa-fw"></i>
-                           superuser
-                        </a>
-                     {% else %}
-                        <a class="badge text-xs text-bg-danger mb-0 me-2 text-decoration-none font-outfit font-medium">
-                           <i class="fa-solid fa-clipboard-user fa-fw"></i>
-                           staff
-                        </a>
-                     {% endif %}
-                  {% endif %}                  
-                  {% if author_posts %}
-                     {% with author_posts=author_posts|length %}                        
-                        <span class="fw-bold text-black">{{author_posts}}</span>  
-                        Published post{{ author_posts|pluralize }}
-                     {% endwith %}
+                  {% if author.is_superuser %}
+                  <a class="badge text-xs text-bg-blue mb-0 me-2 text-decoration-none font-outfit font-medium">
+                     <i class="fa-solid fa-clipboard-user fa-fw"></i>
+                     superuser
+                  </a>
                   {% else %}
-                     No Published posts
+                  <a class="badge text-xs text-bg-danger mb-0 me-2 text-decoration-none font-outfit font-medium">
+                     <i class="fa-solid fa-clipboard-user fa-fw"></i>
+                     staff
+                  </a>
+                  {% endif %}
+                  {% endif %}
+                  {% if author_posts %}
+                  {% with author_posts=author_posts|length %}
+                  <span class="fw-bold text-black">{{author_posts}}</span>
+                  Published post{{ author_posts|pluralize }}
+                  {% endwith %}
+                  {% else %}
+                  No Published posts
                   {% endif %}
                </p>
                <div class="mb-2">
@@ -95,7 +75,7 @@ Author ({{author.username}})
                      {% endif %}
                   </h3>
                   <small class="text-gray-500">
-                     @{{author.get_username}}                      
+                     @{{author.get_username}}
                   </small>
                </div>
                <div class="content">
@@ -106,27 +86,34 @@ Author ({{author.username}})
 
                      <!-- ? Author Email -->
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
-                              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="#292D32" stroke-width="1.5"
-                              stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z"
+                              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                           <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="#292D32"
+                              stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                              stroke-linejoin="round" />
                         </svg>
                         {{author.email}}
                      </li>
 
                      <!-- ? Author Gender -->
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
                            <path
                               d="M16.42 7.95C18.86 10.39 18.86 14.35 16.42 16.79C13.98 19.23 10.02 19.23 7.58 16.79C5.14 14.35 5.14 10.39 7.58 7.95C10.02 5.51 13.98 5.51 16.42 7.95Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M8.24999 21.64C6.24999 20.84 4.49999 19.39 3.33999 17.38C2.19999 15.41 1.81999 13.22 2.08999 11.13"
+                           <path
+                              d="M8.24999 21.64C6.24999 20.84 4.49999 19.39 3.33999 17.38C2.19999 15.41 1.81999 13.22 2.08999 11.13"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M5.84998 4.47998C7.54998 3.14998 9.67997 2.35999 12 2.35999C14.27 2.35999 16.36 3.12997 18.04 4.40997"
+                           <path
+                              d="M5.84998 4.47998C7.54998 3.14998 9.67997 2.35999 12 2.35999C14.27 2.35999 16.36 3.12997 18.04 4.40997"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M15.75 21.64C17.75 20.84 19.5 19.39 20.66 17.38C21.8 15.41 22.18 13.22 21.91 11.13" stroke="#292D32"
-                              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M15.75 21.64C17.75 20.84 19.5 19.39 20.66 17.38C21.8 15.41 22.18 13.22 21.91 11.13"
+                              stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
 
                         {{author.gender}}
@@ -134,15 +121,16 @@ Author ({{author.username}})
 
                      <!-- ? Author Job Title -->
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
                            <path
                               d="M21.08 8.58003V15.42C21.08 16.54 20.48 17.58 19.51 18.15L13.57 21.58C12.6 22.14 11.4 22.14 10.42 21.58L4.48003 18.15C3.51003 17.59 2.91003 16.55 2.91003 15.42V8.58003C2.91003 7.46003 3.51003 6.41999 4.48003 5.84999L10.42 2.42C11.39 1.86 12.59 1.86 13.57 2.42L19.51 5.84999C20.48 6.41999 21.08 7.45003 21.08 8.58003Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                            <path
                               d="M12 11.0001C13.2869 11.0001 14.33 9.95687 14.33 8.67004C14.33 7.38322 13.2869 6.34009 12 6.34009C10.7132 6.34009 9.67004 7.38322 9.67004 8.67004C9.67004 9.95687 10.7132 11.0001 12 11.0001Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M16 16.6601C16 14.8601 14.21 13.4001 12 13.4001C9.79 13.4001 8 14.8601 8 16.6601" stroke="#292D32"
-                              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M16 16.6601C16 14.8601 14.21 13.4001 12 13.4001C9.79 13.4001 8 14.8601 8 16.6601"
+                              stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         {{author.job_title|default:"[Job title]"}}
                      </li>
@@ -150,7 +138,8 @@ Author ({{author.username}})
                      <!-- ? Author City -->
 
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
                            <path
                               d="M12 13.4299C13.7231 13.4299 15.12 12.0331 15.12 10.3099C15.12 8.58681 13.7231 7.18994 12 7.18994C10.2769 7.18994 8.88 8.58681 8.88 10.3099C8.88 12.0331 10.2769 13.4299 12 13.4299Z"
                               stroke="#292D32" stroke-width="1.5" />
@@ -164,13 +153,15 @@ Author ({{author.username}})
                      <!-- ? Author Last Login -->
 
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
                            <path
                               d="M20.75 13.25C20.75 18.08 16.83 22 12 22C7.17 22 3.25 18.08 3.25 13.25C3.25 8.42 7.17 4.5 12 4.5C16.83 4.5 20.75 8.42 20.75 13.25Z"
                               stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M12 8V13" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M9 2H15" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                           <path d="M12 8V13" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round" />
+                           <path d="M9 2H15" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
 
                         GMT {{author.last_login|date:"g:i a, dS M Y"}}
@@ -178,7 +169,8 @@ Author ({{author.username}})
 
                      <!-- ? Author Mobile Number -->
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="32" height="32" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="me-1 pb-1" width="32" height="32" viewBox="0 0 30 30" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
                            <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M9.00745 6.40686C10.6875 4.72679 13.5227 4.85451 14.6925 6.95063L15.3415 8.11356C16.1054 9.48238 15.7799 11.2095 14.6616 12.3414C14.6467 12.3618 14.5677 12.4768 14.5579 12.6776C14.5454 12.9339 14.6364 13.5267 15.5548 14.4451C16.4729 15.3632 17.0656 15.4545 17.3221 15.442C17.5231 15.4322 17.6381 15.3533 17.6585 15.3383C18.7905 14.2201 20.5176 13.8945 21.8864 14.6584L23.0493 15.3075C25.1454 16.4773 25.2731 19.3124 23.5931 20.9925C22.6944 21.8911 21.4995 22.6896 20.0953 22.7429C18.0144 22.8218 14.5591 22.2844 11.1373 18.8626C7.71556 15.4408 7.17818 11.9856 7.25706 9.90463C7.3103 8.50044 8.10879 7.30552 9.00745 6.40686ZM13.3827 7.68163C12.7836 6.60828 11.1739 6.36169 10.0681 7.46752C9.29276 8.24287 8.7887 9.09868 8.75599 9.96146C8.6902 11.6968 9.11864 14.7226 12.198 17.8019C15.2774 20.8813 18.3031 21.3097 20.0385 21.2439C20.9013 21.2112 21.7571 20.7072 22.5324 19.9318C23.6382 18.826 23.3916 17.2163 22.3183 16.6173L21.1554 15.9683C20.432 15.5645 19.4158 15.7023 18.7025 16.4156L18.7023 16.4158C18.6322 16.4858 18.1864 16.9018 17.395 16.9403C16.5847 16.9797 15.604 16.6156 14.4942 15.5058C13.384 14.3956 13.02 13.4146 13.0597 12.6042C13.0985 11.8127 13.5147 11.3671 13.5843 11.2975L13.5844 11.2974C14.2977 10.5841 14.4354 9.56797 14.0317 8.84456L13.3827 7.68163Z"
                               fill="#1C274C" />
@@ -189,18 +181,24 @@ Author ({{author.username}})
 
                      <!-- ? Author Joined date -->
                      <li class="list-inline-item">
-                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M8 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                        <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
+                           <path d="M8 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M16 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M3.5 9.08997H20.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                           <path
+                              d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                               stroke-linejoin="round" />
-                           <path d="M16 2V5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                           <path d="M11.9955 13.7H12.0045" stroke="#292D32" stroke-width="2" stroke-linecap="round"
                               stroke-linejoin="round" />
-                           <path d="M3.5 9.08997H20.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                           <path d="M8.29431 13.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round"
                               stroke-linejoin="round" />
-                           <path d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
-                              stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M11.9955 13.7H12.0045" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M8.29431 13.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                           <path d="M8.29431 16.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M8.29431 16.7H8.30329" stroke="#292D32" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" />
                         </svg>
                         Joined on {{author.date_joined|date:"D, dS M, Y"}}
                      </li>
@@ -226,20 +224,20 @@ Author ({{author.username}})
                            <div class="w-100 mb-auto d-flex justify-content-end">
                               <div class="text-end ms-auto">
                                  <!-- * Post Type -->
-                                 {% if post.post_type == video %}
+                                 {% if post.post_type == 'video' %}
                                  <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
                                     data-bs-toggle="tooltip" data-bs-title="This post has video"
                                     data-bs-placement="right">
                                     <i class="fas fa-video"></i>
                                  </div>
-                                 {% elif post.post_type == video %}
+                                 {% elif post.post_type == 'images' %}
                                  <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
-                                    data-bs-toggle="tooltip" data-bs-title="This post has video"
+                                    data-bs-toggle="tooltip" data-bs-title="This post has images"
                                     data-bs-placement="right">
                                     <i class="fa-solid fa-images text-md"></i>
                                  </div>
                                  {% endif %}
-                              </div>                                                            
+                              </div>
                            </div>
                            <!-- Card overlay bottom -->
                            <div class="w-100 mt-auto d-flex justify-content-between align-items-end">
@@ -250,15 +248,12 @@ Author ({{author.username}})
                               </a>
 
                               {% if post.post_author == request.user %}
-                                                               
-                              <a 
-                                 class="icon-md bg-white bg-opacity-75 bg-blur text-white rounded-circle" 
-                                 data-bs-toggle="tooltip"
-                                 data-bs-title="Edit post" 
-                                 data-bs-placement="right"
-                                 href="{% url 'blog:edit_post' post.slug %}"
-                              >
-                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                              <a class="icon-md bg-white bg-opacity-75 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="Edit post" data-bs-placement="right"
+                                 href="{% url 'blog:edit_post' post.slug %}">
+                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
                                        d="M24.1938 5.80624C25.2687 6.88124 25.2687 8.62415 24.1938 9.69914L23.6982 10.1947C23.5539 10.1634 23.3722 10.1159 23.1651 10.044C22.6108 9.85172 21.8823 9.48827 21.197 8.803C20.5117 8.11774 20.1483 7.38923 19.956 6.8349C19.8841 6.62781 19.8366 6.44609 19.8053 6.30179L20.3009 5.80624C21.3759 4.73125 23.1188 4.73125 24.1938 5.80624Z"
                                        fill="#333" />
@@ -382,55 +377,42 @@ Author ({{author.username}})
                                  <div class="d-flex align-items-center position-relative">
                                     <div class="avatar avatar-xs">
                                        {% if author.profile_picture %}
-                                       <img 
-                                          class="avatar-img rounded-circle" 
-                                          src="{{post.post_author.profile_picture.url}}" 
-                                          alt="Author avatar"
-                                       >
+                                       <img class="avatar-img rounded-circle"
+                                          src="{{post.post_author.profile_picture.url}}" alt="Author avatar">
                                        {% else %}
-                                          {% if post.post_author.gender == 'Male' %}
-                                             <img 
-                                                class="avatar-img rounded-circle" 
-                                                src="{% static 'img/user/male.jpg' %}" 
-                                                alt="Author Avatar"
-                                             >
-                                          {% elif post.post_author.gender == 'Female' %}                                                   
-                                             <img 
-                                                class="avatar-img rounded-circle" 
-                                                src="{% static 'img/user/female.jpg' %}" 
-                                                alt="Author Avatar"
-                                             >
-                                          {% else %}
-                                             <img 
-                                                class="avatar-img rounded-circle" 
-                                                src="{% static 'img/user/custom.jpg' %}" 
-                                                alt="Author Avatar"
-                                             >
-                                          {% endif %} 
+                                       {% if post.post_author.gender == 'Male' %}
+                                       <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                          alt="Author Avatar">
+                                       {% elif post.post_author.gender == 'Female' %}
+                                       <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                          alt="Author Avatar">
+                                       {% else %}
+                                       <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                          alt="Author Avatar">
+                                       {% endif %}
                                        {% endif %}
                                     </div>
                                     <span class="ms-3">by
-                                       <a 
-                                          href="{% url 'author_external' post.post_author.slug %}"
-                                          class="stretched-link text-reset btn-link" 
-                                          tabindex="0"
-                                       >
+                                       <a href="{% url 'author_external' post.post_author.slug %}"
+                                          class="stretched-link text-reset btn-link" tabindex="0">
                                           {{post.post_author.get_short_name}}
                                        </a>
                                     </span>
                                  </div>
                               </div>
                            </li>
-                           <li class="nav-item d-flex align-items-center">                              
-                              <svg class="me-1" width="24" height="24" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <li class="nav-item d-flex align-items-center">
+                              <svg class="me-1" width="24" height="24" viewBox="0 0 30 30" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                  <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M8.62436 7.4241C6.96537 8.18243 5.75 9.98614 5.75 12.137C5.75 14.3344 6.64922 16.0281 7.93829 17.4797C9.00072 18.676 10.2868 19.6675 11.5411 20.6345C11.839 20.8642 12.1351 21.0925 12.426 21.3218C12.9521 21.7365 13.4213 22.1004 13.8736 22.3647C14.3261 22.6292 14.6904 22.7499 15 22.7499C15.3096 22.7499 15.6739 22.6292 16.1264 22.3647C16.5787 22.1004 17.0479 21.7365 17.574 21.3218C17.8649 21.0925 18.161 20.8642 18.4589 20.6345C19.7132 19.6675 20.9993 18.676 22.0617 17.4797C23.3508 16.0281 24.25 14.3344 24.25 12.137C24.25 9.98614 23.0346 8.18243 21.3756 7.4241C19.9023 6.75065 17.9662 6.85585 16.0725 8.51217L17.5302 9.9694C17.8232 10.2622 17.8233 10.7371 17.5304 11.0301C17.2376 11.323 16.7627 11.3231 16.4698 11.0302L14.4698 9.03097L14.4596 9.02065C12.4017 6.88249 10.2361 6.68739 8.62436 7.4241ZM15 7.45873C12.6879 5.39015 10.099 5.10078 8.00076 6.05987C5.78471 7.07284 4.25 9.42494 4.25 12.137C4.25 14.8025 5.3605 16.836 6.81672 18.4757C7.98287 19.7888 9.41022 20.8879 10.6708 21.8585C10.9566 22.0785 11.2338 22.292 11.4974 22.4998C12.0097 22.9036 12.5595 23.3342 13.1168 23.6598C13.6739 23.9853 14.3096 24.2499 15 24.2499C15.6904 24.2499 16.3261 23.9853 16.8832 23.6598C17.4405 23.3342 17.9903 22.9036 18.5026 22.4998C18.7662 22.292 19.0434 22.0785 19.3292 21.8585C20.5898 20.8879 22.0171 19.7888 23.1833 18.4757C24.6395 16.836 25.75 14.8025 25.75 12.137C25.75 9.42494 24.2153 7.07284 21.9992 6.05987C19.901 5.10078 17.3121 5.39015 15 7.45873Z"
                                     fill="#333" />
                               </svg>
-                            {{post.likes.count}}                              
+                              {{post.likes.count}}
                            </li>
-                           <li class="nav-item">                              
-                              <svg width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <li class="nav-item">
+                              <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                  <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M11.989 8.30778C13.169 5.90545 15.6404 4.25 18.5 4.25C22.5041 4.25 25.75 7.49594 25.75 11.5C25.75 12.5721 25.5168 13.5918 25.0977 14.5093C24.9883 14.7488 24.967 14.975 25.0156 15.1568L25.143 15.6328C25.5507 17.1566 24.1566 18.5507 22.6328 18.143L22.1568 18.0156C22.0215 17.9794 21.8616 17.982 21.6899 18.0307C21.1798 22.3775 17.4838 25.75 13 25.75C11.65 25.75 10.3695 25.4438 9.2259 24.8963C8.99951 24.7879 8.7766 24.7659 8.59324 24.815L7.3672 25.143C5.84337 25.5507 4.44927 24.1566 4.857 22.6328L5.18504 21.4068C5.2341 21.2234 5.21211 21.0005 5.10373 20.7741C4.55623 19.6305 4.25 18.35 4.25 17C4.25 12.5094 7.63273 8.80897 11.989 8.30778ZM13.735 8.28043C18.0598 8.64011 21.4914 12.1451 21.736 16.5016C21.9986 16.4766 22.2714 16.4935 22.5445 16.5666L23.0205 16.694C23.4293 16.8034 23.8034 16.4293 23.694 16.0205L23.5666 15.5445C23.4095 14.9571 23.5119 14.3708 23.7333 13.8861C24.0649 13.1602 24.25 12.3527 24.25 11.5C24.25 8.32436 21.6756 5.75 18.5 5.75C16.5181 5.75 14.7692 6.75284 13.735 8.28043ZM13 9.75C8.99594 9.75 5.75 12.9959 5.75 17C5.75 18.121 6.00392 19.1807 6.45667 20.1264C6.69207 20.6181 6.79079 21.2087 6.63407 21.7945L6.30602 23.0205C6.19664 23.4293 6.57066 23.8034 6.97949 23.694L8.20553 23.3659C8.79126 23.2092 9.38191 23.3079 9.87362 23.5433C10.8193 23.9961 11.879 24.25 13 24.25C17.0041 24.25 20.25 21.0041 20.25 17C20.25 12.9959 17.0041 9.75 13 9.75Z"
                                     fill="#333" />
@@ -444,10 +426,11 @@ Author ({{author.username}})
                                     d="M17.5 17C17.5 17.5523 17.0523 18 16.5 18C15.9477 18 15.5 17.5523 15.5 17C15.5 16.4477 15.9477 16 16.5 16C17.0523 16 17.5 16.4477 17.5 17Z"
                                     fill="#333" />
                               </svg>
-                               5                              
+                              5
                            </li>
                            <li class="nav-item d-flex align-items-center">
-                              <svg class="me-1" width="25" height="25" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <svg class="me-1" width="25" height="25" viewBox="0 0 30 30" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                  <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25ZM12.75 15C12.75 13.7574 13.7574 12.75 15 12.75C16.2426 12.75 17.25 13.7574 17.25 15C17.25 16.2426 16.2426 17.25 15 17.25C13.7574 17.25 12.75 16.2426 12.75 15Z"
                                     fill="#333" />
@@ -455,7 +438,7 @@ Author ({{author.username}})
                                     d="M15 6.25C10.4859 6.25 7.44529 8.9542 5.68057 11.2469L5.64874 11.2882C5.24964 11.8065 4.88206 12.2839 4.63269 12.8484C4.36564 13.4529 4.25 14.1117 4.25 15C4.25 15.8883 4.36564 16.5471 4.63269 17.1516C4.88206 17.7161 5.24964 18.1935 5.64875 18.7118L5.68057 18.7531C7.44529 21.0458 10.4859 23.75 15 23.75C19.5141 23.75 22.5547 21.0458 24.3194 18.7531L24.3512 18.7118C24.7504 18.1935 25.1179 17.7161 25.3673 17.1516C25.6344 16.5471 25.75 15.8883 25.75 15C25.75 14.1117 25.6344 13.4529 25.3673 12.8484C25.1179 12.2839 24.7504 11.8065 24.3512 11.2882L24.3194 11.2469C22.5547 8.9542 19.5141 6.25 15 6.25ZM6.86922 12.1618C8.49864 10.0449 11.1504 7.75 15 7.75C18.8496 7.75 21.5014 10.0449 23.1308 12.1618C23.5694 12.7316 23.8263 13.0721 23.9952 13.4545C24.1532 13.812 24.25 14.2489 24.25 15C24.25 15.7511 24.1532 16.188 23.9952 16.5455C23.8263 16.9279 23.5694 17.2684 23.1308 17.8382C21.5014 19.9551 18.8496 22.25 15 22.25C11.1504 22.25 8.49864 19.9551 6.86922 17.8382C6.43064 17.2684 6.17374 16.9279 6.00476 16.5455C5.84684 16.188 5.75 15.7511 5.75 15C5.75 14.2489 5.84684 13.812 6.00476 13.4545C6.17374 13.0721 6.43063 12.7316 6.86922 12.1618Z"
                                     fill="#333" />
                               </svg>
-                               {% get_hit_count for post %}                              
+                              {% get_hit_count for post %}
                            </li>
                         </ul>
                      </div>

@@ -32,5 +32,170 @@ Edit Post
 {% include 'partials/messages.html' %}
 
 
+<div class="container-sm mt-5">
+
+   <div class="border-bottom pb-3 mb-5">
+      <div class="row d-flex g-3 align-items-center justify-content-between">
+         <div class="col">
+            <h4 class="mb-0">
+               Edit post: {{post.post_title}}
+            </h4>
+         </div>
+
+      </div>
+      <!-- Search and select END -->
+   </div>
+
+
+
+   <form class="card p-3 rounded-lg" action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- * Post Title -->
+      <fieldset>
+         <label for="post_title" class="mb-2 text-dark">
+            {{edit_post_form.post_title.label}}
+         </label>
+         {{edit_post_form.post_title}}
+      </fieldset>
+
+      <div class="row mt-4">
+         <div class="col-md-6">
+
+            <!-- * Post Type -->
+            {{edit_post_form.post_type}}
+
+
+            <hr>
+
+            <!-- * Post Image -->
+            <fieldset class="">
+               <label for="background_image" class="mb-2">{{edit_post_form.post_image.label}}</label>
+               <div class="post-image position-relative mb-3">
+
+                  {{edit_post_form.post_image}}
+
+                  {% if post.post_image %}
+                  <img class="w-100 h-100 rounded" src="{{post.post_image.url}}" id="profile-bg-output"
+                     alt="Post Image">
+                  {% else %}
+                  <img class="w-100 h-100 rounded" src="{% static " img/post_image_placeholder.jpg" %}"
+                     id="profile-bg-output" alt="Post Image">
+                  {% endif %}
+                  <label for="background_image"
+                     class="bg-light refresh-icon border position-absolute top-100 start-100 translate-middle rounded-circle cursor-pointer">
+                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.6996 19.8981H20.0766" stroke="#200E32" stroke-width="1.5" stroke-linecap="round"
+                           stroke-linejoin="round" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                           d="M12.8549 4.9557C13.5919 4.0167 14.7829 4.0657 15.7229 4.8027L17.1129 5.8927C18.0529 6.6297 18.3859 7.7727 17.6489 8.7137L9.3599 19.2887C9.0829 19.6427 8.6599 19.8517 8.2099 19.8567L5.0129 19.8977L4.2889 16.7827C4.1869 16.3457 4.2889 15.8857 4.5659 15.5307L12.8549 4.9557Z"
+                           stroke="#200E32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11.3026 6.9361L16.0966 10.6941" stroke="#200E32" stroke-width="1.5"
+                           stroke-linecap="round" stroke-linejoin="round" />
+                     </svg>
+                  </label>
+
+               </div>
+               <small>{{edit_post_form.post_image.help_text}}</small>
+            </fieldset>
+
+         </div>
+
+         <div class="col-md-6">
+
+            <!-- * Short Description -->
+            <fieldset class="mb-3">
+               <label for="short_description" class="form-label">
+                  {{edit_post_form.short_description.label}}
+               </label>
+               {{edit_post_form.short_description}}
+            </fieldset>
+
+            <!-- * Post Video -->
+            <fieldset id="post_video_field" class="w-100 mb-3">
+               <label for="post_video" class="mb-1">
+                  {{edit_post_form.post_video.label}}
+               </label>
+               {{edit_post_form.post_video}}
+               <small class="text-gray-500">
+                  {{edit_post_form.post_video.help_text}}
+               </small>
+            </fieldset>
+
+            <!-- * Post Category -->
+            <fieldset>
+               <label for="" class="mb-1">
+                  {{edit_post_form.category.label}}
+               </label>
+               {{edit_post_form.category}}
+            </fieldset>
+         </div>
+
+      </div>
+
+      <hr>
+
+      <!-- * Post Content -->
+      <fieldset class="mt-1">
+         <label for="id_post_content" class="mb-2">
+            {{edit_post_form.post_content.label}}
+         </label>
+         {{edit_post_form.post_content}}
+      </fieldset>
+
+
+      <div class="row mt-3">
+         <div class="col-md-7">
+
+            <!-- * Post Tags -->
+            <fieldset class="">
+               <label for="inputTags" class="mb-2">
+                  {{edit_post_form.tags.label}}
+               </label>
+               {{edit_post_form.tags}}
+               <small class="text-gray-500">
+                  {{edit_post_form.tags.help_text}}
+               </small>
+            </fieldset>
+
+         </div>
+
+         <div class="col-md-5">
+
+            <!-- * Post Tags -->
+            <fieldset class="h-100 mt-1 d-flex align-items-center justify-content-center">
+               <div class="form-check">
+                  {{edit_post_form.is_featured}}
+                  <label class="form-check-label" for="is_featured">
+                     Make this post featured?
+                  </label>
+               </div>
+            </fieldset>
+
+         </div>
+      </div>
+
+      <div class="d-grid mt-5 mb-2">
+         <button type="submit" class="btn btn- btn-success">Edit post</>
+      </div>
+
+   </form>
+</div>
+
+
 <br><br><br><br><br>
+<script>
+   var loadBgFile = function (event) {
+      var profile_bg_image = document.getElementById('profile-bg-output');
+      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+   };
+   $('#post_video_type').click(() => {
+      $('#post_video_field').slideDown()
+      $('#post_image_type').click(() => {
+         $('#post_video_field').slideUp()
+      })
+      $('#post_default_type').click(() => {
+         $('#post_video_field').slideUp()
+      })
+   })
+</script>
 {% endblock %}

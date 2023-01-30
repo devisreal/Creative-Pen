@@ -25,8 +25,20 @@ def edit_post(request, slug):
       messages.error(request, 'You are not allowed to edit this post')
       return redirect('blog:single_post', slug=post.slug)
    else:
+      if request.method == "POST":         
+         edit_post_form = CreatePostForm(request.POST or None, request.FILES, instance=post)
+         if edit_post_form.is_valid():
+            edit_post_form.save()
+            messages.success(request, 'Post updated successfully')
+            return redirect('blog:single_post', slug=post.slug)
+         else:
+            messages.error(request, f"An error occured")
+            return redirect('new_post')
+      else:
+         edit_post_form = CreatePostForm(instance=post)
       context = {
-         'post': post
+         'post': post,
+         'edit_post_form': edit_post_form
       }
       return render(request, 'blog/edit_post.html', context)    
    

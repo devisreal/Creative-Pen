@@ -6,6 +6,15 @@
 {{post.post_title}}
 {% endblock title %}
 {% block styles %}
+<style>
+   .nav.nav-divider .nav-item+.nav-item:before {    
+      content: "\22C5";
+      color: #fff;
+      padding-left: 0.65rem;
+      padding-right: 0.75rem;
+      opacity: 1;
+   }
+</style>
 {% endblock styles %}
 {% block content %}
 {% include 'partials/messages.html' %}
@@ -101,7 +110,7 @@
                                     </div>
                                  </div>
                               ">
-                              Louis Ferguson
+                              {{post.post_author.get_full_name}}
                            </a>
                         </span>
                      </div>
@@ -117,7 +126,7 @@
                <li class="nav-item">
                   <i class="far fa-eye me-1"></i>{% get_hit_count for post %}
                </li>
-
+               
                {% if request.user.is_authenticated %}                                 
                <li class="nav-item">
                   <a 
@@ -182,7 +191,20 @@
                      ></i>                     
                   </a>
                </li>
-               {% endif %}                                                                              
+               {% endif %}    
+               
+               {% if post.post_author == request.user %}
+               <li class="nav-item">                  
+                  <a 
+                     href="{% url 'blog:edit_post' post.slug %}"
+                     data-bs-toggle="tooltip" 
+                     data-bs-title="Edit post" 
+                     data-bs-placement="bottom"
+                  >
+                     <i class="fa-solid fa-pen-to-square me-1"></i>
+                  </a>
+               </li>
+               {% endif %}
             </ul>
 
             <!-- Tags -->
@@ -376,7 +398,7 @@
                   <h5 class="my-3">Popular posts</h5>
                   <div class="mb-5">
                      <div class="owl-2-style px-4 px-md-0">               
-                        <div class="owl-carousel owl-2">
+                        <div class="owl-carousel popular-posts-carousel">
                                  
                            {% for popular_post in popular_posts %}
                            {% if popular_post != post %}
@@ -389,14 +411,14 @@
                                     <div class="w-100 mb-auto d-flex justify-content-end">
                                        <div class="text-end ms-auto">
                                           <!-- * Post Type -->
-                                          {% if popular_post.post_type == video %}
+                                          {% if popular_post.post_type == 'video' %}
                                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
                                              data-bs-title="This post has video" data-bs-placement="right">
                                              <i class="fas fa-video"></i>
                                           </div>
-                                          {% elif popular_post.post_type == video %}
+                                          {% elif popular_post.post_type == 'images' %}
                                           <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                             data-bs-title="This post has video" data-bs-placement="right">
+                                             data-bs-title="This post has images" data-bs-placement="right">
                                              <i class="fa-solid fa-images text-md"></i>
                                           </div>
                                           {% endif %}

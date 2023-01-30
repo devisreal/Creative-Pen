@@ -3,18 +3,18 @@ $(document).ready(function () {
 })
 $(function () {
 
-   if ($('.owl-2').length > 0) {
-      $('.owl-2').owlCarousel({
+   if ($('.popular-posts-carousel').length > 0) {
+      $('.popular-posts-carousel').owlCarousel({
          center: false,
          items: 1,
-         loop: true,
+         loop: false,
          stagePadding: 0,
          margin: 20,
          smartSpeed: 1000,
-         autoplay: false,
+         autoplay: true,
          nav: true,
          dots: true,
-         pauseOnHover: false,
+         pauseOnHover: true,
          responsive: {
             600: {
                margin: 20,

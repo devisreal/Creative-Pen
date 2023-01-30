@@ -165,12 +165,12 @@ class CreatePostForm(forms.ModelForm):
       ]
    )
 
-   # post_content = forms.CharField(
-   #    label='Post content',
-   #    widget=FroalaEditor(
+   post_content = forms.CharField(
+      label='Post content',
+      widget=FroalaEditor(
          
-   #    )
-   # )
+      )
+   )
 
    category = forms.ModelChoiceField(
       label='Post category',
