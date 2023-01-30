@@ -29,7 +29,7 @@
          </svg>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mx-auto mx d-flex align-items-center text-">
+         <ul class="navbar-nav mx-auto mx d-flex align-items-center">
             <li class="nav-item">
                <a class="nav-link {% if request.path == home %} active-nav  {% endif %}"
                   href="{% url 'home' %}">Home</a>
@@ -47,8 +47,7 @@
             </li>
             <li class="nav-item">
                <a class="nav-link {% active_link 'contact' 'active-nav' %}" href="{% url 'contact' %}">Contact</a>
-            </li>
-            
+            </li>            
          </ul>
 
          <form class="position-relative" action="{% url 'search' %}" method="GET">

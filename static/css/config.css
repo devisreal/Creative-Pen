@@ -315,6 +315,20 @@ td {
   border-color: transparent;
 }
 
+.btn-outline-light {
+  background: transparent;
+  border-color: #d0d4d9;
+  color: #595d69;
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus,
+.btn-outline-light:active,
+.btn-check:checked+.btn-outline-light {
+  background: #d0d4d9;
+  border-color: #d0d4d9;
+  color: #191a1f;
+}
 
 /* ! Pagination Styles */
 

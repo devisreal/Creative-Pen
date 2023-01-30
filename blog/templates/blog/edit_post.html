@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Edit Post
+{% endblock title %}
+{{ form.media }}
+{% block styles %}
+<style>
+   .post-image {
+      height: 220px;
+   }
+
+   .post-image img {
+      object-fit: cover;
+   }
+
+   .refresh-icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   #post_video_field {
+      display: none;
+   }
+</style>
+{% endblock styles %}
+{% block content %}
+{% include 'partials/messages.html' %}
+
+
+<br><br><br><br><br>
+{% endblock %}

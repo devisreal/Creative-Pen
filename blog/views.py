@@ -17,6 +17,21 @@ def single_post(request, slug):
    return render(request, 'blog/single_post.html', context)
 
 
+@login_required
+def edit_post(request, slug):
+   post = Post.objects.get(slug=slug)
+
+   if request.user != post.post_author:
+      messages.error(request, 'You are not allowed to edit this post')
+      return redirect('blog:single_post', slug=post.slug)
+   else:
+      context = {
+         'post': post
+      }
+      return render(request, 'blog/edit_post.html', context)    
+   
+
+
 class PostDetailView(HitCountDetailView):
    model = Post
    template_name = 'blog/single_post.html'
@@ -31,7 +46,6 @@ class PostDetailView(HitCountDetailView):
          'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
       })
       return context
-
 
 @login_required
 def create_post(request):
