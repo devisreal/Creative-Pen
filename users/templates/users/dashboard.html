@@ -113,8 +113,6 @@ Dashboard [{{user.username}}]
 {% include 'partials/messages.html' %}
 
 
-
-
 <!-- * Author Posts -->
 {% if user.is_author %}
 
@@ -127,24 +125,64 @@ Dashboard [{{user.username}}]
 
             <!-- Earning item -->
             <div class="col-md-12 col-xl-6">
-               <div class="card card-body bg-success bg-opacity-10 p-4 h-100 border-0 my-shadow">
-                  <h6>Earning
-                     <a tabindex="0" class="h6 mb-0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
-                        data-bs-placement="top" data-bs-content="After US royalty withholding tax"
-                        data-bs-original-title="" title="">
-                        <i class="bi bi-info-circle-fill small"></i>
+               <div class="card card-body bg-success bg-opacity-10 p-3 h-100 border-0 my-shadow position-relative">
+                  <div class="d-flex align-items-center justify-content-between my-auto">
+                     <div class="avatar avatar-xxl">
+                        {% if user.profile_picture %}
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{{user.profile_picture.url}}"
+                              alt="Reader Avatar"
+                           >                                 
+                        {% else %}
+                           {% if user.gender == 'Male' %}
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/male.jpg' %}"
+                                 alt="Reader Avatar"
+                              >                                    
+                           {% elif user.gender == 'Female' %}                                    
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/female.jpg' %}"
+                                 alt="Reader Avatar"
+                              >
+                           {% else %}
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/custom.jpg' %}"
+                                 alt="Reader Avatar"
+                              >
+                           {% endif %}
+                        {% endif %}
+                     </div>
+                     <div class="text-end">
+                        <h2 class="m-0 p-0">{{user.get_full_name}}</h2>
+                        <p class="text-secondary m-0 p-0">{{user.job_title}}</p>
+                        <small class="text-secondary m-0 p-0">@{{user.get_username}}</small>
+                     </div>
+                  </div>
+                  <div 
+                     class="position-absolute bottom-0 end-0 " 
+                     style="width: 30px;height: 30px;"
+                  >
+                     <a 
+                        href="{% url 'users:edit_profile' user.slug %}"
+                        data-bs-toggle="tooltip" data-bs-title="Edit profile" data-bs-placement="bottom"
+                        data-bs-offset="10,20"
+                     >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="#333">
+                           <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z" />
+                        </svg>
                      </a>
-                  </h6>
-                  <h2 class="fs-1 text-success">$750.35</h2>
-                  <p class="mb-2"><span class="text-primary me-1">0.20%<i class="bi bi-arrow-up"></i></span>vs last
-                     month</p>
-                  <div class="mt-auto"><a href="#" class="btn btn-link text-reset p-0 mb-0">View statement</a></div>
+                  </div>
                </div>
             </div>
 
             <!-- Grid item -->
             <div class="col-md-6 col-xl-3">
-               <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow">
+               <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
                   <h6>Number of posts</h6>
                   <h2 class="fs-1 text-danger">{{author_posts.count}}</h2>
                   <div class="mt-auto"><a href="#author-posts" class="btn btn-link text-reset p-0 mb-0">View posts</a>
@@ -154,7 +192,7 @@ Dashboard [{{user.username}}]
 
             <!-- Grid item -->
             <div class="col-md-6 col-xl-3">
-               <div class="card card-body bg-primary bg-opacity-10 p-4 h-100 border-0 my-shadow">
+               <div class="card card-body bg-primary bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
                   <h6>Followers</h6>
                   <h2 class="fs-1 text-primary">1,586</h2>
                   <p class="mb-2"><span class="text-success me-1">15<i class="bi bi-arrow-up"></i></span>from last month
@@ -465,27 +503,91 @@ Dashboard [{{user.username}}]
 
             <!-- Earning item -->
             <div class="col-md-12 col-xl-6">
-               <div class="card card-body bg-success bg-opacity-10 p-4 h-100 border-0 my-shadow">
-                  <h6>Earning
-                     <a tabindex="0" class="h6 mb-0" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
-                        data-bs-placement="top" data-bs-content="After US royalty withholding tax"
-                        data-bs-original-title="" title="">
-                        <i class="bi bi-info-circle-fill small"></i>
+               <div class="card card-body bg-primary bg-opacity-10 p-3 h-100 border-0 my-shadow-sm position-relative">
+                  <div class="d-flex align-items-center justify-content-between my-auto">
+                     <div class="avatar avatar-xxl">
+                        {% if user.profile_picture %}
+                           <img 
+                              class="avatar-img rounded-circle" 
+                              src="{{user.profile_picture.url}}"
+                              alt="Reader Avatar"
+                           >                                 
+                        {% else %}
+                           {% if user.gender == 'Male' %}
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/male.jpg' %}"
+                                 alt="Reader Avatar"
+                              >                                    
+                           {% elif user.gender == 'Female' %}                                    
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/female.jpg' %}"
+                                 alt="Reader Avatar"
+                              >
+                           {% else %}
+                              <img 
+                                 class="avatar-img rounded-circle" 
+                                 src="{% static 'img/user/custom.jpg' %}"
+                                 alt="Reader Avatar"
+                              >
+                           {% endif %}
+                        {% endif %}
+                     </div>
+                     <div class="text-end">
+                        <h2 class="m-0 p-0">{{user.get_full_name}}</h2>
+                        <p class="text-secondary m-0 p-0">{{user.job_title}}</p>
+                        <small class="text-secondary m-0 p-0">@{{user.get_username}}</small>
+                     </div>
+                  </div>
+                  <div 
+                     class="position-absolute bottom-0 end-0 " 
+                     style="width: 30px;height: 30px;"
+                  >
+                     <a 
+                        href="{% url 'users:edit_profile' user.slug %}"
+                        data-bs-toggle="tooltip" data-bs-title="Edit profile" data-bs-placement="bottom"
+                        data-bs-offset="10,20"
+                     >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="#333">
+                           <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z" />
+                        </svg>
                      </a>
-                  </h6>
-                  <h2 class="fs-1 text-success">$750.35</h2>
-                  <p class="mb-2"><span class="text-primary me-1">0.20%<i class="bi bi-arrow-up"></i></span>vs last
-                     month</p>
-                  <div class="mt-auto"><a href="#" class="btn btn-link text-reset p-0 mb-0">View statement</a></div>
+                  </div>
                </div>
             </div>
                         
             <!-- Grid item -->
-            <div class="col-md-12 col-xl-6">
-               <div class="card card-body bg-primary bg-opacity-10 p-4 h-100 border-0 my-shadow">
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-success bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
+                  <h6>Request Author Access</h6>
+                  <small class="mb-2">Become an author and be able to create posts too.</small>
+                  
+                  <div class="mt-auto">
+                     {% if not user.usersettings.request_author_access %}
+                        <a 
+                           href="{% url 'users:request_author_access' user.slug user.username %}" 
+                           class="btn btn-success btn-sm">
+                           Request Author Access
+                        </a>
+                     {% else %}
+                        <a 
+                           href="{% url 'users:request_author_access' user.slug user.username %}" 
+                           class="btn btn-success btn-sm disabled">
+                           Requested already
+                        </a>
+                     {% endif %}
+                                                               
+                  </div>
+               </div>
+            </div>
+
+            <!-- Grid item -->
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-dark bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
                   <h6>Followers</h6>
-                  <h2 class="fs-1 text-primary">1,586</h2>
-                  <p class="mb-2"><span class="text-success me-1">15<i class="bi bi-arrow-up"></i></span>from last month
+                  <h2 class="fs-1 text-primary">1,586</h2>                  
                   </p>
                   <div class="mt-auto">
                      <a                         
@@ -829,14 +931,7 @@ Dashboard [{{user.username}}]
 </section>
 
 
-{% if not user.is_author %}
-{% if not user.usersettings.request_author_access %}
-<a href="{% url 'users:request_author_access' user.slug user.username %}" class="btn btn-success btn-sm">Request Author
-   Access</a>
-{% else %}
-Requested already
-{% endif %}
-{% endif %}
+
 
 <br><br><br><br><br>
 {% endblock %}

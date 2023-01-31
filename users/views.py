@@ -7,7 +7,6 @@ import datetime
 from blog.models import Post
 import pandas
 
-
 @login_required
 def dashboard(request, slug):
    if slug != request.user.slug:      
@@ -68,7 +67,7 @@ def request_author_access(request, slug, username):
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/')) 
    else:         
       reader_settings.request_author_access = True
-      reader_settings.requested_date = datetime.now()            
+      reader_settings.requested_date = datetime.datetime.now()
       reader_settings.save()      
       messages.success(request, f"Author access requested!")
       return redirect('users:dashboard', slug=slug)
