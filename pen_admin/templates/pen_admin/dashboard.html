@@ -109,6 +109,595 @@ Dashboard [{{user.username}}]
    </div>
 </div>
 
+<!-- * Author Posts -->
+{% if user.is_author %}
+
+<section class="my-4 mt-5" id="author-posts" style="scroll-margin: 75px;">
+   <div class="container">
+      <div class="border-bottom mb-4 author-posts-title">
+         <h3 class=" px-3 px-md-0 font-semibold">
+            <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M13.5487 24.5277L13.7988 24.1053C14.1996 23.4282 14.3999 23.0897 14.7191 22.9009C15.0383 22.712 15.4547 22.6987 16.2874 22.6721C17.0682 22.6471 17.593 22.579 18.0417 22.3931C18.9864 22.0018 19.7369 21.2513 20.1282 20.3066C20.4217 19.5981 20.4217 18.6999 20.4217 16.9035V16.1324C20.4217 13.6083 20.4217 12.3462 19.8536 11.4191C19.5357 10.9003 19.0995 10.4642 18.5807 10.1463C17.6536 9.57813 16.3916 9.57812 13.8675 9.57812H11.5542C9.03013 9.57812 7.76808 9.57813 6.84097 10.1463C6.3222 10.4642 5.88604 10.9003 5.56813 11.4191C5 12.3462 5 13.6083 5 16.1324V16.9035C5 18.6999 5 19.5981 5.29348 20.3066C5.68478 21.2513 6.43533 22.0018 7.38002 22.3931C7.82871 22.579 8.35348 22.6471 9.13427 22.6721C9.96698 22.6987 10.3833 22.712 10.7025 22.9009C11.0217 23.0897 11.2221 23.4282 11.6229 24.1053L11.8729 24.5277C12.2455 25.1572 13.1762 25.1572 13.5487 24.5277ZM16.0843 17.289C16.6167 17.289 17.0482 16.8574 17.0482 16.3251C17.0482 15.7928 16.6167 15.3613 16.0843 15.3613C15.552 15.3613 15.1205 15.7928 15.1205 16.3251C15.1205 16.8574 15.552 17.289 16.0843 17.289ZM13.6747 16.3251C13.6747 16.8574 13.2432 17.289 12.7108 17.289C12.1785 17.289 11.747 16.8574 11.747 16.3251C11.747 15.7928 12.1785 15.3613 12.7108 15.3613C13.2432 15.3613 13.6747 15.7928 13.6747 16.3251ZM9.33735 17.289C9.86967 17.289 10.3012 16.8574 10.3012 16.3251C10.3012 15.7928 9.86967 15.3613 9.33735 15.3613C8.80503 15.3613 8.37349 15.7928 8.37349 16.3251C8.37349 16.8574 8.80503 17.289 9.33735 17.289Z"
+                  fill="#222" />
+               <path
+                  d="M18.1696 5C19.3214 4.99999 20.2372 4.99999 20.9717 5.06982C21.7249 5.14143 22.3617 5.29154 22.9289 5.63915C23.5125 5.9968 24.0032 6.48748 24.3608 7.0711C24.7085 7.63836 24.8586 8.27514 24.9302 9.02829C25 9.76279 25 10.6787 25 11.8304V12.617C25 13.4367 25 14.0886 24.9639 14.6173C24.927 15.1581 24.85 15.6226 24.6698 16.0575C24.2296 17.1202 23.3853 17.9646 22.3225 18.4048C22.2959 18.4158 22.2692 18.4265 22.2423 18.4367C22.114 18.4858 22.0042 18.5278 21.9077 18.5591C21.9217 18.0903 21.9217 17.5563 21.9217 16.9537V16.0614C21.9217 14.8598 21.9217 13.8532 21.8439 13.0349C21.7625 12.1782 21.5853 11.3742 21.1325 10.6354C20.6909 9.91475 20.0851 9.30889 19.3645 8.8673C18.6256 8.41453 17.8217 8.23733 16.9649 8.15588C16.1466 8.07807 15.14 8.07809 13.9384 8.07812H11.4833C10.6672 8.0781 9.94105 8.07809 9.30276 8.10245C9.3325 7.9994 9.37324 7.88128 9.42106 7.74264C9.5024 7.50682 9.60519 7.28381 9.73554 7.0711C10.0932 6.48748 10.5839 5.9968 11.1675 5.63915C11.7347 5.29154 12.3715 5.14143 13.1247 5.06982C13.8592 4.99999 14.775 4.99999 15.9268 5H18.1696Z"
+                  fill="#222" />
+            </svg>
+            My Posts 
+            <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mb-1">
+               {% if author_posts %}
+               {% if author_posts.count < 10 %} 0{{author_posts.count}} {% else %} {{author_posts.count}} {% endif %} {% else %} 0 {% endif %} 
+            </span>
+         </h3>
+      </div>
+
+      {% if author_posts %}
+
+      <div class="row px-3 px-sm-0">
+         <div class="col-md-12">
+            <div class="author-posts owl-carousel carousel-2">
+
+               {% for post in author_posts %}
+               <div class="card border-0 item">
+                  <!-- Card img -->
+                  <div class="position-relative ">
+                     <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
+                     <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                        <!-- Card overlay Top -->
+                        <div class="w-100 mb-auto d-flex justify-content-end">
+                           <div class="text-end ms-auto">
+                              <!-- * Post Type -->
+                              {% if post.post_type == 'video' %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fas fa-video"></i>
+                              </div>
+                              {% elif post.post_type == 'images' %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has images"
+                                 data-bs-placement="right">
+                                 <i class="fa-solid fa-images text-md"></i>
+                              </div>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- Card overlay bottom -->
+                        <div class="w-100 mt-auto d-flex justify-content-between align-items-end">
+                           <!-- Card category -->
+                           <a href="{% url 'category' post.category.slug %}"
+                              class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
+                           </a>
+
+                           {% if post.post_author == request.user %}
+
+                           <a class="icon-md bg-white bg-opacity-75 bg-blur text-white rounded-circle"
+                              data-bs-toggle="tooltip" data-bs-title="Edit post" data-bs-placement="right"
+                              href="{% url 'blog:edit_post' post.slug %}">
+                              <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path
+                                    d="M24.1938 5.80624C25.2687 6.88124 25.2687 8.62415 24.1938 9.69914L23.6982 10.1947C23.5539 10.1634 23.3722 10.1159 23.1651 10.044C22.6108 9.85172 21.8823 9.48827 21.197 8.803C20.5117 8.11774 20.1483 7.38923 19.956 6.8349C19.8841 6.62781 19.8366 6.44609 19.8053 6.30179L20.3009 5.80624C21.3759 4.73125 23.1188 4.73125 24.1938 5.80624Z"
+                                    fill="#333" />
+                                 <path
+                                    d="M17.5801 16.3128C17.1761 16.7168 16.9741 16.9188 16.7513 17.0926C16.4886 17.2975 16.2043 17.4732 15.9035 17.6166C15.6485 17.7381 15.3775 17.8284 14.8354 18.0091L11.9771 18.9619C11.7103 19.0508 11.4163 18.9814 11.2174 18.7826C11.0186 18.5837 10.9492 18.2897 11.0381 18.0229L11.9909 15.1646C12.1716 14.6225 12.2619 14.3515 12.3834 14.0965C12.5268 13.7957 12.7025 13.5114 12.9074 13.2487C13.0812 13.0259 13.2832 12.8239 13.6872 12.4199L18.6033 7.50385C18.867 8.19804 19.3293 9.05663 20.1363 9.86366C20.9434 10.6707 21.802 11.133 22.4962 11.3967L17.5801 16.3128Z"
+                                    fill="#333" />
+                                 <path
+                                    d="M15 25C20.5228 25 25 20.5228 25 15C25 13.8082 24.7915 12.6651 24.409 11.6052L18.586 17.4283C18.2347 17.7797 17.9708 18.0437 17.6738 18.2753C17.3252 18.5473 16.948 18.7804 16.5488 18.9706C16.2088 19.1327 15.8546 19.2506 15.3833 19.4076L12.4514 20.3849C11.6457 20.6535 10.7573 20.4438 10.1568 19.8432C9.55621 19.2427 9.34651 18.3543 9.61509 17.5486L10.5924 14.6167C10.7494 14.1453 10.8673 13.7912 11.0294 13.4512C11.2196 13.052 11.4527 12.6748 11.7247 12.3262C11.9563 12.0292 12.2203 11.7653 12.5717 11.414L18.3948 5.59098C17.3349 5.20849 16.1918 5 15 5C9.47715 5 5 9.47715 5 15C5 20.5228 9.47715 25 15 25Z"
+                                    fill="#333" />
+                              </svg>
+                           </a>
+
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body px-0 pt-3">
+                     <small class="d-flex justify-content-end mb-2">{{post.date_posted|naturalday}}</small>
+                     <div class="d-flex justify-content-between">
+                        <h4 class="card-title m-0 p-0 pb-2">
+                           <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                              {{post.post_title}}
+                           </a>
+                        </h4>
+
+                        {% if request.user.is_authenticated %}
+                        <div class="w-fit col-1">
+
+                           <!-- * Like Post -->
+                           {% if request.user in post.likes.all %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                           <!-- * Bookmark Post -->
+                           {% if request.user in post.bookmarks.all %}
+                           <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}"
+                              class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                        </div>
+                        {% else %}
+                        <div class="w-fit col-1">
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Like post" data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <p class="card-text mt-2">
+                        {{post.short_description|truncatewords:15}}
+                     </p>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider align-items-center just">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center position-relative">
+                                 <div class="avatar avatar-xs">
+                                    {% if post.post_author.profile_picture %}
+                                    <img class="avatar-img rounded-circle"
+                                       src="{{post.post_author.profile_picture.url}}" alt="Author avatar">
+                                    {% else %}
+                                    {% if post.post_author.gender == 'Male' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% elif post.post_author.gender == 'Female' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% endif %}
+                                    {% endif %}
+                                 </div>
+                                 <span class="ms-3">by
+                                    <a href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link" tabindex="0">
+                                       {{post.post_author.get_short_name}}
+                                    </a>
+                                 </span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                           <svg class="me-1" width="24" height="24" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M8.62436 7.4241C6.96537 8.18243 5.75 9.98614 5.75 12.137C5.75 14.3344 6.64922 16.0281 7.93829 17.4797C9.00072 18.676 10.2868 19.6675 11.5411 20.6345C11.839 20.8642 12.1351 21.0925 12.426 21.3218C12.9521 21.7365 13.4213 22.1004 13.8736 22.3647C14.3261 22.6292 14.6904 22.7499 15 22.7499C15.3096 22.7499 15.6739 22.6292 16.1264 22.3647C16.5787 22.1004 17.0479 21.7365 17.574 21.3218C17.8649 21.0925 18.161 20.8642 18.4589 20.6345C19.7132 19.6675 20.9993 18.676 22.0617 17.4797C23.3508 16.0281 24.25 14.3344 24.25 12.137C24.25 9.98614 23.0346 8.18243 21.3756 7.4241C19.9023 6.75065 17.9662 6.85585 16.0725 8.51217L17.5302 9.9694C17.8232 10.2622 17.8233 10.7371 17.5304 11.0301C17.2376 11.323 16.7627 11.3231 16.4698 11.0302L14.4698 9.03097L14.4596 9.02065C12.4017 6.88249 10.2361 6.68739 8.62436 7.4241ZM15 7.45873C12.6879 5.39015 10.099 5.10078 8.00076 6.05987C5.78471 7.07284 4.25 9.42494 4.25 12.137C4.25 14.8025 5.3605 16.836 6.81672 18.4757C7.98287 19.7888 9.41022 20.8879 10.6708 21.8585C10.9566 22.0785 11.2338 22.292 11.4974 22.4998C12.0097 22.9036 12.5595 23.3342 13.1168 23.6598C13.6739 23.9853 14.3096 24.2499 15 24.2499C15.6904 24.2499 16.3261 23.9853 16.8832 23.6598C17.4405 23.3342 17.9903 22.9036 18.5026 22.4998C18.7662 22.292 19.0434 22.0785 19.3292 21.8585C20.5898 20.8879 22.0171 19.7888 23.1833 18.4757C24.6395 16.836 25.75 14.8025 25.75 12.137C25.75 9.42494 24.2153 7.07284 21.9992 6.05987C19.901 5.10078 17.3121 5.39015 15 7.45873Z"
+                                 fill="#333" />
+                           </svg>
+                           {{post.likes.count}}
+                        </li>
+                        <li class="nav-item">
+                           <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M11.989 8.30778C13.169 5.90545 15.6404 4.25 18.5 4.25C22.5041 4.25 25.75 7.49594 25.75 11.5C25.75 12.5721 25.5168 13.5918 25.0977 14.5093C24.9883 14.7488 24.967 14.975 25.0156 15.1568L25.143 15.6328C25.5507 17.1566 24.1566 18.5507 22.6328 18.143L22.1568 18.0156C22.0215 17.9794 21.8616 17.982 21.6899 18.0307C21.1798 22.3775 17.4838 25.75 13 25.75C11.65 25.75 10.3695 25.4438 9.2259 24.8963C8.99951 24.7879 8.7766 24.7659 8.59324 24.815L7.3672 25.143C5.84337 25.5507 4.44927 24.1566 4.857 22.6328L5.18504 21.4068C5.2341 21.2234 5.21211 21.0005 5.10373 20.7741C4.55623 19.6305 4.25 18.35 4.25 17C4.25 12.5094 7.63273 8.80897 11.989 8.30778ZM13.735 8.28043C18.0598 8.64011 21.4914 12.1451 21.736 16.5016C21.9986 16.4766 22.2714 16.4935 22.5445 16.5666L23.0205 16.694C23.4293 16.8034 23.8034 16.4293 23.694 16.0205L23.5666 15.5445C23.4095 14.9571 23.5119 14.3708 23.7333 13.8861C24.0649 13.1602 24.25 12.3527 24.25 11.5C24.25 8.32436 21.6756 5.75 18.5 5.75C16.5181 5.75 14.7692 6.75284 13.735 8.28043ZM13 9.75C8.99594 9.75 5.75 12.9959 5.75 17C5.75 18.121 6.00392 19.1807 6.45667 20.1264C6.69207 20.6181 6.79079 21.2087 6.63407 21.7945L6.30602 23.0205C6.19664 23.4293 6.57066 23.8034 6.97949 23.694L8.20553 23.3659C8.79126 23.2092 9.38191 23.3079 9.87362 23.5433C10.8193 23.9961 11.879 24.25 13 24.25C17.0041 24.25 20.25 21.0041 20.25 17C20.25 12.9959 17.0041 9.75 13 9.75Z"
+                                 fill="#333" />
+                              <path
+                                 d="M10.5 17C10.5 17.5523 10.0523 18 9.5 18C8.94772 18 8.5 17.5523 8.5 17C8.5 16.4477 8.94772 16 9.5 16C10.0523 16 10.5 16.4477 10.5 17Z"
+                                 fill="#333" />
+                              <path
+                                 d="M14 17C14 17.5523 13.5523 18 13 18C12.4477 18 12 17.5523 12 17C12 16.4477 12.4477 16 13 16C13.5523 16 14 16.4477 14 17Z"
+                                 fill="#333" />
+                              <path
+                                 d="M17.5 17C17.5 17.5523 17.0523 18 16.5 18C15.9477 18 15.5 17.5523 15.5 17C15.5 16.4477 15.9477 16 16.5 16C17.0523 16 17.5 16.4477 17.5 17Z"
+                                 fill="#333" />
+                           </svg>
+                           5
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                           <svg class="me-1" width="25" height="25" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25ZM12.75 15C12.75 13.7574 13.7574 12.75 15 12.75C16.2426 12.75 17.25 13.7574 17.25 15C17.25 16.2426 16.2426 17.25 15 17.25C13.7574 17.25 12.75 16.2426 12.75 15Z"
+                                 fill="#333" />
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M15 6.25C10.4859 6.25 7.44529 8.9542 5.68057 11.2469L5.64874 11.2882C5.24964 11.8065 4.88206 12.2839 4.63269 12.8484C4.36564 13.4529 4.25 14.1117 4.25 15C4.25 15.8883 4.36564 16.5471 4.63269 17.1516C4.88206 17.7161 5.24964 18.1935 5.64875 18.7118L5.68057 18.7531C7.44529 21.0458 10.4859 23.75 15 23.75C19.5141 23.75 22.5547 21.0458 24.3194 18.7531L24.3512 18.7118C24.7504 18.1935 25.1179 17.7161 25.3673 17.1516C25.6344 16.5471 25.75 15.8883 25.75 15C25.75 14.1117 25.6344 13.4529 25.3673 12.8484C25.1179 12.2839 24.7504 11.8065 24.3512 11.2882L24.3194 11.2469C22.5547 8.9542 19.5141 6.25 15 6.25ZM6.86922 12.1618C8.49864 10.0449 11.1504 7.75 15 7.75C18.8496 7.75 21.5014 10.0449 23.1308 12.1618C23.5694 12.7316 23.8263 13.0721 23.9952 13.4545C24.1532 13.812 24.25 14.2489 24.25 15C24.25 15.7511 24.1532 16.188 23.9952 16.5455C23.8263 16.9279 23.5694 17.2684 23.1308 17.8382C21.5014 19.9551 18.8496 22.25 15 22.25C11.1504 22.25 8.49864 19.9551 6.86922 17.8382C6.43064 17.2684 6.17374 16.9279 6.00476 16.5455C5.84684 16.188 5.75 15.7511 5.75 15C5.75 14.2489 5.84684 13.812 6.00476 13.4545C6.17374 13.0721 6.43063 12.7316 6.86922 12.1618Z"
+                                 fill="#333" />
+                           </svg>
+                           {% get_hit_count for post %}
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               {% endfor %}
+
+            </div>
+         </div>
+      </div>
+
+      {% else %}
+
+      <div class="d-grid justify-content-center pt-5 mt-5">
+         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+            viewBox="0 0 24 24">
+            <path
+               d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+            </path>
+            <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+         </svg>
+         <h4 class="text-center mt-3">No posts</h4>
+         <p>You haven't created any posts.</p>
+      </div>
+
+      {% endif %}
+
+   </div>
+</section>
+
+{% else %}
+
+<br><br>
+
+{% endif %}
+
+<!-- * Liked Posts -->
+<section class="">
+   <div class="container">
+      <div class="border-bottom mb-4">
+         <h3 class=" px-3 px-md-0 font-semibold">
+            <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="M11.1063 21.2468C8.29819 19.0833 5 16.5422 5 12.1371C5 7.27416 10.5002 3.82546 15 8.50063L17 10.4993C17.2929 10.7921 17.7678 10.792 18.0607 10.4991C18.3535 10.2061 18.3534 9.73127 18.0605 9.43843L16.1285 7.50712C20.3685 4.40309 25 7.67465 25 12.1371C25 16.5422 21.7018 19.0833 18.8937 21.2468C18.6019 21.4717 18.3153 21.6925 18.0383 21.9109C17 22.7294 16 23.5 15 23.5C14 23.5 13 22.7294 11.9617 21.9109C11.6847 21.6925 11.3981 21.4717 11.1063 21.2468Z"
+                  fill="#222" />
+            </svg>
+            Recently Liked Posts
+         </h3>
+      </div>
+
+      {% if liked_posts %}
+
+      <div class="row px-3 px-sm-0">
+
+         <div class="col-md-12">
+            <div class="author-posts owl-carousel carousel-2">
+
+               {% for post in liked_posts %}
+               <div class="card border-0 item">
+                  <!-- Card img -->
+                  <div class="position-relative ">
+                     <img class="card-img pointer-events-none" src="{{post.post_image.url}}" alt="Card image">
+                     <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                        <!-- Card overlay Top -->
+                        <div class="w-100 mb-auto d-flex justify-content-end">
+                           <div class="text-end ms-auto">
+                              <!-- * Post Type -->
+                              {% if post.post_type == 'video' %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has video" data-bs-placement="right">
+                                 <i class="fas fa-video"></i>
+                              </div>
+                              {% elif post.post_type == 'images' %}
+                              <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                 data-bs-toggle="tooltip" data-bs-title="This post has images"
+                                 data-bs-placement="right">
+                                 <i class="fa-solid fa-images text-md"></i>
+                              </div>
+                              {% endif %}
+                           </div>
+                        </div>
+                        <!-- Card overlay bottom -->
+                        <div class="w-100 mt-auto d-flex justify-content-between align-items-end">
+                           <!-- Card category -->
+                           <a href="{% url 'category' post.category.slug %}"
+                              class="badge text-xs text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-2"></i> {{post.category}}
+                           </a>
+
+                           {% if post.post_author == request.user %}
+
+                           <a class="icon-md bg-white bg-opacity-75 bg-blur text-white rounded-circle"
+                              data-bs-toggle="tooltip" data-bs-title="Edit post" data-bs-placement="right"
+                              href="{% url 'blog:edit_post' post.slug %}">
+                              <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path
+                                    d="M24.1938 5.80624C25.2687 6.88124 25.2687 8.62415 24.1938 9.69914L23.6982 10.1947C23.5539 10.1634 23.3722 10.1159 23.1651 10.044C22.6108 9.85172 21.8823 9.48827 21.197 8.803C20.5117 8.11774 20.1483 7.38923 19.956 6.8349C19.8841 6.62781 19.8366 6.44609 19.8053 6.30179L20.3009 5.80624C21.3759 4.73125 23.1188 4.73125 24.1938 5.80624Z"
+                                    fill="#333" />
+                                 <path
+                                    d="M17.5801 16.3128C17.1761 16.7168 16.9741 16.9188 16.7513 17.0926C16.4886 17.2975 16.2043 17.4732 15.9035 17.6166C15.6485 17.7381 15.3775 17.8284 14.8354 18.0091L11.9771 18.9619C11.7103 19.0508 11.4163 18.9814 11.2174 18.7826C11.0186 18.5837 10.9492 18.2897 11.0381 18.0229L11.9909 15.1646C12.1716 14.6225 12.2619 14.3515 12.3834 14.0965C12.5268 13.7957 12.7025 13.5114 12.9074 13.2487C13.0812 13.0259 13.2832 12.8239 13.6872 12.4199L18.6033 7.50385C18.867 8.19804 19.3293 9.05663 20.1363 9.86366C20.9434 10.6707 21.802 11.133 22.4962 11.3967L17.5801 16.3128Z"
+                                    fill="#333" />
+                                 <path
+                                    d="M15 25C20.5228 25 25 20.5228 25 15C25 13.8082 24.7915 12.6651 24.409 11.6052L18.586 17.4283C18.2347 17.7797 17.9708 18.0437 17.6738 18.2753C17.3252 18.5473 16.948 18.7804 16.5488 18.9706C16.2088 19.1327 15.8546 19.2506 15.3833 19.4076L12.4514 20.3849C11.6457 20.6535 10.7573 20.4438 10.1568 19.8432C9.55621 19.2427 9.34651 18.3543 9.61509 17.5486L10.5924 14.6167C10.7494 14.1453 10.8673 13.7912 11.0294 13.4512C11.2196 13.052 11.4527 12.6748 11.7247 12.3262C11.9563 12.0292 12.2203 11.7653 12.5717 11.414L18.3948 5.59098C17.3349 5.20849 16.1918 5 15 5C9.47715 5 5 9.47715 5 15C5 20.5228 9.47715 25 15 25Z"
+                                    fill="#333" />
+                              </svg>
+                           </a>
+
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card-body px-0 pt-3">
+                     <small class="d-flex justify-content-end mb-2">{{post.date_posted|naturalday}}</small>
+                     <div class="d-flex justify-content-between">
+                        <h4 class="card-title m-0 p-0 pb-2">
+                           <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-bold">
+                              {{post.post_title}}
+                           </a>
+                        </h4>
+
+                        {% if request.user.is_authenticated %}
+                        <div class="w-fit col-1">
+
+                           <!-- * Like Post -->
+                           {% if request.user in post.likes.all %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.44 3.10156C14.63 3.10156 13.01 3.98156 12 5.33156C10.99 3.98156 9.37 3.10156 7.56 3.10156C4.49 3.10156 2 5.60156 2 8.69156C2 9.88156 2.19 10.9816 2.52 12.0016C4.1 17.0016 8.97 19.9916 11.38 20.8116C11.72 20.9316 12.28 20.9316 12.62 20.8116C15.03 19.9916 19.9 17.0016 21.48 12.0016C21.81 10.9816 22 9.88156 22 8.69156C22 5.60156 19.51 3.10156 16.44 3.10156Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
+                              data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                           <!-- * Bookmark Post -->
+                           {% if request.user in post.bookmarks.all %}
+                           <a href="{% url 'users:bookmarks' request.user.slug %}" class="text-decoration-none"
+                              data-bs-toggle="tooltip" data-bs-title="Already in your bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M16.8203 2H7.18031C5.05031 2 3.32031 3.74 3.32031 5.86V19.95C3.32031 21.75 4.61031 22.51 6.19031 21.64L11.0703 18.93C11.5903 18.64 12.4303 18.64 12.9403 18.93L17.8203 21.64C19.4003 22.52 20.6903 21.76 20.6903 19.95V5.86C20.6803 3.74 18.9503 2 16.8203 2ZM15.0103 9.75C14.0403 10.1 13.0203 10.28 12.0003 10.28C10.9803 10.28 9.96031 10.1 8.99031 9.75C8.60031 9.61 8.40031 9.18 8.54031 8.79C8.69031 8.4 9.12031 8.2 9.51031 8.34C11.1203 8.92 12.8903 8.92 14.5003 8.34C14.8903 8.2 15.3203 8.4 15.4603 8.79C15.6003 9.18 15.4003 9.61 15.0103 9.75Z"
+                                    fill="#292D32" />
+                              </svg>
+                           </a>
+                           {% else %}
+                           <a href="{% url 'users:bookmark_add' request.user.slug post.id %}"
+                              class="text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                              data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           {% endif %}
+
+                        </div>
+                        {% else %}
+                        <div class="w-fit col-1">
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Like post" data-bs-placement="bottom" data-bs-offset="10,5">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path
+                                    d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                           <a href="{% url 'login' %}" class="text-decoration-none" data-bs-toggle="tooltip"
+                              data-bs-title="Add to bookmarks" data-bs-placement="bottom">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
+                                 <path d="M14.5 10.6499H9.5" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path d="M12 8.20996V13.21" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                 <path
+                                    d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                              </svg>
+                           </a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <p class="card-text mt-2">
+                        {{post.short_description|truncatewords:15}}
+                     </p>
+                     <!-- Card info -->
+                     <ul class="nav nav-divider align-items-center just">
+                        <li class="nav-item">
+                           <div class="nav-link">
+                              <div class="d-flex align-items-center position-relative">
+                                 <div class="avatar avatar-xs">
+                                    {% if post.post_author.profile_picture %}
+                                    <img class="avatar-img rounded-circle"
+                                       src="{{post.post_author.profile_picture.url}}" alt="Author avatar">
+                                    {% else %}
+                                    {% if post.post_author.gender == 'Male' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% elif post.post_author.gender == 'Female' %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                       alt="Author Avatar">
+                                    {% endif %}
+                                    {% endif %}
+                                 </div>
+                                 <span class="ms-3">by
+                                    <a href="{% url 'author_external' post.post_author.slug %}"
+                                       class="stretched-link text-reset btn-link" tabindex="0" data-bs-toggle="popover"
+                                       data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                       data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                       data-bs-content="
+                                          <div class='custom-popover-content'>
+                                             <div class='d-flex justify-content-between align-items-center'>
+                                                <h6 class='font-cabin font-medium m-0 p-0'>
+                                                   <a 
+                                                      href='{% url 'author_external' post.post_author.slug %}'
+                                                      class='text-reset btn-link'
+                                                   >
+                                                      {{post.post_author.get_full_name}}
+                                                   </a>
+                                                </h6>
+                                                <small class='font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
+                                             </div>
+                                             <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                                {{post.post_author.bio|truncatewords:10}}
+                                             </p>
+                                             <hr class='m-0 p-0 my-2'>
+                                             <div class='d-flex justify-content-between align-items-center'>
+                                                <p class='m-0 p-0'>573 Followers</p>
+                                                <a 
+                                                   href=''
+                                                   class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
+                                                >
+                                                   Follow
+                                                </a>
+                                             </div>
+                                          </div>
+                                       ">
+                                       {{post.post_author.get_short_name}}
+                                    </a>
+                                 </span>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                           <svg class="me-1" width="24" height="24" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M8.62436 7.4241C6.96537 8.18243 5.75 9.98614 5.75 12.137C5.75 14.3344 6.64922 16.0281 7.93829 17.4797C9.00072 18.676 10.2868 19.6675 11.5411 20.6345C11.839 20.8642 12.1351 21.0925 12.426 21.3218C12.9521 21.7365 13.4213 22.1004 13.8736 22.3647C14.3261 22.6292 14.6904 22.7499 15 22.7499C15.3096 22.7499 15.6739 22.6292 16.1264 22.3647C16.5787 22.1004 17.0479 21.7365 17.574 21.3218C17.8649 21.0925 18.161 20.8642 18.4589 20.6345C19.7132 19.6675 20.9993 18.676 22.0617 17.4797C23.3508 16.0281 24.25 14.3344 24.25 12.137C24.25 9.98614 23.0346 8.18243 21.3756 7.4241C19.9023 6.75065 17.9662 6.85585 16.0725 8.51217L17.5302 9.9694C17.8232 10.2622 17.8233 10.7371 17.5304 11.0301C17.2376 11.323 16.7627 11.3231 16.4698 11.0302L14.4698 9.03097L14.4596 9.02065C12.4017 6.88249 10.2361 6.68739 8.62436 7.4241ZM15 7.45873C12.6879 5.39015 10.099 5.10078 8.00076 6.05987C5.78471 7.07284 4.25 9.42494 4.25 12.137C4.25 14.8025 5.3605 16.836 6.81672 18.4757C7.98287 19.7888 9.41022 20.8879 10.6708 21.8585C10.9566 22.0785 11.2338 22.292 11.4974 22.4998C12.0097 22.9036 12.5595 23.3342 13.1168 23.6598C13.6739 23.9853 14.3096 24.2499 15 24.2499C15.6904 24.2499 16.3261 23.9853 16.8832 23.6598C17.4405 23.3342 17.9903 22.9036 18.5026 22.4998C18.7662 22.292 19.0434 22.0785 19.3292 21.8585C20.5898 20.8879 22.0171 19.7888 23.1833 18.4757C24.6395 16.836 25.75 14.8025 25.75 12.137C25.75 9.42494 24.2153 7.07284 21.9992 6.05987C19.901 5.10078 17.3121 5.39015 15 7.45873Z"
+                                 fill="#333" />
+                           </svg>
+                           {{post.likes.count}}
+                        </li>
+                        <li class="nav-item">
+                           <svg width="25" height="25" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M11.989 8.30778C13.169 5.90545 15.6404 4.25 18.5 4.25C22.5041 4.25 25.75 7.49594 25.75 11.5C25.75 12.5721 25.5168 13.5918 25.0977 14.5093C24.9883 14.7488 24.967 14.975 25.0156 15.1568L25.143 15.6328C25.5507 17.1566 24.1566 18.5507 22.6328 18.143L22.1568 18.0156C22.0215 17.9794 21.8616 17.982 21.6899 18.0307C21.1798 22.3775 17.4838 25.75 13 25.75C11.65 25.75 10.3695 25.4438 9.2259 24.8963C8.99951 24.7879 8.7766 24.7659 8.59324 24.815L7.3672 25.143C5.84337 25.5507 4.44927 24.1566 4.857 22.6328L5.18504 21.4068C5.2341 21.2234 5.21211 21.0005 5.10373 20.7741C4.55623 19.6305 4.25 18.35 4.25 17C4.25 12.5094 7.63273 8.80897 11.989 8.30778ZM13.735 8.28043C18.0598 8.64011 21.4914 12.1451 21.736 16.5016C21.9986 16.4766 22.2714 16.4935 22.5445 16.5666L23.0205 16.694C23.4293 16.8034 23.8034 16.4293 23.694 16.0205L23.5666 15.5445C23.4095 14.9571 23.5119 14.3708 23.7333 13.8861C24.0649 13.1602 24.25 12.3527 24.25 11.5C24.25 8.32436 21.6756 5.75 18.5 5.75C16.5181 5.75 14.7692 6.75284 13.735 8.28043ZM13 9.75C8.99594 9.75 5.75 12.9959 5.75 17C5.75 18.121 6.00392 19.1807 6.45667 20.1264C6.69207 20.6181 6.79079 21.2087 6.63407 21.7945L6.30602 23.0205C6.19664 23.4293 6.57066 23.8034 6.97949 23.694L8.20553 23.3659C8.79126 23.2092 9.38191 23.3079 9.87362 23.5433C10.8193 23.9961 11.879 24.25 13 24.25C17.0041 24.25 20.25 21.0041 20.25 17C20.25 12.9959 17.0041 9.75 13 9.75Z"
+                                 fill="#333" />
+                              <path
+                                 d="M10.5 17C10.5 17.5523 10.0523 18 9.5 18C8.94772 18 8.5 17.5523 8.5 17C8.5 16.4477 8.94772 16 9.5 16C10.0523 16 10.5 16.4477 10.5 17Z"
+                                 fill="#333" />
+                              <path
+                                 d="M14 17C14 17.5523 13.5523 18 13 18C12.4477 18 12 17.5523 12 17C12 16.4477 12.4477 16 13 16C13.5523 16 14 16.4477 14 17Z"
+                                 fill="#333" />
+                              <path
+                                 d="M17.5 17C17.5 17.5523 17.0523 18 16.5 18C15.9477 18 15.5 17.5523 15.5 17C15.5 16.4477 15.9477 16 16.5 16C17.0523 16 17.5 16.4477 17.5 17Z"
+                                 fill="#333" />
+                           </svg>
+                           5
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                           <svg class="me-1" width="25" height="25" viewBox="0 0 30 30" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25ZM12.75 15C12.75 13.7574 13.7574 12.75 15 12.75C16.2426 12.75 17.25 13.7574 17.25 15C17.25 16.2426 16.2426 17.25 15 17.25C13.7574 17.25 12.75 16.2426 12.75 15Z"
+                                 fill="#333" />
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                 d="M15 6.25C10.4859 6.25 7.44529 8.9542 5.68057 11.2469L5.64874 11.2882C5.24964 11.8065 4.88206 12.2839 4.63269 12.8484C4.36564 13.4529 4.25 14.1117 4.25 15C4.25 15.8883 4.36564 16.5471 4.63269 17.1516C4.88206 17.7161 5.24964 18.1935 5.64875 18.7118L5.68057 18.7531C7.44529 21.0458 10.4859 23.75 15 23.75C19.5141 23.75 22.5547 21.0458 24.3194 18.7531L24.3512 18.7118C24.7504 18.1935 25.1179 17.7161 25.3673 17.1516C25.6344 16.5471 25.75 15.8883 25.75 15C25.75 14.1117 25.6344 13.4529 25.3673 12.8484C25.1179 12.2839 24.7504 11.8065 24.3512 11.2882L24.3194 11.2469C22.5547 8.9542 19.5141 6.25 15 6.25ZM6.86922 12.1618C8.49864 10.0449 11.1504 7.75 15 7.75C18.8496 7.75 21.5014 10.0449 23.1308 12.1618C23.5694 12.7316 23.8263 13.0721 23.9952 13.4545C24.1532 13.812 24.25 14.2489 24.25 15C24.25 15.7511 24.1532 16.188 23.9952 16.5455C23.8263 16.9279 23.5694 17.2684 23.1308 17.8382C21.5014 19.9551 18.8496 22.25 15 22.25C11.1504 22.25 8.49864 19.9551 6.86922 17.8382C6.43064 17.2684 6.17374 16.9279 6.00476 16.5455C5.84684 16.188 5.75 15.7511 5.75 15C5.75 14.2489 5.84684 13.812 6.00476 13.4545C6.17374 13.0721 6.43063 12.7316 6.86922 12.1618Z"
+                                 fill="#333" />
+                           </svg>
+                           {% get_hit_count for post %}
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               {% endfor %}
+
+            </div>
+         </div>
+      </div>
+
+      {% else %}
+
+      <div class="d-grid justify-content-center pt-5 mt-5">
+         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+            viewBox="0 0 24 24">
+            <path
+               d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+            </path>
+            <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+         </svg>
+         <h4 class="text-center mt-3">No liked posts</h4>
+         <p>You haven't liked any posts.</p>
+      </div>
+
+      {% endif %}
+
+   </div>
+</section>
 
 <br><br><br><br><br>
 {% endblock %}
