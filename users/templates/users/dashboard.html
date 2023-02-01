@@ -975,24 +975,71 @@ Dashboard [{{user.username}}]
                         <div class="d-flex text-muted pt-2 border-bottom pb-2">
                         
                            {% if follower.profile_picture %}
-                           <img class="rounded flex-shrink-0 me-2 mt-1" src="{{follower.profile_picture.url}}" width="40" height="40"
-                              alt="follower Avatar">
+                           <img 
+                              class="rounded flex-shrink-0 me-2 mt-1" 
+                              src="{{follower.profile_picture.url}}" 
+                              width="40" 
+                              height="40"
+                              alt="follower Avatar"
+                           >
                            {% else %}
-                           {% if follower.gender == 'Male' %}
-                           <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/male.jpg' %}" width="40" height="40"
-                              alt="follower Avatar">
-                           {% elif follower.gender == 'Female' %}
-                           <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/female.jpg' %}" width="40" height="40"
-                              alt="follower Avatar">
-                           {% else %}
-                           <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/custom.jpg' %}" width="40" height="40"
-                              alt="follower Avatar">
-                           {% endif %}
+                              {% if follower.gender == 'Male' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/male.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% elif follower.gender == 'Female' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/female.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% else %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/custom.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% endif %}
                            {% endif %}
                         
                            <div class="pb-2 mb-0 lh-sm  w-100">
                               <div class="d-flex justify-content-between align-items-center">
-                                 <div class="">
+                                 <div 
+                                    class=""
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                    data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{follower.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500'>@{{follower.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{follower.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with followers=follower.usersettings.followers.all|length %}
+                                                {{followers}}
+                                                follower{{followers|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    "
+                                 >
                                     <strong class="font-cabin text-md">
                                        <a href="{% url 'author_external' follower.slug %}" class="link-dark text-decoration-none">
                                           {{follower.get_full_name|default:"[Fullname]"}}
