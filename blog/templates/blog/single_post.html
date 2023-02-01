@@ -77,10 +77,9 @@
                         <span 
                            class="ms-3"
                         >by 
-                           <a 
-                              href="{% url 'author_external' post.post_author.slug %}"
-                              class="stretched-link text-reset btn-link" tabindex="0" data-bs-toggle="popover"
-                              data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                           <a                               
+                              class="stretched-link text-reset btn-link cursor-pointer" tabindex="0" data-bs-toggle="popover"
+                              data-bs-trigger="focus" data-bs-delay="500" data-bs-html="true"
                               data-bs-container="body" data-bs-offset="10,20" data-bs-placement="right"
                               data-bs-content="
                                  <div class='custom-popover-content'>
@@ -101,12 +100,17 @@
                                     <hr class='m-0 p-0 my-2'>
                                     <div class='d-flex justify-content-between align-items-center'>
                                        <p class='m-0 p-0'>573 Followers</p>
-                                       <a 
-                                          href=''
-                                          class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
-                                       >
-                                          Follow
-                                       </a>
+                                       {% if request.user.is_authenticated %}
+                                          {% if request.user != post.post_author %}                                          
+                                             {% if request.user in post.post_author.usersettings.followers.all %}
+                                             <a href='{% url 'users:follow' request.user.slug post.post_author.username %}' class='btn text-xs btn-outline-light border rounded-pill px-3 btn-sm'>Following</a>
+                                             {% else %}
+                                             <a href='{% url 'users:follow' request.user.slug post.post_author.username %}' class='btn text-xs btn-blue btn-sm rounded-pill px-3'>Follow</a>
+                                             {% endif %}
+                                          {% endif %}
+                                       {% else %}
+                                          <a href='{% url 'login' %}' class='btn text-xs btn-blue btn-sm rounded-pill px-3'>Follow</a>
+                                       {% endif %}
                                     </div>
                                  </div>
                               ">

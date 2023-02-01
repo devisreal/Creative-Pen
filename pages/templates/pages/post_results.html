@@ -160,12 +160,11 @@ Post Results
                                              </div>
                                              <div>
                                                 <h6 class="mb-1">
-                                                   <a 
-                                                      href="{% url 'author_external' post.post_author.slug %}" 
-                                                      class="stretched-link text-reset btn-link"
+                                                   <a                                                       
+                                                      class="stretched-link text-reset btn-link cursor-pointer"
                                                       tabindex="0"
                                                       data-bs-toggle="popover" 
-                                                      data-bs-trigger="hover focus" 
+                                                      data-bs-trigger="focus" 
                                                       data-bs-delay="500"
                                                       data-bs-html="true" 
                                                       data-bs-container="body"                                       
@@ -190,12 +189,17 @@ Post Results
                                                             <hr class='m-0 p-0 my-2'>
                                                             <div class='d-flex justify-content-between align-items-center'>
                                                                <p class='m-0 p-0'>573 Followers</p>
-                                                               <a 
-                                                                  href=''
-                                                                  class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
-                                                               >
-                                                                  Follow
-                                                               </a>
+                                                               {% if request.user.is_authenticated %}
+                                                                  {% if request.user != post.post_author %}                                          
+                                                                     {% if request.user in post.post_author.usersettings.followers.all %}
+                                                                     <a href='{% url 'users:follow' request.user.slug post.post_author.username %}' class='btn text-xs btn-outline-light border rounded-pill px-3 btn-sm'>Following</a>
+                                                                     {% else %}
+                                                                     <a href='{% url 'users:follow' request.user.slug post.post_author.username %}' class='btn text-xs btn-blue btn-sm rounded-pill px-3'>Follow</a>
+                                                                     {% endif %}
+                                                                  {% endif %}
+                                                               {% else %}
+                                                                  <a href='{% url 'login' %}' class='btn text-xs btn-blue btn-sm rounded-pill px-3'>Follow</a>
+                                                               {% endif %}
                                                             </div>
                                                          </div>
                                                       "
@@ -321,9 +325,18 @@ Post Results
                                  </div>
                                  <div class="d-flex gap-2 mt-2">
                                     {% if request.user.is_authenticated %}
-                                    <a href="" class="btn btn-primary-soft w-100">
-                                       <i class="fa-solid fa-user-plus pe-2"></i> Follow
-                                    </a>
+                                    
+                                    {% if request.user != author %}                                          
+                                       {% if request.user in author.usersettings.followers.all %}                                       
+                                       <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-outline-light w-100">
+                                          <i class="fa-solid fa-user-check pe-2"></i> Following
+                                       </a>
+                                       {% else %}                                       
+                                       <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-primary-soft w-100">
+                                          <i class="fa-solid fa-user-plus pe-2"></i> Follow
+                                       </a>
+                                       {% endif %}
+                                    {% endif %}
                                     {% else %}
                                     <a href="{% url 'login' %}" class="btn btn-primary-soft w-100">
                                        <i class="fa-solid fa-user-plus pe-2"></i> Follow
