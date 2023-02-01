@@ -4,9 +4,9 @@
 {% load hitcount_tags %}
 {% block title %}
 {% if author%}
-{{author.username}} ({{author.get_full_name}})
+   {{author.username}} ({{author.get_full_name}})
 {% elif reader %}
-{{reader.username}} ({{reader.get_full_name}})
+   {{reader.username}} ({{reader.get_full_name}})
 {% endif %}
 {% endblock title %}
 {% block styles %}
@@ -50,7 +50,7 @@
    <h2 class="font-semibold mb-0">Hi, I'm {{author.get_full_name}}</h2>
    <small class="font-medium text-gray-500">
       @{{author.get_username}}
-   </small>   
+   </small>
    <ul class="list-inline my-1">
       {% if author.job_title %}
       <li class="list-inline-item">
@@ -151,15 +151,31 @@
    </ul>
 
    <div class="">
+
+      <div class="text-sm mt-2 mb-3 font-outfit">
+         <span class=" cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            0 Following
+         </span>
+         <span class="ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {% with followers=author.usersettings.followers.all|length %}
+            {{followers}}
+            follower{{followers|pluralize }}
+            {% endwith %}
+         </span>
+      </div>
+
       {% if request.user.is_authenticated %}
          {% if request.user in author.usersettings.followers.all %}
-         <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+         <a href="{% url 'users:follow' request.user.slug author.username %}"
+            class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
          {% else %}
-         <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+         <a href="{% url 'users:follow' request.user.slug author.username %}"
+            class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
          {% endif %}
       {% else %}
-      <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+         <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
       {% endif %}
+
    </div>
 </div>
 
@@ -344,37 +360,7 @@
                               </div>
                               <span class="ms-3">by
                                  <a href="{% url 'author_external' post.post_author.slug %}"
-                                    class="stretched-link text-reset btn-link" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
-                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
-                                    data-bs-content="
-                                       <div class='custom-popover-content'>
-                                          <div class='d-flex justify-content-between align-items-center'>
-                                             <h6 class='font-cabin font-medium m-0 p-0'>
-                                                <a 
-                                                   href='{% url 'author_external' post.post_author.slug %}'
-                                                   class='text-reset btn-link'
-                                                >
-                                                   {{post.post_author.get_full_name}}
-                                                </a>
-                                             </h6>
-                                             <small class='font-outfit text-sm text-gray-500'>@{{post.post_author.get_username}}</small>
-                                          </div>
-                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
-                                             {{post.post_author.bio|truncatewords:10}}
-                                          </p>
-                                          <hr class='m-0 p-0 my-2'>
-                                          <div class='d-flex justify-content-between align-items-center'>
-                                             <p class='m-0 p-0'>573 Followers</p>
-                                             <a 
-                                                href=''
-                                                class='font-medium font-outfit text-xs btn btn-blue btn-sm rounded-pill'
-                                             >
-                                                Follow
-                                             </a>
-                                          </div>
-                                       </div>
-                                    ">
+                                    class="stretched-link text-reset btn-link" tabindex="0">
                                     {{post.post_author.get_short_name}}
                                  </a>
                               </span>
@@ -445,7 +431,6 @@
 {% endif %}
 
 {% elif reader %}
-
 <div class="container-md mt-2">
    <div class="col-12">
       <div class="mb-4 position-relative z-index-9">
@@ -514,22 +499,33 @@
                      </p>
                   </div>
                   <!-- Links -->
-                  <div class="d-flex align-items-center justify-content-center">
+
+                  <div class="">
+                     <div class="text-sm mt-2 mb-3 font-outfit">
+                        <span class="">
+                           0 Following
+                        </span>
+                        <span class="ms-3">
+                           {% with followers=reader.usersettings.followers.all|length %}
+                           {{followers}}
+                           follower{{followers|pluralize }}
+                           {% endwith %}
+                        </span>
+                     </div>
+                     
                      {% if request.user.is_authenticated %}
-                        {% if request.user in reader.usersettings.followers.all %}
-                           <a href="{% url 'users:follow' request.user.slug reader.username %}" class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
-                        {% else %}
-                        <a 
-                           href="{% url 'users:follow' request.user.slug reader.username %}"
-                           class="btn btn-blue btn-sm rounded-pill px-3"
-                        >
-                           Follow
-                        </a>
-                        {% endif %}
+                     {% if request.user in reader.usersettings.followers.all %}
+                     <a href="{% url 'users:follow' request.user.slug reader.username %}"
+                        class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
                      {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                     <a href="{% url 'users:follow' request.user.slug reader.username %}"
+                        class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                     {% endif %}
+                     {% else %}
+                     <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
                      {% endif %}
                   </div>
+                  
                </div>
             </div>
          </div>
@@ -539,5 +535,25 @@
 
 {% endif %}
 <br><br>
+
+<!-- * Followers Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            ...
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+         </div>
+      </div>
+   </div>
+</div>
 
 {% endblock %}

@@ -188,7 +188,12 @@ Bookmarks [{{user.username}}]
                                           </p>
                                           <hr class='m-0 p-0 my-2'>
                                           <div class='d-flex justify-content-between align-items-center'>
-                                             <p class='m-0 p-0'>573 Followers</p>
+                                             <p class='m-0 p-0'>
+                                                {% with followers=post.post_author.usersettings.followers.all|length %}
+                                                {{followers}}
+                                                follower{{followers|pluralize }}
+                                                {% endwith %}
+                                             </p>
                                              {% if request.user.is_authenticated %}
                                                 {% if request.user != post.post_author %}                                          
                                                    {% if request.user in post.post_author.usersettings.followers.all %}
