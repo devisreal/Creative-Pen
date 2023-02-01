@@ -8,6 +8,7 @@ app_name = 'users'
 urlpatterns = [   
    path('dashboard/', views.dashboard, name="dashboard"),     
    path('request-access/<str:username>/', views.request_author_access, name="request_author_access"),
+   path('follow/<str:username>/', views.follow_user, name="follow"),
    path('bookmarks/', views.bookmarks, name="bookmarks"),
    path('bookmark/<int:id>/', views.bookmark_add, name='bookmark_add'),
    path('like/<int:id>/', views.like_post, name="like_post"),

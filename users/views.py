@@ -72,6 +72,21 @@ def request_author_access(request, slug, username):
       messages.success(request, f"Author access requested!")
       return redirect('users:dashboard', slug=slug)
 
+@login_required()
+def follow_user(request, slug, username):
+   try:
+      user_settings = UserSettings.objects.get(user__username=username)
+      if user_settings.followers.filter(id=request.user.id).exists():
+         user_settings.followers.remove(request.user)
+         messages.success(request, f"You are no longer following '{user_settings.user.username}' ")
+      else:
+         user_settings.followers.add(request.user)
+         messages.success(request, f"You are now following '{user_settings.user.username}' ")
+      return HttpResponseRedirect(request.META['HTTP_REFERER'])
+   except User.DoesNotExist:
+      return redirect('error_page')
+
+
 @login_required
 def bookmarks(request, slug):
    if slug != request.user.slug:      
@@ -107,7 +122,6 @@ def like_post(request, slug, id):
    else:
       post.likes.add(request.user)      
    return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
 
 @login_required
 def user_profile(request, slug):   

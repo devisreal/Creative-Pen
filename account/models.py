@@ -63,6 +63,7 @@ def user_image_delete(sender, instance, **kwargs):
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    followers = models.ManyToManyField(User, related_name='following', default=None, blank=True)
     request_author_access = models.BooleanField(blank=True, default=False)
     requested_date = models.DateTimeField(null=True, blank=True)
     accepted_date = models.DateTimeField(null=True, blank=True)

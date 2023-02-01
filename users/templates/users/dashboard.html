@@ -125,7 +125,7 @@ Dashboard [{{user.username}}]
 
             <!-- Earning item -->
             <div class="col-md-12 col-xl-6">
-               <div class="card card-body bg-success bg-opacity-10 p-3 h-100 border-0 my-shadow position-relative">
+               <div class="card card-body bg-primary bg-opacity-10 p-3 h-100 border-0 my-shadow position-relative">
                   <div class="d-flex align-items-center justify-content-between my-auto">
                      <div class="avatar avatar-xxl">
                         {% if user.profile_picture %}
@@ -158,12 +158,12 @@ Dashboard [{{user.username}}]
                      </div>
                      <div class="text-end">
                         <h2 class="m-0 p-0">{{user.get_full_name}}</h2>
-                        <p class="text-secondary m-0 p-0">{{user.job_title}}</p>
-                        <small class="text-secondary m-0 p-0">@{{user.get_username}}</small>
+                        <p class="text-secondary m-0 p-0 text-md">{{user.job_title}}</p>
+                        <small class="text-secondary m-0 p-0 font-medium">@{{user.get_username}}</small>
                      </div>
                   </div>
                   <div 
-                     class="position-absolute bottom-0 end-0 " 
+                     class="position-absolute bottom-0 end-0 m-1" 
                      style="width: 30px;height: 30px;"
                   >
                      <a 
@@ -192,7 +192,7 @@ Dashboard [{{user.username}}]
 
             <!-- Grid item -->
             <div class="col-md-6 col-xl-3">
-               <div class="card card-body bg-primary bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
+               <div class="card card-body bg-dark bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
                   <h6>Followers</h6>
                   <h2 class="fs-1 text-primary">1,586</h2>
                   <p class="mb-2"><span class="text-success me-1">15<i class="bi bi-arrow-up"></i></span>from last month
@@ -494,6 +494,7 @@ Dashboard [{{user.username}}]
 </section>
 
 {% else %}
+<!-- * Reader Stats -->
 
 <section class="container my-4 mb-5">
    <div class="row g-4">
@@ -541,7 +542,7 @@ Dashboard [{{user.username}}]
                      </div>
                   </div>
                   <div 
-                     class="position-absolute bottom-0 end-0 " 
+                     class="position-absolute bottom-0 end-0 m-1" 
                      style="width: 30px;height: 30px;"
                   >
                      <a 

@@ -54,18 +54,26 @@ My Profile [{{user.username}}]
                <div class="col-sm-12 col-md-auto text-center text-md-start">
                   <div class="avatar avatar-xxl mt-n7">
                      {% if user.profile_picture %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{{user.profile_picture.url}}" alt="User Avatar">
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                          
+                        src="{{user.profile_picture.url}}" alt="User Avatar"
+                     >
                      {% else %}
                      {% if user.gender == 'Male' %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{% static 'img/user/male.jpg' %}" alt="User Avatar">
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                          
+                        src="{% static 'img/user/male.jpg' %}" alt="User Avatar"
+                     >
                      {% elif user.gender == 'Female' %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{% static 'img/user/female.jpg' %}" alt="User Avatar">
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                          
+                        src="{% static 'img/user/female.jpg' %}" alt="User Avatar"
+                     >
                      {% else %}
-                     <img class="avatar-img rounded-circle border border-white border-3 pointer-events-none"
-                        src="{% static 'img/user/custom.jpg' %}" alt="User Avatar">
+                     <img 
+                        class="avatar-img rounded-circle border border-white border-3 pointer-events-none"                          
+                        src="{% static 'img/user/custom.jpg' %}" alt="User Avatar"
+                     >
                      {% endif %}
                      {% endif %}
                   </div>
@@ -155,8 +163,7 @@ My Profile [{{user.username}}]
                   </div>
 
                   <!-- Links -->
-                  <div class="d-flex align-items-center justify-content-center justify-content-md-end">
-                     <a href="#" class="btn btn-blue btn-sm me-3">Follow</a>
+                  <div class="d-flex align-items-center justify-content-center justify-content-md-end">                     
                      <!-- Card action START -->
                      <div class="dropdown ms-3">
                         <a class="text-secondary" href="" id="profileDropdown" role="button" data-bs-toggle="dropdown"
