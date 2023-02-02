@@ -16,7 +16,6 @@ def single_post(request, slug):
    }
    return render(request, 'blog/single_post.html', context)
 
-
 @login_required
 def edit_post(request, slug):
    post = Post.objects.get(slug=slug)
@@ -42,6 +41,19 @@ def edit_post(request, slug):
       }
       return render(request, 'blog/edit_post.html', context)    
    
+
+@login_required()
+def delete_post(request, slug):
+   post = Post.objects.get(slug=slug)
+
+   if request.user != post.post_author:
+      messages.error(request, 'You are not allowed to delete this post')
+      return redirect('blog:single_post', slug=post.slug)
+   else:      
+      post.delete()
+      messages.success(request, 'Post deleted successfully')
+      return redirect('latest_posts')
+
 
 
 class PostDetailView(HitCountDetailView):
@@ -84,3 +96,4 @@ def create_post(request):
          'create_post_form': create_post_form,         
       }
       return render(request, 'blog/create_post.html', context)
+

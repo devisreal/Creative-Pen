@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import single_post, PostDetailView, edit_post
-from pen_admin.views import categories
+from .views import single_post, PostDetailView, edit_post, delete_post
 
 app_name = 'blog'
 
@@ -8,5 +7,6 @@ urlpatterns = [
    # path('<slug:slug>/', single_post, name='single_post'),   
    path('<slug:slug>/', PostDetailView.as_view(), name='single_post'),
    path('<slug:slug>/edit/', edit_post, name='edit_post'),
+   path('<slug:slug>/delete/', delete_post, name='delete_post'),
 
 ]
