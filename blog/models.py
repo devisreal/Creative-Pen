@@ -95,3 +95,20 @@ class Post(models.Model):
    def save(self, *args, **kwargs):
       self.slug = slugify(self.post_title)
       super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+   post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+   author = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+   comment = models.TextField()
+   date_posted = models.DateTimeField(auto_now_add=True)
+   last_updated = models.DateField(auto_now=True)
+   likes = models.ManyToManyField(User, related_name='comment_likes', default=None, blank=True)
+   dislikes = models.ManyToManyField(User, related_name='comment_dislikes', default=None, blank=True)
+
+   
+   def __str__(self):
+      return f'Comment by {self.author} on {self.post}'
+
+   class Meta:
+      ordering = ('-date_posted',)

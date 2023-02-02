@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views import View
 from hitcount.views import HitCountDetailView
-from .forms import CreatePostForm
+from .forms import CommentForm, CreatePostForm
 from .models import Post
 
 
@@ -55,9 +56,9 @@ def delete_post(request, slug):
       return redirect('latest_posts')
 
 
-
-class PostDetailView(HitCountDetailView):
+class PostDetailView(HitCountDetailView, View):
    model = Post
+   form_class = CommentForm()
    template_name = 'blog/single_post.html'
    context_object_name = 'post'
    slug_field = 'slug'
@@ -70,6 +71,42 @@ class PostDetailView(HitCountDetailView):
          'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
       })
       return context
+   
+   def get(self, request, slug, *args, **kwargs):
+      post = Post.objects.get(slug=slug)
+      form = CommentForm()      
+
+      context = {
+         'post': post,
+         'form': form,         
+      }
+
+      return render(request, 'blog/single_post.html', context)
+
+   def post(self, request, slug, *args, **kwargs):
+      post = Post.objects.get(slug=slug)
+      form = CommentForm(request.POST)    
+
+      if form.is_valid():
+         new_comment = form.save(commit=False)
+         new_comment.author = request.user
+         new_comment.post = post
+         new_comment.save()
+         messages.success(request, 'New comment added')
+         return redirect('blog:single_post', slug=post.slug)
+      else:
+         messages.error(request, 'An error occured')
+         return redirect('blog:single_post', slug=post.slug)
+
+      context = {
+         'post': post,
+         'form': form,         
+      }
+      return render(request, 'blog/single_post.html', context)
+         
+      
+
+
 
 @login_required
 def create_post(request):

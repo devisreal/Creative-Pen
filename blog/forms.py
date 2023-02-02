@@ -1,5 +1,5 @@
 from django import forms
-from .models import PostCategory, Post
+from .models import PostCategory, Post, Comment
 from taggit.forms import TagField, TagWidget
 from froala_editor.widgets import FroalaEditor
 from django.core.validators import FileExtensionValidator
@@ -221,4 +221,18 @@ class CreatePostForm(forms.ModelForm):
          'is_featured'
       )           
 
+
+class CommentForm(forms.ModelForm):
+   comment = forms.CharField(
+      widget=forms.Textarea(
+         attrs={            
+            'class': 'form-control',
+            'rows': '5'
+         }
+      )
+   )
+
+   class Meta:
+      model = Comment
+      fields = ('comment',)
 

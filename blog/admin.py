@@ -20,6 +20,10 @@ class PostAdmin(admin.ModelAdmin):
    def tag_list(self, obj):
       return u", ".join(o.name for o in obj.tags.all())   
 
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+   pass
+
 """
 ! list_per_page = 10
 ! search_fields = ['title']
