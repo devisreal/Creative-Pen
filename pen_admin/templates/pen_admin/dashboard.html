@@ -127,8 +127,15 @@ Dashboard [{{user.username}}]
             My Posts
             <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mb-1">
                {% if author_posts %}
-               {% if author_posts.count < 10 %} 0{{author_posts.count}} {% else %} {{author_posts.count}} {% endif %} {%
-                  else %} 0 {% endif %} </span>
+                  {% if author_posts.count < 10 %} 
+                     0{{author_posts.count}} 
+                  {% else %} 
+                     {{author_posts.count}} 
+                  {% endif %} 
+               {% else %} 
+                  0
+               {% endif %} 
+            </span>
          </h3>
       </div>
 
