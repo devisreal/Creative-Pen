@@ -834,7 +834,7 @@ Dashboard [{{user.username}}]
                                                 <p class='m-0 p-0'>
                                                    {% with followers=post.post_author.usersettings.followers.all|length %}
                                                    {{followers}}
-                                                   follower{{followers|pluralize }}
+                                                   Follower{{followers|pluralize }}
                                                    {% endwith %}
                                                 </p>
                                                 {% if request.user.is_authenticated %}
@@ -934,7 +934,7 @@ Dashboard [{{user.username}}]
             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                <li class="nav-item" role="presentation">
                   <button 
-                     class="nav-link active font-bold" 
+                     class="nav-link active" 
                      id="pills-followers-tab" 
                      data-bs-toggle="pill" 
                      data-bs-target="#pills-home" 
@@ -948,7 +948,7 @@ Dashboard [{{user.username}}]
                </li>
                <li class="nav-item" role="presentation">
                   <button 
-                     class="nav-link font-bold" 
+                     class="nav-link" 
                      id="pills-following-tab" 
                      data-bs-toggle="pill" 
                      data-bs-target="#pills-profile" 
@@ -972,8 +972,7 @@ Dashboard [{{user.username}}]
                >
                   {% if user.usersettings.followers.all %}
                      {% for follower in user.usersettings.followers.all %}
-                        <div class="d-flex text-muted pt-2 border-bottom pb-2">
-                        
+                        <div class="d-flex text-muted pt-2 border-bottom pb-2">                        
                            {% if follower.profile_picture %}
                            <img 
                               class="rounded flex-shrink-0 me-2 mt-1" 
@@ -1033,7 +1032,7 @@ Dashboard [{{user.username}}]
                                              <p class='m-0 p-0'>
                                                 {% with followers=follower.usersettings.followers.all|length %}
                                                 {{followers}}
-                                                follower{{followers|pluralize }}
+                                                Follower{{followers|pluralize }}
                                                 {% endwith %}
                                              </p>
                                           </div>
@@ -1083,7 +1082,110 @@ Dashboard [{{user.username}}]
                   aria-labelledby="pills-following-tab" 
                   tabindex="0"
                >
-                  Following
+                  {% if user.following.all %}
+                     {% for following in user.following.all %}
+                        <div class="d-flex text-muted pt-2 border-bottom pb-2">
+                        
+                           {% if following.user.profile_picture %}
+                           <img 
+                              class="rounded flex-shrink-0 me-2 mt-1" 
+                              src="{{following.user.profile_picture.url}}" 
+                              width="40" 
+                              height="40"
+                              alt="following Avatar"
+                           >
+                           {% else %}
+                              {% if following.user.gender == 'Male' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/male.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% elif following.user.gender == 'Female' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/female.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% else %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/custom.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% endif %}
+                           {% endif %}
+                        
+                           <div class="pb-2 mb-0 lh-sm  w-100">
+                              <div class="d-flex justify-content-between align-items-center">
+                                 <div 
+                                    class=""
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                    data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{following.user.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500'>@{{following.user.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{following.user.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with following=user.following.all|length %}
+                                                {{following}}
+                                                Following{{following|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    "
+                                 >
+                                    <strong class="font-cabin text-md">
+                                       <a href="{% url 'author_external' following.user.slug %}" class="link-dark text-decoration-none">
+                                          {{following.user.get_full_name|default:"[Fullname]"}}
+                                       </a>
+                                    </strong>
+                                    <a href="{% url 'author_external' following.user.slug %}" class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
+                                       @{{following.user.get_username}}
+                                    </a>
+                                 </div>
+                                 
+                                 {% if request.user in following.followers.all %}
+                                 <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                                    class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                                 {% else %}
+                                 <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                                    class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                                 {% endif %}
+                              </div>
+                              
+                           </div>
+                        </div>
+                     {% endfor %}
+                  {% else %}
+                     <div class="d-grid justify-content-center mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                           <path
+                              d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                           </path>
+                           <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                        </svg>
+                        <h5 class="text-center mt-3">No Followings</h5>
+                        <p>You are not following anyone.</p>
+                     </div>
+                  {% endif %}
                </div>
             </div>
 

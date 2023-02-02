@@ -17,13 +17,13 @@ Dashboard [{{user.username}}]
       <div class="col-12">
          <!-- Counter START -->
          <div class="row g-4">
-      
+
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
-                     <div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">                        
+                     <div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">
                         <i class="fa-solid fa-binoculars"></i>
                      </div>
                      <!-- Content -->
@@ -34,7 +34,7 @@ Dashboard [{{user.username}}]
                   </div>
                </div>
             </div>
-      
+
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow">
@@ -51,7 +51,7 @@ Dashboard [{{user.username}}]
                   </div>
                </div>
             </div>
-      
+
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow">
@@ -68,13 +68,13 @@ Dashboard [{{user.username}}]
                   </div>
                </div>
             </div>
-      
+
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
-                     <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">                        
+                     <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">
                         <i class="fa-solid fa-users-line"></i>
                      </div>
                      <!-- Content -->
@@ -85,7 +85,7 @@ Dashboard [{{user.username}}]
                   </div>
                </div>
             </div>
-      
+
          </div>
          <!-- Counter END -->
       </div>
@@ -93,7 +93,7 @@ Dashboard [{{user.username}}]
       <div class="col-12 mt-5">
          <!-- Chart START -->
          <div class="card border h-100">
-      
+
             <!-- Card header -->
             <div class="card-header p-3 border-bottom bg-white">
                <h5 class="card-header-title mb-0">Page Traffic</h5>
@@ -124,11 +124,11 @@ Dashboard [{{user.username}}]
                   d="M18.1696 5C19.3214 4.99999 20.2372 4.99999 20.9717 5.06982C21.7249 5.14143 22.3617 5.29154 22.9289 5.63915C23.5125 5.9968 24.0032 6.48748 24.3608 7.0711C24.7085 7.63836 24.8586 8.27514 24.9302 9.02829C25 9.76279 25 10.6787 25 11.8304V12.617C25 13.4367 25 14.0886 24.9639 14.6173C24.927 15.1581 24.85 15.6226 24.6698 16.0575C24.2296 17.1202 23.3853 17.9646 22.3225 18.4048C22.2959 18.4158 22.2692 18.4265 22.2423 18.4367C22.114 18.4858 22.0042 18.5278 21.9077 18.5591C21.9217 18.0903 21.9217 17.5563 21.9217 16.9537V16.0614C21.9217 14.8598 21.9217 13.8532 21.8439 13.0349C21.7625 12.1782 21.5853 11.3742 21.1325 10.6354C20.6909 9.91475 20.0851 9.30889 19.3645 8.8673C18.6256 8.41453 17.8217 8.23733 16.9649 8.15588C16.1466 8.07807 15.14 8.07809 13.9384 8.07812H11.4833C10.6672 8.0781 9.94105 8.07809 9.30276 8.10245C9.3325 7.9994 9.37324 7.88128 9.42106 7.74264C9.5024 7.50682 9.60519 7.28381 9.73554 7.0711C10.0932 6.48748 10.5839 5.9968 11.1675 5.63915C11.7347 5.29154 12.3715 5.14143 13.1247 5.06982C13.8592 4.99999 14.775 4.99999 15.9268 5H18.1696Z"
                   fill="#222" />
             </svg>
-            My Posts 
+            My Posts
             <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mb-1">
                {% if author_posts %}
-               {% if author_posts.count < 10 %} 0{{author_posts.count}} {% else %} {{author_posts.count}} {% endif %} {% else %} 0 {% endif %} 
-            </span>
+               {% if author_posts.count < 10 %} 0{{author_posts.count}} {% else %} {{author_posts.count}} {% endif %} {%
+                  else %} 0 {% endif %} </span>
          </h3>
       </div>
 
@@ -594,11 +594,10 @@ Dashboard [{{user.username}}]
                                     {% endif %}
                                  </div>
                                  <span class="ms-3">by
-                                    <a 
-                                       class="stretched-link text-reset btn-link cursor-pointer" tabindex="0" data-bs-toggle="popover"
-                                       data-bs-trigger="focus" data-bs-delay="500" data-bs-html="true"
-                                       data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
-                                       data-bs-content="
+                                    <a class="stretched-link text-reset btn-link cursor-pointer" tabindex="0"
+                                       data-bs-toggle="popover" data-bs-trigger="focus" data-bs-delay="500"
+                                       data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
+                                       data-bs-placement="bottom" data-bs-content="
                                           <div class='custom-popover-content'>
                                              <div class='d-flex justify-content-between align-items-center'>
                                                 <h6 class='font-cabin font-medium m-0 p-0'>
@@ -619,7 +618,7 @@ Dashboard [{{user.username}}]
                                                 <p class='m-0 p-0'>
                                                    {% with followers=post.post_author.usersettings.followers.all|length %}
                                                    {{followers}}
-                                                   follower{{followers|pluralize }}
+                                                   Follower{{followers|pluralize }}
                                                    {% endwith %}
                                                 </p>
                                                 {% if request.user.is_authenticated %}
@@ -715,54 +714,54 @@ Dashboard [{{user.username}}]
 {% block scripts %}
 <script>
    var options = {
-         colors: [
-            '#234e70', '#d2302c',
+      colors: [
+         '#234e70', '#d2302c',
+      ],
+      series: [
+         {
+            name: 'This Year',
+            data: {{ y1| safe}}
+            },
+   {
+      name: 'Previous Year',
+         data: { { y2 | safe } }
+   }
          ],
-         series: [
-            {
-               name: 'This Year',
-               data: {{y1|safe}}
-            }, 
-            {
-               name: 'Previous Year',
-               data: {{y2|safe}}
-            }
-         ],
-         chart: {
-            height: 350,
-            stacked: true,
+   chart: {
+      height: 350,
+         stacked: true,
             type: 'area',
-            toolbar: {
-               show: false
-            }
-         },
-         grid: {
-            strokeDashArray: 4,
-            position: 'back'
-         },
-         legend: {
-            show: true,
-            horizontalAlign: 'right',
+               toolbar: {
+         show: false
+      }
+   },
+   grid: {
+      strokeDashArray: 4,
+         position: 'back'
+   },
+   legend: {
+      show: true,
+         horizontalAlign: 'right',
             position: 'top',
-            labels: {},
-            markers: {
-               width: 8,
-               height: 8
-            }
-         },
-         dataLabels: {
-            enabled: false
-         },
-         stroke: {
-            curve: 'smooth'
-         },
-         xaxis: {
-            // type: 'datetime',
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-         },
+               labels: { },
+      markers: {
+         width: 8,
+            height: 8
+      }
+   },
+   dataLabels: {
+      enabled: false
+   },
+   stroke: {
+      curve: 'smooth'
+   },
+   xaxis: {
+      // type: 'datetime',
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+   },
       };
 
-      var chart = new ApexCharts(document.querySelector("#pageTraffic"), options);
-      chart.render();
+   var chart = new ApexCharts(document.querySelector("#pageTraffic"), options);
+   chart.render();
 </script>
 {% endblock scripts %}

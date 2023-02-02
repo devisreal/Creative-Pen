@@ -1,5 +1,5 @@
 $(document).ready(function () {   
-   $('#followersModal').modal('show')
+   // $('#followersModal').modal('show')
 })
 $(function () {
 

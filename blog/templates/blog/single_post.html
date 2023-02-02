@@ -7,7 +7,7 @@
 {% endblock title %}
 {% block styles %}
 <style>
-   .nav.nav-divider .nav-item+.nav-item:before {    
+   .nav.nav-divider .nav-item+.nav-item:before {
       content: "\22C5";
       color: #fff;
       padding-left: 0.65rem;
@@ -20,17 +20,13 @@
 {% include 'partials/messages.html' %}
 
 
-<section 
-   class="bg-dark-overlay-5 mb-5 pb-1 py-5 py-lg-0"
-   style="background-image: url('{{post.post_image.url}}'); background-position: center left; background-size: cover;"
->
+<section class="bg-dark-overlay-5 mb-5 pb-1 py-5 py-lg-0"
+   style="background-image: url('{{post.post_image.url}}'); background-position: center left; background-size: cover;">
    <div class="container">
       <div class="row">
          <div class="col-lg-8 py-4 py-md-5 my-lg-5">
-            <a 
-               href="{% url 'category' post.category.slug %}" 
-               class="text-decoration-none badge text-bg-{{post.category.color}} mb-3 font-outfit font-medium text-sm"
-            >
+            <a href="{% url 'category' post.category.slug %}"
+               class="text-decoration-none badge text-bg-{{post.category.color}} mb-3 font-outfit font-medium text-sm">
                <i class="fa-solid fa-layer-group me-2 "></i>
                {{post.category}}
             </a>
@@ -47,41 +43,25 @@
                      <div class="d-flex align-items-center text-white position-relative">
                         <div class="avatar avatar-sm">
                            {% if post.post_author.profile_picture %}
-                           <img 
-                              class="avatar-img rounded-circle" 
-                              src="{{post.post_author.profile_picture.url}}" 
-                              alt="Author avatar"
-                           >
+                           <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
+                              alt="Author avatar">
                            {% else %}
-                              {% if post.post_author.gender == 'Male' %}
-                                 <img 
-                                    class="avatar-img rounded-circle" 
-                                    src="{% static 'img/user/male.jpg' %}" 
-                                    alt="Author Avatar"
-                                 >
-                              {% elif post.post_author.gender == 'Female' %}                                                   
-                                 <img 
-                                    class="avatar-img rounded-circle" 
-                                    src="{% static 'img/user/female.jpg' %}" 
-                                    alt="Author Avatar"
-                                 >
-                              {% else %}
-                                 <img 
-                                    class="avatar-img rounded-circle" 
-                                    src="{% static 'img/user/custom.jpg' %}" 
-                                    alt="Author Avatar"
-                                 >
-                              {% endif %} 
+                           {% if post.post_author.gender == 'Male' %}
+                           <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                              alt="Author Avatar">
+                           {% elif post.post_author.gender == 'Female' %}
+                           <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                              alt="Author Avatar">
+                           {% else %}
+                           <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                              alt="Author Avatar">
+                           {% endif %}
                            {% endif %}
                         </div>
-                        <span 
-                           class="ms-3"
-                        >by 
-                           <a                               
-                              class="stretched-link text-reset btn-link cursor-pointer" tabindex="0" data-bs-toggle="popover"
-                              data-bs-trigger="focus" data-bs-delay="500" data-bs-html="true"
-                              data-bs-container="body" data-bs-offset="10,20" data-bs-placement="right"
-                              data-bs-content="
+                        <span class="ms-3">by
+                           <a class="stretched-link text-reset btn-link cursor-pointer" tabindex="0"
+                              data-bs-toggle="popover" data-bs-trigger="focus" data-bs-delay="500" data-bs-html="true"
+                              data-bs-container="body" data-bs-offset="10,20" data-bs-placement="right" data-bs-content="
                                  <div class='custom-popover-content'>
                                     <div class='d-flex justify-content-between align-items-center'>
                                        <h6 class='font-cabin font-medium m-0 p-0'>
@@ -102,7 +82,7 @@
                                        <p class='m-0 p-0'>
                                           {% with followers=post.post_author.usersettings.followers.all|length %}
                                           {{followers}}
-                                          follower{{followers|pluralize }}
+                                          Follower{{followers|pluralize }}
                                           {% endwith %}
                                        </p>
                                        {% if request.user.is_authenticated %}
@@ -135,81 +115,48 @@
                <li class="nav-item">
                   <i class="far fa-eye me-1"></i>{% get_hit_count for post %}
                </li>
-               
-               {% if request.user.is_authenticated %}                                 
+
+               {% if request.user.is_authenticated %}
                <li class="nav-item">
-                  <a 
-                     href="{% url 'users:like_post' request.user.slug post.id %}" 
-                     class="text-decoration-none"                     
-                  >
+                  <a href="{% url 'users:like_post' request.user.slug post.id %}" class="text-decoration-none">
                      {% if request.user in post.likes.all %}
-                     <i 
-                        class="fas fa-heart me-1 text-white"
-                        data-bs-toggle="tooltip" data-bs-title="Unlike post" data-bs-placement="bottom"
-                     ></i>
-                     {% else %}                     
-                     <i 
-                        class="fa-regular fa-heart me-1"
-                        data-bs-toggle="tooltip" data-bs-title="Like post" data-bs-placement="bottom"
-                     ></i>
+                     <i class="fas fa-heart me-1 text-white" data-bs-toggle="tooltip" data-bs-title="Unlike post"
+                        data-bs-placement="bottom"></i>
+                     {% else %}
+                     <i class="fa-regular fa-heart me-1" data-bs-toggle="tooltip" data-bs-title="Like post"
+                        data-bs-placement="bottom"></i>
                      {% endif %}
                   </a> {{post.likes.count}}
                </li>
                <li class="nav-item">
-                  <a 
-                     href="{% url 'users:bookmark_add' request.user.slug post.id %}" 
-                     class="text-decoration-none"                  
-                  >
-                     {% if request.user in post.bookmarks.all %}                     
-                     <i 
-                        class="fa-solid fa-bookmark me-1 text-white"                        
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Added to bookmarks" 
-                        data-bs-placement="bottom"
-                     ></i>
-                     {% else %}                     
-                     <i 
-                        class="fa-regular fa-bookmark me-1"                        
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Add to bookmarks" 
-                        data-bs-placement="bottom"
-                     ></i>
+                  <a href="{% url 'users:bookmark_add' request.user.slug post.id %}" class="text-decoration-none">
+                     {% if request.user in post.bookmarks.all %}
+                     <i class="fa-solid fa-bookmark me-1 text-white" data-bs-toggle="tooltip"
+                        data-bs-title="Added to bookmarks" data-bs-placement="bottom"></i>
+                     {% else %}
+                     <i class="fa-regular fa-bookmark me-1" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                        data-bs-placement="bottom"></i>
                      {% endif %}
                   </a>
                </li>
                {% else %}
-               <li class="nav-item">               
-                  <i 
-                     class="fas fa-heart me-1 text-white" 
-                     data-bs-toggle="tooltip" 
-                     data-bs-title="Unlike post"
-                     data-bs-placement="bottom"
-                  ></i>
+               <li class="nav-item">
+                  <i class="fas fa-heart me-1 text-white" data-bs-toggle="tooltip" data-bs-title="Unlike post"
+                     data-bs-placement="bottom"></i>
                   {{post.likes.count}}
                </li>
                <li class="nav-item">
-                  <a 
-                     href="{% url 'login' %}" 
-                     class="text-decoration-none"                  
-                  >
-                     <i 
-                        class="fa-regular fa-bookmark me-1"
-                        data-bs-toggle="tooltip" 
-                        data-bs-title="Add to bookmarks" 
-                        data-bs-placement="bottom"
-                     ></i>                     
+                  <a href="{% url 'login' %}" class="text-decoration-none">
+                     <i class="fa-regular fa-bookmark me-1" data-bs-toggle="tooltip" data-bs-title="Add to bookmarks"
+                        data-bs-placement="bottom"></i>
                   </a>
                </li>
-               {% endif %}    
-               
+               {% endif %}
+
                {% if post.post_author == request.user %}
-               <li class="nav-item">                  
-                  <a 
-                     href="{% url 'blog:edit_post' post.slug %}"
-                     data-bs-toggle="tooltip" 
-                     data-bs-title="Edit post" 
-                     data-bs-placement="bottom"
-                  >
+               <li class="nav-item">
+                  <a href="{% url 'blog:edit_post' post.slug %}" data-bs-toggle="tooltip" data-bs-title="Edit post"
+                     data-bs-placement="bottom">
                      <i class="fa-solid fa-pen-to-square me-1"></i>
                   </a>
                </li>
@@ -221,7 +168,7 @@
                {% for tag in post.tags.all %}
                <li class="nav-item">
                   <span class="badge bg-light text-dark text-md">
-                     #{{tag}}                     
+                     #{{tag}}
                   </span>
                </li>
                {% endfor %}
@@ -280,31 +227,18 @@
                <a href="{% url 'author_external' post.post_author.slug %}">
                   <div class="avatar avatar-xxl me-2 me-md-4">
                      {% if post.post_author.profile_picture %}
-                     <img 
-                        class="avatar-img rounded-circle" 
-                        src="{{post.post_author.profile_picture.url}}" 
-                        alt="Author avatar"
-                     >
+                     <img class="avatar-img rounded-circle" src="{{post.post_author.profile_picture.url}}"
+                        alt="Author avatar">
                      {% else %}
-                        {% if post.post_author.gender == 'Male' %}
-                           <img 
-                              class="avatar-img rounded-circle" 
-                              src="{% static 'img/user/male.jpg' %}" 
-                              alt="Author Avatar"
-                           >
-                        {% elif post.post_author.gender == 'Female' %}                                                   
-                           <img 
-                              class="avatar-img rounded-circle" 
-                              src="{% static 'img/user/female.jpg' %}" 
-                              alt="Author Avatar"
-                           >
-                        {% else %}
-                           <img 
-                              class="avatar-img rounded-circle" 
-                              src="{% static 'img/user/custom.jpg' %}" 
-                              alt="Author Avatar"
-                           >
-                        {% endif %} 
+                     {% if post.post_author.gender == 'Male' %}
+                     <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}" alt="Author Avatar">
+                     {% elif post.post_author.gender == 'Female' %}
+                     <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                        alt="Author Avatar">
+                     {% else %}
+                     <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                        alt="Author Avatar">
+                     {% endif %}
                      {% endif %}
                   </div>
                </a>
@@ -313,10 +247,11 @@
                   <div class="col d-sm-flex align-items-center justify-content-between">
                      <div>
                         <h4 class="m-0">
-                           <a href="{% url 'author_external' post.post_author.slug %}" class="text-reset btn-link">{{post.post_author.get_full_name}}</a>
+                           <a href="{% url 'author_external' post.post_author.slug %}"
+                              class="text-reset btn-link">{{post.post_author.get_full_name}}</a>
                         </h4>
                         <small class="">{{post.post_author.job_title}}</small>
-                     </div>                     
+                     </div>
                   </div>
                   <div>
                      <p class="my-2">
@@ -324,7 +259,7 @@
                      </p>
                      <!-- Social icons -->
                      <ul class="list-inline post-author-profile-icon mt-3 mb-0">
-                     
+
                         <!-- Facebook -->
                         {% if post.post_author.socialhandle.facebook %}
                         <li class="list-inline-item">
@@ -333,7 +268,7 @@
                            </a>
                         </li>
                         {% endif %}
-                     
+
                         <!-- LinkedIn -->
                         {% if post.post_author.socialhandle.linkedin %}
                         <li class="list-inline-item">
@@ -342,7 +277,7 @@
                            </a>
                         </li>
                         {% endif %}
-                     
+
                         <!-- Twitter -->
                         {% if post.post_author.socialhandle.twitter %}
                         <li class="list-inline-item">
@@ -351,7 +286,7 @@
                            </a>
                         </li>
                         {% endif %}
-                     
+
                         <!-- Instagram -->
                         {% if post.post_author.socialhandle.instagram %}
                         <li class="list-inline-item">
@@ -360,8 +295,8 @@
                            </a>
                         </li>
                         {% endif %}
-                     
-                     
+
+
                         <!-- Youtube -->
                         {% if post.post_author.socialhandle.youtube %}
                         <li class="list-inline-item">
@@ -370,7 +305,7 @@
                            </a>
                         </li>
                         {% endif %}
-                     
+
                         <!-- Behance -->
                         {% if post.post_author.socialhandle.behance %}
                         <li class="list-inline-item">
@@ -379,8 +314,8 @@
                            </a>
                         </li>
                         {% endif %}
-                     
-                     
+
+
                         <!-- Dribble -->
                         {% if post.post_author.socialhandle.dribbble %}
                         <li class="list-inline-item">
@@ -394,7 +329,7 @@
                </div>
             </div>
             <!-- Author info END -->
-            
+
          </div>
          <!-- Main Content END -->
 
@@ -402,32 +337,35 @@
          <div class="col-lg-3">
             <div>
                {% if popular_posts %}
-                                 
+
                <div>
                   <h5 class="my-3">Popular posts</h5>
                   <div class="mb-5">
-                     <div class="owl-2-style px-4 px-md-0">               
+                     <div class="owl-2-style px-4 px-md-0">
                         <div class="owl-carousel popular-posts-carousel">
-                                 
+
                            {% for popular_post in popular_posts %}
                            {% if popular_post != post %}
                            <div class="card border-0">
                               <!-- Card img -->
                               <div class="position-relative">
-                                 <img class="card-img" src="{{popular_post.post_image.url}}" style="aspect-ratio: 4/3;object-fit: cover;" alt="Card image">
+                                 <img class="card-img" src="{{popular_post.post_image.url}}"
+                                    style="aspect-ratio: 4/3;object-fit: cover;" alt="Card image">
                                  <div class="card-img-overlay d-flex align-items-start flex-column p-2">
                                     <!-- Card overlay Top -->
                                     <div class="w-100 mb-auto d-flex justify-content-end">
                                        <div class="text-end ms-auto">
                                           <!-- * Post Type -->
                                           {% if popular_post.post_type == 'video' %}
-                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                             data-bs-title="This post has video" data-bs-placement="right">
+                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                             data-bs-toggle="tooltip" data-bs-title="This post has video"
+                                             data-bs-placement="right">
                                              <i class="fas fa-video"></i>
                                           </div>
                                           {% elif popular_post.post_type == 'images' %}
-                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle" data-bs-toggle="tooltip"
-                                             data-bs-title="This post has images" data-bs-placement="right">
+                                          <div class="icon-md bg-white bg-opacity-25 bg-blur text-white rounded-circle"
+                                             data-bs-toggle="tooltip" data-bs-title="This post has images"
+                                             data-bs-placement="right">
                                              <i class="fa-solid fa-images text-md"></i>
                                           </div>
                                           {% endif %}
@@ -443,19 +381,18 @@
                                  </div>
                               </div>
                               <div class="card-body p-0 pt-3">
-                                 <h5 
-                                    class="card-title"
-                                 >
-                                    <a href="{% url 'blog:single_post' popular_post.slug %}" class="btn-link text-reset fw-bold">
+                                 <h5 class="card-title">
+                                    <a href="{% url 'blog:single_post' popular_post.slug %}"
+                                       class="btn-link text-reset fw-bold">
                                        {{popular_post.post_title}}
                                     </a>
                                  </h5>
                               </div>
-                           </div>     
+                           </div>
                            {% endif %}
                            {% endfor %}
 
-                        </div>               
+                        </div>
                      </div>
                   </div>
                </div>
@@ -464,14 +401,15 @@
                <!-- Categories -->
                <div class="row g-2">
                   <h5>Categories</h5>
-                  
-                  {% for category in popular_categories %}                     
+
+                  {% for category in popular_categories %}
                   <div
                      class="d-flex justify-content-between align-items-center bg-light bg-opacity-100 my-shadow-sm rounded p-2 position-relative">
                      <h6 class="m-0 text-{{category.color}} text-capitalize">
                         {{category.name}}
                      </h6>
-                     <a href="{% url 'category' category.slug %}" class="link-light font-outfit badge bg-{{category.color}} stretched-link text-decoration-none ">
+                     <a href="{% url 'category' category.slug %}"
+                        class="link-light font-outfit badge bg-{{category.color}} stretched-link text-decoration-none ">
                         {{category.posts_count}}
                      </a>
                   </div>
@@ -485,18 +423,10 @@
                   <form class="mt-2" action="{% url 'footer' %}" method="POST">
                      {% csrf_token %}
                      <div class="mb-3">
-                        <input 
-                           type="email" 
-                           name="email" 
-                           id="email" 
-                           title="user@email.com" 
-                           class="form-control text-md" 
-                           placeholder="Email address"
-                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                           required
-                        >
+                        <input type="email" name="email" id="email" title="user@email.com" class="form-control text-md"
+                           placeholder="Email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                      </div>
-                     <button type="submit" class="btn btn-blue">Subscribe</button>                     
+                     <button type="submit" class="btn btn-blue">Subscribe</button>
                   </form>
                </div>
                <!-- Newsletter END -->

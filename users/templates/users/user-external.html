@@ -154,12 +154,12 @@
 
       <div class="text-sm mt-2 mb-3 font-outfit">
          <span class=" cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            0 Following
+            {{author.following.all|length}} Following
          </span>
          <span class="ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
             {% with followers=author.usersettings.followers.all|length %}
             {{followers}}
-            follower{{followers|pluralize }}
+            Follower{{followers|pluralize }}
             {% endwith %}
          </span>
       </div>
@@ -508,7 +508,7 @@
                         <span class="ms-3">
                            {% with followers=reader.usersettings.followers.all|length %}
                            {{followers}}
-                           follower{{followers|pluralize }}
+                           Follower{{followers|pluralize }}
                            {% endwith %}
                         </span>
                      </div>

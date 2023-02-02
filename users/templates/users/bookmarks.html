@@ -20,7 +20,8 @@ Bookmarks [{{user.username}}]
                Bookmarks
                <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mt-1">
                   {% if bookmarks %}
-                  {% if bookmarks.count < 10 %} 0{{bookmarks.count}} {% else %} {{bookmarks.count}} {% endif %} {% else %} 0 {% endif %} </span>
+                  {% if bookmarks.count < 10 %} 0{{bookmarks.count}} {% else %} {{bookmarks.count}} {% endif %} {% else
+                     %} 0 {% endif %} </span>
             </h4>
          </div>
 
@@ -166,11 +167,10 @@ Bookmarks [{{user.username}}]
                                  {% endif %}
                               </div>
                               <span class="ms-3">by
-                                 <a 
-                                    class="stretched-link text-reset btn-link cursor-pointer" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="focus" data-bs-delay="500" data-bs-html="true"
-                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
-                                    data-bs-content="
+                                 <a class="stretched-link text-reset btn-link cursor-pointer" tabindex="0"
+                                    data-bs-toggle="popover" data-bs-trigger="focus" data-bs-delay="500"
+                                    data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
+                                    data-bs-placement="bottom" data-bs-content="
                                        <div class='custom-popover-content'>
                                           <div class='d-flex justify-content-between align-items-center'>
                                              <h6 class='font-cabin font-medium m-0 p-0'>
@@ -191,7 +191,7 @@ Bookmarks [{{user.username}}]
                                              <p class='m-0 p-0'>
                                                 {% with followers=post.post_author.usersettings.followers.all|length %}
                                                 {{followers}}
-                                                follower{{followers|pluralize }}
+                                                Follower{{followers|pluralize }}
                                                 {% endwith %}
                                              </p>
                                              {% if request.user.is_authenticated %}
