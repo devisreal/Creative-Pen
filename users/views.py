@@ -182,13 +182,14 @@ def user_external(request, slug):
             author_posts = Post.objects.filter(post_author=user)
             context = {
                'author': user,
+               'user': user,
                'author_posts': author_posts
             }
-            return render(request, 'users/user-external.html', context)
-         
+            return render(request, 'users/user-external.html', context)         
       else:
          context = {
-            'reader': user
+            'reader': user,
+            'user': user,
          }
          return render(request, 'users/user-external.html', context)
    except User.DoesNotExist:

@@ -4,9 +4,9 @@
 {% load hitcount_tags %}
 {% block title %}
 {% if author%}
-   {{author.username}} ({{author.get_full_name}})
+   {{author.get_full_name}} (@{{author.username}})
 {% elif reader %}
-   {{reader.username}} ({{reader.get_full_name}})
+   {{reader.get_full_name}} (@{{reader.username}})
 {% endif %}
 {% endblock title %}
 {% block styles %}
@@ -152,17 +152,31 @@
 
    <div class="">
 
-      <div class="text-sm mt-2 mb-3 font-outfit">
-         <span class=" cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            {{author.following.all|length}} Following
-         </span>
-         <span class="ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            {% with followers=author.usersettings.followers.all|length %}
-            {{followers}}
-            Follower{{followers|pluralize }}
-            {% endwith %}
-         </span>
-      </div>
+      {% if request.user.is_authenticated %}
+         <div class="text-sm mt-2 mb-3 font-outfit">
+            <span class=" cursor-pointer" data-bs-toggle="modal" data-bs-target="#followersModal">
+               {{author.following.all|length}} Following
+            </span>
+            <span class="ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#followersModal">
+               {% with followers=author.usersettings.followers.all|length %}
+               {{followers}}
+               Follower{{followers|pluralize }}
+               {% endwith %}
+            </span>
+         </div>
+      {% else %}
+         <div class="text-sm mt-2 mb-3 font-outfit">
+            <a href="{% url 'login' %}" class="link-dark text-decoration-none">
+               {{author.following.all|length}} Following
+            </a>
+            <a href="{% url 'login' %}" class="ms-3 link-dark text-decoration-none">
+               {% with followers=author.usersettings.followers.all|length %}
+               {{followers}}
+               Follower{{followers|pluralize }}
+               {% endwith %}
+            </a>
+         </div>
+      {% endif %}
 
       {% if request.user.is_authenticated %}
          {% if request.user in author.usersettings.followers.all %}
@@ -501,17 +515,31 @@
                   <!-- Links -->
 
                   <div class="">
+                     {% if request.user.is_authenticated %}
                      <div class="text-sm mt-2 mb-3 font-outfit">
-                        <span class="">
-                           0 Following
+                        <span class=" cursor-pointer" data-bs-toggle="modal" data-bs-target="#followersModal">
+                           {{reader.following.all|length}} Following
                         </span>
-                        <span class="ms-3">
+                        <span class="ms-3 cursor-pointer" data-bs-toggle="modal" data-bs-target="#followersModal">
                            {% with followers=reader.usersettings.followers.all|length %}
                            {{followers}}
                            Follower{{followers|pluralize }}
                            {% endwith %}
                         </span>
                      </div>
+                     {% else %}
+                     <div class="text-sm mt-2 mb-3 font-outfit">
+                        <a href="{% url 'login' %}" class="link-dark text-decoration-none">
+                           {{reader.following.all|length}} Following
+                        </a>
+                        <a href="{% url 'login' %}" class="ms-3 link-dark text-decoration-none">
+                           {% with followers=reader.usersettings.followers.all|length %}
+                           {{followers}}
+                           Follower{{followers|pluralize }}
+                           {% endwith %}
+                        </a>
+                     </div>
+                     {% endif %}
                      
                      {% if request.user.is_authenticated %}
                      {% if request.user in reader.usersettings.followers.all %}
@@ -536,21 +564,269 @@
 {% endif %}
 <br><br>
 
-<!-- * Followers Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
+<!-- * Followers and Following Modal -->
+<div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">         
          <div class="modal-body">
-            ...
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+            <!-- * Followers and Following -->
+            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+               <li class="nav-item" role="presentation">
+                  <button 
+                     class="nav-link active" 
+                     id="pills-followers-tab" 
+                     data-bs-toggle="pill" 
+                     data-bs-target="#pills-home" 
+                     type="button" 
+                     role="tab" 
+                     aria-controls="pills-home" 
+                     aria-selected="true"
+                  >
+                     Followers
+                  </button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button 
+                     class="nav-link" 
+                     id="pills-following-tab" 
+                     data-bs-toggle="pill" 
+                     data-bs-target="#pills-profile" 
+                     type="button" 
+                     role="tab" 
+                     aria-controls="pills-profile" 
+                     aria-selected="false"
+                  >
+                     Following
+                  </button>
+               </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+               <div 
+                  class="tab-pane fade show active" 
+                  id="pills-home" 
+                  role="tabpanel" 
+                  aria-labelledby="pills-followers-tab" 
+                  tabindex="0"
+               >
+                  {% if user.usersettings.followers.all %}
+                     {% for follower in user.usersettings.followers.all %}
+                        <div class="d-flex text-muted pt-2 border-bottom pb-2">                        
+                           {% if follower.profile_picture %}
+                           <img 
+                              class="rounded flex-shrink-0 me-2 mt-1" 
+                              src="{{follower.profile_picture.url}}" 
+                              width="40" 
+                              height="40"
+                              alt="follower Avatar"
+                           >
+                           {% else %}
+                              {% if follower.gender == 'Male' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/male.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% elif follower.gender == 'Female' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/female.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% else %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/custom.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="follower Avatar"
+                              >
+                              {% endif %}
+                           {% endif %}
+                        
+                           <div class="pb-2 mb-0 lh-sm  w-100">
+                              <div class="d-flex justify-content-between align-items-center">
+                                 <div 
+                                    class=""
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                    data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{follower.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{follower.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{follower.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with followers=follower.usersettings.followers.all|length %}
+                                                {{followers}}
+                                                Follower{{followers|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    "
+                                 >
+                                    <strong class="font-cabin text-md">
+                                       <a href="{% url 'author_external' follower.slug %}" class="link-dark text-decoration-none">
+                                          {{follower.get_full_name|default:"[Fullname]"}}
+                                       </a>
+                                    </strong>
+                                    <a href="{% url 'author_external' follower.slug %}" class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
+                                       @{{follower.get_username}}
+                                    </a>
+                                 </div>
+                                 
+                                 <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">
+                                    Follow
+                                 </a>
+                              </div>
+                              
+                           </div>
+                        </div>
+                     {% endfor %}
+                  {% else %}
+                     <div class="d-grid justify-content-center mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                           <path
+                              d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                           </path>
+                           <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                        </svg>
+                        <h5 class="text-center mt-3">No Followers</h5>
+                        <p>Nobody is following {{user.username}}.</p>
+                     </div>
+                  {% endif %}
+               </div>
+
+               <div 
+                  class="tab-pane fade" 
+                  id="pills-profile" 
+                  role="tabpanel" 
+                  aria-labelledby="pills-following-tab" 
+                  tabindex="0"
+               >
+                  {% if user.following.all %}
+                     {% for following in user.following.all %}
+                        <div class="d-flex text-muted pt-2 border-bottom pb-2">
+                        
+                           {% if following.user.profile_picture %}
+                           <img 
+                              class="rounded flex-shrink-0 me-2 mt-1" 
+                              src="{{following.user.profile_picture.url}}" 
+                              width="40" 
+                              height="40"
+                              alt="following Avatar"
+                           >
+                           {% else %}
+                              {% if following.user.gender == 'Male' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/male.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% elif following.user.gender == 'Female' %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/female.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% else %}
+                              <img 
+                                 class="rounded flex-shrink-0 me-2 mt-1" 
+                                 src="{% static 'img/user/custom.jpg' %}" 
+                                 width="40" 
+                                 height="40"
+                                 alt="following Avatar"
+                              >
+                              {% endif %}
+                           {% endif %}
+                        
+                           <div class="pb-2 mb-0 lh-sm  w-100">
+                              <div class="d-flex justify-content-between align-items-center">
+                                 <div 
+                                    class=""
+                                    data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-delay="500" data-bs-html="true"
+                                    data-bs-container="body" data-bs-offset="10,20" data-bs-placement="bottom"
+                                    data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{following.user.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{following.user.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{following.user.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with following=user.following.all|length %}
+                                                {{following}}
+                                                Following{{following|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    "
+                                 >
+                                    <strong class="font-cabin text-md">
+                                       <a href="{% url 'author_external' following.user.slug %}" class="link-dark text-decoration-none">
+                                          {{following.user.get_full_name|default:"[Fullname]"}}
+                                       </a>
+                                    </strong>
+                                    <a href="{% url 'author_external' following.user.slug %}" class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
+                                       @{{following.user.get_username}}
+                                    </a>
+                                 </div>
+                                                                                                   
+                                 <a 
+                                    href="{% url 'login' %}"
+                                    class="btn btn-blue btn-sm rounded-pill px-3"
+                                 >
+                                    Follow
+                                 </a>
+                              </div>
+                              
+                           </div>
+                        </div>
+                     {% endfor %}
+                  {% else %}
+                     <div class="d-grid justify-content-center mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
+                           <path
+                              d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                           </path>
+                           <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                        </svg>
+                        <h5 class="text-center mt-3">No Followings</h5>
+                        <p>{{user.username}} is not following anyone.</p>
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+
          </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+         <div class="modal-footer pt-0 pb-3 border-top-0">
+            <button type="button" class="btn btn-sm btn-dark-soft" data-bs-dismiss="modal">Close</button>            
          </div>
       </div>
    </div>
