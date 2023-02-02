@@ -123,7 +123,7 @@ Dashboard [{{user.username}}]
          <!-- Grid START -->
          <div class="row g-4">
 
-            <!-- Earning item -->
+            <!-- Profile Card -->
             <div class="col-md-12 col-xl-6">
                <div class="card card-body bg-primary bg-opacity-10 p-3 h-100 border-0 my-shadow position-relative">
                   <div class="d-flex align-items-center justify-content-between my-auto">
@@ -180,7 +180,7 @@ Dashboard [{{user.username}}]
                </div>
             </div>
 
-            <!-- Grid item -->
+            <!-- No of Posts -->
             <div class="col-md-6 col-xl-3">
                <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
                   <h6>Number of posts</h6>
@@ -190,24 +190,32 @@ Dashboard [{{user.username}}]
                </div>
             </div>
 
-            <!-- Grid item -->
+            <!-- Followers and Following -->
             <div class="col-md-6 col-xl-3">
                <div class="card card-body bg-dark bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
-                  <h6>Followers</h6>
-                  <h2 class="fs-1 text-primary">1,586</h2>
-                  <p class="mb-2"><span class="text-success me-1">15<i class="bi bi-arrow-up"></i></span>from last month
-                  </p>
+                  <div class="d-flex justify-content-between">
+                     <div>
+                        <h6>Followers</h6>
+                        <h2 class="fs-1 text-primary">
+                           {{user.usersettings.followers.all|length}}
+                        </h2>
+                     </div>
+                     <div class="text-end">
+                        <h6>Following</h6>
+                        <h2 class="fs-1 text-primary">
+                           {{user.following.all|length}}
+                        </h2>
+                     </div>
+                  </div>                  
                   <div class="mt-auto">
-                     <a 
-                        href="#" 
-                        class="btn btn-link text-reset p-0 mb-0"
+                     <a                         
+                        class="btn btn-link text-reset p-0 mb-0 cursor-pointer"
                         data-bs-toggle="modal" 
                         data-bs-target="#followersModal"
                      >
                         Manage followers
                      </a>
                   </div>
-               </div>
             </div>
 
          </div>
@@ -231,7 +239,14 @@ Dashboard [{{user.username}}]
             My Posts
             <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mb-1">
                {% if author_posts %}
-               {% if author_posts.count < 10 %} 0{{author_posts.count}} {% else %} {{author_posts.count}} {% endif %} {% else %} 0 {% endif %} 
+                  {% if author_posts.count < 10 %} 
+                     0{{author_posts.count}} 
+                  {% else %} 
+                     {{author_posts.count}} 
+                  {% endif %} 
+               {% else %} 
+                  0 
+               {% endif %} 
             </span>
          </h3>
       </div>
@@ -502,7 +517,7 @@ Dashboard [{{user.username}}]
          <!-- Grid START -->
          <div class="row g-4">
 
-            <!-- Earning item -->
+            <!-- Profile Card -->
             <div class="col-md-12 col-xl-6">
                <div class="card card-body bg-primary bg-opacity-10 p-3 h-100 border-0 my-shadow-sm position-relative">
                   <div class="d-flex align-items-center justify-content-between my-auto">
@@ -559,39 +574,74 @@ Dashboard [{{user.username}}]
                </div>
             </div>
                         
-            <!-- Grid item -->
+            <!-- Request Author Access -->
             <div class="col-md-6 col-xl-3">
-               <div class="card card-body bg-success bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
+               <div class="card card-body bg-success bg-opacity-10 p-3 h-100 border-0 my-shadow-sm">
                   <h6>Request Author Access</h6>
                   <small class="mb-2">Become an author and be able to create posts too.</small>
                   
                   <div class="mt-auto">
-                     {% if not user.usersettings.request_author_access %}
-                        <a 
-                           href="{% url 'users:request_author_access' user.slug user.username %}" 
-                           class="btn btn-success btn-sm">
-                           Request Author Access
-                        </a>
-                     {% else %}
-                        <a 
-                           href="{% url 'users:request_author_access' user.slug user.username %}" 
-                           class="btn btn-success btn-sm disabled">
-                           Requested already
-                        </a>
+                     {% if liked_posts|length > 3 %}                                             
+                        {% if not user.usersettings.request_author_access %}
+                           <a 
+                              href="#" 
+                              class="btn btn-success btn-sm float-end"
+                              data-bs-toggle="modal" data-bs-target="#requestAccessModal"
+                           >
+                              Request Author Access
+                           </a>
+                        {% else %}
+                           <a 
+                              href="{% url 'users:request_author_access' user.slug user.username %}" 
+                              class="btn btn-success btn-sm disabled">
+                              Requested already
+                           </a>
+                        {% endif %}
+                     {% else %}                         
+                        <div class="d-flex justify-content-end">
+                           <a 
+                              class="cursor-pointer"
+                              tabindex="0"
+                              data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-delay="0"
+                              data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
+                              data-bs-placement="left" data-bs-content="
+                                 <div class='custom-popover-content'>                                    
+                                    <p class='font-light font-outfit text-sm m-0 p-0'>
+                                       You need to be more active on the blog in order request for author access.
+                                    </p>                   
+                                    <small class='font-medium text-danger'>(You must have liked at least 3 posts)</small>
+                                 </div>
+                              "
+                           >
+                              <svg class="" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 512 512" fill="#d6293e">
+                                 <path
+                                    d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM288 352c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z" />
+                              </svg>
+                           </a>
+                        </div>
                      {% endif %}
-                                                               
                   </div>
                </div>
             </div>
 
-            <!-- Grid item -->
+            <!-- Followers and Following -->
             <div class="col-md-6 col-xl-3">
                <div class="card card-body bg-dark bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
-                  <h6>Followers</h6>
-                  <h2 class="fs-1 text-primary">
-                     {{user.usersettings.followers.all|length}}
-                  </h2>                  
-                  </p>
+                  <div class="d-flex justify-content-between">
+                     <div>
+                        <h6>Followers</h6>
+                        <h2 class="fs-1 text-primary">
+                           {{user.usersettings.followers.all|length}}
+                        </h2>
+                     </div>
+                     <div class="text-end">
+                        <h6>Following</h6>
+                        <h2 class="fs-1 text-primary">
+                           {{user.following.all|length}}
+                        </h2>
+                     </div>
+                  </div>
                   <div class="mt-auto">
                      <a                         
                         class="btn btn-link text-reset p-0 mb-0 cursor-pointer"
@@ -1022,7 +1072,7 @@ Dashboard [{{user.username}}]
                                              <h6 class='font-cabin font-medium m-0 p-0'>
                                                 {{follower.get_full_name}}                                                
                                              </h6>
-                                             <small class='font-outfit text-sm text-gray-500'>@{{follower.get_username}}</small>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{follower.get_username}}</small>
                                           </div>
                                           <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
                                              {{follower.bio|truncatewords:10}}
@@ -1135,7 +1185,7 @@ Dashboard [{{user.username}}]
                                              <h6 class='font-cabin font-medium m-0 p-0'>
                                                 {{following.user.get_full_name}}                                                
                                              </h6>
-                                             <small class='font-outfit text-sm text-gray-500'>@{{following.user.get_username}}</small>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{following.user.get_username}}</small>
                                           </div>
                                           <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
                                              {{following.user.bio|truncatewords:10}}
@@ -1192,6 +1242,41 @@ Dashboard [{{user.username}}]
          </div>
          <div class="modal-footer pt-0 pb-3 border-top-0">
             <button type="button" class="btn btn-sm btn-dark-soft" data-bs-dismiss="modal">Close</button>            
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- * Request Author Access Modal -->
+<div class="modal fade" id="requestAccessModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="p-2 pb-0 d-flex justify-content-end">
+            <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+               <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                  <path
+                     d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                  </path>
+               </svg>
+            </a>
+         </div>
+         <div class="d-grid justify-content-center">            
+            <svg class="mx-auto" width="60" height="60" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M15 25C10.286 25 7.92893 25 6.46447 23.5355C5 22.0711 5 19.714 5 15C5 10.286 5 7.92893 6.46447 6.46447C7.92893 5 10.286 5 15 5C19.714 5 22.0711 5 23.5355 6.46447C25 7.92893 25 10.286 25 15C25 19.714 25 22.0711 23.5355 23.5355C22.0711 25 19.714 25 15 25ZM15 10.75C14.3787 10.75 13.875 11.2537 13.875 11.875C13.875 12.2892 13.5392 12.625 13.125 12.625C12.7108 12.625 12.375 12.2892 12.375 11.875C12.375 10.4253 13.5503 9.25 15 9.25C16.4497 9.25 17.625 10.4253 17.625 11.875C17.625 12.5858 17.3415 13.232 16.883 13.704C16.7907 13.7989 16.7027 13.8869 16.6187 13.9708C16.4029 14.1864 16.2138 14.3753 16.0479 14.5885C15.8289 14.8699 15.75 15.0768 15.75 15.25V16C15.75 16.4142 15.4142 16.75 15 16.75C14.5858 16.75 14.25 16.4142 14.25 16V15.25C14.25 14.5948 14.555 14.0644 14.8642 13.6672C15.0929 13.3733 15.3804 13.0863 15.6138 12.8535C15.6842 12.7832 15.7496 12.7179 15.807 12.6588C16.0046 12.4554 16.125 12.18 16.125 11.875C16.125 11.2537 15.6213 10.75 15 10.75ZM15 20C15.5523 20 16 19.5523 16 19C16 18.4477 15.5523 18 15 18C14.4477 18 14 18.4477 14 19C14 19.5523 14.4477 20 15 20Z"
+                  fill="#198754" />
+            </svg>
+            <h6 class="text-center mt-2">Request Author Access ?</h6>
+         </div>
+         <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+            <a href="{% url 'users:request_author_access' user.slug user.username %}"
+               class="btn btn-sm btn-success-soft">
+               Yes, I'm sure
+            </a>
+            <button type="button" class="btn btn-sm btn-secondary-soft" data-bs-dismiss="modal">
+               No, cancel
+            </button>
          </div>
       </div>
    </div>
