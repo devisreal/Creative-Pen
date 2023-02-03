@@ -11,8 +11,106 @@ Dashboard [{{user.username}}]
 {% include 'partials/messages.html' %}
 
 
+<!-- * Author Stats -->
+<section class="container my-4 mb-5">
+   <div class="row g-4">
+      <div class="col-12">
+         <!-- Grid START -->
+         <div class="row g-4">
 
+            <!-- Profile Card -->
+            <div class="col-md-12 col-xl-6">
+               <div class="card card-body bg-primary bg-opacity-10 p-3 h-100 border-0 my-shadow position-relative">
+                  <div class="d-flex align-items-center justify-content-between my-auto">
+                     <div class="avatar avatar-xxl">
+                        {% if user.profile_picture %}
+                        <img class="avatar-img rounded-circle" src="{{user.profile_picture.url}}" alt="Reader Avatar">
+                        {% else %}
+                        {% if user.gender == 'Male' %}
+                        <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                           alt="Reader Avatar">
+                        {% elif user.gender == 'Female' %}
+                        <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                           alt="Reader Avatar">
+                        {% else %}
+                        <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                           alt="Reader Avatar">
+                        {% endif %}
+                        {% endif %}
+                     </div>
+                     <div class="text-end">
+                        <h2 class="m-0 p-0">{{user.get_full_name}}</h2>
+                        <p class="text-secondary m-0 p-0 text-md">{{user.job_title|default:''}}</p>
+                        <small class="text-secondary m-0 p-0 font-medium">@{{user.get_username}}</small>
+                     </div>
+                  </div>
+                  <div class="position-absolute bottom-0 end-0 m-1" style="width: 30px;height: 30px;">
+                     <a href="{% url 'users:edit_profile' user.slug %}" data-bs-toggle="tooltip"
+                        data-bs-title="Edit profile" data-bs-placement="bottom" data-bs-offset="10,20">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24"
+                           fill="#333">
+                           <path
+                              d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z" />
+                        </svg>
+                     </a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- No of Posts -->
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
+                  <h6>Number of posts</h6>
+                  <h2 class="fs-1 text-danger">{{author_posts.count}}</h2>
+                  <div class="mt-auto"><a href="#author-posts" class="btn btn-link text-reset p-0 mb-0">View posts</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Followers and Following -->
+            <div class="col-md-6 col-xl-3">
+               <div class="card card-body bg-dark bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
+                  <div class="d-flex justify-content-between">
+                     <div>
+                        <h6>Followers</h6>
+                        <h2 class="fs-1 text-primary">                           
+                           {{user.usersettings.followers.all|length}}
+                        </h2>
+                     </div>
+                     <div class="text-end">
+                        <h6>Following</h6>
+                        <h2 class="fs-1 text-primary">
+                           {{user.following.all|length}}
+                        </h2>
+                     </div>
+                  </div>
+                  <div class="mt-auto">
+                     <a class="btn btn-link text-reset p-0 mb-0 cursor-pointer" data-bs-toggle="modal"
+                        data-bs-target="#followersModal">
+                        Manage followers
+                     </a>
+                  </div>
+               </div>
+
+            </div>
+            <!-- Grid END -->
+         </div>
+      </div>
+</section>
+
+<!-- * Page Stats -->
 <div class="container mt-5">
+   <div class="border-bottom mb-4 author-posts-title">
+      <h3 class=" px-3 px-md-0 font-semibold">
+         <svg width="40" height="40" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+               d="M5 4.25C4.58579 4.25 4.25 4.58579 4.25 5C4.25 5.41421 4.58579 5.75 5 5.75H7V13.5C7 16.5641 7 18.0962 8.00421 19.0481C9.00841 20 10.6247 20 13.8571 20H14.25V23.5365L12.6646 24.3292C12.2941 24.5144 12.1439 24.9649 12.3292 25.3354C12.5144 25.7059 12.9649 25.8561 13.3354 25.6708L15 24.8385L16.6646 25.6708C17.0351 25.8561 17.4856 25.7059 17.6708 25.3354C17.8561 24.9649 17.7059 24.5144 17.3354 24.3292L15.75 23.5365V20H16.1429C19.3753 20 20.9916 20 21.9958 19.0481C23 18.0962 23 16.5641 23 13.5V5.75H25C25.4142 5.75 25.75 5.41421 25.75 5C25.75 4.58579 25.4142 4.25 25 4.25H5ZM18.5303 10.9697C18.8232 11.2626 18.8232 11.7374 18.5303 12.0303L17.2131 13.3476C17.0681 13.4927 16.9113 13.6496 16.7612 13.7642C16.5852 13.8984 16.3335 14.0429 16 14.0429C15.6665 14.0429 15.4148 13.8984 15.2388 13.7642C15.0887 13.6496 14.9319 13.4927 14.7869 13.3476L14.1768 12.7374C14.1067 12.6674 14.0499 12.6106 14 12.5623C13.9501 12.6106 13.8933 12.6674 13.8232 12.7374L12.5303 14.0303C12.2374 14.3232 11.7626 14.3232 11.4697 14.0303C11.1768 13.7374 11.1768 13.2626 11.4697 12.9697L12.7869 11.6524C12.9319 11.5073 13.0887 11.3504 13.2388 11.2358C13.4148 11.1016 13.6665 10.9571 14 10.9571C14.3335 10.9571 14.5852 11.1016 14.7612 11.2358C14.9113 11.3504 15.0681 11.5073 15.213 11.6524L15.8232 12.2626C15.8933 12.3326 15.9501 12.3894 16 12.4377C16.0499 12.3894 16.1067 12.3326 16.1768 12.2626L17.4697 10.9697C17.7626 10.6768 18.2374 10.6768 18.5303 10.9697Z"
+               fill="#222" />
+         </svg>
+
+         Page Stats
+      </h3>
+   </div>
    <div class="row gx-4">
       <div class="col-12">
          <!-- Counter START -->
@@ -20,7 +118,7 @@ Dashboard [{{user.username}}]
 
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-success bg-opacity-10 rounded-3 text-success">
@@ -37,7 +135,7 @@ Dashboard [{{user.username}}]
 
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-primary bg-opacity-10 rounded-3 text-primary">
@@ -54,7 +152,7 @@ Dashboard [{{user.username}}]
 
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-danger bg-opacity-10 rounded-3 text-danger">
@@ -71,7 +169,7 @@ Dashboard [{{user.username}}]
 
             <!-- Counter item -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">                        
@@ -715,6 +813,215 @@ Dashboard [{{user.username}}]
    </div>
 </section>
 
+
+<!-- * Followers and Following Modal -->
+<div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-body">
+
+            <!-- * Followers and Following -->
+            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-followers-tab" data-bs-toggle="pill"
+                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                     aria-selected="true">
+                     <i class="fa-solid fa-user-plus fa-fw me-1"></i>
+                     Followers
+                  </button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-following-tab" data-bs-toggle="pill"
+                     data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                     aria-selected="false">
+                     <i class="fa-solid fa-user-check fa-fw me-1"></i>
+                     Following
+                  </button>
+               </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+               <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                  aria-labelledby="pills-followers-tab" tabindex="0">
+                  {% if user.usersettings.followers.all %}
+                  {% for follower in user.usersettings.followers.all %}
+                  <div class="d-flex text-muted pt-2 border-bottom pb-2">
+                     {% if follower.profile_picture %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{{follower.profile_picture.url}}" width="40"
+                        height="40" alt="follower Avatar">
+                     {% else %}
+                     {% if follower.gender == 'Male' %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/male.jpg' %}" width="40"
+                        height="40" alt="follower Avatar">
+                     {% elif follower.gender == 'Female' %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/female.jpg' %}" width="40"
+                        height="40" alt="follower Avatar">
+                     {% else %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/custom.jpg' %}" width="40"
+                        height="40" alt="follower Avatar">
+                     {% endif %}
+                     {% endif %}
+
+                     <div class="pb-2 mb-0 lh-sm  w-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                           <div class="" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-delay="500"
+                              data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
+                              data-bs-placement="bottom" data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{follower.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{follower.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{follower.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with followers=follower.usersettings.followers.all|length %}
+                                                {{followers}}
+                                                Follower{{followers|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    ">
+                              <strong class="font-cabin text-md">
+                                 <a href="{% url 'author_external' follower.slug %}"
+                                    class="link-dark text-decoration-none">
+                                    {{follower.get_full_name|default:"[Fullname]"}}
+                                 </a>
+                              </strong>
+                              <a href="{% url 'author_external' follower.slug %}"
+                                 class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
+                                 @{{follower.get_username}}
+                              </a>
+                           </div>
+
+                           {% if request.user in follower.usersettings.followers.all %}
+                           <a href="{% url 'users:follow' request.user.slug follower.username %}"
+                              class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                           {% else %}
+                           <a href="{% url 'users:follow' request.user.slug follower.username %}"
+                              class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                           {% endif %}
+                        </div>
+
+                     </div>
+                  </div>
+                  {% endfor %}
+                  {% else %}
+                  <div class="d-grid justify-content-center mt-4">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+                        viewBox="0 0 24 24">
+                        <path
+                           d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                        </path>
+                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                     </svg>
+                     <h5 class="text-center mt-3">No Followers</h5>
+                     <p>Nobody is following you yet.</p>
+                  </div>
+                  {% endif %}
+               </div>
+
+               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-following-tab"
+                  tabindex="0">
+                  {% if user.following.all %}
+                  {% for following in user.following.all %}
+                  <div class="d-flex text-muted pt-2 border-bottom pb-2">
+
+                     {% if following.user.profile_picture %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{{following.user.profile_picture.url}}"
+                        width="40" height="40" alt="following Avatar">
+                     {% else %}
+                     {% if following.user.gender == 'Male' %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/male.jpg' %}" width="40"
+                        height="40" alt="following Avatar">
+                     {% elif following.user.gender == 'Female' %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/female.jpg' %}" width="40"
+                        height="40" alt="following Avatar">
+                     {% else %}
+                     <img class="rounded flex-shrink-0 me-2 mt-1" src="{% static 'img/user/custom.jpg' %}" width="40"
+                        height="40" alt="following Avatar">
+                     {% endif %}
+                     {% endif %}
+
+                     <div class="pb-2 mb-0 lh-sm  w-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                           <div class="" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-delay="500"
+                              data-bs-html="true" data-bs-container="body" data-bs-offset="10,20"
+                              data-bs-placement="bottom" data-bs-content="
+                                       <div class='custom-popover-content'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <h6 class='font-cabin font-medium m-0 p-0'>
+                                                {{following.user.get_full_name}}                                                
+                                             </h6>
+                                             <small class='font-outfit text-sm text-gray-500 ms-5'>@{{following.user.get_username}}</small>
+                                          </div>
+                                          <p class='font-light font-outfit text-sm m-0 p-0 mt-2'>
+                                             {{following.user.bio|truncatewords:10}}
+                                          </p>
+                                          <hr class='m-0 p-0 my-2'>
+                                          <div class='d-flex justify-content-between align-items-center'>
+                                             <p class='m-0 p-0'>
+                                                {% with following=user.following.all|length %}
+                                                {{following}}
+                                                Following{{following|pluralize }}
+                                                {% endwith %}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    ">
+                              <strong class="font-cabin text-md">
+                                 <a href="{% url 'author_external' following.user.slug %}"
+                                    class="link-dark text-decoration-none">
+                                    {{following.user.get_full_name|default:"[Fullname]"}}
+                                 </a>
+                              </strong>
+                              <a href="{% url 'author_external' following.user.slug %}"
+                                 class="d-block text-sm text-gray-500 text-decoration-none font-outfit w-fit">
+                                 @{{following.user.get_username}}
+                              </a>
+                           </div>
+
+                           {% if request.user in following.followers.all %}
+                           <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                              class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                           {% else %}
+                           <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                              class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                           {% endif %}
+                        </div>
+
+                     </div>
+                  </div>
+                  {% endfor %}
+                  {% else %}
+                  <div class="d-grid justify-content-center mt-4">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626"
+                        viewBox="0 0 24 24">
+                        <path
+                           d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                        </path>
+                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                     </svg>
+                     <h5 class="text-center mt-3">No Followings</h5>
+                     <p>You are not following anyone.</p>
+                  </div>
+                  {% endif %}
+               </div>
+            </div>
+
+         </div>
+         <div class="modal-footer pt-0 pb-3 border-top-0">
+            <button type="button" class="btn btn-sm btn-dark-soft" data-bs-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
 <br><br><br><br><br>
 {% endblock %}
 
@@ -728,47 +1035,47 @@ Dashboard [{{user.username}}]
          {
             name: 'This Year',
             data: {{ y1| safe}}
-            },
-   {
-      name: 'Previous Year',
-         data: { { y2 | safe } }
-   }
-         ],
-   chart: {
-      height: 350,
+         },
+         {  
+            name: 'Previous Year',
+            data: {{ y2| safe}}
+         }
+      ],
+      chart: {
+         height: 350,
          stacked: true,
-            type: 'area',
-               toolbar: {
-         show: false
-      }
-   },
-   grid: {
-      strokeDashArray: 4,
+         type: 'area',
+            toolbar: {
+            show: false
+         }
+      },
+      grid: {
+         strokeDashArray: 4,
          position: 'back'
-   },
-   legend: {
-      show: true,
+      },
+      legend: {
+         show: true,
          horizontalAlign: 'right',
-            position: 'top',
-               labels: { },
-      markers: {
-         width: 8,
+         position: 'top',
+         labels: { },
+         markers: {
+            width: 8,
             height: 8
-      }
-   },
-   dataLabels: {
-      enabled: false
-   },
-   stroke: {
-      curve: 'smooth'
-   },
-   xaxis: {
-      // type: 'datetime',
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-   },
+         }
+      },
+      dataLabels: {
+         enabled: false
+      },
+      stroke: {
+         curve: 'smooth'
+      },
+      xaxis: {
+         // type: 'datetime',
+         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      },
       };
 
-   var chart = new ApexCharts(document.querySelector("#pageTraffic"), options);
-   chart.render();
+      var chart = new ApexCharts(document.querySelector("#pageTraffic"), options);
+      chart.render();
 </script>
 {% endblock scripts %}
