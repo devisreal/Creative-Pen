@@ -488,6 +488,7 @@ Dashboard [{{user.username}}]
          </svg>
          <h4 class="text-center mt-3">No posts</h4>
          <p>You haven't created any posts.</p>
+         <a href="{% url 'new_post' %}" class="btn btn-sm btn-blue w-fit mx-auto">Create one now</a>
       </div>
 
       {% endif %}
@@ -496,9 +497,7 @@ Dashboard [{{user.username}}]
 </section>
 
 {% else %}
-
 <br><br>
-
 {% endif %}
 
 <!-- * Liked Posts -->
@@ -812,7 +811,6 @@ Dashboard [{{user.username}}]
 
    </div>
 </section>
-
 
 <!-- * Followers and Following Modal -->
 <div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true">

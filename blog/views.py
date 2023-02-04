@@ -123,7 +123,7 @@ def create_post(request):
             create_post_form.save_m2m()
 
             messages.success(request, f"New post created")
-            return redirect('home')
+            return redirect('latest_posts')
          else:
             messages.error(request, f"An error occured")
             return redirect('new_post')
