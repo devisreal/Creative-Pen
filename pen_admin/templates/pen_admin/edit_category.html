@@ -166,10 +166,10 @@ Categories
 </div>
 
 <br><br>
-   <script>
-      var loadBgFile = function (event) {
-         var profile_bg_image = document.getElementById('profile-bg-output');
-         profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
-      };
-   </script>
-   {% endblock %}
+<script>
+   var loadBgFile = function (event) {
+      var profile_bg_image = document.getElementById('profile-bg-output');
+      profile_bg_image.src = URL.createObjectURL(event.target.files[0]);
+   };
+</script>
+{% endblock %}
