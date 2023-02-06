@@ -582,7 +582,7 @@ Dashboard [{{user.username}}]
                   <small class="mb-2">Become an author and be able to create posts too.</small>
                   
                   <div class="mt-auto">
-                     {% if liked_posts|length > 3 %}                                             
+                     {% if liked_posts|length >= 0 %}                                             
                         {% if not user.usersettings.request_author_access %}
                            <a 
                               href="#" 

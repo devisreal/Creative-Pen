@@ -46,7 +46,7 @@ Edit Profile ({{request.user.username}})
       <div class="col-md-6">
          <div class="px-4 px-sm-3">
             <div class="mb-4 position-relative z-index-9">
-
+               <p class="text-danger text-sm">Fields marked with red asterik (*) are required</p>
                <!-- * Background Image -->
                <fieldset class="background-img position-relative">
       
@@ -127,7 +127,7 @@ Edit Profile ({{request.user.username}})
 
                <!-- * City -->
                <fieldset>
-                  <label for="city" class="form-label">City</label>
+                  <label for="city" class="form-label">City <span class="text-secondary text-sm">(optional)</span></label>
                   <div class="input-group mb-3">
                      <span class="input-group-text bg-light">                        
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="20" height="20" fill="#234e70">                           
@@ -222,7 +222,7 @@ Edit Profile ({{request.user.username}})
 
             <!-- * Fullname -->
             <fieldset>
-               <label for="first_name" class="form-label">Full name</label>
+               <label for="first_name" class="form-label">Full name <span class="text-danger text-sm">*</span></label>
                <div class="input-group mb-3">
                   <span class="input-group-text bg-light">
                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#234e70" class="bi bi-person-circle"
@@ -239,7 +239,7 @@ Edit Profile ({{request.user.username}})
 
             <!-- * Username -->
             <fieldset>
-               <label for="username" class="form-label">Username</label>
+               <label for="username" class="form-label">Username <span class="text-danger text-sm">*</span></label>
                <div class="input-group mb-3">
                   <span class="input-group-text font-outfit bg-light user-select-none" id="user_name"><span
                         id="currentHost"></span>/@</span>
@@ -249,7 +249,7 @@ Edit Profile ({{request.user.username}})
 
             <!-- * Email Address -->
             <fieldset>
-               <label for="email" class="form-label">Email Address</label>
+               <label for="email" class="form-label">Email Address <span class="text-danger text-sm">*</span></label>
                <div class="input-group mb-3">
                   <span class="input-group-text bg-light">                     
                      
@@ -299,7 +299,7 @@ Edit Profile ({{request.user.username}})
 
             <!-- * Date oF Birth -->
             <fieldset>
-               <label for="date_of_birth">Date Of Birth</label>
+               <label for="date_of_birth">Date Of Birth <span class="text-danger text-sm">*</span></label>
                <div class="input-group mb-3 mt-1">
                   <span class="input-group-text bg-light">
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="#234e70">                        
@@ -313,7 +313,7 @@ Edit Profile ({{request.user.username}})
 
             <!-- * Gender -->
             <fieldset class="mt-2">
-               <label for="gender">Gender</label>
+               <label for="gender">Gender <span class="text-danger text-sm">*</span></label>
                <div class="">
                   {{user_form.gender}}
                </div>
