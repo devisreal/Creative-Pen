@@ -39,6 +39,8 @@
                {% endfor %}
             </ul> -->
 
+            {% if footer_categories %}
+               
             <ul class="list-inline">
                {% for category in footer_categories %}
                <li class="list-inline-item mb-1">
@@ -48,6 +50,7 @@
                </li>
                {% endfor %}
             </ul>
+            {% endif %}
          </div>
 
          <div class="col-12 px-4 px-sm-1 col-sm-6 col-md-2 mb-3 mb-md-0 mt-4 mt-md-0">

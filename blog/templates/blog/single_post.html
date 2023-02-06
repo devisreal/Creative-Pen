@@ -310,12 +310,14 @@
             {% if post.comments %}
                            
             <div class="mt-5">
+               {% if post.comments.all %}                  
                <h3>                  
                   {% with comments=post.comments.all|length %}
                   {{comments}}
                   comment{{ comments|pluralize }}
                   {% endwith %}                  
                </h3>
+               {% endif %}
 
                {% for comments in post.comments.all %}                                 
                <!-- Comment level 1-->               

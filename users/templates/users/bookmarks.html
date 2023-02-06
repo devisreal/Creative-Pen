@@ -18,17 +18,20 @@ Bookmarks [{{user.username}}]
          <div class="col-md-4">
             <h4 class="mb-0">
                Bookmarks
+
+               {% if bookmarks %}                  
                <span class="badge bg-info bg-opacity-10 text-info text-sm ms-2 mt-1">
                   {% if bookmarks %}
-                     {% if bookmarks.count < 10 %} 
-                        0{{bookmarks.count}} 
-                     {% else %} 
-                        {{bookmarks.count}} 
-                     {% endif %} 
+                  {% if bookmarks.count < 10 %} 
+                  0{{bookmarks.count}} 
                   {% else %} 
-                     0 
+                  {{bookmarks.count}} 
+                  {% endif %} 
+                  {% else %} 
+                  0 
                   {% endif %} 
                </span>
+               {% endif %}
             </h4>
          </div>
 
@@ -42,7 +45,6 @@ Bookmarks [{{user.username}}]
       <div class="row gy-4" data-masonry='{"percentPosition": true }'>
 
          {% for post in bookmarks %}
-
 
          <div class="col-sm-6 col-lg-4 ">
             <div class="card border-0 ">
@@ -270,7 +272,7 @@ Bookmarks [{{user.username}}]
 
    {% else %}
 
-   <div class="d-grid justify-content-center py-5">
+   <div class="d-grid justify-content-center py-5 my-5">
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="70" height="70" fill="#dc2626" viewBox="0 0 24 24">
          <path
             d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">

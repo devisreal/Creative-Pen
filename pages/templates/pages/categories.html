@@ -40,6 +40,8 @@ Categories
    </div>
 </section>
 
+
+{% if category_posts %}
 <section class="position-relative pt-4 mt-5">
    <div class="container">
       <div class="row">
@@ -274,15 +276,12 @@ Categories
 
          </div>
 
-
-
          <div class="col-lg-3 mt-5 mt-lg-0 ">
 
             <div>
                <h4 class="mb-3">Trending topics</h4>
 
                {% for category in popular_categories %}
-
                <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded" style="
                         background-position: center left; 
                         background-size: cover;
@@ -303,6 +302,15 @@ Categories
       </div>
    </div>
 </section>
+{% else %}
+<div class=" text-center my-5 py-5">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="#d6293e">
+      <path
+         d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z" />
+   </svg>
+   <h4 class="mt-2">No categories at the moment</h4>
+</div>
+{% endif %}
 
 <br><br><br><br><br>
 {% endblock %}

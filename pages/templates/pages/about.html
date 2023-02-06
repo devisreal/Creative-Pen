@@ -43,7 +43,7 @@ About
 </header>
 
 
-<!-- <div class="container" style="margin-top: 120px;">
+<div class="container" style="margin-top: 120px;">
    <div class="row">
       <div class="col-10 mx-auto mx-md-0 col-md-5 mb-0 pb-0 ">
 
@@ -1096,101 +1096,9 @@ About
          </p>
       </div>
    </div>
-</div> -->
-
-<div class="p-5">
-   {% for x in paginated_categories %}
-   <h2>{{x.name}}</h2>
-   {% endfor %}
 </div>
 
-{% if paginated_categories %}
-   
-<ul class="pagination pagination-bordered  w-fit mx-auto">   
-   <li class="page-item">
-      <a class="page-link" href="?page={{ 1 }}">
-         First
-      </a>
-   </li>      
 
-   {% if paginated_categories.has_previous %}
-   <li class="page-item">
-      <a class="page-link" href="?page={{ paginated_categories.previous_page_number }}">
-         <i class="fa-solid fa-caret-left"></i>
-      </a>
-   </li> 
-      {% if paginated_categories.number > 3 %}
-      <li class="page-item">
-         <a class="page-link" href="?page=1">1</a>
-      </li>
-         {% if paginated_categories.number > 4 %}
-            <li class="page-item disabled">
-               <a class="page-link">...</a>
-            </li>
-         {% endif %}
-      {% endif %}
-   {% else %}
-   <li class="page-item disabled" style="opacity: 0.5;" title="No next">
-      <a class="page-link" aria-disabled="true">
-         <i class="fa-solid fa-caret-left"></i>
-      </a>
-   </li>
-   {% endif %}
- 
-
-   {% for num in paginated_categories.paginator.page_range %}
-      {% if paginated_categories.number == num %}
-      <li class="page-item active" aria-current="page">
-         <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-      </li>
-      {% elif num > paginated_categories.number|add:'-2' and num < paginated_categories.number|add:'2' %}
-      <li class="page-item">
-         <a href="?page={{ num }}" class="page-link">{{ num }}</a>
-      </li>
-      {% endif %}
-   {% endfor %}
-      
-   {% if paginated_categories.has_next %}
-
-      {% if paginated_categories.number < paginated_categories.paginator.num_pages|add:'-2' %} 
-         <li class="page-item disabled">
-            <a class="page-link">...</a>
-         </li>
-         <li class="page-item">
-            <a href="?page={{ paginated_categories.paginator.num_pages }}" class="page-link">
-               {{ paginated_categories.paginator.num_pages }}
-            </a>
-         </li>
-      {% elif paginated_categories.number < paginated_categories.paginator.num_pages|add:'-2' %} 
-         <li class="page-item">
-            <a href="?page={{ paginated_categories.paginator.num_pages }}" class="page-link">
-               {{ paginated_categories.paginator.num_pages }}
-            </a>
-         </li>
-      {% endif %}
-
-   <li class="page-item">
-      <a class="page-link" href="?page={{ paginated_categories.next_page_number }}">
-         <i class="fa-solid fa-caret-right"></i>
-      </a>
-   </li>  
-
-   {% else %}
-   <li class="page-item disabled" style="opacity: 0.5;" title="No next">
-      <a class="page-link" aria-disabled="true">
-         <i class="fa-solid fa-caret-right"></i>
-      </a>
-   </li>
-   {% endif %}
-
-   <li class="page-item">
-      <a class="page-link" href="?page={{ paginated_categories.paginator.num_pages }}">
-         Last
-      </a>
-   </li>   
-</ul>
-
-{% endif %}
 
 
 <br><br><br><br><br>

@@ -7,11 +7,8 @@ from blog.models import PostCategory, Post
 from .models import ContactDetail, Subscriber
 
 
-def home(request):
-   authors = User.objects.filter(is_author=True)   
-   context = {
-      'authors': authors,      
-   }
+def home(request):   
+   context = {}
    return render(request, 'pages/home.html', context)
 
 def footer(request):
@@ -33,9 +30,11 @@ def latest_posts(request):
    return render(request, 'pages/latest_posts.html', context)
 
 def categories(request):      
-   categories = PostCategory.objects.all()
+   categories = PostCategory.objects.all()   
+   category_posts = None
    for category in categories:
-      category_posts = Post.objects.distinct('category__name').order_by('category__name', '-date_posted')
+      posts = Post.objects.distinct('category__name').order_by('category__name', '-date_posted')   
+      category_posts = posts
    context = { 
       'categories': categories,
       'category_posts': category_posts
@@ -54,15 +53,8 @@ def single_category(request, slug):
    }
    return render(request, 'pages/single_category.html', context)
 
-def about(request):
-   categories = PostCategory.objects.all().order_by('name')
-   p = Paginator(categories, 5)   
-   page = request.GET.get('page')
-   paginated_categories = p.get_page(page)   
-   
-   context = { 
-      'paginated_categories': paginated_categories
-   }
+def about(request):   
+   context = {}
    return render(request, 'pages/about.html', context)
 
 def contact(request):   
