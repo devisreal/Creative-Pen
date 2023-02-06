@@ -691,9 +691,16 @@
                                     </a>
                                  </div>
                                  
-                                 <a href="{% url 'login' %}" class="btn btn-blue btn-sm rounded-pill px-3">
-                                    Follow
-                                 </a>
+                                 {% if request.user != follower %}
+                                    {% if request.user in follower.usersettings.followers.all %}
+                                    <a href="{% url 'users:follow' request.user.slug follower.username %}"
+                                       class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                                    {% else %}
+                                    <a href="{% url 'users:follow' request.user.slug follower.username %}"
+                                       class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                                    {% endif %}
+                                 {% endif %}
+
                               </div>
                               
                            </div>
@@ -800,12 +807,15 @@
                                     </a>
                                  </div>
                                                                                                    
-                                 <a 
-                                    href="{% url 'login' %}"
-                                    class="btn btn-blue btn-sm rounded-pill px-3"
-                                 >
-                                    Follow
-                                 </a>
+                                 {% if request.user != following.user %}
+                                    {% if request.user in following.followers.all %}
+                                    <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                                       class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                                    {% else %}
+                                    <a href="{% url 'users:follow' request.user.slug following.user.username %}"
+                                       class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                                    {% endif %}
+                                 {% endif %}
                               </div>
                               
                            </div>
