@@ -242,7 +242,7 @@ Post Results
                      <div class="tab-pane fade" id="authors-tab">
                         {% if author_results %}
 
-                        <div class="row g-4">
+                        <div class="row g-4" >
 
                            {% for author in author_results %}
 
@@ -254,9 +254,17 @@ Post Results
                                           {% if author.profile_picture %}
                                           <img class="avatar-img rounded-circle" src="{{author.profile_picture.url}}"
                                              alt="Author Avatar">
-                                          {% else %}
-                                          <img class="avatar-img rounded-circle"
-                                             src="{% static 'img/user/custom.jpg' %}" alt="Author Avatar">
+                                          {% else %}                                             
+                                             {% if author.gender == 'Male' %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                                alt="Author Avatar">
+                                             {% elif author.gender == 'Female' %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                                alt="Author Avatar">
+                                             {% else %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                                alt="Author Avatar">
+                                             {% endif %}
                                           {% endif %}
                                        </div>
                                     </div>
@@ -278,8 +286,8 @@ Post Results
                                        <small class="">{{author.job_title|default:''}}</small>
                                     </div>
 
-                                    <div class="d-flex justify-content-between mt-3">
-                                       <div class="d-flex text-start align-items-center mt-3">
+                                    <div class="d-sm-flex justify-content-sm-between mt-3">
+                                       <div class="d-flex text-sm-start align-items-center mt-3">
                                           <div
                                              class="icon-md bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
                                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -289,12 +297,16 @@ Post Results
                                              </svg>
                                           </div>
                                           <div class="ms-2">
-                                             <h5 class="mb-0">5,354</h5>
-                                             <h6 class="mb-0 fw-light">Followers</h6>
+                                             <h5 class="mb-0">{{author.usersettings.followers.all|length}}</h5>
+                                             <h6 class="mb-0 fw-light">                                                
+                                                {% with followers=author.usersettings.followers.all|length %}
+                                                Follower{{ followers|pluralize }}
+                                                {% endwith %}
+                                             </h6>
                                           </div>
                                        </div>
 
-                                       <div class="d-flex text-start align-items-center mt-3">
+                                       <div class="d-flex text-sm-start align-items-center mt-3">
                                           <div
                                              class="icon-md bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
                                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -313,6 +325,7 @@ Post Results
                                           </div>
                                        </div>
                                     </div>
+
                                  </div>
                                  <div class="d-flex gap-2 mt-2">
                                     {% if request.user.is_authenticated %}
@@ -382,9 +395,17 @@ Post Results
                                           {% if reader.profile_picture %}
                                           <img class="avatar-img rounded-circle" src="{{reader.profile_picture.url}}"
                                              alt="Reader Avatar">
-                                          {% else %}
-                                          <img class="avatar-img rounded-circle"
-                                             src="{% static 'img/user/custom.jpg' %}" alt="Reader Avatar">
+                                          {% else %}                                             
+                                             {% if reader.gender == 'Male' %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
+                                                alt="Reader Avatar">
+                                             {% elif reader.gender == 'Female' %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
+                                                alt="Reader Avatar">
+                                             {% else %}
+                                             <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
+                                                alt="Reader Avatar">
+                                             {% endif %}
                                           {% endif %}
                                        </div>
 
