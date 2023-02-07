@@ -9,6 +9,25 @@ from blog.models import PostCategory, Post
 from pages.models import ContactDetail, Subscriber
 from account.models import User, UserSettings
 
+# ! Dashboard View
+@login_required
+def all_users(request, slug):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:
+      context = {}
+      return render(request, 'pen_admin/all_users.html', context)
+
+@login_required
+def all_posts(request, slug):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:
+      context = {}
+      return render(request, 'pen_admin/all_posts.html', context)
+
 # ! Staffs
 @login_required
 def staffs(request, slug):

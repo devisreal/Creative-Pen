@@ -60,7 +60,7 @@ Dashboard [{{user.username}}]
             <!-- No of Posts -->
             <div class="col-md-6 col-xl-3">
                <div class="card card-body bg-danger bg-opacity-10 p-4 h-100 border-0 my-shadow-sm">
-                  <h6>Number of posts</h6>
+                  <h6>My posts</h6>
                   <h2 class="fs-1 text-danger">{{author_posts.count}}</h2>
                   <div class="mt-auto"><a href="#author-posts" class="btn btn-link text-reset p-0 mb-0">View posts</a>
                   </div>
@@ -116,7 +116,7 @@ Dashboard [{{user.username}}]
          <!-- Counter START -->
          <div class="row g-4">
 
-            <!-- Counter item -->
+            <!-- Page Views -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
@@ -133,9 +133,9 @@ Dashboard [{{user.username}}]
                </div>
             </div>
 
-            <!-- Counter item -->
+            <!-- No of Posts -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm position-relative">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-primary bg-opacity-10 rounded-3 text-primary">
@@ -147,10 +147,18 @@ Dashboard [{{user.username}}]
                         <h6 class="mb-0 font-outfit">Posts</h6>
                      </div>
                   </div>
+                  <div class="position-absolute top-0 end-0 bg-light me-2">
+                     <a href="{% url 'users:all_posts' request.user.slug %}" data-bs-toggle="tooltip" data-bs-placement="top" title="All Posts">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16px" height="16px" class="" fill="#333">
+                           <path
+                              d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z" />
+                        </svg>
+                     </a>
+                  </div>
                </div>
             </div>
 
-            <!-- Counter item -->
+            <!-- Posts likes -->
             <div class="col-sm-6 col-lg-3">
                <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
                   <div class="d-flex align-items-center">
@@ -167,9 +175,9 @@ Dashboard [{{user.username}}]
                </div>
             </div>
 
-            <!-- Counter item -->
+            <!-- Registered Users -->
             <div class="col-sm-6 col-lg-3">
-               <div class="card card-body border rounded-2xl p-3 my-shadow-sm">
+               <div class="card card-body border rounded-2xl p-3 my-shadow-sm position-relative">
                   <div class="d-flex align-items-center">
                      <!-- Icon -->
                      <div class="icon-xl fs-1 bg-black bg-opacity-10 rounded-3 text-black">                        
@@ -180,6 +188,14 @@ Dashboard [{{user.username}}]
                         <h3>{{total_users}}</h3>
                         <h6 class="mb-0 font-outfit">Registered Users</h6>
                      </div>
+                  </div>
+                  <div class="position-absolute top-0 end-0 bg-light me-2">
+                    <a href="{% url 'users:all_users' request.user.slug %}" data-bs-toggle="tooltip" data-bs-placement="top" title="All Users">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16px" height="16px" class="" fill="#333">
+                        <path
+                           d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z" />
+                     </svg>
+                    </a>
                   </div>
                </div>
             </div>
@@ -1044,7 +1060,7 @@ Dashboard [{{user.username}}]
          stacked: true,
          type: 'area',
             toolbar: {
-            show: false
+            show: true
          }
       },
       grid: {
@@ -1054,7 +1070,7 @@ Dashboard [{{user.username}}]
       legend: {
          show: true,
          horizontalAlign: 'right',
-         position: 'top',
+         // position: 'top',
          labels: { },
          markers: {
             width: 8,
