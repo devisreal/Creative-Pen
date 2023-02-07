@@ -16,7 +16,10 @@ def all_users(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      context = {}
+      all_users = User.objects.all()
+      context = {
+         'all_users': all_users
+      }
       return render(request, 'pen_admin/all_users.html', context)
 
 @login_required

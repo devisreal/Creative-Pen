@@ -83,7 +83,7 @@ Readers
 
          {% if reader.profile_picture %}
             <img 
-               class="rounded flex-shrink-0 me-2" 
+               class="rounded flex-shrink-0 me-2 mt-1" 
                src="{{reader.profile_picture.url}}" 
                width="40" 
                height="40"
@@ -92,7 +92,7 @@ Readers
          {% else %}            
             {% if reader.gender == 'Male' %}
                <img 
-                  class="rounded flex-shrink-0 me-2" 
+                  class="rounded flex-shrink-0 me-2 mt-1" 
                   src="{% static 'img/user/male.jpg' %}" 
                   width="40" 
                   height="40"
@@ -100,7 +100,7 @@ Readers
                >                      
             {% elif reader.gender == 'Female' %}                                                   
                <img 
-                  class="rounded flex-shrink-0 me-2" 
+                  class="rounded flex-shrink-0 me-2 mt-1" 
                   src="{% static 'img/user/female.jpg' %}" 
                   width="40" 
                   height="40"
@@ -108,7 +108,7 @@ Readers
                >
             {% else %}
                <img 
-                  class="rounded flex-shrink-0 me-2" 
+                  class="rounded flex-shrink-0 me-2 mt-1" 
                   src="{% static 'img/user/custom.jpg' %}" 
                   width="40" 
                   height="40"
