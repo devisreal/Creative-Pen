@@ -23,6 +23,8 @@ urlpatterns = [
    path('users/', admin_views.all_users, name="all_users"),
    path('block-user/<str:username>/', admin_views.block_user, name='block_user'),
    path('unblock-user/<str:username>/', admin_views.unblock_user, name='unblock_user'),
+   path('verify-user/<str:username>/', admin_views.verify_user, name='verify_user'),
+   path('unverify-user/<str:username>/', admin_views.un_verify_user, name='unverify_user'),
 
    path('posts/', admin_views.all_posts, name="all_posts"),
 

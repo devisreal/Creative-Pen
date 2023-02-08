@@ -63,6 +63,32 @@ def unblock_user(request, slug, username):
       return redirect('users:all_users', slug=slug)
 
 @login_required
+def verify_user(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      user = User.objects.get(username=username)            
+      user_settings = UserSettings.objects.get(user__username=username)
+      user_settings.is_verified = True
+      user_settings.save()
+      messages.success(request, f"Author {user.username} verified!")
+      return redirect('users:all_users', slug=slug)
+
+@login_required
+def un_verify_user(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      user = User.objects.get(username=username)            
+      user_settings = UserSettings.objects.get(user__username=username)
+      user_settings.is_verified = False
+      user_settings.save()
+      messages.success(request, f"Author {user.username} unverified!")
+      return redirect('users:all_users', slug=slug)
+
+@login_required
 def all_posts(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
@@ -198,7 +224,7 @@ def verify_author(request, slug, username):
       author_settings = UserSettings.objects.get(user__username=username)
       author_settings.is_verified = True
       author_settings.save()
-      messages.success(request, f"Author {author.username} verified!")
+      messages.success(request, f"User {author.username} verified!")
       return redirect('users:authors', slug=slug)
 
 @login_required
@@ -211,7 +237,7 @@ def un_verify_author(request, slug, username):
       author_settings = UserSettings.objects.get(user__username=username)
       author_settings.is_verified = False
       author_settings.save()
-      messages.success(request, f"Author {author.username} unverified!")
+      messages.success(request, f"User {author.username} unverified!")
       return redirect('users:authors', slug=slug)
 
 @login_required

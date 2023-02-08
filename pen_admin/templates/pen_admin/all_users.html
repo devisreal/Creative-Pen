@@ -33,24 +33,22 @@ All Users
                      <thead class="table-dark font-cabin">
                         <tr>
                            <th scope="col" class="border-0 rounded-start">Author name</th>
-                           <th scope="col" class="border-0">Join date</th>
-                           <th scope="col" class="border-0">Total post</th>
-                           <th scope="col" class="border-0">Total followers</th>
-                           <th scope="col" class="border-0">User status</th>
+                           <th scope="col" class="border-0 text-center">Join date</th>
+                           <th scope="col" class="border-0 text-center">Total post</th>
+                           <th scope="col" class="border-0 text-center">Total followers</th>
+                           <th scope="col" class="border-0 text-center">User status</th>
                            <th scope="col" class="border-0 text-end rounded-end">Action</th>
                         </tr>
                      </thead>
                
                      <!-- Table body START -->
                      <tbody class="border-top-0">
-
                         {% for user in paginated_users %}                           
                         
-                        <tr>
-                           <!-- Table data -->
+                        <tr>                           
                            <td>
                               <div class="d-flex align-items-center position-relative">
-                                 <!-- Image -->
+                                 
                                  <div class="avatar avatar-sm">
                                     {% if user.profile_picture %}                                       
                                        <img src="{{user.profile_picture.url}}" class="rounded-circle avatar-img" alt="">
@@ -67,21 +65,27 @@ All Users
                                  </div>
                                  <div class="mb-0 ms-2">                                    
                                     <h6 class="mb-0">
-                                       <a href="{% url 'author_external' user.slug %}" class="stretched-link link-dark btn-link text-decoration-none">
-                                          {{user.get_full_name}}
+                                       <a 
+                                          href="{% url 'author_external' user.slug %}" 
+                                          class="stretched-link link-dark btn-link text-decoration-none d-flex align-items-center"
+                                       >
+                                          <span>{{user.get_full_name}}</span>
+                                          {% if user.usersettings.is_verified %}
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="verified-icon ms-1" viewBox="0 0 24 24">
+                                             <path
+                                                d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
+                                             </path>
+                                          </svg>
+                                          {% endif %}
                                        </a>
                                     </h6>
                                  </div>
                               </div>
-                           </td>
-                           <!-- Table data -->
-                           <td>{{user.date_joined|date:"dS M, Y"}}</td>
-                           <!-- Table data -->
-                           <td>256</td>
-                           <!-- Table data -->
-                           <td>{{user.usersettings.followers.all|length}}</td>
-                           <!-- Table data -->
-                           <td>
+                           </td>                           
+                           <td class="text-center">{{user.date_joined|date:"dS M, Y"}}</td>                           
+                           <td class="text-center">256</td>                           
+                           <td class="text-center">{{user.usersettings.followers.all|length}}</td>                           
+                           <td class="text-center">
                               {% if user.is_superuser %}
                                  <span class="badge font-semibold bg-blue bg-opacity-10 text-white mb-2">Superuser</span>
                               {% elif user.is_staff %}
@@ -91,23 +95,33 @@ All Users
                               {% else %}
                                  <span class="badge font-semibold bg-success bg-opacity-10 text-success mb-2">Reader</span>                                 
                               {% endif %}
-                           </td>
-                           <!-- Table data -->
-                           <td class="float-end">
-                              <div class="d-flex gap-2">
-                                 <a href="#" class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="" data-bs-original-title="Message" aria-label="Message">
-                                    <i class="fa-solid fa-message"></i>
-                                 </a>
+                           </td>                           
+                           <td class="">
+                              <div class="d-flex gap-2 justify-content-end">
+                                 
+                                 {% if not user.is_superuser %}
 
-                                 {% if user.is_active %}                                    
+                                    {% if user.usersettings.is_verified %}
+                                       <a href="#" class="btn btn-light btn-round mb-0" aria-label="Message" data-bs-toggle="modal" data-bs-target="#unVerifyUser{{user.slug}}">
+                                          <i class="fa-solid fa-xmark" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Unverify '{{user.username}}'"></i>
+                                       </a>
+                                    {% else %}
+                                       <a href="#" class="btn btn-light btn-round mb-0" aria-label="Message" data-bs-toggle="modal" data-bs-target="#verifyUser{{user.slug}}">
+                                          <i class='bx bxs-badge-check text-success' data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Verify '{{user.username}}'"></i>
+                                       </a>
+                                    {% endif %}
+                                    
+                              
+                                    {% if user.is_active %}
                                     <a href="" class="btn btn-light btn-round mb-0" data-bs-toggle="modal" data-bs-target="#blockUser{{user.username}}">
                                        <i data-bs-toggle="tooltip" data-bs-title="Block '{{user.username}}'" class="fa-solid fa-ban text-danger"></i>
                                     </a>
-                                 {% else %}
+                                    {% else %}
                                     <a href="" class="btn btn-light btn-round mb-0" data-bs-toggle="modal" data-bs-target="#unBlockUser{{user.username}}">
-                                       <i data-bs-toggle="tooltip" data-bs-title="Unblock '{{user.username}}'" class="fa-solid fa-lock-open text-success"></i>
+                                       <i data-bs-toggle="tooltip" data-bs-title="Unblock '{{user.username}}'"
+                                          class="fa-solid fa-lock-open text-success"></i>
                                     </a>
+                                    {% endif %}
                                  {% endif %}
 
                               </div>
@@ -181,6 +195,77 @@ All Users
                               </div>
                            </div>
                         </div>
+
+                        <!-- ! Verify User Modal -->
+                        <div class="modal fade" id="verifyUser{{user.slug}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                           aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="p-2 pb-0 d-flex justify-content-end">
+                                    <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                                          <path
+                                             d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                                          </path>
+                                       </svg>
+                                    </a>
+                                 </div>
+                                 <div class="d-grid justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" viewBox="0 0 24 24"
+                                       fill="#198754">
+                                       <path
+                                          d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z">
+                                       </path>
+                                    </svg>
+                                    <h6 class="text-center mt-3">Verify {{user.username}}'s account?</h6>
+                                 </div>
+                                 <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+                                    <a href="{% url 'users:verify_user' request.user.slug user.username %}"
+                                       class="btn btn-sm btn-success-soft">
+                                       Yes, I'm sure
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-secondary-soft" data-bs-dismiss="modal">No,
+                                       cancel</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <!-- ! Unverify User Modal -->
+                        <div class="modal fade" id="unVerifyUser{{user.slug}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                           aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="p-2 pb-0 d-flex justify-content-end">
+                                    <a class="cursor-pointer cancel-modal" data-bs-dismiss="modal" aria-label="Close">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                                          <path
+                                             d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z">
+                                          </path>
+                                       </svg>
+                                    </a>
+                                 </div>
+                                 <div class="d-grid justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="50" height="50" fill="#191a1f"
+                                       viewBox="0 0 24 24">
+                                       <path
+                                          d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479z">
+                                       </path>
+                                    </svg>
+                                    <h6 class="text-center mt-3">Unverify {{user.username}}'s account?</h6>
+                                 </div>
+                                 <div class="modal-footer border-0 mb-3 d-flex justify-content-center">
+                                    <a href="{% url 'users:unverify_user' request.user.slug user.username %}"
+                                       class="btn btn-sm btn-dark-soft">
+                                       Yes, I'm sure
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-secondary-soft" data-bs-dismiss="modal">No,
+                                       cancel</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
                         {% endfor %}
                      </tbody>
                      <!-- Table body END -->
