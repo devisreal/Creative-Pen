@@ -564,6 +564,7 @@
 {% endif %}
 <br><br>
 
+{% if request.user.is_authenticated %}   
 <!-- * Followers and Following Modal -->
 <div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered">
@@ -843,5 +844,5 @@
       </div>
    </div>
 </div>
-
+{% endif %}
 {% endblock %}

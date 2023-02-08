@@ -123,16 +123,17 @@ Readers
                   <a href="{% url 'users:single_reader' request.user.slug reader.username %}" class="reader-link">
                      {{reader.get_full_name|default:"[Fullname]"}}
                   </a>
-               </strong>
+               </strong
+               >
                {% if reader.is_active %}                  
                <a class="block-icon" data-bs-toggle="modal" data-bs-target="#blockReader{{reader.username}}" href="">
-                  <i data-bs-toggle="tooltip" data-bs-title="Block Reader" class="fa-solid fa-ban text-sm p-2 rounded-circle"></i>
+                  <i data-bs-toggle="tooltip" data-bs-title="Block '{{reader.username}}'" class="fa-solid fa-ban text-sm p-2 rounded-circle"></i>
                </a>
                {% else %}
                <div>
                   <small class="text-danger me-1 font-medium">Blocked</small>
                   <a class="unblock-icon" data-bs-toggle="modal" data-bs-target="#unBlockReader{{reader.username}}" href="">
-                     <i data-bs-toggle="tooltip" data-bs-title="Unblock Reader" class="fa-solid fa-unlock text-sm p-2 rounded-circle"></i>
+                     <i data-bs-toggle="tooltip" data-bs-title="Unblock '{{reader.username}}'" class="fa-solid fa-lock-open text-sm p-2 rounded-circle"></i>
                   </a>
                </div>          
                {% endif %}

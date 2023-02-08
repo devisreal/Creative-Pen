@@ -9,18 +9,58 @@ from blog.models import PostCategory, Post
 from pages.models import ContactDetail, Subscriber
 from account.models import User, UserSettings
 
-# ! Dashboard View
+# ? Dashboard View
 @login_required
 def all_users(request, slug):
    if not request.user.is_staff:
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      all_users = User.objects.all()
+      all_users = User.objects.all().order_by('date_joined')
+
+      paginator_user = Paginator(all_users, 20)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_users = paginator_user.page(page)
+      except PageNotAnInteger:
+         messages.error(request, 'Invalid page number')
+         return redirect('users:subscribers', slug=slug)
+      except EmptyPage:
+         messages.error(request, 'No users found.')
+         return redirect('users:subscribers', slug=slug)
+
+      paginated_users.adjusted_elided_pages = paginator_user.get_elided_page_range(page)
+
       context = {
-         'all_users': all_users
+         'all_users': all_users,
+         'paginated_users': paginated_users
       }
       return render(request, 'pen_admin/all_users.html', context)
+
+@login_required
+def block_user(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      user = User.objects.get(username=username)      
+      user.is_active = False
+      user.save()
+      messages.success(request, f"User {user.username} blocked!")
+      return redirect('users:all_users', slug=slug)
+
+@login_required
+def unblock_user(request, slug, username):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:      
+      user = User.objects.get(username=username)      
+      user.is_active = True
+      user.save()
+      messages.success(request, f"User {user.username} unblocked!")
+      return redirect('users:all_users', slug=slug)
 
 @login_required
 def all_posts(request, slug):
@@ -31,7 +71,7 @@ def all_posts(request, slug):
       context = {}
       return render(request, 'pen_admin/all_posts.html', context)
 
-# ! Staffs
+# ? Staffs
 @login_required
 def staffs(request, slug):
    if not request.user.is_superuser:
@@ -96,7 +136,7 @@ def revoke_staff_access(request, slug, username):
       messages.success(request, f"Staff {staff.username} access revoked!")
       return redirect('users:staffs', slug=slug)
 
-# ! Authors
+# ? Authors
 @login_required
 def authors(request, slug):
    if not request.user.is_staff:
@@ -232,7 +272,7 @@ def reject_author_access(request, slug, username):
       messages.success(request, f"Reader {author_request.user.username} author access Rejected!")
       return redirect('users:authors', slug=slug)
 
-# ! Readers
+# ? Readers
 @login_required
 def readers(request, slug):
    if not request.user.is_staff:
@@ -295,7 +335,7 @@ def unblock_reader(request, slug, username):
       messages.success(request, f"Reader {reader.username} unblocked!")
       return redirect('users:readers', slug=slug)
 
-# ! Subscribers
+# ? Subscribers
 @login_required
 def subscribers(request, slug):
    if not request.user.is_staff:
@@ -335,7 +375,7 @@ def delete_subscriber(request, slug, id):
       messages.success(request, 'Subscriber deleted!')
       return redirect('users:subscribers', slug=slug)
 
-# ! Enquiries
+# ? Enquiries
 @login_required
 def enquiries(request, slug):
    if not request.user.is_staff:
@@ -386,7 +426,7 @@ def delete_enquiry(request, slug, id):
       return redirect('users:enquiries', slug=slug)
 
 
-# ! Categories
+# ? Categories
 @login_required
 def categories(request, slug):
    if not request.user.is_staff:
