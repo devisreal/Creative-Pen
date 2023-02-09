@@ -130,8 +130,12 @@ Authors
                         </svg>
                      </div>
                      <div class="ms-2">
-                        <h5 class="mb-0">5,354</h5>
-                        <h6 class="mb-0 fw-light">Followers</h6>
+                        <h5 class="mb-0">{{author.usersettings.followers.all|length}}</h5>
+                        <h6 class="mb-0 fw-light">                                                
+                           {% with followers=author.usersettings.followers.all|length %}
+                           Follower{{ followers|pluralize }}
+                           {% endwith %}
+                        </h6>
                      </div>
                   </div>
 
