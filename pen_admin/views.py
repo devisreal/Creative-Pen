@@ -94,7 +94,25 @@ def all_posts(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      context = {}
+      all_posts = Post.objects.all()
+
+      paginator_post = Paginator(all_posts, 20)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_posts = paginator_post.page(page)
+      except PageNotAnInteger:
+         messages.error(request, 'Invalid page number')
+         return redirect('users:all_posts', slug=slug)
+      except EmptyPage:
+         messages.error(request, 'No posts found.')
+         return redirect('users:all_posts', slug=slug)
+
+      paginated_posts.adjusted_elided_pages = paginator_post.get_elided_page_range(page)
+
+      context = {
+         'paginated_posts': paginated_posts
+      }
       return render(request, 'pen_admin/all_posts.html', context)
 
 # ? Staffs
