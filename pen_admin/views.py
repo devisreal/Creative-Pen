@@ -111,9 +111,21 @@ def all_posts(request, slug):
       paginated_posts.adjusted_elided_pages = paginator_post.get_elided_page_range(page)
 
       context = {
-         'paginated_posts': paginated_posts
+         'paginated_posts': paginated_posts,
+         'all_posts': all_posts
       }
       return render(request, 'pen_admin/all_posts.html', context)
+
+@login_required()
+def post_delete(request, slug, id):
+   if not request.user.is_staff:
+      messages.warning(request, 'You are not authorized to access that page')
+      return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
+   else:
+      post = Post.objects.get(id=id)
+      post.delete()
+      messages.success(request, 'Post deleted successfully')
+      return redirect('users:all_posts', slug=slug)
 
 # ? Staffs
 @login_required

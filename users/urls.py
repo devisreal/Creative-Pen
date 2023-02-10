@@ -27,6 +27,7 @@ urlpatterns = [
    path('unverify-user/<str:username>/', admin_views.un_verify_user, name='unverify_user'),
 
    path('posts/', admin_views.all_posts, name="all_posts"),
+   path('post/delete/<int:id>/', admin_views.post_delete, name="delete_post"),
 
    #* Staffs 
    path('staffs/', admin_views.staffs, name="staffs"),      
