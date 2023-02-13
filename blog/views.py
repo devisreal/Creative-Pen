@@ -62,26 +62,18 @@ class PostDetailView(HitCountDetailView, View):
    template_name = 'blog/single_post.html'
    context_object_name = 'post'
    slug_field = 'slug'
+
    # set to True to count the hit
    count_hit = True
 
    def get_context_data(self, **kwargs):
+      form = CommentForm()
       context = super(PostDetailView, self).get_context_data(**kwargs)
       context.update({
          'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
+         'form': form
       })
       return context
-   
-   def get(self, request, slug, *args, **kwargs):
-      post = Post.objects.get(slug=slug)
-      form = CommentForm()      
-
-      context = {
-         'post': post,
-         'form': form,         
-      }
-
-      return render(request, 'blog/single_post.html', context)
 
    def post(self, request, slug, *args, **kwargs):
       post = Post.objects.get(slug=slug)
@@ -97,12 +89,7 @@ class PostDetailView(HitCountDetailView, View):
       else:
          messages.error(request, 'An error occured')
          return redirect('blog:single_post', slug=post.slug)
-
-      context = {
-         'post': post,
-         'form': form,         
-      }
-      return render(request, 'blog/single_post.html', context)
+      
          
       
 
