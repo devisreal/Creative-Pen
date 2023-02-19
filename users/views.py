@@ -86,7 +86,6 @@ def follow_user(request, slug, username):
    except User.DoesNotExist:
       return redirect('error_page')
 
-
 @login_required
 def bookmarks(request, slug):
    if slug != request.user.slug:      
@@ -194,4 +193,3 @@ def user_external(request, slug):
          return render(request, 'users/user-external.html', context)
    except User.DoesNotExist:
       return redirect('error_page')
-         

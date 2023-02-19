@@ -116,9 +116,9 @@
 </head>
 <body id="body">
 
-   <!-- <div id="preloder">
+   <div id="preloder">
       <div class="loader"></div>
-   </div> -->
+   </div>
    {% include 'partials/navbar.html' %}
    {% block content %}
 
@@ -142,9 +142,8 @@
    <script>
       $(window).on('load', function () {
          $(".loader").fadeOut();
-         $("#preloder").delay(200).fadeOut("slow");      
-      });
-     
+         $("#preloder").delay(300).fadeOut("slow");      
+      });     
    </script>
 </body>
 

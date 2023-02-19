@@ -8,7 +8,6 @@ from account.models import User
 from django.contrib import messages
 from random_username.generate import generate_username
 
-
 def login(request):
     if request.user.is_authenticated:
         messages.warning(request, "You are already logged in!")
@@ -49,7 +48,6 @@ def login(request):
                 return redirect("login")
     return render(request, "account/login.html")
 
-
 def register(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -76,7 +74,6 @@ def register(request):
             messages.error(request, "Passwords do not match")
             return redirect("register")
     return render(request, "account/register.html")
-
 
 @login_required
 def user_logout(request):

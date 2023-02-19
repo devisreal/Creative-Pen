@@ -5,7 +5,6 @@ from froala_editor.widgets import FroalaEditor
 from django.core.validators import FileExtensionValidator
 
 class AddCategoryForm(forms.ModelForm):
-
    name =  forms.CharField(
       label='Category Name',
       widget=forms.TextInput(
@@ -16,7 +15,6 @@ class AddCategoryForm(forms.ModelForm):
          }
       )
    )
-
    color =  forms.CharField(
       label='Category Color',      
       required=False,
@@ -28,7 +26,6 @@ class AddCategoryForm(forms.ModelForm):
          }
       )
    )
-
    emoji =  forms.CharField(
       label='Category Emoji',
       required=False,
@@ -41,7 +38,6 @@ class AddCategoryForm(forms.ModelForm):
          }
       )
    )
-
    short_description = forms.CharField(
       label='Short description',
       required=False,
@@ -54,7 +50,6 @@ class AddCategoryForm(forms.ModelForm):
          }
       )
    )
-
    category_image = forms.ImageField(
       label='Category Image',
       required=False,
@@ -67,7 +62,6 @@ class AddCategoryForm(forms.ModelForm):
          }
       )
    )
-
    class Meta:
       model = PostCategory
       fields = (
@@ -78,9 +72,7 @@ class AddCategoryForm(forms.ModelForm):
          'category_image'
       )
 
-
 class CreatePostForm(forms.ModelForm):
-   
    post_title = forms.CharField(
       label='Post Title',       
       widget=forms.TextInput(
@@ -91,13 +83,11 @@ class CreatePostForm(forms.ModelForm):
          }
       )
    )
-
    post_types =  (      
       ('post', 'Post'),
       ('images', 'Images'),
       ('video', 'Video'),  
    )
-
    post_type = forms.CharField(
       label='',
       required=True,
@@ -109,7 +99,6 @@ class CreatePostForm(forms.ModelForm):
          }
       )
    )
-
    short_description = forms.CharField(
       label='Short description',
       widget=forms.Textarea(
@@ -121,7 +110,6 @@ class CreatePostForm(forms.ModelForm):
          }
       )
    )
-
    post_image = forms.ImageField(
       label="Post Image",
       help_text='Note: Only JPG, JPEG and PNG. Our suggested dimension is landscape. Other dimensions will be cropped to fit our thumbnails',
@@ -144,7 +132,6 @@ class CreatePostForm(forms.ModelForm):
          )
       ]
    )
-
    post_video = forms.FileField(
       label="Post Video",
       help_text='Note:',
@@ -164,14 +151,12 @@ class CreatePostForm(forms.ModelForm):
          )
       ]
    )
-
    post_content = forms.CharField(
       label='Post content',
       widget=FroalaEditor(
          
       )
    )
-
    category = forms.ModelChoiceField(
       label='Post category',
       queryset=PostCategory.objects.all(),
@@ -182,7 +167,6 @@ class CreatePostForm(forms.ModelForm):
          }
       )
    )
-
    tags = TagField(
       label='Tags',  
       required=False,    
@@ -195,7 +179,6 @@ class CreatePostForm(forms.ModelForm):
          }            
       )
    )   
-
    is_featured = forms.BooleanField(
       label='Featured post ?',
       required=False,
@@ -206,7 +189,6 @@ class CreatePostForm(forms.ModelForm):
          }
       )
    )
-
    class Meta:
       model = Post
       fields = (
@@ -221,7 +203,6 @@ class CreatePostForm(forms.ModelForm):
          'is_featured'
       )           
 
-
 class CommentForm(forms.ModelForm):
    comment = forms.CharField(
       widget=forms.Textarea(
@@ -235,4 +216,3 @@ class CommentForm(forms.ModelForm):
    class Meta:
       model = Comment
       fields = ('comment',)
-

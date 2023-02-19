@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class ContactDetail(models.Model):
    name = models.CharField(max_length=100)
    subject = models.CharField(max_length=100)
@@ -10,7 +9,6 @@ class ContactDetail(models.Model):
 
    def __str__(self):
       return f'{self.name} on {self.date_posted}'
-
 
 class Subscriber(models.Model):
    email = models.EmailField(max_length=255)

@@ -481,7 +481,6 @@ def delete_enquiry(request, slug, id):
       messages.success(request, 'Enquiry deleted!')
       return redirect('users:enquiries', slug=slug)
 
-
 # ? Categories
 @login_required
 def categories(request, slug):

@@ -2,7 +2,6 @@ from typing import Any
 from django import forms
 from account.models import User, SocialHandle
 
-
 class UserUpdateForm(forms.ModelForm):
    username = forms.CharField(
       label="",
@@ -222,7 +221,6 @@ class UserUpdateForm(forms.ModelForm):
             self.fields[fieldname].help_text = None
 
 class UserSocialHandleForm(forms.ModelForm):
-
    facebook = forms.URLField(
       label='',
       required=False,
@@ -319,4 +317,3 @@ class UserSocialHandleForm(forms.ModelForm):
          'behance',
          'dribbble'
       )
-      

@@ -207,6 +207,5 @@ TAGGIT_SELECTIZE = {
     'DELIMITER': ','
 }
 
-
 # Froala Editor
 FRAOLA_EDITOR_THIRD_PARTY = ("image_aviary", "spell_checker")

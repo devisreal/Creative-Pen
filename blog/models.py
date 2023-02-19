@@ -9,7 +9,6 @@ from autoslug import AutoSlugField
 from django.template.defaultfilters import slugify
 from froala_editor.fields import FroalaField
 
-
 class PostCategory(models.Model):
    name = models.CharField(max_length=150)
    color = models.CharField(max_length=20, default='blue', null=True, blank=True)
@@ -96,7 +95,6 @@ class Post(models.Model):
       self.slug = slugify(self.post_title)
       super().save(*args, **kwargs)
 
-
 class Comment(models.Model):
    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
    author = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
@@ -106,7 +104,6 @@ class Comment(models.Model):
    likes = models.ManyToManyField(User, related_name='comment_likes', default=None, blank=True)
    dislikes = models.ManyToManyField(User, related_name='comment_dislikes', default=None, blank=True)
 
-   
    def __str__(self):
       return f'Comment by {self.author} on {self.post}'
 

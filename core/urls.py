@@ -14,8 +14,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('<slug:slug>/', include('users.urls')),
     path('@<slug:slug>/', user_external, name='author_external'),
-    path('post/new/', create_post, name='new_post')
-    
+    path('post/new/', create_post, name='new_post')    
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

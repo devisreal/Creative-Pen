@@ -6,7 +6,6 @@ from hitcount.views import HitCountDetailView
 from .forms import CommentForm, CreatePostForm
 from .models import Post
 
-
 def single_post(request, slug):
    try:
       post = Post.objects.get(slug=slug)
@@ -42,7 +41,6 @@ def edit_post(request, slug):
       }
       return render(request, 'blog/edit_post.html', context)    
    
-
 @login_required()
 def delete_post(request, slug):
    post = Post.objects.get(slug=slug)
@@ -54,7 +52,6 @@ def delete_post(request, slug):
       post.delete()
       messages.success(request, 'Post deleted successfully')
       return redirect('latest_posts')
-
 
 class PostDetailView(HitCountDetailView, View):
    model = Post
@@ -89,12 +86,7 @@ class PostDetailView(HitCountDetailView, View):
       else:
          messages.error(request, 'An error occured')
          return redirect('blog:single_post', slug=post.slug)
-      
-         
-      
-
-
-
+               
 @login_required
 def create_post(request):
    if not request.user.is_author:
@@ -120,4 +112,3 @@ def create_post(request):
          'create_post_form': create_post_form,         
       }
       return render(request, 'blog/create_post.html', context)
-

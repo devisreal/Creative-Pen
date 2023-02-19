@@ -6,7 +6,6 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.template.defaultfilters import slugify
 
-
 class User(AbstractUser):
     gender_choices = (
         ("Male", "Male"),
@@ -55,11 +54,9 @@ class User(AbstractUser):
         self.slug = slugify(self.username)
         super().save(*args, **kwargs)
 
-
 @receiver(pre_delete, sender=User)
 def user_image_delete(sender, instance, **kwargs):
     instance.file.delete(False)
-
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -76,7 +73,6 @@ class UserSettings(models.Model):
         verbose_name = "User Setting"
         verbose_name_plural = "User Settings"
 
-
 class SocialHandle(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     facebook = models.URLField(blank=True, null=True)
@@ -89,4 +85,3 @@ class SocialHandle(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Social Handles"
-

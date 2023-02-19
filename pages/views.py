@@ -6,7 +6,6 @@ from account.models import User
 from blog.models import PostCategory, Post
 from .models import ContactDetail, Subscriber
 
-
 def home(request):   
    context = {}
    return render(request, 'pages/home.html', context)
@@ -92,7 +91,7 @@ def search_posts(request):
             Q(last_name__icontains=querystring) |
             Q(slug__icontains=querystring)
          ).annotate(posts_count=Count('post')).order_by('first_name')
-         #  !categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')   
+         #  !categories = PostCategory.objects.annotate(posts_count=Count('post')).all().order_by('name')
          
          readers_results = User.objects.filter(is_author=False).filter(
             Q(username__icontains=querystring) |
@@ -123,5 +122,5 @@ def search_posts(request):
       messages.error(request, 'Please enter a search item!')
       return render(request,'pages/post_results.html')  
 
-def _error_page(request):
+def error_page(request):
    return render(request, 'pages/404.html')

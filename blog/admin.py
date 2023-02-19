@@ -1,11 +1,9 @@
 from django.contrib import admin
 from . import models
 
-
 @admin.register(models.PostCategory)
 class PostCategoryAdmin(admin.ModelAdmin):
    list_display = ('name',)
-
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
@@ -28,5 +26,4 @@ class CommentAdmin(admin.ModelAdmin):
 ! list_per_page = 10
 ! search_fields = ['title']
 ! list_editable = ['unit_price']
-
 """   

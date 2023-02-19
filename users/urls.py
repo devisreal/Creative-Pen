@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 from pen_admin import views as admin_views
 
-
 app_name = 'users'
 
 urlpatterns = [   
@@ -16,16 +15,13 @@ urlpatterns = [
    path('edit-profile/', views.edit_profile, name="edit_profile"),
    path('delete-account', views.delete_account, name='delete_account'),   
 
-
    # ! Admin Views
-
    #* Dashboard Views
    path('users/', admin_views.all_users, name="all_users"),
    path('block-user/<str:username>/', admin_views.block_user, name='block_user'),
    path('unblock-user/<str:username>/', admin_views.unblock_user, name='unblock_user'),
    path('verify-user/<str:username>/', admin_views.verify_user, name='verify_user'),
    path('unverify-user/<str:username>/', admin_views.un_verify_user, name='unverify_user'),
-
    path('posts/', admin_views.all_posts, name="all_posts"),
    path('post/delete/<int:id>/', admin_views.post_delete, name="delete_post"),
 
