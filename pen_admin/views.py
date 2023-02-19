@@ -346,7 +346,7 @@ def readers(request, slug):
          return redirect('users:readers', slug=slug)
       except EmptyPage:
          messages.error(request, 'No readers found.')
-         return redirect('users:authors', slug=slug)
+         return redirect('users:readers', slug=slug)
 
       paginated_readers.adjusted_elided_pages = paginator_reader.get_elided_page_range(page)
 

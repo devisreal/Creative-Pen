@@ -76,13 +76,21 @@ Author ({{author.username}})
                         {% endif %}
                      </h3>
 
-                     {% if request.user != author %}
-                        {% if request.user in author.usersettings.followers.all %}
-                        <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
-                        {% else %}
-                        <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                     <div class="d-grid text-center">
+                        {% if request.user != author %}
+                           {% if request.user in author.usersettings.followers.all %}
+                              <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                           {% else %}
+                              <a href="{% url 'users:follow' request.user.slug author.username %}" class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                           {% endif %}
                         {% endif %}
-                     {% endif %}
+                        <small class="mt-1 font-medium">
+                           {{author.usersettings.followers.all|length}} 
+                           {% with followers=author.usersettings.followers.all|length %}
+                           Follower{{ followers|pluralize }}
+                           {% endwith %}                           
+                        </small>
+                     </div>
                   </div>
 
                   <small class="text-gray-500">
