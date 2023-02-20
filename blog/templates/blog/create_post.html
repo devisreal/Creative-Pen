@@ -94,11 +94,12 @@ Create Post
          <div class="col-md-6">
 
             <!-- * Post Type -->
-            {{create_post_form.post_type}}
-            
+            <fieldset>
+               <label for="post_type" class="mb-1">Post Type</label>
+               {{create_post_form.post_type}} 
+            </fieldset>           
 
             <hr>
-
             <!-- * Post Image -->
             <fieldset class="">
                <label for="background_image" class="mb-2">{{create_post_form.post_image.label}}</label>
@@ -134,18 +135,7 @@ Create Post
                   {{create_post_form.short_description.label}}
                </label>
                {{create_post_form.short_description}}
-            </fieldset>
-
-            <!-- * Post Video -->
-            <fieldset id="post_video_field" class="w-100 mb-3">
-               <label for="post_video" class="mb-1">
-                  {{create_post_form.post_video.label}}
-               </label>
-               {{create_post_form.post_video}}
-               <small class="text-gray-500">
-                  {{create_post_form.post_video.help_text}}
-               </small>
-            </fieldset>
+            </fieldset>         
 
             <!-- * Post Category -->
             <fieldset>

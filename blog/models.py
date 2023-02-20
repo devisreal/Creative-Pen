@@ -59,16 +59,6 @@ class Post(models.Model):
          )
       ]
    )
-   post_video = models.FileField(
-      upload_to='posts/videos',
-      null=True,
-      blank=True,
-      validators=[
-         FileExtensionValidator(
-            allowed_extensions=['MOV','avi','mp4','webm','mkv']
-         )
-      ]
-   )
    post_content = FroalaField(      
       theme='dark',
       null=True, blank=True

@@ -132,25 +132,6 @@ class CreatePostForm(forms.ModelForm):
          )
       ]
    )
-   post_video = forms.FileField(
-      label="Post Video",
-      help_text='Note:',
-      required=False,
-      widget=forms.FileInput(
-         attrs={
-            "type": "file",
-            "placeholder": "",
-            "accept": "video/*",
-            "class": "form-control",
-            "id": "post_video",            
-         }
-      ),
-      validators=[
-         FileExtensionValidator(
-            allowed_extensions=['MOV','avi','mp4','webm','mkv']
-         )
-      ]
-   )
    post_content = forms.CharField(
       label='Post content',
       widget=FroalaEditor(
@@ -195,8 +176,7 @@ class CreatePostForm(forms.ModelForm):
          'post_title',
          'post_type',
          'short_description',
-         'post_image',
-         'post_video',
+         'post_image',         
          'post_content',
          'category',
          'tags',

@@ -33,7 +33,7 @@ urlpatterns = [
 
    #* Authors
    path('authors/', admin_views.authors, name="authors"),   
-   path('author__<str:username>/', admin_views.author_single, name='single_author'),
+   path('author/<str:username>/', admin_views.author_single, name='single_author'),
    
    path('verify-author/<str:username>/', admin_views.verify_author, name='verify_author'),
    path('unverify-author/<str:username>/', admin_views.un_verify_author, name='unverify_author'),
@@ -46,7 +46,7 @@ urlpatterns = [
 
    #* Readers
    path('readers/', admin_views.readers, name="readers"),
-   path('reader__<str:username>/', admin_views.reader_single, name='single_reader'),
+   path('reader/<str:username>/', admin_views.reader_single, name='single_reader'),
    path('block-reader/<str:username>/', admin_views.block_reader, name='block_reader'),
    path('unblock-reader/<str:username>/', admin_views.unblock_reader, name='unblock_reader'),
 
