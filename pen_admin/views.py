@@ -16,7 +16,7 @@ def all_users(request, slug):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:
-      all_users = User.objects.all().order_by('date_joined')
+      all_users = User.objects.all().order_by('date_joined').annotate(posts_count=Count('post'))
 
       paginator_user = Paginator(all_users, 20)
       page = request.GET.get('page', 1)

@@ -20,8 +20,7 @@ All Users
                <!-- Search and select START -->
                <div class="row g-3 align-items-center justify-content-between">               
                   <h5 class="mb-2 mb-sm-0">All Users</h5>
-               </div>
-               <!-- Search and select END -->
+               </div>               
             </div>
             <!-- Card header END -->
    
@@ -32,8 +31,8 @@ All Users
                      <thead class="table-dark font-cabin">
                         <tr>
                            <th scope="col" class="border-0 rounded-start">Author name</th>
-                           <th scope="col" class="border-0 text-center">Join date</th>
-                           <th scope="col" class="border-0 text-center">Total post</th>
+                           <th scope="col" class="border-0 text-center">Joined date</th>
+                           <th scope="col" class="border-0 text-center">Total posts</th>
                            <th scope="col" class="border-0 text-center">Total followers</th>
                            <th scope="col" class="border-0 text-center">User status</th>
                            <th scope="col" class="border-0 text-end rounded-end">Action</th>
@@ -81,17 +80,29 @@ All Users
                               </div>
                            </td>                           
                            <td class="text-center">{{user.date_joined|date:"dS M, Y"}}</td>                           
-                           <td class="text-center">256</td>                           
+                           <td class="text-center">{{user.posts_count}}</td>                           
                            <td class="text-center">{{user.usersettings.followers.all|length}}</td>                           
                            <td class="text-center">
                               {% if user.is_superuser %}
-                                 <span class="badge font-semibold bg-blue bg-opacity-10 text-white mb-2">Superuser</span>
+                                 <span class="badge font-semibold bg-blue bg-opacity-10 text-white mb-2">
+                                    <i class="fa-solid fa-layer-group me-1"></i>
+                                    Superuser
+                                 </span>
                               {% elif user.is_staff %}
-                                 <span class="badge font-semibold bg-danger bg-opacity-10 text-danger mb-2">Staff</span>
+                                 <span class="badge font-semibold bg-danger bg-opacity-10 text-danger mb-2">
+                                    <i class="fa-solid fa-user-tie me-1"></i>
+                                    Staff
+                                 </span>
                               {% elif user.is_author %}
-                                 <span class="badge font-semibold bg-primary bg-opacity-10 text-primary mb-2">Author</span>
+                                 <span class="badge font-semibold bg-primary bg-opacity-10 text-primary mb-2">
+                                    <i class="fa-solid fa-feather me-1"></i>
+                                    Author
+                                 </span>
                               {% else %}
-                                 <span class="badge font-semibold bg-success bg-opacity-10 text-success mb-2">Reader</span>                                 
+                                 <span class="badge font-semibold bg-success bg-opacity-10 text-success mb-2">
+                                    <i class="fa-solid fa-layer-group me-1"></i>
+                                    Reader
+                                 </span>
                               {% endif %}
                            </td>                           
                            <td class="">
