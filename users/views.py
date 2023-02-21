@@ -6,6 +6,7 @@ from account.models import User, UserSettings
 import datetime
 from blog.models import Post
 import pandas
+from hitcount.models import Hit
 
 @login_required
 def dashboard(request, slug):
@@ -16,11 +17,12 @@ def dashboard(request, slug):
       user = User.objects.get(slug=slug)
       liked_posts = Post.objects.filter(likes=user)
       author_posts = Post.objects.filter(post_author=user)
+      total_hits = Hit.objects.all().count()
       total_users = User.objects.all()
       total_posts = Post.objects.all()
-      total_posts_likes = 0
+      total_posts_likes = 0      
       for post in Post.objects.all():
-         total_posts_likes += post.likes.all().count()
+         total_posts_likes += post.likes.all().count()         
       total_likes = total_posts_likes
       
       user_values = total_users.values().order_by("date_joined")
@@ -51,6 +53,7 @@ def dashboard(request, slug):
          'total_users': total_users.count(),
          'total_posts': total_posts.count(),
          'total_likes': total_likes,
+         'total_hits': total_hits,
          'y1': sum_user_list,
          'y2': sum_user_list_prev,
       })
