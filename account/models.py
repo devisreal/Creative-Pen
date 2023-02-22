@@ -16,17 +16,17 @@ class User(AbstractUser):
         null=True,
         blank=True,
         upload_to="profile_images",
-        validators=[
-            FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
-        ],
+        # validators=[
+        #     FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
+        # ],
     )
     background_image = models.ImageField(
         null=True,
         blank=True,
         upload_to="profile_bg_images",
-        validators=[
-            FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
-        ],
+        # validators=[
+        #     FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
+        # ],
     )
     job_title = models.CharField(max_length=250, blank=True, null=True)
     bio = models.TextField(blank=True)

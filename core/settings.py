@@ -57,23 +57,18 @@ INSTALLED_APPS = [
     "pages",
 ]
 
-CLOUDINARY_CLOUD_NAME = "ds4h5p2np"
-CLOUDINARY_API_KEY = "893118262317724"
-CLOUDINARY_API_SECRET = "QsjFzFDkXolPDAYmCcpPBGbBhJE"
 
 cloudinary.config(
-    cloud_name=CLOUDINARY_CLOUD_NAME,
-    api_key=CLOUDINARY_API_KEY,
-    api_secret=CLOUDINARY_API_SECRET
+    cloud_name=config("CLOUDINARY_CLOUD_NAME"),
+    api_key=config("CLOUDINARY_API_KEY"),
+    api_secret=config("CLOUDINARY_API_SECRET")
 )
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
-    'API_KEY': CLOUDINARY_API_KEY,
-    'API_SECRET': CLOUDINARY_API_SECRET
+    'CLOUD_NAME': config("CLOUDINARY_CLOUD_NAME"),
+    'API_KEY': config("CLOUDINARY_API_KEY"),
+    'API_SECRET': config("CLOUDINARY_API_SECRET")
 }
-
-CLOUDINARY_URL = 'cloudinary://893118262317724:QsjFzFDkXolPDAYmCcpPBGbBhJE@ds4h5p2np'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -101,7 +96,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
-                "pages.context_processors.categories_processor",
+                # "pages.context_processors.categories_processor",
                 # 'django.core.context_processors',
             ],
         },
@@ -174,9 +169,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-MEDIA_URL = "media/"
+MEDIA_URL = "creative_pen/"
 MEDIA_ROOT = BASE_DIR / "media"
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Froala Editor
 FRAOLA_EDITOR_THIRD_PARTY = ("image_aviary", "spell_checker")

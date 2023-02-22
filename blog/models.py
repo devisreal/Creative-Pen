@@ -18,13 +18,13 @@ class PostCategory(models.Model):
       null=True,
       blank=True,
       upload_to='category_images/',
-      validators=[
-         FileExtensionValidator(
-            allowed_extensions=[
-               'png', 'jpg', 'jpeg', 'webp'
-            ]
-         )
-      ]
+      # validators=[
+      #    FileExtensionValidator(
+      #       allowed_extensions=[
+      #          'png', 'jpg', 'jpeg', 'webp'
+      #       ]
+      #    )
+      # ]
    )
    slug = AutoSlugField(unique=True, populate_from='name', sep='-', null=True)
    date_created = models.DateTimeField(auto_now_add=True)
@@ -51,13 +51,13 @@ class Post(models.Model):
    short_description = models.TextField(null=True, blank=True)
    post_image = models.ImageField(      
       upload_to='posts/images',
-      validators=[
-         FileExtensionValidator(
-            allowed_extensions=[
-               'png', 'jpg', 'jpeg', 'webp'
-            ]
-         )
-      ]
+      # validators=[
+      #    FileExtensionValidator(
+      #       allowed_extensions=[
+      #          'png', 'jpg', 'jpeg', 'webp'
+      #       ]
+      #    )
+      # ]
    )
    post_content = FroalaField(      
       theme='dark',
