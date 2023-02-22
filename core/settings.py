@@ -9,6 +9,11 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, seeclear
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
+import os
 import dj_database_url
 from pathlib import Path
 from decouple import config, Csv
@@ -16,10 +21,6 @@ from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 MODE = config("MODE", default="dev")
@@ -29,9 +30,7 @@ DEBUG = config("DEBUG")
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -48,6 +47,8 @@ INSTALLED_APPS = [
     "hitcount",
     "froala_editor",
     'django_cleanup.apps.CleanupConfig',
+    'cloudinary_storage',
+    "cloudinary",
     # Custom Apps
     "account",
     "blog",
@@ -55,6 +56,24 @@ INSTALLED_APPS = [
     "users",
     "pages",
 ]
+
+CLOUDINARY_CLOUD_NAME = "ds4h5p2np"
+CLOUDINARY_API_KEY = "893118262317724"
+CLOUDINARY_API_SECRET = "QsjFzFDkXolPDAYmCcpPBGbBhJE"
+
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+    'API_KEY': CLOUDINARY_API_KEY,
+    'API_SECRET': CLOUDINARY_API_SECRET
+}
+
+CLOUDINARY_URL = 'cloudinary://893118262317724:QsjFzFDkXolPDAYmCcpPBGbBhJE@ds4h5p2np'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -82,7 +101,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
-                # "pages.context_processors.categories_processor",
+                "pages.context_processors.categories_processor",
                 # 'django.core.context_processors',
             ],
         },
@@ -90,7 +109,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -113,7 +131,6 @@ else:
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES["default"].update(db_from_env)
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -131,7 +148,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -160,6 +176,21 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Froala Editor
+FRAOLA_EDITOR_THIRD_PARTY = ("image_aviary", "spell_checker")
+FROALA_STORAGE_BACKEND = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+FROALA_UPLOAD_PARAMS = {
+    'folder': 'media',
+    'tags': 'froala_editor'
+}
+FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/'
+FROALA_UPLOAD_PATH = 'froala_editor_upload/'
+FROALA_EDITOR_OPTIONS = {    
+    'imageUploadURL': '/froala_upload/',
+    'imageAllowedTypes': ['jpeg', 'jpg', 'png', 'gif'],    
+}
 
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
@@ -206,6 +237,3 @@ TAGGIT_SELECTIZE = {
     'DRAG_DROP': False,
     'DELIMITER': ','
 }
-
-# Froala Editor
-FRAOLA_EDITOR_THIRD_PARTY = ("image_aviary", "spell_checker")

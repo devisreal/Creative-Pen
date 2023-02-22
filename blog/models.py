@@ -99,3 +99,13 @@ class Comment(models.Model):
 
    class Meta:
       ordering = ('-date_posted',)
+
+   @property
+   def children(self):
+      return Comment.objects.filter(parent=self).reverse()
+   
+   @property
+   def is_parent(self):
+      if self.parent is None:
+         return True
+      return False
