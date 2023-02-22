@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Count, Q
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from account.models import User
 from blog.models import PostCategory, Post
 from .models import ContactDetail, Subscriber
+
 
 def home(request):   
    context = {}
@@ -21,10 +22,26 @@ def footer(request):
 def latest_posts(request):   
    try:
       posts = Post.objects.all().order_by('-date_posted')
+
+      paginator_post = Paginator(posts, 15)
+      page = request.GET.get('page', 1)
+
+      try:
+         paginated_posts = paginator_post.page(page)
+      except PageNotAnInteger:
+         messages.error(request, 'Invalid page number')
+         return redirect('latest_posts')
+      except EmptyPage:         
+         messages.error(request, 'No posts found.')
+         return redirect('latest_posts')
+
+      paginated_posts.adjusted_elided_pages = paginator_post.get_elided_page_range(page)
+
    except Post.DoesNotExist:
       return redirect('error_page')   
    context = {
-      'posts': posts
+      'posts': posts,
+      'paginated_posts': paginated_posts
    }
    return render(request, 'pages/latest_posts.html', context)
 

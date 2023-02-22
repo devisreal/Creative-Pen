@@ -14,7 +14,7 @@ Latest Posts
 <div class="container-md mt-5 ">
    <div class="row gy-4" data-masonry='{"percentPosition": true }'>
 
-      {% for post in posts %}
+      {% for post in paginated_posts %}
 
       <div class="col-sm-6 col-lg-4 ">
          <div class="card border-0 ">
@@ -273,6 +273,67 @@ Latest Posts
       {% endfor %}
    </div>
 </div>
+
+<!-- Pagination START -->
+<div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-5 container border-top pt-3">
+   <p class="mb-sm-0 text-md text-center text-sm-start">
+      Showing {{ paginated_posts.start_index }} to {{ paginated_posts.end_index }} of
+      {{paginated_posts.paginator.count }} entries
+   </p>
+   <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+      <ul class="pagination pagination-sm pagination-bordered mb-0">
+
+         <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+         </li>
+
+         {% if paginated_posts.has_previous %}
+         <li class="page-item">
+            <a class="page-link" href="?page={{ paginated_posts.previous_page_number }}">
+               <i class="fa-solid fa-caret-left"></i>
+            </a>
+         </li>
+         {% else %}
+         <li class="page-item disabled" style="opacity: 0.5;">
+            <a class="page-link" href="#" aria-disabled="true">
+               <i class="fa-solid fa-caret-left"></i>
+            </a>
+         </li>
+         {% endif %}
+
+         {% for i in paginated_posts.adjusted_elided_pages %}
+         {% if i == paginated_posts.paginator.ELLIPSIS %}
+         <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+         {% else %}
+         <li class="page-item {% if i == paginated_posts.number %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">
+               {{i}}
+            </a>
+         </li>
+         {% endif %}
+         {% endfor %}
+
+         {% if paginated_posts.has_next %}
+         <li class="page-item">
+            <a class="page-link" href="?page={{ paginated_posts.next_page_number }}">
+               <i class="fa-solid fa-caret-right"></i>
+            </a>
+         </li>
+         {% else %}
+         <li class="page-item disabled" style="opacity: 0.5;">
+            <a class="page-link" href="#" aria-disabled="true">
+               <i class="fa-solid fa-caret-right"></i>
+            </a>
+         </li>
+         {% endif %}
+
+         <li class="page-item">
+            <a class="page-link" href="?page={{ paginated_posts.paginator.num_pages }}">Last</a>
+         </li>
+      </ul>
+   </nav>
+</div>
+<!-- Pagination END -->
 {% else %}
 <div class=" text-center my-5 py-5">
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="#d6293e">
@@ -283,26 +344,8 @@ Latest Posts
 </div>
 {% endif %}
 
-<!-- <ul class="pagination pagination-bordered  w-fit mx-auto mt-5">
-   <li class="page-item disabled">
-      <span class="page-link">Total 25 pages</span>
-   </li>
-   <li class="page-item disabled">
-      <span class="page-link">|</span>
-   </li>
-   <li class="page-item disabled">
-      <span class="page-link">Go to page:</span>
-   </li>
-   <li class="page-item">
-      <input class="form-control h-100 icon-lg fs-6" type="number" placeholder="12">
-   </li>
-   <li class="page-item active">
-      <a class="page-link" href="#">Jump <i class="fa-solid fa-arrows-turn-right ms-2"></i></a>
-   </li>
-</ul> -->
 
 {% if posts %}
-   
-<br><br><br><br><br>
+<br><br><br>
 {% endif %}
 {% endblock %}
