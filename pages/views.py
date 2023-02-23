@@ -51,9 +51,25 @@ def categories(request):
    for category in categories:
       posts = Post.objects.distinct('category__name').order_by('category__name', '-date_posted')   
       category_posts = posts
+   
+   paginator_category = Paginator(category_posts, 6)
+   page = request.GET.get('page', 1)
+
+   try:
+      paginated_categories = paginator_category.page(page)
+   except PageNotAnInteger:
+      messages.error(request, 'Invalid page number')
+      return redirect('categories')
+   except EmptyPage:         
+      messages.error(request, 'No categories found.')
+      return redirect('categories')
+
+   paginated_categories.adjusted_elided_pages = paginator_category.get_elided_page_range(page)
+
    context = { 
       'categories': categories,
-      'category_posts': category_posts
+      'category_posts': category_posts,
+      'paginated_categories': paginated_categories
    }
    return render(request, 'pages/categories.html', context)
 

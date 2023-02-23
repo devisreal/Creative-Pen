@@ -41,15 +41,15 @@ Categories
 </section>
 
 
-{% if category_posts %}
+{% if paginated_categories %}
 <section class="position-relative pt-4 mt-5">
    <div class="container">
       <div class="row">
 
          <div class="col-lg-9">
 
-            {% for post in category_posts %}
-            <div class="card mb-4 p-3 border-0 up-hover">
+            {% for post in paginated_categories %}
+            <div class="card mb-4 p-3 border-0 up-hover my-shadow">
                <div class="row">
                   <div class="col-md-5">
                      <img class="rounded-3 img-fluid" src="{{post.post_image.url}}"
@@ -274,6 +274,62 @@ Categories
             </div>
             {% endfor %}
 
+            <!-- Pagination START -->
+            <div class="d-sm-flex justify-content-sm-end align-items-sm-center mt-5 p-1">               
+               <nav class="mb-sm-0 d-flex justify-content-center" aria-label="navigation">
+                  <ul class="pagination pagination-sm pagination-bordered mb-0">
+            
+                     <li class="page-item">
+                        <a class="page-link" href="?page=1">First</a>
+                     </li>
+            
+                     {% if paginated_categories.has_previous %}
+                     <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_categories.previous_page_number }}">
+                           <i class="fa-solid fa-caret-left"></i>
+                        </a>
+                     </li>
+                     {% else %}
+                     <li class="page-item disabled" style="opacity: 0.5;">
+                        <a class="page-link" href="#" aria-disabled="true">
+                           <i class="fa-solid fa-caret-left"></i>
+                        </a>
+                     </li>
+                     {% endif %}
+            
+                     {% for i in paginated_categories.adjusted_elided_pages %}
+                     {% if i == paginated_categories.paginator.ELLIPSIS %}
+                     <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+                     {% else %}
+                     <li class="page-item {% if i == paginated_categories.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">
+                           {{i}}
+                        </a>
+                     </li>
+                     {% endif %}
+                     {% endfor %}
+            
+                     {% if paginated_categories.has_next %}
+                     <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_categories.next_page_number }}">
+                           <i class="fa-solid fa-caret-right"></i>
+                        </a>
+                     </li>
+                     {% else %}
+                     <li class="page-item disabled" style="opacity: 0.5;">
+                        <a class="page-link" href="#" aria-disabled="true">
+                           <i class="fa-solid fa-caret-right"></i>
+                        </a>
+                     </li>
+                     {% endif %}
+            
+                     <li class="page-item">
+                        <a class="page-link" href="?page={{ paginated_categories.paginator.num_pages }}">Last</a>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+            <!-- Pagination END -->
          </div>
 
          <div class="col-lg-3 mt-5 mt-lg-0 ">
