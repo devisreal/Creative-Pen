@@ -44,7 +44,7 @@ My Profile [{{user.username}}]
    <div class="col-12">
       <div class="mb-4 position-relative z-index-9">
          <!-- Cover image -->
-         <div class="py-5 rounded background-img" {% if user.background_image %}
+         <div class="py-5 rounded-2xl background-img" {% if user.background_image %}
             style="background-image: url('{{user.background_image.url}}');" {% else %}
             style="background-image: url('{% static "img/user/bkg_placeholder2.jpg" %}');" {% endif %}>
          </div>
@@ -158,6 +158,24 @@ My Profile [{{user.username}}]
 
                            Joined on {{user.date_joined|date:"D, dS F, Y"}}
                         </li>
+
+                        <!-- ? User Followers -->
+                        <li class="list-inline-item">
+                           <svg class="me-1 pb-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                 d="M9.16006 10.87C9.06006 10.86 8.94006 10.86 8.83006 10.87C6.45006 10.79 4.56006 8.84 4.56006 6.44C4.56006 3.99 6.54006 2 9.00006 2C11.4501 2 13.4401 3.99 13.4401 6.44C13.4301 8.84 11.5401 10.79 9.16006 10.87Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path d="M16.41 4C18.35 4 19.91 5.57 19.91 7.5C19.91 9.39 18.41 10.93 16.54 11C16.46 10.99 16.37 10.99 16.28 11"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path
+                                 d="M4.15997 14.56C1.73997 16.18 1.73997 18.82 4.15997 20.43C6.90997 22.27 11.42 22.27 14.17 20.43C16.59 18.81 16.59 16.17 14.17 14.56C11.43 12.73 6.91997 12.73 4.15997 14.56Z"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                              <path
+                                 d="M18.3401 20C19.0601 19.85 19.7401 19.56 20.3001 19.13C21.8601 17.96 21.8601 16.03 20.3001 14.86C19.7501 14.44 19.0801 14.16 18.3701 14"
+                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                           </svg>
+                            {{user.usersettings.followers.all|length}}
+                        </li>
                      </ul>
                      <p class="m-0"></p>
                   </div>
@@ -270,6 +288,294 @@ My Profile [{{user.username}}]
                </div>
             </div>
          </div>
+      </div>
+   </div>
+
+   <div class="row g-4 mt-5">
+      <!-- Left sidebar START -->
+      <div class="col-lg-7 col-xxl-8">
+         <!-- Profile START -->
+         <div class="card border mb-4">
+            <div class="card-header bg-white border-bottom p-3 d-flex justify-content-between">
+               <h5 class="card-header-title mb-0">Profile</h5>
+               <a href="{% url 'users:edit_profile' user.slug %}" class="btn btn-sm btn-blue mb-0">Edit Profile</a>
+            </div>
+            <div class="card-body">
+               <!-- Full name -->
+               <div class="mb-3">
+                  <label class="form-label">Full name</label>
+                  <div class="input-group">
+                     <input type="text" class="form-control bg-white" value="{{user.first_name}}" placeholder="First name" readonly>
+                     <input type="text" class="form-control bg-white" value="{{user.last_name}}" placeholder="Last name" readonly>
+                  </div>
+               </div>
+               <!-- Username -->
+               <div class="mb-3">
+                  <label class="form-label">Username</label>
+                  <div class="input-group">                     
+                     <span 
+                        class="input-group-text font-outfit bg-light user-select-none" 
+                        id="user_name"
+                     >
+                        <span id="currentHost"></span>/@
+                     </span>
+                     <input type="text" class="form-control bg-white" value="{{user.username}}" readonly>
+                  </div>
+               </div>
+
+               <!-- Job title -->
+               <div class="mb-3">
+                  <label class="form-label">Job title</label>
+                  <input class="form-control bg-white" type="text" value="{{user.job_title}}" readonly>
+               </div>
+               <!-- City -->
+               <div class="mb-3">
+                  <label class="form-label">City</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.city %}
+                        value="{{user.city}}" 
+                     {% else %}
+                        value="Nil"
+                     {% endif %}
+                     readonly
+                  >
+               </div>
+               <!-- Bio -->
+               <div class="mb-3">
+                  <label class="form-label">Bio</label>
+                  <textarea 
+                     class="form-control bg-white text-md"
+                     style="resize: none"
+                     rows="5"
+                     readonly
+                  >{% if user.bio %}{{user.bio}} {% else %} Nil {% endif %}
+                  </textarea>
+               </div>
+               <!-- Birthday -->
+               <div>
+                  <label class="form-label">Birthday</label>
+                  <input type="text" class="form-control bg-white" value="{{user.date_of_birth|date:'F jS, Y'}}" readonly>
+               </div>
+
+            </div>
+         </div>
+         <!-- Profile END -->         
+            
+         <!-- Social links START -->
+         <div class="card border mb-4">
+            <div class="card-header bg-white border-bottom p-3">
+               <h5 class="card-header-title mb-0">Social links</h5>
+            </div>
+            <div class="card-body">
+               <!-- Facebook -->
+               <div class="mb-3">
+                  <label class="form-label">Facebook</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.facebook %}
+                        value="{{user.socialhandle.facebook}}" 
+                     {% else %}
+                        value="Nil"
+                     {% endif %}                      
+                     readonly
+                  >
+               </div>
+               <!-- Linkedin -->
+               <div class="mb-3">
+                  <label class="form-label">linkedin</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.linkedin %}
+                        value="{{user.socialhandle.linkedin}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               <!-- Twitter -->
+               <div class="mb-3">
+                  <label class="form-label">Twitter</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.twitter %}
+                        value="{{user.socialhandle.twitter}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               <!-- Instagram -->
+               <div class="mb-3">
+                  <label class="form-label">Instagram</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.instagram %}
+                        value="{{user.socialhandle.instagram}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               <!-- Youtube -->
+               <div class="mb-3">
+                  <label class="form-label">Youtube</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.youtube %}
+                        value="{{user.socialhandle.youtube}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               <!-- Behance -->
+               <div class="mb-3">
+                  <label class="form-label">Behance</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.behance %}
+                        value="{{user.socialhandle.behance}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               <!-- Dribbble -->
+               <div class="mb-3">
+                  <label class="form-label">Dribbble</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.socialhandle.dribbble %}
+                        value="{{user.socialhandle.dribbble}}"
+                     {% else %}
+                        value="Nil"
+                     {% endif %} 
+                     readonly
+                  >
+               </div>
+               
+            </div>
+         </div>
+         <!-- Social links END -->
+            
+      </div>
+      <!-- Left sidebar END -->
+   
+      <!-- Right sidebar START -->
+      <div class="col-lg-5 col-xxl-4">
+         <!-- Profile Setting START -->
+         <!-- <div class="card border mb-4">
+            <div class="card-header bg-white border-bottom p-3">
+               <h5 class="card-header-title mb-0">Profile Setting</h5>
+            </div>
+            <div class="card-body">
+               <div class="form-check form-switch form-check-md mb-3">
+                  <input class="form-check-input" type="checkbox" id="availabilityCheck" checked="">
+                  <label class="form-check-label" for="availabilityCheck">Visible profile to everyone</label>
+               </div>
+               <div class="form-check form-switch form-check-md mb-3">
+                  <input class="form-check-input" type="checkbox" id="proCheck" disabled="">
+                  <label class="form-check-label" for="proCheck">Disable ads <span
+                        class="badge bg-primary align-middle">Pro</span></label>
+               </div>
+            </div>
+         </div> -->
+         <!-- Profile Setting END -->   
+
+         <!-- Personal information START -->
+         <div class="card border mb-4">
+            <div class="card-header bg-white border-bottom p-3">
+               <h5 class="card-header-title mb-0">Personal information</h5>
+            </div>
+            <div class="card-body">
+               <!-- Email -->
+               <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="email" 
+                     value="{{user.email}}" 
+                     readonly
+                  >
+               </div>
+               <!-- Phone Number -->
+               <div class="mb-3">
+                  <label class="form-label">Mobile Number</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.mobile_no %}
+                        value="{{user.mobile_no}}" 
+                     {% else %}
+                        value="Nil"
+                     {% endif %}
+                     readonly
+                  >
+               </div>               
+               <!-- Address -->
+               <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <input 
+                     class="form-control bg-white" 
+                     type="text" 
+                     {% if user.address %}
+                        value="{{user.address}}" 
+                     {% else %}
+                        value="Nil"                        
+                     {% endif %}
+                     readonly
+                  >
+               </div>
+            </div>
+         </div>
+         <!-- Personal information END -->
+
+         <!-- Update password START -->
+         <div class="card border">
+            <div class="card-header bg-white border-bottom p-3">
+               <h5 class="card-header-title mb-0">Update password</h5>
+            </div>
+            <div class="card-body">
+               <div class="mb-3">
+                  <label class="form-label">Current password</label>
+                  <input class="form-control" type="password" placeholder="Enter current password">
+               </div>
+               <!-- New password -->
+               <div class="mb-3">
+                  <label class="form-label" id="psw-strength-message"></label>
+                  <div class="input-group">
+                     <input class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password">
+                     <span class="input-group-text p-0">
+                        <i class="fakepasswordicon far fa-eye cursor-pointer p-2 w-40px"></i>
+                     </span>
+                  </div>
+                  <div class="rounded mt-1" id="psw-strength"></div>
+               </div>
+               <!-- New password -->
+               <div>
+                  <label class="form-label">Confirm new password</label>
+                  <input class="form-control" type="password" placeholder="Enter new password">
+               </div>
+               <div class="d-flex justify-content-end mt-4">
+                  <a href="#" class="btn btn-primary">Change password</a>
+               </div>
+            </div>
+         </div>
+
       </div>
    </div>
 </div>
@@ -429,11 +735,13 @@ My Profile [{{user.username}}]
    </div>
 </div>
 
-<br><br><br><br><br>
+<br><br><br>
 {% endblock %}
 
 {% block scripts %}
 <script>
+   let currentHost = document.getElementById('currentHost')
+   currentHost.innerHTML = window.location.host;
    var clipboard = new ClipboardJS('.user-url-copy');
    const successToast = document.getElementById('successToast')
    const toast1 = new bootstrap.Toast(successToast)
