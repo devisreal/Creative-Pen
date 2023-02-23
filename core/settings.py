@@ -96,7 +96,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
-                # "pages.context_processors.categories_processor",
+                "pages.context_processors.categories_processor",
                 # 'django.core.context_processors',
             ],
         },

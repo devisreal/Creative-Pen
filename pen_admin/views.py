@@ -200,7 +200,7 @@ def authors(request, slug):
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:            
       authors = User.objects.filter(is_author=True).exclude(is_staff=True).annotate(posts_count=Count('post')).order_by('first_name')      
-      author_requests = User.objects.filter(usersettings__request_author_access=True)      
+      author_requests = User.objects.filter(usersettings__request_author_access=True)
 
       paginator_author = Paginator(authors, 6)
       paginator_author_request = Paginator(author_requests, 6)
