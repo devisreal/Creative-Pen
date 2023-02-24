@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import UserSocialHandleForm, UserUpdateForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-from account.models import User, UserSettings
-import datetime
-from blog.models import Post
-import pandas
 from hitcount.models import Hit
+from account.models import User, UserSettings
+from blog.models import Post
+import datetime
+import pandas
+from .forms import UserSocialHandleForm, UserUpdateForm
 
 @login_required
 def dashboard(request, slug):
@@ -196,3 +198,22 @@ def user_external(request, slug):
          return render(request, 'users/user-external.html', context)
    except User.DoesNotExist:
       return redirect('error_page')
+   
+@login_required
+def change_password(request, slug):
+   if request.method == 'POST':
+      form = PasswordChangeForm(request.user, request.POST)
+      if form.is_valid():
+         user = form.save()
+         update_session_auth_hash(request, user)
+         messages.success(request, 'Your password was successfully updated!')
+         return redirect('users:profile', slug=slug)
+      else:
+         messages.error(request, 'Please correct the error below.')
+   else:
+      form = PasswordChangeForm(request.user)
+
+   context = {
+       'form': form
+   }
+   return render(request, 'users/change_password.html', context)
