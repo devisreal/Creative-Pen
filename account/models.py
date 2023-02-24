@@ -65,6 +65,7 @@ class UserSettings(models.Model):
     requested_date = models.DateTimeField(null=True, blank=True)
     accepted_date = models.DateTimeField(null=True, blank=True)
     is_verified = models.BooleanField(blank=True, default=False)
+    share_liked_posts = models.BooleanField(blank=True, default=True)
 
     def __str__(self):
         return f"User settings for {self.user.username}"

@@ -177,6 +177,7 @@ def delete_account(request, slug):
 def user_external(request, slug):
    try:
       user = User.objects.get(slug=slug)
+      liked_posts = Post.objects.filter(likes=user)
       if request.user == user:
          return redirect('users:profile', slug=slug)        
       elif user.is_author:
@@ -187,13 +188,15 @@ def user_external(request, slug):
             context = {
                'author': user,
                'user': user,
-               'author_posts': author_posts
+               'author_posts': author_posts,
+               'liked_posts': liked_posts
             }
             return render(request, 'users/user-external.html', context)         
       else:
          context = {
             'reader': user,
             'user': user,
+            'liked_posts': liked_posts
          }
          return render(request, 'users/user-external.html', context)
    except User.DoesNotExist:
