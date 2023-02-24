@@ -487,22 +487,40 @@ My Profile [{{user.username}}]
       <!-- Right sidebar START -->
       <div class="col-lg-5 col-xxl-4">
          <!-- Profile Setting START -->
-         <!-- <div class="card border mb-4">
+         <div class="card border mb-4">
             <div class="card-header bg-white border-bottom p-3">
                <h5 class="card-header-title mb-0">Profile Setting</h5>
             </div>
             <div class="card-body">
                <div class="form-check form-switch form-check-md mb-3">
-                  <input class="form-check-input" type="checkbox" id="availabilityCheck" checked="">
-                  <label class="form-check-label" for="availabilityCheck">Visible profile to everyone</label>
+                  <input 
+                     class="form-check-input" 
+                     type="checkbox" 
+                     id="verification" 
+                     {% if user.usersettings.is_verified %}
+                        checked
+                     {% endif %}
+                     disabled
+                  >
+                  <label class="form-check-label" for="verification">Verification Status</label>
                </div>
+               
                <div class="form-check form-switch form-check-md mb-3">
-                  <input class="form-check-input" type="checkbox" id="proCheck" disabled="">
-                  <label class="form-check-label" for="proCheck">Disable ads <span
-                        class="badge bg-primary align-middle">Pro</span></label>
+                  <a href="{% url 'users:share_liked_posts' user.slug %}">
+                     <input 
+                        class="form-check-input cursor-pointer" 
+                        type="checkbox" 
+                        id="share_liked_posts" 
+                        {% if user.usersettings.share_liked_posts %}
+                           checked
+                        {% endif %}
+                     > 
+                  </a>
+                  <label class="form-check-label" for="share_liked_posts">Share liked posts</label>
                </div>
+               
             </div>
-         </div> -->
+         </div>
          <!-- Profile Setting END -->   
 
          <!-- Personal information START -->

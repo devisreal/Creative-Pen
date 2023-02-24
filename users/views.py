@@ -64,6 +64,25 @@ def dashboard(request, slug):
       return render(request, 'users/dashboard.html', context)
 
 @login_required
+def share_liked_posts(request, slug):
+   if slug != request.user.slug:        
+      return redirect('users:edit_profile', slug=request.user.slug)
+   
+   user = User.objects.get(slug=slug)
+   user_settings = UserSettings.objects.get(user=user)
+   
+   if user_settings.share_liked_posts == True:
+      user_settings.share_liked_posts = False
+      messages.success(
+          request, "Operation successful! Other users will no longer see your liked posts")
+   else:
+      user_settings.share_liked_posts = True      
+      messages.success(request, "Operation successful! Other users can now see your liked posts")
+
+   user_settings.save()
+   return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
 def request_author_access(request, slug, username):   
    reader_settings = UserSettings.objects.get(user__username=username)
    user = User.objects.get(username=username)
