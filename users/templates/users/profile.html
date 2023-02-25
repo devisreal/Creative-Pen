@@ -506,7 +506,7 @@ My Profile [{{user.username}}]
                </div>
                
                <div class="form-check form-switch form-check-md mb-3">
-                  <a href="{% url 'users:share_liked_posts' user.slug %}">
+                  
                      <input 
                         class="form-check-input cursor-pointer" 
                         type="checkbox" 
@@ -514,9 +514,12 @@ My Profile [{{user.username}}]
                         {% if user.usersettings.share_liked_posts %}
                            checked
                         {% endif %}
-                     > 
-                  </a>
-                  <label class="form-check-label" for="share_liked_posts">Share liked posts</label>
+                     >                  
+                     <a href="{% url 'users:share_liked_posts' user.slug %}" class="text-dark">
+                        <label class="text-dark cursor-pointer" for="">
+                           Share liked posts
+                        </label>
+                     </a>
                </div>
                
             </div>

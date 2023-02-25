@@ -71,12 +71,13 @@ def share_liked_posts(request, slug):
    user = User.objects.get(slug=slug)
    user_settings = UserSettings.objects.get(user=user)
    
-   if user_settings.share_liked_posts == True:
+   if user_settings.share_liked_posts:
       user_settings.share_liked_posts = False
-      messages.success(
-          request, "Operation successful! Other users will no longer see your liked posts")
+      user_settings.save()
+      messages.success(request, "Operation successful! Other users will no longer see your liked posts")
    else:
-      user_settings.share_liked_posts = True      
+      user_settings.share_liked_posts = True  
+      user_settings.save()
       messages.success(request, "Operation successful! Other users can now see your liked posts")
 
    user_settings.save()

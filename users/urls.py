@@ -15,7 +15,7 @@ urlpatterns = [
    path('edit-profile/', views.edit_profile, name="edit_profile"),
    path('delete-account', views.delete_account, name='delete_account'),   
    path('change-password/', views.change_password, name="change_password" ),
-   path('share_liked_posts/', views.share_liked_posts, name="share_liked_posts"),
+   path('share_liked_posts', views.share_liked_posts, name="share_liked_posts"),
 
    # ! Admin Views
    #* Dashboard Views
