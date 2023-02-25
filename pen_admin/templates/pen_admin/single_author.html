@@ -16,7 +16,7 @@ Author ({{author.username}})
 {% block content %}
 {% include 'partials/messages.html' %}
 
-<br><br><br>
+<br>
 
 <div class="container">
    <div class="row justify-content-center">
@@ -42,21 +42,27 @@ Author ({{author.username}})
             <div class="col-xl-9 col-lg-8 col-md-12">
                <p class="mb-2">
                   {% if author.is_staff %}
-                  {% if author.is_superuser %}
-                  <a class="badge text-xs text-bg-blue mb-0 me-2 text-decoration-none font-outfit font-medium">
-                     <i class="fa-solid fa-clipboard-user fa-fw"></i>
-                     superuser
-                  </a>
+                     {% if author.is_superuser %}
+                     <a class="badge text-xs text-bg-blue mb-0 me-2 text-decoration-none font-outfit font-medium">
+                        <i class="fa-solid fa-clipboard-user fa-fw"></i>
+                        superuser
+                     </a>
+                     {% else %}
+                     <a class="badge text-xs text-bg-danger mb-0 me-2 text-decoration-none font-outfit font-medium">
+                        <i class="fa-solid fa-clipboard-user fa-fw"></i>
+                        staff
+                     </a>
+                     {% endif %}
                   {% else %}
-                  <a class="badge text-xs text-bg-danger mb-0 me-2 text-decoration-none font-outfit font-medium">
-                     <i class="fa-solid fa-clipboard-user fa-fw"></i>
-                     staff
-                  </a>
+                     <a class="badge text-xs text-bg-primary mb-0 me-2 text-decoration-none font-outfit font-medium">
+                        <i class="fa-solid fa-clipboard-user fa-fw"></i>
+                        author
+                     </a>
                   {% endif %}
-                  {% endif %}
+
                   {% if author_posts %}
                   {% with author_posts=author_posts|length %}
-                  <span class="fw-bold text-black">{{author_posts}}</span>
+                  <span class="font-semibold text-black">{{author_posts}}</span>
                   Published post{{ author_posts|pluralize }}
                   {% endwith %}
                   {% else %}

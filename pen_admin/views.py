@@ -362,11 +362,16 @@ def reader_single(request, slug, username):
       messages.warning(request, 'You are not authorized to access that page')
       return HttpResponseRedirect(request. META. get('HTTP_REFERER', '/'))
    else:   
-      reader = User.objects.filter(is_author=False).get(username=username)      
-      context = {
-         'reader': reader         
-      }
-      return render(request, 'pen_admin/single_reader.html', context)
+      try:
+         reader = User.objects.filter(is_author=False).get(username=username)      
+         liked_posts = Post.objects.filter(likes=reader)
+         context = {
+            'reader': reader,
+            'liked_posts': liked_posts
+         }
+         return render(request, 'pen_admin/single_reader.html', context)
+      except User.DoesNotExist:
+         return redirect('error_page')
 
 @login_required
 def block_reader(request, slug, username):
