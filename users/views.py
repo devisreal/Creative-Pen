@@ -232,7 +232,7 @@ def change_password(request, slug):
          messages.success(request, 'Your password was successfully updated!')
          return redirect('users:profile', slug=slug)
       else:
-         messages.error(request, 'Please correct the error below.')
+         messages.error(request, 'Please correct the error.')
    else:
       form = PasswordChangeForm(request.user)
 
