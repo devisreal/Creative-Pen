@@ -583,7 +583,7 @@ Home
          </div>
          <div class="row g-3">
             {% for category in popular_categories %}
-            <div class="col-10 mx-auto col-sm-6 col-md-4 col-lg">
+            <div class="col-10 mx-auto col-sm-6 col-md-4 col-lg-4">
                <div class="card border-0 card-overlay-bottom card-img-scale">
                   <img class="card-img rounded-2" src="{{category.category_image.url}}" alt="card image"
                      style="height: 200px; object-fit: cover;">
@@ -597,6 +597,57 @@ Home
                </div>
             </div>
             {% endfor %}
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="pt-0 pb-0 pb-sm-0">
+   <div class="container-fluid px-sm-5">
+      <div class="row g-sm-5">
+         <div class="col-lg-6">
+            <!-- Call to action START -->
+            <div class="bg-dark-overlay-4 p-3 p-sm-5 position-relative overflow-hidden h-100 call-to-action-bg">
+               <div class="row">
+                  <div class="col-xl-8 mx-auto text-center py-4 py-sm-5 position-relative">
+                     <!-- Title -->
+                     <h2 class="display-5 text-white">Never miss a story!</h2>
+                     <p class="text-white">Get the freshest headlines and updates sent uninterrupted to your inbox.</p>
+                     <!-- Form -->
+                     <a href="{% url 'latest_posts' %}" class="btn btn-light mt-4">Read more</a>
+                  </div>
+               </div>
+            </div>
+            <!-- Call to action END -->
+         </div>
+         <div class="col-lg-6">
+            <!-- Newsletter START -->
+            <div class="bg-light position-relative overflow-hidden h-100 my-shadow-md">
+               <div class="row h-100">
+                  <div class="col-md-4 call-to-action-bg2">
+                  </div>
+                  <div class="col-md-8">
+                     <div class="p-4 p-sm-5 ">
+                        <!-- Title -->
+                        <h2 class="display-5">Never miss a story!</h2>
+                        <p>Get the freshest headlines and updates sent uninterrupted to your inbox.</p>
+                        <!-- Form -->
+                        <form class="row row-cols-sm-auto g-2 align-items-center mt-3" action="{% url 'footer' %}" method="POST">
+                           {% csrf_token %}
+                           <div class="col-12">
+                              <input name="email" id="email"  type="email" class="form-control"
+                                 placeholder="Enter your email address">
+                           </div>
+                           <div class="col-12">
+                              <button type="submit" class="btn btn-dark  m-0">Subscribe</button>
+                           </div>
+                           
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Newsletter END -->
          </div>
       </div>
    </div>

@@ -166,3 +166,13 @@ svg#freepik_stories-blog-post.animated #freepik--graphics-1--inject-1--inject-32
   text-decoration: 2px underline wavy var(--color-red);
   text-underline-offset: 5px;
 }
+
+.call-to-action-bg{
+  background-image: url(../img/call-to-action-bg.jpg);
+}
+
+.call-to-action-bg2{
+  background-image: url(../img/call-to-action-bg2.jpg);
+  background-size: cover;
+  background-position: center center;
+}

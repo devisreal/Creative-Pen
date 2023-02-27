@@ -24,17 +24,17 @@ Dashboard [{{user.username}}]
                   <div class="d-flex align-items-center justify-content-between my-auto">
                      <div class="avatar avatar-xxl">
                         {% if user.profile_picture %}
-                        <img class="avatar-img rounded-circle" src="{{user.profile_picture.url}}" alt="Reader Avatar">
+                        <img class="avatar-img rounded-circle" src="{{user.profile_picture.url}}" alt="User Avatar">
                         {% else %}
                            {% if user.gender == 'Male' %}
                            <img class="avatar-img rounded-circle" src="{% static 'img/user/male.jpg' %}"
-                              alt="Reader Avatar">
+                              alt="User Avatar">
                            {% elif user.gender == 'Female' %}
                            <img class="avatar-img rounded-circle" src="{% static 'img/user/female.jpg' %}"
-                              alt="Reader Avatar">
+                              alt="User Avatar">
                            {% else %}
                            <img class="avatar-img rounded-circle" src="{% static 'img/user/custom.jpg' %}"
-                              alt="Reader Avatar">
+                              alt="User Avatar">
                            {% endif %}
                         {% endif %}
                      </div>
