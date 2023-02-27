@@ -174,5 +174,5 @@ svg#freepik_stories-blog-post.animated #freepik--graphics-1--inject-1--inject-32
 .call-to-action-bg2{
   background-image: url(../img/call-to-action-bg2.jpg);
   background-size: cover;
-  background-position: center center;
+  background-position: left ;
 }
