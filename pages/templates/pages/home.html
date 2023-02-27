@@ -4,6 +4,126 @@
 Home
 {% endblock title %}
 {% block styles %}
+<style>
+   .owl-carousel {
+      position: relative;
+   }
+
+   .owl-carousel .owl-item {
+      opacity: 1;
+   }
+
+   .owl-carousel .owl-item.active {
+      opacity: 1;
+   }
+
+   .owl-carousel .owl-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+   }
+
+   .owl-carousel .owl-nav .owl-prev,
+   .owl-carousel .owl-nav .owl-next {
+      position: absolute;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      margin-top: 0;
+      color: white !important;
+      -webkit-transition: 0.7s;
+      -o-transition: 0.7s;
+      transition: 0.7s;
+      opacity: 1;
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+
+      .owl-carousel .owl-nav .owl-prev,
+      .owl-carousel .owl-nav .owl-next {
+         -webkit-transition: none;
+         -o-transition: none;
+         transition: none;
+      }
+   }
+
+   .owl-carousel .owl-nav .owl-prev span:before,
+   .owl-carousel .owl-nav .owl-next span:before {
+      font-size: 30px;
+   }
+
+   .owl-carousel .owl-nav .owl-prev {
+      left: 20px;
+   }
+
+   .owl-carousel .owl-nav .owl-next {
+      right: 20px;
+   }
+
+   .owl-carousel .owl-dots {
+      text-align: center;
+      margin-top: 0;
+      position: absolute;
+      bottom: 20px;
+      right: 0;
+      left: 0;
+   }
+
+   .owl-carousel .owl-dots .owl-dot {
+      width: 10px;
+      height: 10px;
+      margin: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      position: relative;
+   }
+
+   .owl-carousel .owl-dots .owl-dot:hover,
+   .owl-carousel .owl-dots .owl-dot:focus {
+      outline: none !important;
+   }
+
+   .owl-carousel .owl-dots .owl-dot.active {
+      background: #d2302c;
+   }
+
+   .owl-carousel.owl-drag .owl-item {
+      -ms-touch-action: pan-y;
+      touch-action: pan-y;
+   }
+
+   .hero {
+      position: relative;
+   }
+
+   .controls {
+      border-radius: 50%;
+      padding: 15px 20px;
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      color: #fff;
+      z-index: 20;
+   }
+
+   .arrow-hover {
+      overflow: hidden;
+   }
+
+   .arrow-hover .owl-nav .owl-prev {
+      left: -60px;
+   }
+
+   .arrow-hover .owl-nav .owl-next {
+      right: -60px;
+   }
+
+   .arrow-hover:hover .owl-nav .owl-prev {
+      left: 15px;
+   }
+
+   .arrow-hover:hover .owl-nav .owl-next {
+      right: 15px;
+   }
+</style>
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock styles %}
 {% block content %}
@@ -11,16 +131,16 @@ Home
 
 <header class="home-header d-grid align-content-center my-shadow border-bottom"
    style="background-image: url(../../../static/img/doodles.webp);">
-   <div class="container-fluid px-0  py-md-0 my-0" style="backdrop-filter: blur(1.5px);">
+   <div class="container-fluid px-0  py-md-0 my-0" style="backdrop-filter: blur(1px);">
       <div class="container py-4">
-         <div class="row py-5">            
+         <div class="row py-5">
             <div class="col-12 py-5 d-flex justify-content-center text-center">
                <div class="p-2">
                   <h1 class="display-5 font-bold ">
                      Thrilling topics to look out for.
                   </h1>
                   <p class="mt-2 text-lg">
-                     We tackle interesting topics every day
+                     We provide you interesting topics every day
                   </p>
                </div>
             </div>
@@ -29,7 +149,64 @@ Home
    </div>
 </header>
 
+<br><br><br>
 
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="hero featured-carousel owl-carousel arrow-hover">
+            {% for x in '1000' %}
+                     
+            <div class="item">
+               <div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-3xl border-0"
+                  style="background-image:url(../../../static/img/4by3.jpg); background-position: center left; background-size: cover;">
+                  <!-- Card Image overlay -->
+                  <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5">
+                     <div class="w-100 mt-auto">
+                        <div class="col-md-10 col-lg-7">
+                           <!-- Card category -->
+                           <a href="#" class="badge text-bg-danger mb-2 text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-1"></i>Lifestyle
+                           </a>
+                           <!-- Card title -->
+                           <h2 class="text-white display-5">
+                              <a href="post-single-4.html" class="btn-link text-reset fw-normal">
+                                 This is why this year will
+                                 be the year of startups
+                              </a>
+                           </h2>
+                           <p class="text-white">Particular way thoroughly unaffected projection
+                              favorable Mrs can be projecting own. </p>
+                           <!-- Card info -->
+                           <ul class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block">
+                              <li class="nav-item">
+                                 <div class="nav-link">
+                                    <div class="d-flex align-items-center text-white position-relative">
+                                       <div class="avatar avatar-sm">
+                                          <img class="avatar-img rounded-circle" src="{% static 'img/avatar.jpg' %}"
+                                             alt="avatar">
+                                       </div>
+                                       <span class="ms-3">by <a href="#"
+                                             class="stretched-link text-reset btn-link">Louis</a></span>
+                                    </div>
+                                 </div>
+                              </li>
+                              <li class="nav-item">Nov 15, 2022</li>
+                              <li class="nav-item">5 min read</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+
+<br><br><br><br><br>
 
 <section>
    <div class="container my-5">
@@ -39,7 +216,7 @@ Home
          </div>
          <div class="row g-3">
             {% for category in popular_categories %}
-            <div class="col-10 mx-auto col-sm-6 col-md-4 col-lg-4">
+            <div class="col-10 mx-auto col-sm-6 col-md-4 col-lg-3">
                <div class="card border-0 card-overlay-bottom card-img-scale">
                   <img class="card-img rounded-2" src="{{category.category_image.url}}" alt="card image"
                      style="height: 200px; object-fit: cover;">
@@ -80,7 +257,7 @@ Home
             <!-- Newsletter START -->
             <div class="bg-light position-relative overflow-hidden h-100 my-shadow-md">
                <div class="row h-100 ">
-                  <div class="col-md-5 call-to-action-bg2 bg-dark-overlay-4 ">
+                  <div class="col-md-5 call-to-action-bg2">
                   </div>
                   <div class="col-md-7">
                      <div class="p-4 p-sm-5">
@@ -88,16 +265,17 @@ Home
                         <h2 class="display-5">Never miss a story!</h2>
                         <p>Get the freshest headlines and updates sent uninterrupted to your inbox.</p>
                         <!-- Form -->
-                        <form class="row row-cols-sm-auto g-2 align-items-center mt-3" action="{% url 'footer' %}" method="POST">
+                        <form class="row row-cols-sm-auto g-2 align-items-center mt-3" action="{% url 'footer' %}"
+                           method="POST">
                            {% csrf_token %}
                            <div class="col-12">
-                              <input name="email" id="email"  type="email" class="form-control"
+                              <input name="email" id="email" type="email" class="form-control"
                                  placeholder="Enter your email address">
                            </div>
                            <div class="col-12">
                               <button type="submit" class="btn btn-dark  m-0">Subscribe</button>
                            </div>
-                           
+
                         </form>
                      </div>
                   </div>
@@ -109,7 +287,7 @@ Home
    </div>
 </section>
 
-<div class="container text-center my-5">
-   
-</div>
+<script>
+
+</script>
 {% endblock content %}

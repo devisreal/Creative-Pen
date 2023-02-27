@@ -63,6 +63,26 @@ var AuthorPosts = function () {
    });
 };
 AuthorPosts();
+var carousel = function () {
+   $('.featured-carousel').owlCarousel({
+      loop: true,
+      autoplay: true,
+      margin: 10,
+      animateOut: 'fadeOut',
+      animateIn: 'fadeIn',
+      smartSpeed: 1000,
+      nav: true,
+      dots: true,
+      autoplayHoverPause: true,
+      items: 1,
+      navText: [
+         "<i class='fa-solid fa-chevron-left text-lg controls'></i>",
+         "<i class='fa-solid fa-chevron-right text-lg controls'></i>",         
+      ],
+   });
+
+};
+carousel();
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
