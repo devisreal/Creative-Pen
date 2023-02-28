@@ -213,52 +213,42 @@ Home
       <div class="row">
          <div class="col-12">
             <div class="hero home-popular-carousel owl-carousel arrow-hover">
-               <!-- <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3"> -->
-                  
-                  {% for x in '100000' %}                     
-                  
-                  <div>
-                     <div class="card border-0 rounded-xl card-overlay-bottom card-img-scale">
-                        <!-- Card Image -->
-                        <img 
-                           class="card-img" 
-                           src="{% static 'img/04.jpg' %}" 
-                           style="aspect-ratio: 3/4;object-fit: cover;" 
-                           alt=""
-                        >
-                        <!-- Card Image overlay -->
-                        <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
-                           <div>
-                              <!-- Card category -->
-                              <a 
-                                 href="#" 
-                                 class="badge text-bg-warning text-decoration-none font-outfit font-medium"
-                              >
-                                 <i class="fa-solid fa-layer-group me-1"></i>Technology</a>
-                           </div>
-                           <div class="w-100 mt-auto">
+               {% for x in '100000' %}
 
-                              <!-- Card title -->
-                              <h4 class="text-white"><a href="post-single-2.html"
-                                    class="btn-link text-reset stretched-link">Best Pinterest boards for learning about
-                                    business</a></h4>
-                              <!-- Card info -->
-                              <ul
-                                 class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block small">
-                                 <li class="nav-item position-relative">
-                                    <div class="nav-link">by <a href="#"
-                                          class="stretched-link text-reset btn-link">Bryan</a>
-                                    </div>
-                                 </li>
-                                 <li class="nav-item">Aug 18, 2022</li>
-                              </ul>
-                           </div>
+               <div>
+                  <div class="card border-0 rounded-xl card-overlay-bottom card-img-scale">
+                     <!-- Card Image -->
+                     <img class="card-img" src="{% static 'img/04.jpg' %}" style="aspect-ratio: 3/4;object-fit: cover;"
+                        alt="">
+                     <!-- Card Image overlay -->
+                     <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
+                        <div>
+                           <!-- Card category -->
+                           <a href="#" class="badge text-bg-warning text-decoration-none font-outfit font-medium">
+                              <i class="fa-solid fa-layer-group me-1"></i>Technology</a>
+                        </div>
+                        <div class="w-100 mt-auto">
+
+                           <!-- Card title -->
+                           <h4 class="text-white"><a href="post-single-2.html"
+                                 class="btn-link text-reset stretched-link">Best Pinterest boards for learning about
+                                 business</a></h4>
+                           <!-- Card info -->
+                           <ul
+                              class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block small">
+                              <li class="nav-item position-relative">
+                                 <div class="nav-link">by <a href="#"
+                                       class="stretched-link text-reset btn-link">Bryan</a>
+                                 </div>
+                              </li>
+                              <li class="nav-item">Aug 18, 2022</li>
+                           </ul>
                         </div>
                      </div>
                   </div>
+               </div>
 
-                  {% endfor %}
-               <!-- </div> -->
+               {% endfor %}
             </div>
          </div>
       </div>
@@ -278,16 +268,20 @@ Home
                </a>
             </div>
 
+            {% if popular_categories %}
+                           
             <div class="hero trending-topics-carousel owl-carousel arrow-hover">
-               {% for x in '1000000' %}
+               {% for category in popular_categories %}
 
                <div>
                   <div class="card border-0 card-overlay-bottom card-img-scale rounded-xl">
-                     <img class="card-img" src="{% static 'img/4by3.jpg' %}" alt="card image"
+                     <img class="card-img" src="{{category.category_image.url}}" alt="card image"
                         style="aspect-ratio: 1/1;object-fit: cover;">
-                     <div class="card-img-overlay d-flex px-3 px-sm-5">
+                     <div class="card-img-overlay d-flex">
                         <h5 class="mt-auto mx-auto">
-                           <a href="#" class="stretched-link btn-link fw-bold text-white">Travel</a>
+                           <a href="{% url 'category' category.slug %}" class="stretched-link btn-link fw-bold text-white">
+                              {{category.name}}
+                           </a>
                         </h5>
                      </div>
                   </div>
@@ -296,12 +290,15 @@ Home
                {% endfor %}
             </div>
 
+            {% endif %}
+
          </div>
       </div>
    </div>
 </section>
 
 <br><br><br><br><br>
+
 <!-- ! Call to Action -->
 <section class="pt-0 pb-0 pb-sm-0">
    <div class="container-fluid px-sm-5">
