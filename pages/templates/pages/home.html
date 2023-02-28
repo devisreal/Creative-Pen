@@ -132,7 +132,7 @@ Home
 <header class="home-header d-grid align-content-center my-shadow border-bottom"
    style="background-image: url(../../../static/img/doodles.webp);">
    <div class="container-fluid px-0  py-md-0 my-0" style="backdrop-filter: blur(1px);">
-      <div class="container py-4">
+      <div class="container py-5">
          <div class="row py-5">
             <div class="col-12 py-5 d-flex justify-content-center text-center">
                <div class="p-2">
@@ -149,14 +149,14 @@ Home
    </div>
 </header>
 
-<br><br><br>
+<br><br><br><br><br>
 
-<div class="container">
+<div class="container px-sm-0">
    <div class="row">
       <div class="col-md-12">
-         <div class="hero featured-carousel owl-carousel arrow-hover">
+         <div class="hero home-featured-carousel owl-carousel arrow-hover">
             {% for x in '1000' %}
-                     
+
             <div class="item">
                <div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-3xl border-0"
                   style="background-image:url(../../../static/img/4by3.jpg); background-position: center left; background-size: cover;">
@@ -199,42 +199,110 @@ Home
                   </div>
                </div>
             </div>
-            
+
             {% endfor %}
          </div>
       </div>
    </div>
 </div>
 
-<br><br><br><br><br>
+<br><br><br>
 
-<section>
-   <div class="container my-5">
+<section class="py-0">
+   <div class="container">
       <div class="row">
          <div class="col-12">
-            <h3 class="text-center mb-1">Popular Categories</h3>
-         </div>
-         <div class="row g-3">
-            {% for category in popular_categories %}
-            <div class="col-10 mx-auto col-sm-6 col-md-4 col-lg-3">
-               <div class="card border-0 card-overlay-bottom card-img-scale">
-                  <img class="card-img rounded-2" src="{{category.category_image.url}}" alt="card image"
-                     style="height: 200px; object-fit: cover;">
-                  <div class="card-img-overlay d-flex px-3 px-sm-3">
-                     <h5 class="mt-auto mx-auto">
-                        <a href="{% url 'category' category.slug %}" class="stretched-link btn-link fw-bold text-white">
-                           {{category.name}}
-                        </a>
-                     </h5>
+            <div class="hero home-popular-carousel owl-carousel arrow-hover">
+               <!-- <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3"> -->
+                  
+                  {% for x in '100000' %}                     
+                  
+                  <div>
+                     <div class="card border-0 rounded-xl card-overlay-bottom card-img-scale">
+                        <!-- Card Image -->
+                        <img 
+                           class="card-img" 
+                           src="{% static 'img/04.jpg' %}" 
+                           style="aspect-ratio: 3/4;object-fit: cover;" 
+                           alt=""
+                        >
+                        <!-- Card Image overlay -->
+                        <div class="card-img-overlay d-flex flex-column p-3 p-sm-4">
+                           <div>
+                              <!-- Card category -->
+                              <a 
+                                 href="#" 
+                                 class="badge text-bg-warning text-decoration-none font-outfit font-medium"
+                              >
+                                 <i class="fa-solid fa-layer-group me-1"></i>Technology</a>
+                           </div>
+                           <div class="w-100 mt-auto">
+
+                              <!-- Card title -->
+                              <h4 class="text-white"><a href="post-single-2.html"
+                                    class="btn-link text-reset stretched-link">Best Pinterest boards for learning about
+                                    business</a></h4>
+                              <!-- Card info -->
+                              <ul
+                                 class="nav nav-divider text-white-force align-items-center d-none d-sm-inline-block small">
+                                 <li class="nav-item position-relative">
+                                    <div class="nav-link">by <a href="#"
+                                          class="stretched-link text-reset btn-link">Bryan</a>
+                                    </div>
+                                 </li>
+                                 <li class="nav-item">Aug 18, 2022</li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-               </div>
+
+                  {% endfor %}
+               <!-- </div> -->
             </div>
-            {% endfor %}
          </div>
       </div>
    </div>
 </section>
 
+<br><br><br><br>
+
+<section class="p-0">
+   <div class="container px-sm-0">
+      <div class="row g-0">
+         <div class="col-12 bg-light p-2 p-sm-4 rounded-3">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+               <h2 class="m-0">Trending topics</h2>
+               <a href="{% url 'categories' %}" class="link-dark btn-link  font-outfit">
+                  View all categories
+               </a>
+            </div>
+
+            <div class="hero trending-topics-carousel owl-carousel arrow-hover">
+               {% for x in '1000000' %}
+
+               <div>
+                  <div class="card border-0 card-overlay-bottom card-img-scale rounded-xl">
+                     <img class="card-img" src="{% static 'img/4by3.jpg' %}" alt="card image"
+                        style="aspect-ratio: 1/1;object-fit: cover;">
+                     <div class="card-img-overlay d-flex px-3 px-sm-5">
+                        <h5 class="mt-auto mx-auto">
+                           <a href="#" class="stretched-link btn-link fw-bold text-white">Travel</a>
+                        </h5>
+                     </div>
+                  </div>
+               </div>
+
+               {% endfor %}
+            </div>
+
+         </div>
+      </div>
+   </div>
+</section>
+
+<br><br><br><br><br>
+<!-- ! Call to Action -->
 <section class="pt-0 pb-0 pb-sm-0">
    <div class="container-fluid px-sm-5">
       <div class="row g-sm-5">
@@ -287,7 +355,5 @@ Home
    </div>
 </section>
 
-<script>
-
-</script>
+<br><br><br>
 {% endblock content %}

@@ -63,9 +63,10 @@ var AuthorPosts = function () {
    });
 };
 AuthorPosts();
-var carousel = function () {
-   $('.featured-carousel').owlCarousel({
-      loop: true,
+
+var homeFeaturedCarousel = function () {
+   $('.home-featured-carousel').owlCarousel({
+      loop: false,
       autoplay: true,
       margin: 10,
       animateOut: 'fadeOut',
@@ -82,7 +83,78 @@ var carousel = function () {
    });
 
 };
-carousel();
+homeFeaturedCarousel();
+
+var homePopularCarousel = function () {
+   $('.home-popular-carousel').owlCarousel({
+      loop: false,
+      autoplay: true,
+      margin: 10,
+      animateOut: 'fadeOut',
+      animateIn: 'fadeIn',
+      smartSpeed: 1000,
+      nav: true,
+      dots: true,
+      autoplayHoverPause: true,
+      items: 1,
+      navText: [
+         "<i class='fa-solid fa-chevron-left text-lg controls'></i>",
+         "<i class='fa-solid fa-chevron-right text-lg controls'></i>",         
+      ],
+      responsive: {
+         0: {
+            items: 1,
+         },
+         600: {
+            items: 2,
+         },
+         800: {
+            items: 3,
+         },
+         1000: {
+            items: 4,
+         },
+      },
+   });
+
+};
+homePopularCarousel();
+
+var trendingTopicsCarousel = function () {
+   $('.trending-topics-carousel').owlCarousel({
+      loop: false,
+      autoplay: true,
+      margin: 10,
+      animateOut: 'fadeOut',
+      animateIn: 'fadeIn',
+      smartSpeed: 1000,
+      nav: true,
+      dots: true,
+      autoplayHoverPause: true,
+      items: 1,
+      navText: [
+         "<i class='fa-solid fa-chevron-left text-lg controls'></i>",
+         "<i class='fa-solid fa-chevron-right text-lg controls'></i>",         
+      ],
+      responsive: {
+         0: {
+            items: 1,
+         },
+         600: {
+            items: 2,
+         },
+         800: {
+            items: 3,
+         },
+         1000: {
+            items: 5,
+         },
+      },
+   });
+
+};
+trendingTopicsCarousel();
+
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
