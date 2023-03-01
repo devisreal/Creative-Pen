@@ -7,8 +7,11 @@ from blog.models import PostCategory, Post
 from .models import ContactDetail, Subscriber
 
 
-def home(request):   
-   context = {}
+def home(request):
+   featured_posts = Post.objects.filter(is_featured=True).order_by('-date_posted')[:5]
+   context = {
+      'featured_posts': featured_posts
+   }
    return render(request, 'pages/home.html', context)
 
 def footer(request):
