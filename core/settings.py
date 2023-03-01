@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MODE = config("MODE", default="dev")
 # SECRET_KEY = config("SECRET_KEY")
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
-DEBUG = config("DEBUG")
+DEBUG = 'RENDER' not in os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = []
@@ -185,7 +185,7 @@ FROALA_UPLOAD_PARAMS = {
     'folder': 'media',
     'tags': 'froala_editor'
 }
-FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/'
+FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/q_auto/'
 FROALA_UPLOAD_PATH = 'froala_editor_upload/'
 FROALA_EDITOR_OPTIONS = {
     'imageUploadURL': '/froala_upload/',
