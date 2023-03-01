@@ -68,9 +68,9 @@ var homeFeaturedCarousel = function () {
    $('.home-featured-carousel').owlCarousel({
       loop: false,
       autoplay: true,
-      margin: 10,
-      animateOut: 'fadeOut',
-      animateIn: 'fadeIn',
+      margin: 5,
+      // animateOut: 'fadeOut',
+      // animateIn: 'fadeIn',
       smartSpeed: 1000,
       nav: true,
       dots: true,

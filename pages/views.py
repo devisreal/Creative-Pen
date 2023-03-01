@@ -9,8 +9,11 @@ from .models import ContactDetail, Subscriber
 
 def home(request):
    featured_posts = Post.objects.filter(is_featured=True).order_by('-date_posted')[:5]
+   popular_posts = Post.objects.order_by('-hit_count_generic__hits')[:7]
+
    context = {
-      'featured_posts': featured_posts
+      'featured_posts': featured_posts,
+      'popular_posts': popular_posts
    }
    return render(request, 'pages/home.html', context)
 
