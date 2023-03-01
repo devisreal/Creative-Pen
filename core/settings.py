@@ -31,7 +31,7 @@ DEBUG = config("DEBUG")
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:    
+if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
@@ -100,7 +100,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.media",
-                # "pages.context_processors.acategories_processor",
+                "pages.context_processors.categories_processor",
                 # 'django.core.context_processors',
             ],
         },
@@ -125,7 +125,8 @@ if config("MODE") == "dev":
     }
 # production
 else:
-    DATABASES = {"default": dj_database_url.config(default=config("DATABASE_URL"))}
+    DATABASES = {"default": dj_database_url.config(
+        default=config("DATABASE_URL"))}
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES["default"].update(db_from_env)
@@ -186,9 +187,9 @@ FROALA_UPLOAD_PARAMS = {
 }
 FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/'
 FROALA_UPLOAD_PATH = 'froala_editor_upload/'
-FROALA_EDITOR_OPTIONS = {    
+FROALA_EDITOR_OPTIONS = {
     'imageUploadURL': '/froala_upload/',
-    'imageAllowedTypes': ['jpeg', 'jpg', 'png', 'gif'],    
+    'imageAllowedTypes': ['jpeg', 'jpg', 'png', 'gif'],
 }
 
 MESSAGE_TAGS = {
@@ -207,7 +208,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 AUTH_USER_MODEL = "account.User"
 LOGIN_URL = "login"
 
-#DJANGO SESSION TIMEOUT SETTINGS
+# DJANGO SESSION TIMEOUT SETTINGS
 # SESSION_EXPIRE_SECONDS = 7200
 # SESSION_EXPIRE_AFTER_LAST_ACTIVITY = False
 # SESSION_TIMEOUT_REDIRECT = 'login'
