@@ -16,6 +16,7 @@ class User(AbstractUser):
         null=True,
         blank=True,
         upload_to="profile_images",
+        max_length=500
         # validators=[
         #     FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
         # ],
@@ -24,6 +25,7 @@ class User(AbstractUser):
         null=True,
         blank=True,
         upload_to="profile_bg_images",
+        max_length=500
         # validators=[
         #     FileExtensionValidator(allowed_extensions=["png", "jpg", "jpeg", "webp"])
         # ],

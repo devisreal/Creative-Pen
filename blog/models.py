@@ -18,6 +18,7 @@ class PostCategory(models.Model):
       null=True,
       blank=True,
       upload_to='category_images/',
+      max_length=500
       # validators=[
       #    FileExtensionValidator(
       #       allowed_extensions=[
@@ -51,6 +52,7 @@ class Post(models.Model):
    short_description = models.TextField(null=True, blank=True)
    post_image = models.ImageField(      
       upload_to='posts/images',
+      max_length=500
       # validators=[
       #    FileExtensionValidator(
       #       allowed_extensions=[
