@@ -123,6 +123,14 @@ Home
    .arrow-hover:hover .owl-nav .owl-next {
       right: 15px;
    }
+
+   .nav.nav-divider .nav-item+.nav-item:before {
+      content: "\22C5";
+      color: #fff;
+      padding-left: 0.65rem;
+      padding-right: 0.75rem;
+      opacity: 1;
+   }
 </style>
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock styles %}
@@ -173,16 +181,16 @@ Home
                <div class="card card-overlay-bottom card-bg-scale h-400 h-sm-500 h-md-600 rounded-xl border-0"
                   style="background-image:url('{{post.post_image.url}}'); background-position: center left; background-size: cover;">
                   <!-- Card Image overlay -->
-                  <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5">
-                     <div class="w-100 mt-auto">
-                        <div class="col-md-10 col-lg-7">
+                  <div class="card-img-overlay d-flex align-items-center p-3 p-sm-5" style="transform: rotate(0);">
+                     <div class="w-100 mt-auto" >
+                        <div class="col-md-10 col-lg-7" >
                            <!-- Card category -->
                            <a href="{% url 'category' post.category.slug %}" class="badge text-bg-{{post.category.color}} mb-2 text-decoration-none font-outfit font-medium">
                               <i class="fa-solid fa-layer-group me-1"></i>{{post.category.name}}
                            </a>
                            <!-- Card title -->
                            <h2 class="text-white display-5">
-                              <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-normal">
+                              <a href="{% url 'blog:single_post' post.slug %}" class="btn-link text-reset fw-normal stretched-link">
                                  {{post.post_title}}
                               </a>
                            </h2>

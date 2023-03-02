@@ -43,7 +43,7 @@ Dashboard [{{user.username}}]
                         <p class="text-secondary m-0 p-0 text-sm">{{user.job_title|default:''}}</p>
                         <small class="text-secondary m-0 p-0 font-medium">@{{user.get_username}}</small>
 
-                        <div class="position-absolute bottom-0 m-1 end-0 mt-auto" style="width: 30px;height: 30px;">
+                        <div class="position-absolute bottom-0 end-0 d-none d-md-inline mt-md-auto" style="width: 30px;height: 30px;">
                            <a href="{% url 'users:edit_profile' user.slug %}" data-bs-toggle="tooltip"
                               data-bs-title="Edit profile" data-bs-placement="bottom" data-bs-offset="10,20">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24"

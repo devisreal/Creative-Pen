@@ -25,17 +25,17 @@ Author ({{author.username}})
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-6">
                {% if author.profile_picture %}
                <img class="img-fluid rounded" src="{{author.profile_picture.url}}" alt="{{author.getusername}}'s Avatar"
-                  width="250" height="250">
+                  width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% else %}
                {% if author.gender == 'Male' %}
                <img class="img-fluid rounded" src="{% static 'img/user/male.jpg' %}"
-                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{author.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% elif author.gender == 'Female' %}
                <img class="img-fluid rounded" src="{% static 'img/user/female.jpg' %}"
-                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{author.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% else %}
                <img class="img-fluid rounded" src="{% static 'img/user/custom.jpg' %}"
-                  alt="{{author.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{author.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% endif %}
                {% endif %}
             </div>

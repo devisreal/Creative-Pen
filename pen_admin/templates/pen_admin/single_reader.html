@@ -125,29 +125,29 @@ Reader ({{reader.get_full_name}})
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5 col-6">
                {% if reader.profile_picture %}
                <img class="img-fluid rounded" src="{{reader.profile_picture.url}}" alt="{{reader.getusername}}'s Avatar"
-                  width="250" height="250">
+                  width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% else %}
                {% if reader.gender == 'Male' %}
                <img class="img-fluid rounded" src="{% static 'img/user/male.jpg' %}"
-                  alt="{{reader.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{reader.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% elif reader.gender == 'Female' %}
                <img class="img-fluid rounded" src="{% static 'img/user/female.jpg' %}"
-                  alt="{{reader.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{reader.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% else %}
                <img class="img-fluid rounded" src="{% static 'img/user/custom.jpg' %}"
-                  alt="{{reader.getusername}}'s Avatar" width="250" height="250">
+                  alt="{{reader.getusername}}'s Avatar" width="250px" height="250px" style="aspect-ratio: 1/1;object-fit: cover;">
                {% endif %}
                {% endif %}
             </div>
             <div class="col-xl-9 col-lg-8 col-md-12">
-               <p class="mb-0">                  
+               <p class="mb-2">                  
                   <a class="badge text-xs text-bg-success mb-0 me-2 text-decoration-none font-outfit font-medium">
                      <i class="fa-solid fa-clipboard-user fa-fw"></i>
                      reader
                   </a>                  
                </p>
                <div class="mb-2">
-                  <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-sm-flex align-items-center justify-content-between">
                      <h3 class="text-dark mb-0 pb-0">
                         {{reader.get_full_name|default:"Firstname Lastname"}}
                         {% if reader.usersettings.is_verified %}
@@ -159,14 +159,14 @@ Reader ({{reader.get_full_name}})
                         {% endif %}
                      </h3>
 
-                     <div class="d-grid text-center">
+                     <div class="d-grid text-center mt-3 mt-sm-0">
                         {% if request.user != author %}
                         {% if request.user in reader.usersettings.followers.all %}
                         <a href="{% url 'users:follow' request.user.slug reader.username %}"
-                           class="btn btn-outline-light border rounded-pill px-3 btn-sm">Following</a>
+                           class="btn btn-outline-light border rounded-pill px-3 btn-sm w-fit mx-auto">Following</a>
                         {% else %}
                         <a href="{% url 'users:follow' request.user.slug reader.username %}"
-                           class="btn btn-blue btn-sm rounded-pill px-3">Follow</a>
+                           class="btn btn-blue btn-sm rounded-pill px-3 w-fit mx-auto">Follow</a>
                         {% endif %}
                         {% endif %}
                         <small class="mt-1 font-medium">
@@ -320,9 +320,8 @@ Reader ({{reader.get_full_name}})
          
          {% if liked_posts %}
          
-         <div class="row gy-4">
-         
-            <div class="col-md-12">
+         <div class="row gy-4">         
+            <div class="col-md-12 col-11 mx-auto mx-md-0">
                <div class="author-posts owl-carousel carousel-2">
          
                   {% for post in liked_posts %}

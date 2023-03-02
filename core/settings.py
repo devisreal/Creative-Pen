@@ -185,7 +185,7 @@ FROALA_UPLOAD_PARAMS = {
     'folder': 'media',
     'tags': 'froala_editor'
 }
-FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/q_auto/'
+FROALA_UPLOAD_URL = 'http://res.cloudinary.com/ds4h5p2np/image/upload/'
 FROALA_UPLOAD_PATH = 'froala_editor_upload/'
 FROALA_EDITOR_OPTIONS = {
     'imageUploadURL': '/froala_upload/',
